@@ -1,23 +1,21 @@
 package gui;
 
 import eval.Expression;
-import eval.ICalculable;
 import lexer.Lexer;
-import lexer.Token;
 import lexer.UnknownSequenceException;
 import model.Domain;
+import org.apache.commons.lang3.StringUtils;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
 import parser.Parser;
 
-import java.util.List;
 import java.util.Scanner;
 
 /**
  * x++.gui
  *
- * @author      Alexander Broadbent
- * @version     28/12/2015
+ * @author Alexander Broadbent
+ * @version 28/12/2015
  */
 public class MainGUI {
 
@@ -28,16 +26,19 @@ public class MainGUI {
         Domain domain = new Domain(new Lexer(), new Parser());
         Expression expression;
 
-        do {
-            System.out.print("> ");
-            input = scanner.nextLine();
+        System.out.print("> ");
+        input = scanner.nextLine();
 
+        while (!input.equals("exit") && !input.isEmpty()) {
             try {
-                List<Token> tokens = domain.getLexer().readAllTokens(input);
-
                 expression = new Expression(domain, domain.getLexer().readAllTokens(input));
                 Object result = expression.execute();
-                if (result != null) System.out.print("> " + result + "\n");
+
+                if (!StringUtils.isEmpty(result.toString()))
+                    System.out.print("> " + result + "\n");
+            }
+            catch (NullPointerException ex) {
+                XLogger.severe("Error: " + ex);
             }
             catch (UnknownSequenceException ex) {
                 XLogger.severe("Error while lexing expression: " + ex);
@@ -45,9 +46,10 @@ public class MainGUI {
             catch (ExpressionException | IncomparableTypeException ex) {
                 XLogger.severe("Error while executing expression: " + ex);
             }
-        }
-        while (!input.isEmpty());
 
+            System.out.print("> ");
+            input = scanner.nextLine();
+        }
 
     }
 

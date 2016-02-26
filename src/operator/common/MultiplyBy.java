@@ -7,7 +7,7 @@ import operator.base.BinaryOperator;
 import parser.IncomparableTypeException;
 
 import static operator.IConstants.MULTIPLY_BY;
-import static operator.IPrecedence.ASSIGNMENT;
+import static operator.IPrecedence.ASSIGNMENT_OPERATOR;
 
 /**
  * x++.operator.common
@@ -29,7 +29,7 @@ public class MultiplyBy extends BinaryOperator {
 
     @Override
     public int getPrecedence() {
-        return ASSIGNMENT;
+        return ASSIGNMENT_OPERATOR;
     }
 
     @Override

@@ -4,7 +4,6 @@ import eval.Literal;
 import eval.Variable;
 import lexer.ILexer;
 import lexer.Lexer;
-import lexer.Token;
 import operator.IOperator;
 import operator.bitwise.*;
 import operator.common.*;
@@ -22,18 +21,17 @@ import parser.IParser;
 import parser.Parser;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * LazyLanguage.model
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class Domain {
 
-    protected static Domain instance;
+    protected static Domain instance = null;
 
     protected ILexer lexer;
     protected IParser parser;
@@ -62,6 +60,8 @@ public class Domain {
         registerOperator(new DecrementBy());
         registerOperator(new MultiplyBy());
         registerOperator(new DivideBy());
+        registerOperator(new LogicalAnd());
+        registerOperator(new LogicalOr());
 
         // bitwise package operators
         registerOperator(new Not());
@@ -147,7 +147,7 @@ public class Domain {
         if (hasVariable(name))
             return getVariable(name);
         else {
-            Variable var =  createVariable(name);
+            Variable var = createVariable(name);
             variables.put(name, var);
             return var;
         }
@@ -163,6 +163,13 @@ public class Domain {
             return (Literal) value;
 
         return new Literal(value);
+    }
+
+    public static Domain getInstance() {
+        if (instance == null)
+            instance = new Domain(null, null);
+
+        return instance;
     }
 
 }

@@ -1,5 +1,6 @@
 package operator.common;
 
+import com.google.common.collect.Lists;
 import eval.ICalculableType;
 import eval.Literal;
 import operator.IConstants;
@@ -7,11 +8,13 @@ import operator.IPrecedence;
 import operator.base.BinaryOperator;
 import parser.IncomparableTypeException;
 
+import java.util.List;
+
 /**
  * x++.operator
  *
- * @author      Alexander Broadbent
- * @version     31/12/2015
+ * @author Alexander Broadbent
+ * @version 31/12/2015
  */
 public class LogicalAnd extends BinaryOperator {
 
@@ -39,6 +42,11 @@ public class LogicalAnd extends BinaryOperator {
             throw new IncomparableTypeException(getAllowedExecutionTypes(),
                     getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
         }
+    }
+
+    @Override
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Boolean.class.getSimpleName());
     }
 
 }

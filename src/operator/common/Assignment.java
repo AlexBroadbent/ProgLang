@@ -33,7 +33,7 @@ public class Assignment extends BinaryOperator {
     @Override
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException {
         arg1.setValue(arg2.getValue());
-        return arg1;
+        return "";
     }
 
 }

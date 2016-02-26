@@ -80,17 +80,17 @@ public class Expression extends Literal {
      */
     public Object execute() throws ExpressionException, IncomparableTypeException {
 
-        Stack<Literal> stack = new Stack<>();
+        // Escape clause for when just a single variable has been input to print the value
+        if (expression.size() == 1 && expression.get(0).getType() == ICalculableType.VARIABLE)
+            return ((Literal) expression.get(0)).getValue();
 
+        Stack<Literal> stack = new Stack<>();
         for (ICalculable literal : expression)
             stack.push(literal.evaluate(model, stack));
 
         // get result from stack
         if (stack.size() == 1)
-            if (stack.peek().getValue() == null)
-                return stack.pop().getValue();
-            else
-                return "";
+            return stack.pop().getValue();
 
         throw new ExpressionException("Invalid Expression: " + infix + " \nPostfix: " + StringUtils.join(expression, " "));
     }

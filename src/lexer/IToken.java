@@ -10,8 +10,7 @@ package lexer;
  */
 public interface IToken {
 
-    int WHITESPACE                              = -1;
-    int EPSILON                                 = 0;
+    int WHITESPACE                              = 0;
     int ARITHMETIC                              = 1;
     int GEOMETRIC                               = 2;
     int FUNCTION                                = 3;
@@ -25,9 +24,6 @@ public interface IToken {
     int TEXT                                    = 12;
     int VARIABLE                                = 13;
     int BOOLEAN                                 = 14;
-    int LAMBDA                                  = 15;
-    int OPTIONAL_VAR                            = 16;
-    int REST_VAR                                = 17;
     int BITWISE_OPERATOR                        = 18;
     int BIT_SHIFT                               = 19;
     int INC_DEC                                 = 20;
@@ -37,6 +33,10 @@ public interface IToken {
     int IF                                      = 25;
     int ELSE                                    = 26;
     int END                                     = 27;
+    int LIST                                    = 28;
+    int LIST_START                              = 40;
+    int LIST_END                                = 41;
+    int LIST_SEPARATOR                          = 42;
 
 
     String WHITESPACE_REGEX                     = "\\s";
@@ -48,22 +48,23 @@ public interface IToken {
     String LEFT_PAREN_REGEX                     = "\\(";
     String RIGHT_PAREN_REGEX                    = "\\)";
     String BINARY_8BIT_REGEX                    = "[0-1]{8}";
-    String NUMBER_REGEX                         = "[0-9]+,?";
+    String NUMBER_REGEX                         = "[0-9]+";
     String DECIMAL_REGEX                        = "[+-]?((\\d*\\.\\d+))";
     String TEXT_REGEX                           = "\".*\"|\\'.*\\'";
     String VARIABLE_REGEX                       = "[a-zA-Z][a-zA-Z0-9_]*";
     String BOOLEAN_REGEX                        = "true|false|TRUE|FALSE";
-    String LAMBDA_REGEX                         = "lambda";
-    String OPTIONAL_VAR_REGEX                   = "&optional";
-    String REST_VAR_REGEX                       = "&rest";
     String BITWISE_OPERATOR_REGEX               = "\\~|\\&|\\||\\$";
     String LOGICAL_COMPARATOR_REGEX             = "\\!|\\&\\&|\\|\\|";
     String BIT_SHIFT_OPERATOR_REGEX             = "\\<\\<|\\>\\>";
     String INC_DEC_REGEX                        = "\\+\\+|\\-\\-";
-    String ASSIGNMENT_INC_DEC__REGEX            = "\\+\\=|\\-\\=|\\*\\=|\\/\\=";
+    String ASSIGNMENT_INC_DEC_REGEX             = "\\+\\=|\\-\\=|\\*\\=|\\/\\=";
     String ASSIGNMENT_REGEX                     = "\\=";
     String IF_REGEX                             = "\\?";
     String ELSE_REGEX                           = "\\:";
     String END_REGEX                            = "\\;";
+    String LIST_START_REGEX                     = "\\{";
+    String LIST_END_REGEX                       = "\\}";
+    String LIST_SEPARATOR_REGEX                 = "\\,";
+    String LIST_REGEX                           = "\\{.*\\}";
 
 }

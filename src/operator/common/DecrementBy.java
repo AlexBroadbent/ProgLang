@@ -7,7 +7,7 @@ import parser.IncomparableTypeException;
 
 import static eval.ICalculableType.COMMON_OPERATOR;
 import static operator.IConstants.DECREMENT_BY;
-import static operator.IPrecedence.ASSIGNMENT;
+import static operator.IPrecedence.ASSIGNMENT_OPERATOR;
 
 /**
  * x++.operator.common
@@ -29,7 +29,7 @@ public class DecrementBy extends BinaryOperator {
 
     @Override
     public int getPrecedence() {
-        return ASSIGNMENT;
+        return ASSIGNMENT_OPERATOR;
     }
 
     @Override

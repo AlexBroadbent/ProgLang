@@ -2,7 +2,6 @@ package operator.base;
 
 import com.google.common.collect.Lists;
 import eval.ICalculable;
-import eval.ICalculableType;
 import eval.Literal;
 import model.Domain;
 import operator.Associativity;
@@ -11,8 +10,6 @@ import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;
-
-import static eval.ICalculableType.VARIABLE;
 
 /**
  * LazyLanguage.operator.base
@@ -55,10 +52,6 @@ public abstract class BinaryOperator extends Operator {
     public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
         Literal arg2 = stack.pop();
         Literal arg1 = stack.pop();
-
-        if ((arg1.getType() == VARIABLE && arg1.getValue() == null) ||
-                arg2.getType() == VARIABLE && arg2.getValue() == null)
-            return null;
 
         return Domain.wrapLiteral(execute(arg1, arg2));
     }

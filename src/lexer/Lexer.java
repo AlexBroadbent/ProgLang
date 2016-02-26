@@ -13,19 +13,21 @@ import static lexer.IToken.*;
 /**
  * JavaCCProgrammingLanguage.parser
  *
- * @author      Alexander Broadbent
- * @version     31/10/2015
+ * @author Alexander Broadbent
+ * @version 31/10/2015
  */
 public class Lexer implements ILexer {
 
     protected List<TokenInfo> tokenInfoList;
+    protected List<TokenInfo> tokenInfoExcludeList;
 
 
     public Lexer() {
         tokenInfoList = Lists.newLinkedList();
+        tokenInfoExcludeList = Lists.newLinkedList();
 
         addToken(WHITESPACE_REGEX, WHITESPACE);
-        addToken(ASSIGNMENT_INC_DEC__REGEX, ASSIGNMENT_INC_DEC);
+        addToken(ASSIGNMENT_INC_DEC_REGEX, ASSIGNMENT_INC_DEC);
         addToken(ASSIGNMENT_REGEX, ASSIGNMENT);
         addToken(ARITHMETIC_REGEX, ARITHMETIC);
         addToken(GEOMETRIC_REGEX, GEOMETRIC);
@@ -44,22 +46,27 @@ public class Lexer implements ILexer {
         addToken(BINARY_8BIT_REGEX, BINARY_8BIT);
         addToken(DECIMAL_REGEX, DECIMAL);
         addToken(NUMBER_REGEX, NUMBER);
-        addToken(LAMBDA_REGEX, LAMBDA);
         addToken(TEXT_REGEX, TEXT);
         addToken(VARIABLE_REGEX, VARIABLE);
         addToken(BOOLEAN_REGEX, BOOLEAN);
-        addToken(OPTIONAL_VAR_REGEX, OPTIONAL_VAR);
-        addToken(REST_VAR_REGEX, REST_VAR);
 
         addToken(IF_REGEX, IF);
         addToken(ELSE_REGEX, ELSE);
         addToken(END_REGEX, END);
+
+        addToken(LIST_REGEX, LIST);
+        addToken(LIST_START_REGEX, LIST_START);
+        addToken(LIST_END_REGEX, LIST_END);
+        addToken(LIST_SEPARATOR_REGEX, LIST_SEPARATOR);
     }
 
 
     public void addToken(String regex, int token) {
         try {
-            tokenInfoList.add(new TokenInfo(Pattern.compile("^(" + regex + ")"), token));
+            TokenInfo ti = new TokenInfo(Pattern.compile("^(" + regex + ")"), token);
+            tokenInfoList.add(ti);
+            if (token != LIST)
+                tokenInfoExcludeList.add(ti);
         }
         catch (PatternSyntaxException ex) {
             XLogger.severe("Lexer Regex is invalid: " + regex + " for token " + token);
@@ -68,21 +75,25 @@ public class Lexer implements ILexer {
 
     @Override
     public List<Token> readAllTokens(String input) throws UnknownSequenceException {
+        return readAllTokens(input, false);
+    }
+
+    public List<Token> readAllTokens(String input, boolean ignoreList) throws UnknownSequenceException {
         List<Token> tokens = Lists.newArrayList();
 
-        while(!input.isEmpty()) {
+        while (!input.isEmpty()) {
             boolean match = false;
 
-            for (TokenInfo info : tokenInfoList) {
+            for (TokenInfo info : ((ignoreList) ? tokenInfoExcludeList : tokenInfoList)) {
                 Matcher m = info.regex.matcher(input);
 
                 if (m.find()) {
                     match = true;
 
-                    if (info.token != Token.WHITESPACE)
+                    if (info.token != WHITESPACE)
                         tokens.add(new Token(info.token, m.group().trim()));
-
                     input = m.replaceFirst("");
+
                     break;
                 }
             }
