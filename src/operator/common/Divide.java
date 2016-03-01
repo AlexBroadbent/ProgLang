@@ -1,6 +1,5 @@
 package operator.common;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
@@ -19,11 +18,6 @@ public class Divide extends BinaryOperator {
     @Override
     public String getToken() {
         return DIVIDE;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.COMMON_OPERATOR;
     }
 
     @Override

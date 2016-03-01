@@ -6,10 +6,11 @@ import eval.ICalculableType;
 import eval.Literal;
 import model.Domain;
 import operator.Associativity;
+import operator.IFunction;
 import operator.IOperator;
 import operator.IPrecedence;
+import parser.IncomparableTypeException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
@@ -20,7 +21,9 @@ import java.util.Stack;
  * @author      Alexander Broadbent
  * @version     02/12/2015
  */
-public class Function implements IOperator {
+public class Function implements IFunction {
+
+    protected int operands = 0;
 
     @Override
     public String getToken() {
@@ -30,7 +33,7 @@ public class Function implements IOperator {
 
     @Override
     public int getNumOperands() {
-        return 0;
+        return operands;
     }
 
     @Override
@@ -44,13 +47,8 @@ public class Function implements IOperator {
     }
 
     @Override
-    public boolean isValidContext(Stack<IOperator> operatorStack, List<ICalculable> infix, int position) {
-        return true;
-    }
-
-    @Override
     public int getType() {
-        return ICalculableType.FUNCTION_OPERATOR;
+        return ICalculableType.FUNCTION;
     }
 
     @Override
@@ -59,11 +57,18 @@ public class Function implements IOperator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack) {
-        ArrayList<Literal> args = Lists.newArrayList();
+    public boolean isValidContext(Stack<IOperator> operatorStack, List<ICalculable> infix, int position) {
+        return true;
+    }
 
-        for (int i=0; i<getNumOperands(); i++)
+    @Override
+    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
+        List<Literal> args = Lists.newArrayList();
+
+        while (stack.peek().getValue() != null)
             args.add(stack.pop());
+        stack.pop(); // Pop off the arg separator
+        operands = args.size();
 
         Collections.reverse(args);
         return Domain.wrapLiteral(execute(args));
@@ -71,13 +76,12 @@ public class Function implements IOperator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
+        postfix.add(new ArgSeparator());
         operatorStack.push(this);
     }
 
-    public Object execute(ArrayList<Literal> args) {
+    public Object execute(List<Literal> args) throws IncomparableTypeException {
         throw new Error("Function not implemented");
     }
-
-
 
 }

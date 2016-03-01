@@ -5,7 +5,6 @@ import eval.Literal;
 import operator.base.BinaryOperator;
 import parser.IncomparableTypeException;
 
-import static eval.ICalculableType.COMMON_OPERATOR;
 import static operator.IConstants.DECREMENT_BY;
 import static operator.IPrecedence.ASSIGNMENT_OPERATOR;
 
@@ -20,11 +19,6 @@ public class DecrementBy extends BinaryOperator {
     @Override
     public String getToken() {
         return DECREMENT_BY;
-    }
-
-    @Override
-    public int getType() {
-        return COMMON_OPERATOR;
     }
 
     @Override

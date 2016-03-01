@@ -3,12 +3,15 @@ package operator;
 /**
  * LazyLanguage.operator
  *
+ * See:
+ *  https://en.wikipedia.org/wiki/Order_of_operations#Programming_languages
+ *
+ *
  * @version     01/12/2015
  * @author      Alexander Broadbent
  */
 public interface IPrecedence {
 
-    // https://en.wikipedia.org/wiki/Order_of_operations#Programming_languages
     int FUNCTION                = 1;    // ()
     int ARRAY_ACCESS            = 1;    // []
     int UNARY                   = 2;    // ! ++ --
@@ -25,6 +28,6 @@ public interface IPrecedence {
     int CONDITIONAL_EXPRESSION  = 13;   // ? :
     int ASSIGNMENT_OPERATOR     = 14;   // = += -= *= /= %= &= |= ^= <<= >>=
     int ARG_SEPARATOR           = 15;   // ,
-    int BRACKET                 = 51;	// Brackets are implemented as operators
+    int BRACKET                 = 16;
 
 }

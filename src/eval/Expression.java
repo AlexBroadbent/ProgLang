@@ -12,6 +12,8 @@ import parser.IncomparableTypeException;
 import java.util.List;
 import java.util.Stack;
 
+import static eval.ICalculableType.*;
+
 /**
  * LazyLanguage.eval
  * <p>
@@ -20,7 +22,7 @@ import java.util.Stack;
  * @author Alexander Broadbent
  * @version 01/12/2015
  */
-public class Expression extends Literal {
+public class Expression {
 
     protected Domain model;
     protected List<ICalculable> expression;
@@ -36,8 +38,6 @@ public class Expression extends Literal {
      * @throws UnknownSequenceException
      */
     public Expression(Domain model, List<Token> tokens) throws ExpressionException, UnknownSequenceException {
-        super(null);
-
         infix = StringUtils.join(tokens, " ");
         this.model = model;
 
@@ -85,8 +85,11 @@ public class Expression extends Literal {
             return ((Literal) expression.get(0)).getValue();
 
         Stack<Literal> stack = new Stack<>();
-        for (ICalculable literal : expression)
-            stack.push(literal.evaluate(model, stack));
+        for (ICalculable literal : expression) {
+            Literal result = literal.evaluate(model, stack);
+            if (result != null)
+                stack.push(result);
+        }
 
         // get result from stack
         if (stack.size() == 1)
@@ -100,33 +103,22 @@ public class Expression extends Literal {
         for (ICalculable literal : expression) {
             stackSize++;
 
-            if (literal instanceof IOperator)
+            if (literal.getType() == OPERATOR)
                 stackSize -= ((IOperator) literal).getNumOperands();
+            if (literal.getType() == FUNCTION) {
+                for (int i=expression.indexOf(literal); i>=0; i--) {
+                    if (expression.get(i).getType() == ARG_SEPARATOR) {
+                        // Pop the stack of all literals up until the point of the arg separator - leaving just the function
+                        stackSize -= (expression.indexOf(literal) - i);
+                        break;
+                    }
+                }
+            }
+
         }
 
         return stackSize == 1;
     }
-
-    /**
-     * <p>
-     * Determines if the expression can be executed. The following conditions must be met:
-     * <ul style='margin-top: 0;'>
-     * <li>Variables must have a value set</li>
-     * </ul>
-     * <p>
-     * </p>
-     *
-     * @return executable
-     */
-    public boolean isExecutable() {
-        for (ICalculable literal : expression)
-            if (literal.getType() == ICalculableType.VARIABLE)
-                if (!((Variable) literal).isValueSet())
-                    return false;
-
-        return true;
-    }
-
 
     @Override
     public String toString() {

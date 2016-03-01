@@ -36,19 +36,19 @@ public interface IToken {
     int LIST                                    = 28;
     int LIST_START                              = 40;
     int LIST_END                                = 41;
-    int LIST_SEPARATOR                          = 42;
+    int ARG_SEPARATOR                           = 42;
 
 
     String WHITESPACE_REGEX                     = "\\s";
     String ARITHMETIC_REGEX                     = "[+-]";
     String GEOMETRIC_REGEX                      = "[*|/|\\^|\\%]";
-    String FUNCTION_REGEX                       = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan";
+    String FUNCTION_REGEX                       = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan|list|sum|max";
     String BOOLEAN_COMPARATOR_REGEX             = "\\!\\=|\\=\\=";
     String MATH_COMPARATOR_REGEX                = "\\<|\\>|\\<\\=|\\>\\=";
     String LEFT_PAREN_REGEX                     = "\\(";
     String RIGHT_PAREN_REGEX                    = "\\)";
     String BINARY_8BIT_REGEX                    = "[0-1]{8}";
-    String NUMBER_REGEX                         = "[0-9]+";
+    String NUMBER_REGEX                         = "[+-]?[0-9]+";
     String DECIMAL_REGEX                        = "[+-]?((\\d*\\.\\d+))";
     String TEXT_REGEX                           = "\".*\"|\\'.*\\'";
     String VARIABLE_REGEX                       = "[a-zA-Z][a-zA-Z0-9_]*";
@@ -64,7 +64,7 @@ public interface IToken {
     String END_REGEX                            = "\\;";
     String LIST_START_REGEX                     = "\\{";
     String LIST_END_REGEX                       = "\\}";
-    String LIST_SEPARATOR_REGEX                 = "\\,";
     String LIST_REGEX                           = "\\{.*\\}";
+    String ARG_SEPARATOR_REGEX                  = "\\,";
 
 }

@@ -1,6 +1,5 @@
 package operator.common;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
@@ -18,11 +17,6 @@ public class Decrement extends UnaryOperator {
     @Override
     public String getToken() {
         return IConstants.DECREMENT;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.COMMON_OPERATOR;
     }
 
     @Override

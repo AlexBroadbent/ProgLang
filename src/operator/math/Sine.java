@@ -1,10 +1,11 @@
 package operator.math;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IPrecedence;
-import operator.base.UnaryOperator;
+import operator.function.Function;
 import parser.IncomparableTypeException;
+
+import java.util.List;
 
 import static operator.IConstants.SIN;
 
@@ -14,16 +15,11 @@ import static operator.IConstants.SIN;
  * @author      Alexander Broadbent
  * @version     01/12/2015
  */
-public class Sine extends UnaryOperator {
+public class Sine extends Function {
 
     @Override
     public String getToken() {
         return SIN;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.MATH_OPERATOR;
     }
 
     @Override
@@ -32,7 +28,11 @@ public class Sine extends UnaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1) throws IncomparableTypeException {
+    public Object execute(List<Literal> args) throws IncomparableTypeException {
+        if (args.size() != 1)
+            throw new Error("Sine function expected only one argument but received " + args.size());
+
+        Literal arg1 = args.get(0);
         try {
             return Math.sin(Double.parseDouble(arg1.getValue().toString()));
         }

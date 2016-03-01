@@ -8,19 +8,14 @@ package eval;
  */
 public interface ICalculableType {
 
-    int BITWISE_OPERATOR                = 1;
-    int COMMON_OPERATOR                 = 2;
-    int COMPARATOR_OPERATOR             = 3;
-    int EQUALITY_OPERATOR               = 4;
-    int FUNCTION_OPERATOR               = 5;
-    int MATH_OPERATOR                   = 6;
-    int CONDITIONAL_OPERATOR            = 7;
+    int OPERATOR                        = 1;
+    int FUNCTION                        = 2;
 
-    int LEFT_PARENTHESIS                = 10;
-    int RIGHT_PARENTHESIS               = 11;
+    int LEFT_PARENTHESIS                = 5;
+    int RIGHT_PARENTHESIS               = 6;
+    int ARG_SEPARATOR                   = 7;
 
-    int LITERAL                         = 20;
-    int ASSIGNMENT                      = 21;
-    int VARIABLE                        = 22;
+    int LITERAL                         = 10;
+    int VARIABLE                        = 11;
 
 }

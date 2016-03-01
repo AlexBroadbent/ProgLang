@@ -52,7 +52,6 @@ public interface IConstants {
     String ACOS                 = "acos";
     String ATAN                 = "atan";
 
-    String CONCATENATION        = "#";
     String ASSIGNMENT           = "=";
 
     String GREATER_THAN         = ">";
@@ -65,5 +64,14 @@ public interface IConstants {
     String CONDITIONAL          = "?";
     String CONDITIONAL_ELSE     = ":";
     String CONDITIONAL_END      = ";";
+
+
+    /*
+        Functions
+     */
+
+    String SUM                  = "sum";
+    String MAX                  = "max";
+    String LIST                 = "list";
 
 }

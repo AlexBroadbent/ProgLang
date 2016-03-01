@@ -1,7 +1,6 @@
 package operator.common;
 
 import com.google.common.collect.Lists;
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
@@ -21,11 +20,6 @@ public class LogicalOr extends BinaryOperator {
     @Override
     public String getToken() {
         return IConstants.LOGICAL_OR;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.COMMON_OPERATOR;
     }
 
     @Override

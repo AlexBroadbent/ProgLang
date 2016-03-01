@@ -1,6 +1,5 @@
 package operator.equality;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
@@ -22,11 +21,6 @@ public class Equal extends BinaryOperator {
     @Override
     public int getPrecedence() {
         return IPrecedence.BOOLEAN_COMPARATOR;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.EQUALITY_OPERATOR;
     }
 
     @Override

@@ -1,7 +1,6 @@
 
 package operator.common;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.base.BinaryOperator;
 import parser.IncomparableTypeException;
@@ -20,11 +19,6 @@ public class IncrementBy extends BinaryOperator {
     @Override
     public String getToken() {
         return INCREMENT_BY;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.COMMON_OPERATOR;
     }
 
     @Override

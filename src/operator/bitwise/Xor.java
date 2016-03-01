@@ -5,7 +5,6 @@ import operator.IPrecedence;
 import operator.base.BinaryOperator;
 import parser.IncomparableTypeException;
 
-import static eval.ICalculableType.BITWISE_OPERATOR;
 import static operator.IConstants.BITWISE_XOR;
 
 /**
@@ -19,11 +18,6 @@ public class Xor extends BinaryOperator {
     @Override
     public String getToken() {
         return BITWISE_XOR;
-    }
-
-    @Override
-    public int getType() {
-        return BITWISE_OPERATOR;
     }
 
     @Override

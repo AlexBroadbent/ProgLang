@@ -1,11 +1,8 @@
 package gui;
 
-import java.util.logging.Level;
 import java.util.logging.LogRecord;
-import java.util.logging.Logger;
 
 import static gui.IConstants.DEBUG_MODE;
-import static gui.IConstants.LOGGER_NAME;
 
 /**
  * x++.gui
@@ -19,7 +16,7 @@ import static gui.IConstants.LOGGER_NAME;
 public class XLogger {
 
     protected static boolean debug = DEBUG_MODE;
-    protected static Logger logger = Logger.getLogger(LOGGER_NAME);
+    //protected static Logger logger = Logger.getLogger(LOGGER_NAME);
 
 
     public static void log(String msg) {
@@ -29,12 +26,14 @@ public class XLogger {
 
     public static void severe(String msg) {
         if (debug)
-            logger.severe(format(new LogRecord(Level.SEVERE, msg)));
+            System.err.print("> SEVERE: " + msg + "\n");
+            //logger.severe(format(new LogRecord(Level.SEVERE, msg)));
     }
 
     public static void warning(String msg) {
         if (debug)
-            logger.warning(format(new LogRecord(Level.WARNING, msg)));
+            System.err.print("> WARNING: " + msg + "\n");
+            //logger.warning(format(new LogRecord(Level.WARNING, msg)));
     }
 
 

@@ -1,6 +1,5 @@
 package operator.bitwise;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
@@ -18,11 +17,6 @@ public class Not extends UnaryOperator {
     @Override
     public String getToken() {
         return IConstants.BITWISE_NOT;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.BITWISE_OPERATOR;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package operator.conditional;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
@@ -23,11 +22,6 @@ public class Conditional extends TernaryOperator {
     @Override
     public int getPrecedence() {
         return IPrecedence.CONDITIONAL_EXPRESSION;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.CONDITIONAL_OPERATOR;
     }
 
     @Override

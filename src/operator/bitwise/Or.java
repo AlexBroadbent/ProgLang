@@ -5,7 +5,6 @@ import operator.IPrecedence;
 import operator.base.BinaryOperator;
 import parser.IncomparableTypeException;
 
-import static eval.ICalculableType.BITWISE_OPERATOR;
 import static operator.IConstants.BITWISE_OR;
 
 /**
@@ -19,11 +18,6 @@ public class Or extends BinaryOperator {
     @Override
     public String getToken() {
         return BITWISE_OR;
-    }
-
-    @Override
-    public int getType() {
-        return BITWISE_OPERATOR;
     }
 
     @Override

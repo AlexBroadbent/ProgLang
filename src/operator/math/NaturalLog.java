@@ -1,6 +1,5 @@
 package operator.math;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
@@ -23,11 +22,6 @@ public class NaturalLog extends UnaryOperator {
     @Override
     public int getPrecedence() {
         return IPrecedence.FUNCTION;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.MATH_OPERATOR;
     }
 
     @Override

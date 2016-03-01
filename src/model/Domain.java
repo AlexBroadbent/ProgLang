@@ -1,9 +1,11 @@
 package model;
 
+import com.google.common.collect.Maps;
 import eval.Literal;
 import eval.Variable;
 import lexer.ILexer;
 import lexer.Lexer;
+import operator.IFunction;
 import operator.IOperator;
 import operator.bitwise.*;
 import operator.common.*;
@@ -13,14 +15,16 @@ import operator.comparator.LessThan;
 import operator.comparator.LessThanEqual;
 import operator.conditional.Conditional;
 import operator.conditional.ConditionalElse;
-import operator.conditional.ConditionalEnd;
 import operator.equality.Equal;
 import operator.equality.NotEqual;
+import operator.function.ArgSeparator;
+import operator.function.List;
+import operator.function.Max;
+import operator.function.Sum;
 import operator.math.*;
 import parser.IParser;
 import parser.Parser;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -31,16 +35,17 @@ import java.util.Map;
  */
 public class Domain {
 
-    protected static Domain instance = null;
-
     protected ILexer lexer;
     protected IParser parser;
     protected Map<String, IOperator> operators;
+    protected Map<String, IFunction> functions;
     protected Map<String, Variable> variables;
+    protected static Domain instance = null;
 
     public Domain(ILexer lexer, IParser parser) {
-        operators = new HashMap<>();
-        variables = new HashMap<>();
+        operators = Maps.newHashMap();
+        functions = Maps.newHashMap();
+        variables = Maps.newHashMap();
 
         // Add predefined variables
         variables.put("pi", new Variable("pi", Math.PI));
@@ -62,6 +67,7 @@ public class Domain {
         registerOperator(new DivideBy());
         registerOperator(new LogicalAnd());
         registerOperator(new LogicalOr());
+        registerOperator(new ArgSeparator());
 
         // bitwise package operators
         registerOperator(new Not());
@@ -98,7 +104,11 @@ public class Domain {
         // conditional package operators
         registerOperator(new Conditional());
         registerOperator(new ConditionalElse());
-        registerOperator(new ConditionalEnd());
+
+        // function package functions
+        registerFunction(new Sum());
+        registerFunction(new Max());
+        registerFunction(new List());
 
         this.lexer = (lexer != null) ? lexer : new Lexer();
         this.parser = (parser != null) ? parser : new Parser();
@@ -106,6 +116,7 @@ public class Domain {
         if (instance == null)
             instance = this;
     }
+
 
     public ILexer getLexer() {
         return lexer;
@@ -119,12 +130,24 @@ public class Domain {
         operators.put(operator.getToken(), operator);
     }
 
+    public void registerFunction(IFunction function) {
+        functions.put(function.getToken(), function);
+    }
+
     public boolean isOperator(String token) {
         return operators.containsKey(token);
     }
 
+    public boolean isFunction(String token) {
+        return functions.containsKey(token);
+    }
+
     public IOperator getOperator(String token) {
         return operators.get(token);
+    }
+
+    public IFunction getFunction(String token) {
+        return functions.get(token);
     }
 
     public boolean hasVariable(String name) {
@@ -133,14 +156,6 @@ public class Domain {
 
     public Variable getVariable(String name) {
         return variables.get(name);
-    }
-
-    public void setVariables(Map<String, Variable> variables) {
-        this.variables.putAll(variables);
-    }
-
-    public Map<String, Variable> getAllVariables() {
-        return variables;
     }
 
     public Variable getOrCreateVariable(String name) {

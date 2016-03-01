@@ -29,22 +29,18 @@ public class MainGUI {
         System.out.print("> ");
         input = scanner.nextLine();
 
-        while (!input.equals("exit") && !input.isEmpty()) {
-            try {
-                expression = new Expression(domain, domain.getLexer().readAllTokens(input));
-                Object result = expression.execute();
+        while (!input.equals("exit")) {
+            if (!input.isEmpty()) {
+                try {
+                    expression = new Expression(domain, domain.getLexer().readAllTokens(input));
+                    Object result = expression.execute();
 
-                if (!StringUtils.isEmpty(result.toString()))
-                    System.out.print("> " + result + "\n");
-            }
-            catch (NullPointerException ex) {
-                XLogger.severe("Error: " + ex);
-            }
-            catch (UnknownSequenceException ex) {
-                XLogger.severe("Error while lexing expression: " + ex);
-            }
-            catch (ExpressionException | IncomparableTypeException ex) {
-                XLogger.severe("Error while executing expression: " + ex);
+                    if (!StringUtils.isEmpty(result.toString()))
+                        System.out.print("> " + result + "\n");
+                }
+                catch (UnknownSequenceException | ExpressionException | IncomparableTypeException ex) {
+                    XLogger.severe(ex.getMessage());
+                }
             }
 
             System.out.print("> ");

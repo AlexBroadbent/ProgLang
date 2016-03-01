@@ -1,7 +1,6 @@
 package operator.conditional;
 
 import eval.ICalculable;
-import eval.ICalculableType;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
@@ -26,11 +25,6 @@ public class ConditionalElse extends NullaryOperator {
     @Override
     public int getPrecedence() {
         return IPrecedence.CONDITIONAL_EXPRESSION;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.CONDITIONAL_OPERATOR;
     }
 
     @Override

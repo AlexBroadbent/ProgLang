@@ -1,6 +1,5 @@
 package operator.comparator;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
@@ -23,11 +22,6 @@ public class LessThanEqual extends BinaryOperator {
     @Override
     public int getPrecedence() {
         return IPrecedence.MATH_COMPARATOR;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.COMPARATOR_OPERATOR;
     }
 
     @Override

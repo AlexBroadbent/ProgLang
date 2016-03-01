@@ -27,7 +27,7 @@ public class Assignment extends BinaryOperator {
 
     @Override
     public int getType() {
-        return ICalculableType.ASSIGNMENT;
+        return ICalculableType.OPERATOR;
     }
 
     @Override

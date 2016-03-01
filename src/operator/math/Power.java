@@ -1,6 +1,5 @@
 package operator.math;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
@@ -19,11 +18,6 @@ public class Power extends BinaryOperator {
     @Override
     public String getToken() {
         return POWER;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.MATH_OPERATOR;
     }
 
     @Override

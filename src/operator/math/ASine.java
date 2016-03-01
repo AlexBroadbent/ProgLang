@@ -1,6 +1,5 @@
 package operator.math;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IPrecedence;
 import operator.base.UnaryOperator;
@@ -19,11 +18,6 @@ public class ASine extends UnaryOperator {
     @Override
     public String getToken() {
         return ASIN;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.MATH_OPERATOR;
     }
 
     @Override

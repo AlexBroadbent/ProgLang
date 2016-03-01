@@ -10,6 +10,8 @@ import operator.base.NullaryOperator;
 import java.util.List;
 import java.util.Stack;
 
+import static eval.ICalculableType.FUNCTION;
+
 /**
  * LazyLanguage.operator.common
  *
@@ -41,7 +43,7 @@ public class RightParenthesis extends NullaryOperator {
         if (operatorStack.peek().getType() == ICalculableType.LEFT_PARENTHESIS) {
             operatorStack.pop();
 
-            if (operatorStack.size() > 0 && operatorStack.peek().getType() == ICalculableType.FUNCTION_OPERATOR)
+            if (operatorStack.size() > 0 && operatorStack.peek().getType() == FUNCTION)
                 postfix.add(operatorStack.pop());
         }
         else

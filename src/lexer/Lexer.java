@@ -29,6 +29,10 @@ public class Lexer implements ILexer {
         addToken(WHITESPACE_REGEX, WHITESPACE);
         addToken(ASSIGNMENT_INC_DEC_REGEX, ASSIGNMENT_INC_DEC);
         addToken(ASSIGNMENT_REGEX, ASSIGNMENT);
+        addToken(INC_DEC_REGEX, INC_DEC);
+        addToken(BINARY_8BIT_REGEX, BINARY_8BIT);
+        addToken(DECIMAL_REGEX, DECIMAL);
+        addToken(NUMBER_REGEX, NUMBER);
         addToken(ARITHMETIC_REGEX, ARITHMETIC);
         addToken(GEOMETRIC_REGEX, GEOMETRIC);
         addToken(FUNCTION_REGEX, FUNCTION);
@@ -38,17 +42,13 @@ public class Lexer implements ILexer {
         addToken(BIT_SHIFT_OPERATOR_REGEX, BIT_SHIFT);
         addToken(MATH_COMPARATOR_REGEX, MATH_COMPARATOR);
         addToken(LOGICAL_COMPARATOR_REGEX, LOGICAL_OPERATOR);
-        addToken(INC_DEC_REGEX, INC_DEC);
 
         addToken(LEFT_PAREN_REGEX, LEFT_PARENTHESIS);
         addToken(RIGHT_PAREN_REGEX, RIGHT_PARENTHESIS);
 
-        addToken(BINARY_8BIT_REGEX, BINARY_8BIT);
-        addToken(DECIMAL_REGEX, DECIMAL);
-        addToken(NUMBER_REGEX, NUMBER);
         addToken(TEXT_REGEX, TEXT);
-        addToken(VARIABLE_REGEX, VARIABLE);
         addToken(BOOLEAN_REGEX, BOOLEAN);
+        addToken(VARIABLE_REGEX, VARIABLE);
 
         addToken(IF_REGEX, IF);
         addToken(ELSE_REGEX, ELSE);
@@ -57,7 +57,7 @@ public class Lexer implements ILexer {
         addToken(LIST_REGEX, LIST);
         addToken(LIST_START_REGEX, LIST_START);
         addToken(LIST_END_REGEX, LIST_END);
-        addToken(LIST_SEPARATOR_REGEX, LIST_SEPARATOR);
+        addToken(ARG_SEPARATOR_REGEX, ARG_SEPARATOR);
     }
 
 

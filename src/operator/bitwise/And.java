@@ -1,7 +1,6 @@
 package operator.bitwise;
 
 import com.google.common.collect.Lists;
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
@@ -22,11 +21,6 @@ public class And extends BinaryOperator {
     @Override
     public String getToken() {
         return BITWISE_AND;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.BITWISE_OPERATOR;
     }
 
     @Override

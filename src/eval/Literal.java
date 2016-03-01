@@ -26,8 +26,6 @@ public class Literal implements ICalculable {
             return new Literal(Double.valueOf(token.sequence));
         if (token.token == Token.BINARY_8BIT)
             return new Literal(Integer.parseUnsignedInt(token.sequence, 2));
-        if (token.token == Token.LIST)
-            return new Literal(LinkList.parse(token));
         if (token.sequence.equalsIgnoreCase(NULL))
             return new Literal(null);
 

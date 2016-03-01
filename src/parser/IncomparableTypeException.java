@@ -12,8 +12,7 @@ import java.util.List;
  */
 public class IncomparableTypeException extends Exception {
 
-    protected static final String OUTPUT_MSG        = "Cannot perform operation, operation requires a value " +
-                                                      "of type %s where the value is of type %s.";
+    protected static final String OUTPUT_MSG        = "Cannot perform operation, expected %s where the value is of type %s.";
 
 
     public IncomparableTypeException(String expectedType, String foundType) {

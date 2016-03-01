@@ -1,6 +1,5 @@
 package operator.bitwise;
 
-import eval.ICalculableType;
 import eval.Literal;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
@@ -19,11 +18,6 @@ public class RightShift extends BinaryOperator {
     @Override
     public String getToken() {
         return RIGHT_SHIFT;
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.BITWISE_OPERATOR;
     }
 
     @Override
