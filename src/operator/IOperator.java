@@ -14,8 +14,11 @@ import java.util.Stack;
 public interface IOperator extends ICalculable {
 
     String getToken();
+
     int getNumOperands();
+
     Associativity getAssociativity();
+
     int getPrecedence();
 
     List<String> getAllowedExecutionTypes();

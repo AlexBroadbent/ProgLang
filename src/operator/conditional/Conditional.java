@@ -21,7 +21,7 @@ public class Conditional extends TernaryOperator {
 
     @Override
     public int getPrecedence() {
-        return IPrecedence.CONDITIONAL_EXPRESSION;
+        return IPrecedence.CONDITIONAL;
     }
 
     @Override

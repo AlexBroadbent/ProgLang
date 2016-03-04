@@ -43,10 +43,13 @@ public class Expression {
 
         List<ICalculable> infixExpression = model.getParser().parse(model, tokens);
 
+
+
+
         init(infixExpression);
 
         if (!validate())
-            throw new ExpressionException("Invalid Expression: " + expression);
+            throw new ExpressionException("Expression is not valid: " + expression);
     }
 
 

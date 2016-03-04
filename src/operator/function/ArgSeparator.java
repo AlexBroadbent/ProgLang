@@ -13,6 +13,9 @@ import parser.IncomparableTypeException;
 import java.util.List;
 import java.util.Stack;
 
+import static eval.ICalculableType.LEFT_PARENTHESIS;
+import static eval.ICalculableType.LIST_START;
+
 /**
  * LazyLanguage.operator.function
  *
@@ -46,13 +49,13 @@ public class ArgSeparator extends NullaryOperator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        while (!(operatorStack.peek().getType() == ICalculableType.LEFT_PARENTHESIS))
+        while (!(operatorStack.peek().getType() == LEFT_PARENTHESIS || operatorStack.peek().getType() == LIST_START))
             postfix.add(operatorStack.pop());
     }
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
-        return null;
+        return new Literal(this);
     }
 
 }

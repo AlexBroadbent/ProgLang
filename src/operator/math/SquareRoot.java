@@ -16,7 +16,7 @@ public class SquareRoot extends UnaryOperator {
 
     @Override
     public String getToken() {
-        return IConstants.SQUAREROOT;
+        return IConstants.SQUARE_ROOT;
     }
 
     @Override

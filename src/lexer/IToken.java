@@ -27,22 +27,20 @@ public interface IToken {
     int BITWISE_OPERATOR                        = 18;
     int BIT_SHIFT                               = 19;
     int INC_DEC                                 = 20;
-    int ASSIGNMENT_INC_DEC                      = 21;
     int LOGICAL_OPERATOR                        = 22;   // Logical AND/OR/NOT
     int ASSIGNMENT                              = 24;
     int IF                                      = 25;
     int ELSE                                    = 26;
     int END                                     = 27;
-    int LIST                                    = 28;
-    int LIST_START                              = 40;
-    int LIST_END                                = 41;
-    int ARG_SEPARATOR                           = 42;
+    int LIST_START                              = 28;
+    int LIST_END                                = 29;
+    int ARG_SEPARATOR                           = 30;
 
 
     String WHITESPACE_REGEX                     = "\\s";
     String ARITHMETIC_REGEX                     = "[+-]";
     String GEOMETRIC_REGEX                      = "[*|/|\\^|\\%]";
-    String FUNCTION_REGEX                       = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan|list|sum|max";
+    String FUNCTION_REGEX                       = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan|list|sum|max|head|tail|cons";
     String BOOLEAN_COMPARATOR_REGEX             = "\\!\\=|\\=\\=";
     String MATH_COMPARATOR_REGEX                = "\\<|\\>|\\<\\=|\\>\\=";
     String LEFT_PAREN_REGEX                     = "\\(";
@@ -57,14 +55,12 @@ public interface IToken {
     String LOGICAL_COMPARATOR_REGEX             = "\\!|\\&\\&|\\|\\|";
     String BIT_SHIFT_OPERATOR_REGEX             = "\\<\\<|\\>\\>";
     String INC_DEC_REGEX                        = "\\+\\+|\\-\\-";
-    String ASSIGNMENT_INC_DEC_REGEX             = "\\+\\=|\\-\\=|\\*\\=|\\/\\=";
     String ASSIGNMENT_REGEX                     = "\\=";
     String IF_REGEX                             = "\\?";
     String ELSE_REGEX                           = "\\:";
     String END_REGEX                            = "\\;";
     String LIST_START_REGEX                     = "\\{";
     String LIST_END_REGEX                       = "\\}";
-    String LIST_REGEX                           = "\\{.*\\}";
     String ARG_SEPARATOR_REGEX                  = "\\,";
 
 }

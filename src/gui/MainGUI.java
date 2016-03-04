@@ -31,15 +31,38 @@ public class MainGUI {
 
         while (!input.equals("exit")) {
             if (!input.isEmpty()) {
-                try {
-                    expression = new Expression(domain, domain.getLexer().readAllTokens(input));
-                    Object result = expression.execute();
-
-                    if (!StringUtils.isEmpty(result.toString()))
-                        System.out.print("> " + result + "\n");
+                if (input.startsWith("domain")) {
+                    input = input.replaceFirst("domain ", "");
+                    if (input.startsWith("size"))
+                        XLogger.log("Domain size is " + domain.getVariableCount());
+                    else if (input.startsWith("list"))
+                        XLogger.log("Domain list is " + domain.getAllVariables());
+                    else if (input.startsWith("free")) {
+                        input = input.replaceFirst("free ", "");
+                        domain.freeVariable(input);
+                        XLogger.log(input + " has been removed.");
+                    }
+                    else if (input.startsWith("invalidate")) {
+                        Domain.invalidateInstance();
+                        domain = Domain.getInstance();
+                        XLogger.log("Domain has been invalidated.");
+                    }
+                    else if (input.startsWith("var")) {
+                        input = input.replaceFirst("var ", "");
+                        XLogger.log(domain.getVariable(input).toDebugString());
+                    }
                 }
-                catch (UnknownSequenceException | ExpressionException | IncomparableTypeException ex) {
-                    XLogger.severe(ex.getMessage());
+                else {
+                    try {
+                        expression = new Expression(domain, domain.getLexer().readAllTokens(input));
+                        Object result = expression.execute();
+
+                        if (result != null && !StringUtils.isEmpty(result.toString()))
+                            System.out.print("> " + result + "\n");
+                    }
+                    catch (UnknownSequenceException | ExpressionException | IncomparableTypeException ex) {
+                        XLogger.severe(ex.getMessage());
+                    }
                 }
             }
 

@@ -6,6 +6,7 @@ import eval.Literal;
 import model.Domain;
 import operator.Associativity;
 import operator.IOperator;
+import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
 import java.util.List;
@@ -39,21 +40,21 @@ public abstract class BinaryOperator extends Operator {
         return 99;
     }
 
-    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException {
-        return null;
-    }
-
     @Override
     public boolean isValidContext(Stack operatorStack, List infix, int position) {
         return true;
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException, ExpressionException {
         Literal arg2 = stack.pop();
         Literal arg1 = stack.pop();
 
         return Domain.wrapLiteral(execute(arg1, arg2));
+    }
+
+    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
+        return null;
     }
 
     @Override

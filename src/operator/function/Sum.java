@@ -22,11 +22,6 @@ public class Sum extends Function {
     }
 
     @Override
-    public int getNumOperands() {
-        return operands;
-    }
-
-    @Override
     public Object execute(List<Literal> args) throws IncomparableTypeException {
         int sum = 0;
 
@@ -40,4 +35,5 @@ public class Sum extends Function {
     public List<String> getAllowedExecutionTypes() {
         return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
+
 }

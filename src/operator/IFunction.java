@@ -3,8 +3,8 @@ package operator;
 /**
  * LazyLanguage.operator
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public interface IFunction extends IOperator {
 

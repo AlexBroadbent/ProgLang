@@ -31,26 +31,9 @@ public interface IConstants {
     String LOGICAL_NOT          = "!";
     String LOGICAL_AND          = "&&";
     String LOGICAL_OR           = "||";
-    String NOT                  = "!";
+
     String INCREMENT            = "++";
-
     String DECREMENT            = "--";
-    String INCREMENT_BY         = "+=";
-    String DECREMENT_BY         = "-=";
-    String MULTIPLY_BY          = "*=";
-
-    String DIVIDE_BY            = "/=";
-    String EXPONENTIAL          = "exp";
-    String SQUAREROOT           = "sqrt";
-    String LN                   = "ln";
-    String LOG_10               = "log10";
-
-    String SIN                  = "sin";
-    String COS                  = "cos";
-    String TAN                  = "tan";
-    String ASIN                 = "asin";
-    String ACOS                 = "acos";
-    String ATAN                 = "atan";
 
     String ASSIGNMENT           = "=";
 
@@ -63,15 +46,31 @@ public interface IConstants {
 
     String CONDITIONAL          = "?";
     String CONDITIONAL_ELSE     = ":";
-    String CONDITIONAL_END      = ";";
 
+    String LIST_START           = "{";
+    String LIST_END             = "}";
 
     /*
         Functions
      */
 
+    String EXPONENTIAL          = "exp";
+
+    String SQUARE_ROOT          = "sqrt";
+    String LN                   = "ln";
+    String LOG_10               = "log10";
+    String SIN                  = "sin";
+    String COS                  = "cos";
+    String TAN                  = "tan";
+    String ASIN                 = "asin";
+    String ACOS                 = "acos";
+    String ATAN                 = "atan";
+
     String SUM                  = "sum";
     String MAX                  = "max";
     String LIST                 = "list";
+    String HEAD                 = "head";
+    String TAIL                 = "tail";
+    String CONS                 = "cons";
 
 }

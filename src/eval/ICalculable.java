@@ -2,6 +2,7 @@ package eval;
 
 import model.Domain;
 import operator.IOperator;
+import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Stack;
  */
 public interface ICalculable {
 
-    Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException;
+    Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException, ExpressionException;
     void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack);
 
     int getType();

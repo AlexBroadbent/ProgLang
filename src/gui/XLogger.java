@@ -21,18 +21,18 @@ public class XLogger {
 
     public static void log(String msg) {
         if (debug)
-            System.out.println(msg);
+            System.out.print(msg + "\n");
     }
 
     public static void severe(String msg) {
         if (debug)
-            System.err.print("> SEVERE: " + msg + "\n");
+            System.err.print("SEVERE: " + msg + "\n");
             //logger.severe(format(new LogRecord(Level.SEVERE, msg)));
     }
 
     public static void warning(String msg) {
         if (debug)
-            System.err.print("> WARNING: " + msg + "\n");
+            System.err.print("WARNING: " + msg + "\n");
             //logger.warning(format(new LogRecord(Level.WARNING, msg)));
     }
 

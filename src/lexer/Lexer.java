@@ -19,15 +19,12 @@ import static lexer.IToken.*;
 public class Lexer implements ILexer {
 
     protected List<TokenInfo> tokenInfoList;
-    protected List<TokenInfo> tokenInfoExcludeList;
 
 
     public Lexer() {
         tokenInfoList = Lists.newLinkedList();
-        tokenInfoExcludeList = Lists.newLinkedList();
 
         addToken(WHITESPACE_REGEX, WHITESPACE);
-        addToken(ASSIGNMENT_INC_DEC_REGEX, ASSIGNMENT_INC_DEC);
         addToken(ASSIGNMENT_REGEX, ASSIGNMENT);
         addToken(INC_DEC_REGEX, INC_DEC);
         addToken(BINARY_8BIT_REGEX, BINARY_8BIT);
@@ -54,7 +51,6 @@ public class Lexer implements ILexer {
         addToken(ELSE_REGEX, ELSE);
         addToken(END_REGEX, END);
 
-        addToken(LIST_REGEX, LIST);
         addToken(LIST_START_REGEX, LIST_START);
         addToken(LIST_END_REGEX, LIST_END);
         addToken(ARG_SEPARATOR_REGEX, ARG_SEPARATOR);
@@ -65,11 +61,9 @@ public class Lexer implements ILexer {
         try {
             TokenInfo ti = new TokenInfo(Pattern.compile("^(" + regex + ")"), token);
             tokenInfoList.add(ti);
-            if (token != LIST)
-                tokenInfoExcludeList.add(ti);
         }
         catch (PatternSyntaxException ex) {
-            XLogger.severe("Lexer Regex is invalid: " + regex + " for token " + token);
+            XLogger.severe("Lexer regex is invalid: " + regex + " for token " + token);
         }
     }
 
@@ -84,7 +78,7 @@ public class Lexer implements ILexer {
         while (!input.isEmpty()) {
             boolean match = false;
 
-            for (TokenInfo info : ((ignoreList) ? tokenInfoExcludeList : tokenInfoList)) {
+            for (TokenInfo info : tokenInfoList) {
                 Matcher m = info.regex.matcher(input);
 
                 if (m.find()) {

@@ -22,7 +22,7 @@ public class RightShift extends BinaryOperator {
 
     @Override
     public int getPrecedence() {
-        return IPrecedence.BITSHIFT;
+        return IPrecedence.BIT_SHIFT;
     }
 
     @Override

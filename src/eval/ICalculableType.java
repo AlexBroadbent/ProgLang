@@ -14,6 +14,7 @@ public interface ICalculableType {
     int LEFT_PARENTHESIS                = 5;
     int RIGHT_PARENTHESIS               = 6;
     int ARG_SEPARATOR                   = 7;
+    int LIST_START                      = 8;
 
     int LITERAL                         = 10;
     int VARIABLE                        = 11;

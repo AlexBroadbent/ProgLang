@@ -9,6 +9,7 @@ import operator.Associativity;
 import operator.IFunction;
 import operator.IOperator;
 import operator.IPrecedence;
+import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
 import java.util.Collections;
@@ -23,8 +24,6 @@ import java.util.Stack;
  */
 public class Function implements IFunction {
 
-    protected int operands = 0;
-
     @Override
     public String getToken() {
         String className = this.getClass().getSimpleName();
@@ -33,7 +32,7 @@ public class Function implements IFunction {
 
     @Override
     public int getNumOperands() {
-        return operands;
+        return 0;
     }
 
     @Override
@@ -62,13 +61,12 @@ public class Function implements IFunction {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException, ExpressionException {
         List<Literal> args = Lists.newArrayList();
 
-        while (stack.peek().getValue() != null)
+        while (!(stack.peek().getValue() instanceof ArgSeparator))
             args.add(stack.pop());
         stack.pop(); // Pop off the arg separator
-        operands = args.size();
 
         Collections.reverse(args);
         return Domain.wrapLiteral(execute(args));
@@ -80,8 +78,13 @@ public class Function implements IFunction {
         operatorStack.push(this);
     }
 
-    public Object execute(List<Literal> args) throws IncomparableTypeException {
+    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
         throw new Error("Function not implemented");
     }
 
+
+    @Override
+    public String toString() {
+        return getToken();
+    }
 }

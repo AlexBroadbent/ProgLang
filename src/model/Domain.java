@@ -17,15 +17,15 @@ import operator.conditional.Conditional;
 import operator.conditional.ConditionalElse;
 import operator.equality.Equal;
 import operator.equality.NotEqual;
-import operator.function.ArgSeparator;
-import operator.function.List;
-import operator.function.Max;
-import operator.function.Sum;
+import operator.function.*;
+import operator.list.ListEnd;
+import operator.list.ListStart;
 import operator.math.*;
 import parser.IParser;
 import parser.Parser;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * LazyLanguage.model
@@ -61,10 +61,6 @@ public class Domain {
         registerOperator(new Divide());
         registerOperator(new Increment());
         registerOperator(new Decrement());
-        registerOperator(new IncrementBy());
-        registerOperator(new DecrementBy());
-        registerOperator(new MultiplyBy());
-        registerOperator(new DivideBy());
         registerOperator(new LogicalAnd());
         registerOperator(new LogicalOr());
         registerOperator(new ArgSeparator());
@@ -105,10 +101,17 @@ public class Domain {
         registerOperator(new Conditional());
         registerOperator(new ConditionalElse());
 
+        // list package operators
+        registerOperator(new ListStart());
+        registerOperator(new ListEnd());
+
         // function package functions
         registerFunction(new Sum());
         registerFunction(new Max());
         registerFunction(new List());
+        registerFunction(new Head());
+        registerFunction(new Tail());
+        registerFunction(new Cons());
 
         this.lexer = (lexer != null) ? lexer : new Lexer();
         this.parser = (parser != null) ? parser : new Parser();
@@ -158,6 +161,19 @@ public class Domain {
         return variables.get(name);
     }
 
+    public void freeVariable(String name) {
+        if (hasVariable(name))
+            variables.remove(name);
+    }
+
+    public int getVariableCount() {
+        return variables.size();
+    }
+
+    public Set<Map.Entry<String, Variable>> getAllVariables() {
+        return variables.entrySet();
+    }
+
     public Variable getOrCreateVariable(String name) {
         if (hasVariable(name))
             return getVariable(name);
@@ -185,6 +201,10 @@ public class Domain {
             instance = new Domain(null, null);
 
         return instance;
+    }
+
+    public static void invalidateInstance() {
+        instance = null;
     }
 
 }

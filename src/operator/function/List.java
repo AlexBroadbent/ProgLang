@@ -2,6 +2,7 @@ package operator.function;
 
 import com.google.common.collect.Lists;
 import eval.Literal;
+import eval.Variable;
 import parser.IncomparableTypeException;
 
 import static operator.IConstants.LIST;
@@ -20,13 +21,13 @@ public class List extends Function {
     }
 
     @Override
-    public int getNumOperands() {
-        return operands;
-    }
-
-    @Override
     public Object execute(java.util.List<Literal> args) throws IncomparableTypeException {
         return new Literal(Lists.newLinkedList(args));
     }
 
+    @Override
+    public java.util.List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Integer.class.getSimpleName(), Double.class.getSimpleName(),
+                Boolean.class.getSimpleName(), Variable.class.getSimpleName(), List.class.getSimpleName());
+    }
 }

@@ -16,14 +16,13 @@ public class Variable extends Literal {
     protected boolean valueSet;
     protected int links;            // Memory management counter -> can be deleted when links is 0
 
-
     public Variable(String name) {
         super(null);
 
         this.name = name;
         valueSet = false;
 
-        links = 1;
+        links = 0;
     }
 
     public Variable(String name, Object value) {
@@ -73,6 +72,10 @@ public class Variable extends Literal {
     @Override
     public String toString() {
         return getName() + ((isValueSet()) ? " [" + getValue().toString() + "]" : " [No Value]");
+    }
+
+    public String toDebugString() {
+        return getName() + " -> Holds: " + getValue().getClass().getSimpleName() + " value: " + getValue().toString();
     }
 
 }

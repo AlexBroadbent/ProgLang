@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import eval.Literal;
 import parser.IncomparableTypeException;
 
+import java.util.Collections;
 import java.util.List;
 
 import static operator.IConstants.MAX;
@@ -24,12 +25,12 @@ public class Max extends Function {
 
     @Override
     public Object execute(List<Literal> args) throws IncomparableTypeException {
-        int sum = 0;
+        List<Double> list = Lists.newArrayList();
 
         for (Literal literal : args)
-            sum += Double.parseDouble(literal.getValue().toString());
+            list.add(Double.parseDouble(literal.getValue().toString()));
 
-        return sum;
+        return Collections.max(list);
     }
 
     @Override
