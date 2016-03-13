@@ -1,6 +1,7 @@
 package operator.function;
 
 import com.google.common.collect.Lists;
+import eval.FunctionPlaceholder;
 import eval.ICalculable;
 import eval.ICalculableType;
 import eval.Literal;
@@ -15,6 +16,8 @@ import parser.IncomparableTypeException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+
+import static eval.ICalculableType.FUNCTION_PLACEHOLDER;
 
 /**
  * LazyLanguage.operator.function
@@ -64,7 +67,7 @@ public class Function implements IFunction {
     public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException, ExpressionException {
         List<Literal> args = Lists.newArrayList();
 
-        while (!(stack.peek().getValue() instanceof ArgSeparator))
+        while (!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER)
             args.add(stack.pop());
         stack.pop(); // Pop off the arg separator
 
@@ -74,12 +77,12 @@ public class Function implements IFunction {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        postfix.add(new ArgSeparator());
+        postfix.add(new FunctionPlaceholder());
         operatorStack.push(this);
     }
 
     public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
-        throw new Error("Function not implemented");
+        throw new ExpressionException("Function not implemented");
     }
 
 

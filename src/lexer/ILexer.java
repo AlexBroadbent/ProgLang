@@ -13,4 +13,6 @@ public interface ILexer {
     List<Token> readAllTokens(String input) throws UnknownSequenceException;
     List<Token> readAllTokens(String input, boolean ignoreList) throws UnknownSequenceException;
 
+    void addUserFunctionName(String name);
+
 }

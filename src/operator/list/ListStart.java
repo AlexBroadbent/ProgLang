@@ -1,12 +1,12 @@
 package operator.list;
 
+import eval.FunctionPlaceholder;
 import eval.ICalculable;
 import eval.ICalculableType;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
 import operator.base.NullaryOperator;
-import operator.function.ArgSeparator;
 
 import java.util.List;
 import java.util.Stack;
@@ -36,7 +36,7 @@ public class ListStart extends NullaryOperator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        postfix.add(new ArgSeparator());
+        postfix.add(new FunctionPlaceholder());
         operatorStack.push(this);
     }
 

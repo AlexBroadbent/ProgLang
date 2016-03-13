@@ -15,6 +15,7 @@ public interface IToken {
     int GEOMETRIC                               = 2;
     int FUNCTION                                = 3;
     int BOOLEAN_COMPARATOR                      = 4;
+    int FUNCTION_DECLARATION = 5;
     int MATH_COMPARATOR                         = 6;
     int LEFT_PARENTHESIS                        = 7;
     int RIGHT_PARENTHESIS                       = 8;
@@ -40,7 +41,8 @@ public interface IToken {
     String WHITESPACE_REGEX                     = "\\s";
     String ARITHMETIC_REGEX                     = "[+-]";
     String GEOMETRIC_REGEX                      = "[*|/|\\^|\\%]";
-    String FUNCTION_REGEX                       = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan|list|sum|max|head|tail|cons";
+    String FUNCTION_REGEX = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan";
+    String FUNCTION_DECLARATION_REGEX = "func";
     String BOOLEAN_COMPARATOR_REGEX             = "\\!\\=|\\=\\=";
     String MATH_COMPARATOR_REGEX                = "\\<|\\>|\\<\\=|\\>\\=";
     String LEFT_PAREN_REGEX                     = "\\(";

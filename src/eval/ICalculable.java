@@ -11,12 +11,13 @@ import java.util.Stack;
 /**
  * LazyLanguage.eval
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public interface ICalculable {
 
     Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException, ExpressionException;
+
     void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack);
 
     int getType();

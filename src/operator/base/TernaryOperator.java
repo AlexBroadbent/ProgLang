@@ -45,6 +45,9 @@ public abstract class TernaryOperator extends Operator {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
+        if (!isStackExecutable(stack))
+            return Domain.wrapLiteral(this);
+
         Literal arg3 = stack.pop();
         Literal arg2 = stack.pop();
         Literal arg1 = stack.pop();

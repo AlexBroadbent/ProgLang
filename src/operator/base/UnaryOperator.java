@@ -14,8 +14,8 @@ import java.util.Stack;
 /**
  * LazyLanguage.operator.base
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public abstract class UnaryOperator extends Operator {
 
@@ -41,6 +41,9 @@ public abstract class UnaryOperator extends Operator {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
+        if (!isStackExecutable(stack))
+            return Domain.wrapLiteral(this);
+
         return Domain.wrapLiteral(execute(stack.pop()));
     }
 

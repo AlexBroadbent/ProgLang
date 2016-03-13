@@ -1,9 +1,12 @@
 package lexer;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import gui.XLogger;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -18,11 +21,13 @@ import static lexer.IToken.*;
  */
 public class Lexer implements ILexer {
 
-    protected List<TokenInfo> tokenInfoList;
+    protected Map<Integer, TokenInfo> tokenInfoMap;
+    protected List<String> userFunctionNameList;
 
 
     public Lexer() {
-        tokenInfoList = Lists.newLinkedList();
+        tokenInfoMap = Maps.newHashMap();
+        userFunctionNameList = Lists.newArrayList();
 
         addToken(WHITESPACE_REGEX, WHITESPACE);
         addToken(ASSIGNMENT_REGEX, ASSIGNMENT);
@@ -33,6 +38,8 @@ public class Lexer implements ILexer {
         addToken(ARITHMETIC_REGEX, ARITHMETIC);
         addToken(GEOMETRIC_REGEX, GEOMETRIC);
         addToken(FUNCTION_REGEX, FUNCTION);
+        addToken(getUserFunctionNameRegex(), FUNCTION);
+        addToken(FUNCTION_DECLARATION_REGEX, FUNCTION_DECLARATION);
 
         addToken(BOOLEAN_COMPARATOR_REGEX, BOOLEAN_COMPARATOR);
         addToken(BITWISE_OPERATOR_REGEX, BITWISE_OPERATOR);
@@ -57,14 +64,30 @@ public class Lexer implements ILexer {
     }
 
 
-    public void addToken(String regex, int token) {
+    protected void addToken(String regex, Integer token) {
         try {
             TokenInfo ti = new TokenInfo(Pattern.compile("^(" + regex + ")"), token);
-            tokenInfoList.add(ti);
+            tokenInfoMap.put(token, ti);
         }
         catch (PatternSyntaxException ex) {
             XLogger.severe("Lexer regex is invalid: " + regex + " for token " + token);
         }
+    }
+
+    /**
+     * Add a user function to the lexer
+     *
+     * @param name the name of the function to add to the lexer
+     */
+    @Override
+    public void addUserFunctionName(String name) {
+        userFunctionNameList.add(name);
+        tokenInfoMap.put(FUNCTION, new TokenInfo(Pattern.compile("^(" + getUserFunctionNameRegex() + ")"), FUNCTION));
+    }
+
+    protected String getUserFunctionNameRegex() {
+        String userF = StringUtils.join(userFunctionNameList, "|");
+        return FUNCTION_REGEX.concat("|" + userF);
     }
 
     @Override
@@ -78,7 +101,7 @@ public class Lexer implements ILexer {
         while (!input.isEmpty()) {
             boolean match = false;
 
-            for (TokenInfo info : tokenInfoList) {
+            for (TokenInfo info : tokenInfoMap.values()) {
                 Matcher m = info.regex.matcher(input);
 
                 if (m.find()) {

@@ -35,8 +35,15 @@ public class MainGUI {
                     input = input.replaceFirst("domain ", "");
                     if (input.startsWith("size"))
                         XLogger.log("Domain size is " + domain.getVariableCount());
-                    else if (input.startsWith("list"))
-                        XLogger.log("Domain list is " + domain.getAllVariables());
+                    else if (input.startsWith("list")) {
+                        input = input.replaceFirst("list ", "");
+                        if (input.startsWith("variables"))
+                            XLogger.log("Variable list: " + domain.getAllVariables());
+                        if (input.startsWith("operators"))
+                            XLogger.log("Operator list: " + domain.getOperatorList());
+                        if (input.startsWith("functions"))
+                            XLogger.log("Function list: " + domain.getFunctionList());
+                    }
                     else if (input.startsWith("free")) {
                         input = input.replaceFirst("free ", "");
                         domain.freeVariable(input);
@@ -61,6 +68,7 @@ public class MainGUI {
                             System.out.print("> " + result + "\n");
                     }
                     catch (UnknownSequenceException | ExpressionException | IncomparableTypeException ex) {
+
                         XLogger.severe(ex.getMessage());
                     }
                 }

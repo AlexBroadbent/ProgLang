@@ -25,20 +25,20 @@ public class Cons extends Function {
     @Override
     @SuppressWarnings("unchecked")
     public Object execute(List<Literal> args) throws ExpressionException {
-        if (args.size() == 0)
-            throw new ExpressionException("Cons function requires at least two arguments, a list and a literal.");
+        if (args.size() != 2)
+            throw new ExpressionException("Cons function requires two arguments, a literal and a list.");
 
-        LinkedList<Literal> list = null;
+        LinkedList<Literal> list;
         LinkedList<Literal> newList = Lists.newLinkedList();
 
         // arg first, only take two
         try {
-            list = (LinkedList<Literal>) args.get(0).getValue();
+            list = (LinkedList<Literal>) args.get(1).getValue();
             newList.addAll(args.subList(1, args.size()));
             newList.addAll(list);
         }
         catch (ClassCastException ex) {
-            XLogger.severe("The first argument given to cons function must be a list. Instead found: "
+            XLogger.severe("The second argument given to cons function must be a list. Instead found: "
                     + args.get(0).getValue().getClass().getSimpleName());
         }
 

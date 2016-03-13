@@ -55,7 +55,7 @@ public class ArgSeparator extends NullaryOperator {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
-        return new Literal(this);
+        return Domain.wrapLiteral(this);
     }
 
 }

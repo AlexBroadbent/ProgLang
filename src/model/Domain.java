@@ -21,6 +21,7 @@ import operator.function.*;
 import operator.list.ListEnd;
 import operator.list.ListStart;
 import operator.math.*;
+import org.apache.commons.lang3.StringUtils;
 import parser.IParser;
 import parser.Parser;
 
@@ -35,17 +36,21 @@ import java.util.Set;
  */
 public class Domain {
 
+    protected static Domain instance = null;
     protected ILexer lexer;
     protected IParser parser;
     protected Map<String, IOperator> operators;
     protected Map<String, IFunction> functions;
     protected Map<String, Variable> variables;
-    protected static Domain instance = null;
-
     public Domain(ILexer lexer, IParser parser) {
+        // Initialise the maps used for functions, operators and variables
         operators = Maps.newHashMap();
         functions = Maps.newHashMap();
         variables = Maps.newHashMap();
+
+        // Create lexer and parser if necessary
+        this.lexer = (lexer != null) ? lexer : new Lexer();
+        this.parser = (parser != null) ? parser : new Parser();
 
         // Add predefined variables
         variables.put("pi", new Variable("pi", Math.PI));
@@ -112,14 +117,30 @@ public class Domain {
         registerFunction(new Head());
         registerFunction(new Tail());
         registerFunction(new Cons());
+        registerFunction(new Declaration());
 
-        this.lexer = (lexer != null) ? lexer : new Lexer();
-        this.parser = (parser != null) ? parser : new Parser();
-
+        // set singleton instance
         if (instance == null)
             instance = this;
     }
 
+    public static Domain getInstance() {
+        if (instance == null)
+            instance = new Domain(null, null);
+
+        return instance;
+    }
+
+    public static Literal wrapLiteral(Object value) {
+        if (value instanceof Literal)
+            return (Literal) value;
+
+        return new Literal(value);
+    }
+
+    public static void invalidateInstance() {
+        instance = null;
+    }
 
     public ILexer getLexer() {
         return lexer;
@@ -134,6 +155,7 @@ public class Domain {
     }
 
     public void registerFunction(IFunction function) {
+        lexer.addUserFunctionName(function.getToken()); // Register the function with the lexer
         functions.put(function.getToken(), function);
     }
 
@@ -161,19 +183,6 @@ public class Domain {
         return variables.get(name);
     }
 
-    public void freeVariable(String name) {
-        if (hasVariable(name))
-            variables.remove(name);
-    }
-
-    public int getVariableCount() {
-        return variables.size();
-    }
-
-    public Set<Map.Entry<String, Variable>> getAllVariables() {
-        return variables.entrySet();
-    }
-
     public Variable getOrCreateVariable(String name) {
         if (hasVariable(name))
             return getVariable(name);
@@ -188,23 +197,25 @@ public class Domain {
         return new Variable(name);
     }
 
-
-    public static Literal wrapLiteral(Object value) {
-        if (value instanceof Literal)
-            return (Literal) value;
-
-        return new Literal(value);
+    public void freeVariable(String name) {
+        if (hasVariable(name))
+            variables.remove(name);
     }
 
-    public static Domain getInstance() {
-        if (instance == null)
-            instance = new Domain(null, null);
-
-        return instance;
+    public int getVariableCount() {
+        return variables.size();
     }
 
-    public static void invalidateInstance() {
-        instance = null;
+    public Set<Map.Entry<String, Variable>> getAllVariables() {
+        return variables.entrySet();
+    }
+
+    public String getOperatorList() {
+        return StringUtils.join(operators.entrySet(), ", ");
+    }
+
+    public String getFunctionList() {
+        return StringUtils.join(functions.entrySet(), ", ");
     }
 
 }

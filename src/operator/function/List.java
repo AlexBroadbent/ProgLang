@@ -3,6 +3,7 @@ package operator.function;
 import com.google.common.collect.Lists;
 import eval.Literal;
 import eval.Variable;
+import model.Domain;
 import parser.IncomparableTypeException;
 
 import static operator.IConstants.LIST;
@@ -22,7 +23,7 @@ public class List extends Function {
 
     @Override
     public Object execute(java.util.List<Literal> args) throws IncomparableTypeException {
-        return new Literal(Lists.newLinkedList(args));
+        return Domain.wrapLiteral(Lists.newLinkedList(args));
     }
 
     @Override

@@ -12,33 +12,31 @@ import static parser.IConstants.NULL;
 /**
  * LazyLanguage.eval
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class Literal implements ICalculable {
 
-    public static Literal parseLiteral(Token token) {
-        if (token.token == Token.BOOLEAN)
-            return new Literal(Boolean.valueOf(token.sequence));
-        if (token.token == Token.NUMBER)
-            return new Literal(Integer.valueOf(token.sequence));
-        if (token.token == Token.DECIMAL)
-            return new Literal(Double.valueOf(token.sequence));
-        if (token.token == Token.BINARY_8BIT)
-            return new Literal(Integer.parseUnsignedInt(token.sequence, 2));
-        if (token.sequence.equalsIgnoreCase(NULL))
-            return new Literal(null);
-
-        return new Literal(token.sequence);
-    }
-
     protected Object value;
-
 
     public Literal(Object value) {
         this.value = value;
     }
 
+    public static Literal parseLiteral(Token token) {
+        if (token.token == Token.BOOLEAN)
+            return Domain.wrapLiteral(Boolean.valueOf(token.sequence));
+        if (token.token == Token.NUMBER)
+            return Domain.wrapLiteral(Integer.valueOf(token.sequence));
+        if (token.token == Token.DECIMAL)
+            return Domain.wrapLiteral(Double.valueOf(token.sequence));
+        if (token.token == Token.BINARY_8BIT)
+            return Domain.wrapLiteral(Integer.parseUnsignedInt(token.sequence, 2));
+        if (token.sequence.equalsIgnoreCase(NULL))
+            return Domain.wrapLiteral(null);
+
+        return Domain.wrapLiteral(token.sequence);
+    }
 
     public Object getValue() {
         return value;
@@ -65,7 +63,7 @@ public class Literal implements ICalculable {
 
     @Override
     public String toString() {
-        return getValue().toString();
+        return getValue() != null ? getValue().toString() : "null";
     }
 
 }

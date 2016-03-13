@@ -47,6 +47,9 @@ public abstract class BinaryOperator extends Operator {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException, ExpressionException {
+        if (!isStackExecutable(stack))
+            return Domain.wrapLiteral(this);
+
         Literal arg2 = stack.pop();
         Literal arg1 = stack.pop();
 

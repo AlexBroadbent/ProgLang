@@ -73,4 +73,6 @@ public interface IConstants {
     String TAIL                 = "tail";
     String CONS                 = "cons";
 
+    String FUNC = "func";
+
 }
