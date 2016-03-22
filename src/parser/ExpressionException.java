@@ -1,7 +1,7 @@
 package parser;
 
 /**
- * LazyLanguage.parser.exception
+ * x++.parser.exception
  *
  * @author      Alexander Broadbent
  * @version     02/12/2015

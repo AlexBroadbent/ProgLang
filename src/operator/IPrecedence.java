@@ -1,7 +1,7 @@
 package operator;
 
 /**
- * LazyLanguage.operator
+ * x++.operator
  *
  * See:
  *  https://en.wikipedia.org/wiki/Order_of_operations#Programming_languages

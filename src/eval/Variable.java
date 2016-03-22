@@ -1,7 +1,7 @@
 package eval;
 
 /**
- * LazyLanguage.eval
+ * x++.eval
  * <p>
  * Variable of a lambda infix, created using just the name, and then a value
  * is assigned later on.

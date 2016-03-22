@@ -44,7 +44,8 @@ public interface IToken {
     String FUNCTION_REGEX = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan";
     String FUNCTION_DECLARATION_REGEX = "func";
     String BOOLEAN_COMPARATOR_REGEX             = "\\!\\=|\\=\\=";
-    String MATH_COMPARATOR_REGEX                = "\\<|\\>|\\<\\=|\\>\\=";
+    String MATH_COMPARATOR_EQUALITY_REGEX = "\\<\\=|\\>\\=";
+    String MATH_COMPARATOR_REGEX = "\\<|\\>";
     String LEFT_PAREN_REGEX                     = "\\(";
     String RIGHT_PAREN_REGEX                    = "\\)";
     String BINARY_8BIT_REGEX                    = "[0-1]{8}";

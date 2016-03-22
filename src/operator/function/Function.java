@@ -20,7 +20,7 @@ import java.util.Stack;
 import static eval.ICalculableType.FUNCTION_PLACEHOLDER;
 
 /**
- * LazyLanguage.operator.function
+ * x++.operator.function
  *
  * @author      Alexander Broadbent
  * @version     02/12/2015
@@ -64,7 +64,7 @@ public class Function implements IFunction {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean funcDec) throws IncomparableTypeException, ExpressionException {
         List<Literal> args = Lists.newArrayList();
 
         while (!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER)

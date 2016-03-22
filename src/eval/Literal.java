@@ -7,10 +7,8 @@ import operator.IOperator;
 import java.util.List;
 import java.util.Stack;
 
-import static parser.IConstants.NULL;
-
 /**
- * LazyLanguage.eval
+ * x++.eval
  *
  * @author Alexander Broadbent
  * @version 01/12/2015
@@ -32,8 +30,6 @@ public class Literal implements ICalculable {
             return Domain.wrapLiteral(Double.valueOf(token.sequence));
         if (token.token == Token.BINARY_8BIT)
             return Domain.wrapLiteral(Integer.parseUnsignedInt(token.sequence, 2));
-        if (token.sequence.equalsIgnoreCase(NULL))
-            return Domain.wrapLiteral(null);
 
         return Domain.wrapLiteral(token.sequence);
     }
@@ -47,7 +43,7 @@ public class Literal implements ICalculable {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack stack) {
+    public Literal evaluate(Domain domain, Stack stack, boolean funcDec) {
         return this;
     }
 

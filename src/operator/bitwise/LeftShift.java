@@ -11,7 +11,7 @@ import java.util.List;
 import static operator.IConstants.LEFT_SHIFT;
 
 /**
- * LazyLanguage.operator.common
+ * x++.operator.common
  *
  * @version     01/12/2015
  * @author      Alexander Broadbent

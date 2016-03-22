@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * LazyLanguage.operator
+ * x++.operator
  *
  * @version     01/12/2015
  * @author      Alexander Broadbent

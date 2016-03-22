@@ -1,14 +1,15 @@
 package eval;
 
 import com.google.common.collect.Lists;
-import gui.XLogger;
 import lexer.Token;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import operator.IOperator;
+import operator.function.Declaration;
 import org.apache.commons.lang3.StringUtils;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
+import parser.ParserException;
 
 import java.util.List;
 import java.util.Stack;
@@ -16,14 +17,14 @@ import java.util.Stack;
 import static eval.ICalculableType.*;
 
 /**
- * LazyLanguage.eval
+ * x++.eval
  * <p>
  * Used for the body of a Lambda Expression.
  *
  * @author Alexander Broadbent
  * @version 01/12/2015
  */
-public class Expression extends Literal {
+public class Expression {
 
     protected Domain model;
     protected List<ICalculable> expression;
@@ -38,8 +39,7 @@ public class Expression extends Literal {
      * @throws ExpressionException
      * @throws UnknownSequenceException
      */
-    public Expression(Domain model, List<Token> tokens) throws ExpressionException, UnknownSequenceException {
-        super(null);
+    public Expression(Domain model, List<Token> tokens) throws ExpressionException, UnknownSequenceException, ParserException {
         infix = StringUtils.join(tokens, " ");
         this.model = model;
 
@@ -52,8 +52,6 @@ public class Expression extends Literal {
     }
 
     public Expression(List<ICalculable> postfix, Domain model) throws ExpressionException {
-        super(null);
-
         infix = StringUtils.join(postfix, " "); // TODO: postfix-to-infix function?
         this.model = model;
 
@@ -67,7 +65,7 @@ public class Expression extends Literal {
     /**
      * @param infix A parsed expression in infix form
      */
-    public void init(List<ICalculable> infix) {
+    protected void init(List<ICalculable> infix) {
         Stack<IOperator> operatorStack = new Stack<>();
         expression = Lists.newArrayList();
 
@@ -79,8 +77,9 @@ public class Expression extends Literal {
             infix.get(i).toPostFix(infix, i, expression, operatorStack);
 
         // Handle any remaining tokens in operator stack
-        while (operatorStack.size() > 0)
+        while (operatorStack.size() > 0) {
             expression.add(operatorStack.pop());
+        }
     }
 
     /**
@@ -93,13 +92,13 @@ public class Expression extends Literal {
      * @throws IncomparableTypeException
      */
     public Object execute() throws ExpressionException, IncomparableTypeException {
-        // Escape clause for when just a single variable has been input to print the value
-        if (expression.size() == 1 && expression.get(0).getType() == ICalculableType.VARIABLE)
-            return ((Literal) expression.get(0)).getValue();
-
         Stack<Literal> stack = new Stack<>();
+        boolean isFunctionDeclaration = false;
+
         for (ICalculable literal : expression) {
-            Literal result = literal.evaluate(model, stack);
+            if (literal instanceof Declaration)
+                isFunctionDeclaration = true;
+            Literal result = literal.evaluate(model, stack, isFunctionDeclaration);
             if (result != null)
                 stack.push(result);
         }
@@ -111,37 +110,29 @@ public class Expression extends Literal {
         throw new ExpressionException("Arguments remaining after execution: " + StringUtils.join(stack, ", "));
     }
 
-    public boolean validate() {
+    protected boolean validate() {
         int stackSize = 0;
+        int funcSize = 0;
+        int inFunc = 0;
+
         for (ICalculable literal : expression) {
             stackSize++;
+            if (inFunc > 0)
+                funcSize++;
 
             if (literal.getType() == OPERATOR)
                 stackSize -= ((IOperator) literal).getNumOperands();
             if (literal.getType() == FUNCTION || literal.getType() == USER_FUNCTION) {
-                for (int i = expression.indexOf(literal); i >= 0; i--) {
-                    if (expression.get(i).getType() == FUNCTION_PLACEHOLDER) {
-                        // Pop the stack of all literals up until the point of the arg separator - leaving just the function
-                        stackSize -= (expression.indexOf(literal) - i);
-                        break;
-                    }
-                }
+                inFunc--;
+                stackSize -= funcSize;
+                funcSize = 0;
             }
-
+            if (literal.getType() == FUNCTION_PLACEHOLDER) {
+                inFunc++;
+            }
         }
 
         return stackSize == 1;
-    }
-
-    @Override
-    public Object getValue() {
-        try {
-            return execute();
-        }
-        catch (ExpressionException | IncomparableTypeException e) {
-            XLogger.severe("Exception thrown while getting the value of expression: " + infix + " - " + e.getMessage());
-            return null;
-        }
     }
 
     @Override

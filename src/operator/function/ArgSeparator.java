@@ -17,7 +17,7 @@ import static eval.ICalculableType.LEFT_PARENTHESIS;
 import static eval.ICalculableType.LIST_START;
 
 /**
- * LazyLanguage.operator.function
+ * x++.operator.function
  *
  * @author Alexander Broadbent
  * @version 02/12/2015
@@ -54,7 +54,7 @@ public class ArgSeparator extends NullaryOperator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean funcDec) throws IncomparableTypeException {
         return Domain.wrapLiteral(this);
     }
 

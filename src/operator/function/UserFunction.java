@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import eval.*;
 import model.Domain;
-import model.VarDomain;
 import operator.Associativity;
 import operator.IOperator;
 import operator.IPrecedence;
@@ -26,23 +25,23 @@ public class UserFunction extends Function {
     protected String name;
     protected List<Literal> arguments;
     protected Expression expression;
-    protected VarDomain domain;
+    protected Domain model;
 
 
     public UserFunction(Domain model, String name, List<Literal> arguments) {
+        this.model = model;
         this.name = name;
         this.arguments = arguments;
         expression = null;
-        domain = new VarDomain(model);
+    }
+
+    public UserFunction(Domain model, String name) {
+        this(model, name, null);
     }
 
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public List<Literal> getArguments() {
@@ -51,6 +50,13 @@ public class UserFunction extends Function {
 
     public void setArguments(List<Literal> arguments) {
         this.arguments = arguments;
+    }
+
+    public void addArgument(Literal arg) {
+        if (arguments == null)
+            arguments = Lists.newArrayList();
+
+        arguments.add(arg);
     }
 
     public Expression getExpression() {
@@ -66,9 +72,10 @@ public class UserFunction extends Function {
         if (args.size() != arguments.size())
             throw new ExpressionException("Not enough arguments for function, expected " + arguments.size() + " and received " + args.size());
 
+        // set values for the functional variables
         for (int i = 0; i < arguments.size(); i++) {
-            Literal arg = arguments.get(i);
-            arg.setValue(args.get(i).getValue());
+            Variable var = model.getFunctionalVariable(name, ((Variable) arguments.get(i)).getName());
+            var.setValue(args.get(i));
         }
 
         return expression.execute();
@@ -111,21 +118,37 @@ public class UserFunction extends Function {
 
     /**
      * Match the variables used with those in the expression
+     * <p>
+     * Variable defined in the domain can be used in expressions, eg. pi, and so
+     * only the variables used in the arguments of the function have to be used
+     * in the expression; not vice-versa.
      *
      * @return function declaration is valid
      */
-    public boolean validate(List<ICalculable> postfix) {
+    public boolean validate(List<ICalculable> postfix, Domain domain) throws InvalidFunctionException {
         Set<String> argNames = Sets.newHashSet();
         Set<String> expNames = Sets.newHashSet();
-
         for (Literal args : getArguments())
             argNames.add(((Variable) args).getName());
-
         for (ICalculable literal : postfix)
             if (literal.getType() == ICalculableType.VARIABLE)
                 expNames.add(((Variable) literal).getName());
 
-        return argNames.containsAll(expNames) && expNames.containsAll(argNames);
+        // Check if all arguments are used in the expression
+        if (expNames.containsAll(argNames))
+            return true;
+
+        // Check the variables from the domain
+        argNames.removeAll(expNames);
+        for (String varName : argNames)
+            if (domain.hasVariable(varName)) {
+                if (!domain.getVariable(varName).isValueSet())
+                    throw new InvalidFunctionException("Expression contains variable (" + varName + ") that does not have a value set.");
+            }
+            else
+                throw new InvalidFunctionException("The variable, " + varName + ", has not been declared.");
+
+        return true;
     }
 
 }

@@ -13,10 +13,10 @@ import java.util.Stack;
 import static eval.ICalculableType.FUNCTION;
 
 /**
- * LazyLanguage.operator.common
+ * x++.operator.common
  *
- * @version     02/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 02/12/2015
  */
 public class RightParenthesis extends NullaryOperator {
 

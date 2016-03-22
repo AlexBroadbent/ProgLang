@@ -1,7 +1,7 @@
 package operator;
 
 /**
- * LazyLanguage.operator
+ * x++.operator
  *
  * @version     01/12/2015
  * @author      Alexander Broadbent

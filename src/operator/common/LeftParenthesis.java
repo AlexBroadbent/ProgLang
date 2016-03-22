@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * LazyLanguage.operator.common
+ * x++.operator.common
  *
  * @version     02/12/2015
  * @author      Alexander Broadbent

@@ -25,11 +25,11 @@ import org.apache.commons.lang3.StringUtils;
 import parser.IParser;
 import parser.Parser;
 
+import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 /**
- * LazyLanguage.model
+ * x++.model
  *
  * @author Alexander Broadbent
  * @version 01/12/2015
@@ -42,11 +42,15 @@ public class Domain {
     protected Map<String, IOperator> operators;
     protected Map<String, IFunction> functions;
     protected Map<String, Variable> variables;
+    protected Map<String, Map<String, Variable>> functionalVariables;
+
+
     public Domain(ILexer lexer, IParser parser) {
         // Initialise the maps used for functions, operators and variables
         operators = Maps.newHashMap();
         functions = Maps.newHashMap();
         variables = Maps.newHashMap();
+        functionalVariables = Maps.newHashMap();
 
         // Create lexer and parser if necessary
         this.lexer = (lexer != null) ? lexer : new Lexer();
@@ -155,7 +159,7 @@ public class Domain {
     }
 
     public void registerFunction(IFunction function) {
-        lexer.addUserFunctionName(function.getToken()); // Register the function with the lexer
+        lexer.addUserFunctionName(function.getToken());         // Register the function with the lexer
         functions.put(function.getToken(), function);
     }
 
@@ -165,6 +169,29 @@ public class Domain {
 
     public boolean isFunction(String token) {
         return functions.containsKey(token);
+    }
+
+    public boolean hasFunctionalVariable(String function, String variable) {
+        return functionalVariables.get(function).containsKey(variable);
+    }
+
+    public Variable getFunctionalVariable(String function, String variable) {
+        if (hasFunctionalVariable(function, variable))
+            return functionalVariables.get(function).get(variable);
+
+        return getVariable(variable);
+    }
+
+    public Variable addFunctionalVariable(String function, String name) {
+        // empty map check
+        if (!isFunction(function) && functionalVariables.get(function) == null)
+            functionalVariables.put(function, Maps.newHashMap());
+
+        // duplication check
+        if (!hasFunctionalVariable(function, name))
+            functionalVariables.get(function).put(name, createVariable(name));
+
+        return functionalVariables.get(function).get(name);
     }
 
     public IOperator getOperator(String token) {
@@ -197,6 +224,15 @@ public class Domain {
         return new Variable(name);
     }
 
+
+
+
+
+
+    /*
+     *      Functions for the GUI to interact with
+     */
+
     public void freeVariable(String name) {
         if (hasVariable(name))
             variables.remove(name);
@@ -206,8 +242,8 @@ public class Domain {
         return variables.size();
     }
 
-    public Set<Map.Entry<String, Variable>> getAllVariables() {
-        return variables.entrySet();
+    public Collection<Variable> getAllVariables() {
+        return variables.values();
     }
 
     public String getOperatorList() {

@@ -8,7 +8,7 @@ import parser.IncomparableTypeException;
 import static operator.IConstants.ASIN;
 
 /**
- * LazyLanguage.operator.common
+ * x++.operator.common
  *
  * @author      Alexander Broadbent
  * @version     01/12/2015

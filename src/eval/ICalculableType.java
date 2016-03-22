@@ -1,7 +1,7 @@
 package eval;
 
 /**
- * LazyLanguage.eval
+ * x++.eval
  *
  * @version     02/12/2015
  * @author      Alexander Broadbent

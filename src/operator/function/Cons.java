@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * ProgLang.operator.function
  *
- * @author      Alexander Broadbent
- * @version     26/02/2016
+ * @author Alexander Broadbent
+ * @version 26/02/2016
  */
 public class Cons extends Function {
 
@@ -23,10 +23,9 @@ public class Cons extends Function {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Object execute(List<Literal> args) throws ExpressionException {
         if (args.size() != 2)
-            throw new ExpressionException("Cons function requires two arguments, a literal and a list.");
+            throw new ExpressionException("Cons function requires two arguments: a literal and a list.");
 
         LinkedList<Literal> list;
         LinkedList<Literal> newList = Lists.newLinkedList();
@@ -34,7 +33,7 @@ public class Cons extends Function {
         // arg first, only take two
         try {
             list = (LinkedList<Literal>) args.get(1).getValue();
-            newList.addAll(args.subList(1, args.size()));
+            newList.add(args.get(0));
             newList.addAll(list);
         }
         catch (ClassCastException ex) {

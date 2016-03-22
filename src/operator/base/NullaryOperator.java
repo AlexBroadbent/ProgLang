@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * LazyLanguage.operator.base
+ * x++.operator.base
  *
  * @version     01/12/2015
  * @author      Alexander Broadbent
@@ -37,7 +37,7 @@ public abstract class NullaryOperator extends Operator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean funcDec) throws IncomparableTypeException {
         throw new Error("Operator not implemented");
     }
 

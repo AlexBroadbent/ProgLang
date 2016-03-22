@@ -41,7 +41,7 @@ public class Assignment extends BinaryOperator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean funcDec) throws IncomparableTypeException, ExpressionException {
         if (stack.size() > 2) {
             List<Literal> expression = Lists.newArrayList();
             while (!stack.isEmpty())
@@ -55,9 +55,13 @@ public class Assignment extends BinaryOperator {
             List<ICalculable> expr = Lists.newArrayList(expression.subList(1, expression.size()));
             UserFunction func = (UserFunction) userFunction.getValue();
 
-            if (!func.validate(expr))
-                throw new ExpressionException("Function is not valid: Check the arguments match those used the expression");
-
+            try {
+                if (!func.validate(expr, domain))
+                    throw new ExpressionException("Function is not valid: Check the arguments match those used the expression");
+            }
+            catch (InvalidFunctionException ex) {
+                throw new ExpressionException("Invalid Function: " + ex.getMessage());
+            }
             // Remove operators from Literals
             for (int i = 0; i < expr.size(); i++) {
                 ICalculable calculable = expr.get(i);

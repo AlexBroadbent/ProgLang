@@ -10,7 +10,7 @@ import java.util.List;
 import static operator.IConstants.SIN;
 
 /**
- * LazyLanguage.operator.common
+ * x++.operator.common
  *
  * @author      Alexander Broadbent
  * @version     01/12/2015

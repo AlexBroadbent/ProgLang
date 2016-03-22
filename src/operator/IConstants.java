@@ -1,7 +1,7 @@
 package operator;
 
 /**
- * LazyLanguage.operator
+ * x++.operator
  *
  *  Tokens for operators
  *

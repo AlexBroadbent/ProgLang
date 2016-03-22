@@ -3,7 +3,7 @@ package lexer;
 import java.util.List;
 
 /**
- * LazyLanguage.parser
+ * x++.parser
  *
  * @version     01/12/2015
  * @author      Alexander Broadbent

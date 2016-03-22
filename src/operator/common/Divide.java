@@ -8,7 +8,7 @@ import parser.IncomparableTypeException;
 import static operator.IConstants.DIVIDE;
 
 /**
- * LazyLanguage.operator.common
+ * x++.operator.common
  *
  * @version     01/12/2015
  * @author      Alexander Broadbent

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * LazyLanguage.operator.base
+ * x++.operator.base
  *
  * @author Alexander Broadbent
  * @version 01/12/2015
@@ -40,10 +40,9 @@ public abstract class UnaryOperator extends Operator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack) throws IncomparableTypeException {
-        if (!isStackExecutable(stack))
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean funcDec) throws IncomparableTypeException {
+        if (funcDec)
             return Domain.wrapLiteral(this);
-
         return Domain.wrapLiteral(execute(stack.pop()));
     }
 
