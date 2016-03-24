@@ -10,8 +10,8 @@ import static operator.IConstants.ACOS;
 /**
  * x++.operator.common
  *
- * @author      Alexander Broadbent
- * @version     01/12/2015
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class ACosine extends UnaryOperator {
 

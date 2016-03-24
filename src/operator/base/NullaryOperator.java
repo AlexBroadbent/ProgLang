@@ -13,8 +13,8 @@ import java.util.Stack;
 /**
  * x++.operator.base
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public abstract class NullaryOperator extends Operator {
 
@@ -37,8 +37,8 @@ public abstract class NullaryOperator extends Operator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException {
-        throw new Error("Operator not implemented");
+    public List<String> getAllowedExecutionTypes() {
+        return null;
     }
 
     @Override
@@ -47,8 +47,9 @@ public abstract class NullaryOperator extends Operator {
     }
 
     @Override
-    public List<String> getAllowedExecutionTypes() {
-        return null;
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
+            throws IncomparableTypeException {
+        throw new Error("Operator not implemented");
     }
 
 }

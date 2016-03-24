@@ -13,8 +13,8 @@ import static operator.IConstants.LEFT_SHIFT;
 /**
  * x++.operator.common
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class LeftShift extends BinaryOperator {
 
@@ -29,6 +29,11 @@ public class LeftShift extends BinaryOperator {
     }
 
     @Override
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
+    }
+
+    @Override
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException {
         try {
             return Byte.valueOf(arg1.getValue().toString()) << Byte.valueOf(arg2.getValue().toString());
@@ -37,11 +42,6 @@ public class LeftShift extends BinaryOperator {
             throw new IncomparableTypeException(getAllowedExecutionTypes(),
                     getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
         }
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
 
 }

@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * x++.operator.function
  *
- * @author      Alexander Broadbent
- * @version     26/02/2016
+ * @author Alexander Broadbent
+ * @version 26/02/2016
  */
 public class Head extends Function {
 
@@ -28,7 +28,12 @@ public class Head extends Function {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(List.class.getSimpleName());
+    }
+
+    @Override
+    @SuppressWarnings( "unchecked" )    // Catch is in place to check a casting exception
     public Object execute(List<Literal> args) throws ExpressionException {
         if (args.size() != getNumOperands())
             throw new ExpressionException("Head function requires only one argument");
@@ -42,11 +47,6 @@ public class Head extends Function {
             XLogger.severe("Argument given to head must be a list. Instead found: " + args.get(0).getValue().getClass().getSimpleName());
         }
 
-        return (list != null) ? list.peek().getValue() : null ;
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(List.class.getSimpleName());
+        return (list != null) ? list.peek().getValue() : null;
     }
 }

@@ -10,8 +10,8 @@ import static operator.IConstants.ATAN;
 /**
  * x++.operator.common
  *
- * @author      Alexander Broadbent
- * @version     01/12/2015
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class ATangent extends UnaryOperator {
 

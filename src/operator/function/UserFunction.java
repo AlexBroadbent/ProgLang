@@ -23,10 +23,10 @@ import java.util.Stack;
  */
 public class UserFunction extends Function {
 
-    protected String name;
+    protected String        name;
     protected List<Literal> arguments;
-    protected Expression expression;
-    protected Domain model;
+    protected Expression    expression;
+    protected Domain        model;
 
 
     public UserFunction(Domain model, String name, List<Literal> arguments) {
@@ -51,25 +51,6 @@ public class UserFunction extends Function {
 
     public void setExpression(Expression expression) {
         this.expression = expression;
-    }
-
-    @Override
-    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
-        if (args.size() != arguments.size())
-            throw new ExpressionException("Not enough arguments for function, expected " + arguments.size() + " and received " + args.size());
-
-        // set values for the functional variables
-        for (int i = 0; i < arguments.size(); i++) {
-            Variable var = model.getFunctionalVariable(name, ((Variable) arguments.get(i)).getName());
-            var.setValue(args.get(i));
-        }
-
-        return getExpression().execute();
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.USER_FUNCTION;
     }
 
     @Override
@@ -102,6 +83,34 @@ public class UserFunction extends Function {
         return true;
     }
 
+    @Override
+    public int getType() {
+        return ICalculableType.USER_FUNCTION;
+    }
+
+    @Override
+    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
+        if (args.size() != arguments.size())
+            throw new ExpressionException("Not enough arguments for function, expected " + arguments.size() + " and received " + args.size());
+
+        // set values for the functional variables
+        for (int i = 0; i < arguments.size(); i++) {
+            Variable var = model.getFunctionalVariable(name, ((Variable) arguments.get(i)).getName());
+            var.setValue(args.get(i));
+        }
+
+        return getExpression().execute();
+    }
+
+    @Override
+    public String toString() {
+        List<Variable> vars = Lists.newArrayList();
+        for (Literal arg : getArguments())
+            vars.add((Variable) arg);
+
+        return getName() + ((!vars.isEmpty()) ? "(" + StringUtils.join(vars, ", ") + ")" : "");
+    }
+
     /**
      * Match the variables used with those in the expression
      * <p>
@@ -111,7 +120,7 @@ public class UserFunction extends Function {
      *
      * @return function declaration is valid
      */
-    public boolean validate(List<ICalculable> postfix, Domain domain) throws InvalidFunctionException {
+    public boolean validate(List<ICalculable> postfix, Domain domain) throws ExpressionException {
         Set<String> argNames = Sets.newHashSet();
         Set<String> expNames = Sets.newHashSet();
         for (Literal args : getArguments())
@@ -129,21 +138,11 @@ public class UserFunction extends Function {
         for (String varName : argNames)
             if (domain.hasVariable(varName)) {
                 if (!domain.getVariable(varName).isValueSet())
-                    throw new InvalidFunctionException("Expression contains variable (" + varName + ") that does not have a value set.");
+                    throw new ExpressionException("Expression contains variable (" + varName + ") that does not have a value set.");
             }
             else
-                throw new InvalidFunctionException("The variable, " + varName + ", has not been declared.");
+                throw new ExpressionException("The variable, " + varName + ", has not been declared.");
 
         return true;
-    }
-
-
-    @Override
-    public String toString() {
-        List<Variable> vars = Lists.newArrayList();
-        for (Literal arg : getArguments())
-            vars.add((Variable) arg);
-
-        return getName() + ((!vars.isEmpty()) ? "(" + StringUtils.join(vars, ", ") + ")" : "");
     }
 }

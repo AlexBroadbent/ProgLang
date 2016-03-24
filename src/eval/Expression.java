@@ -26,9 +26,9 @@ import static eval.ICalculableType.*;
  */
 public class Expression {
 
-    protected Domain model;
+    protected Domain            model;
     protected List<ICalculable> expression;
-    protected String infix;
+    protected String            infix;
 
 
     /**
@@ -39,7 +39,8 @@ public class Expression {
      * @throws ExpressionException
      * @throws UnknownSequenceException
      */
-    public Expression(Domain model, List<Token> tokens) throws ExpressionException, UnknownSequenceException, ParserException {
+    public Expression(Domain model, List<Token> tokens)
+            throws ExpressionException, UnknownSequenceException, ParserException {
         infix = StringUtils.join(tokens, " ");
         this.model = model;
 
@@ -52,9 +53,9 @@ public class Expression {
     }
 
     public Expression(List<ICalculable> postfix, Domain model) throws ExpressionException {
-        infix = StringUtils.join(postfix, " "); // TODO: postfix-to-infix function?
+        this.infix = StringUtils.join(postfix, " "); // TODO: postfix-to-infix function?
         this.model = model;
-        expression = postfix;
+        this.expression = postfix;
 
         if (!validate())
             throw new ExpressionException("Expression is not valid: " + this.toString());
@@ -82,7 +83,7 @@ public class Expression {
 
     /**
      * Evaluate the post-fix infix
-     *
+     * <p>
      * See http://en.wikipedia.org/wiki/Postfix_notation#The_postfix_algorithm
      * See https://en.wikipedia.org/wiki/Reverse_Polish_notation#Postfix_algorithm
      *

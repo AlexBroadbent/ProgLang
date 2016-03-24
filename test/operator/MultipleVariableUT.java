@@ -17,16 +17,16 @@ import parser.ParserException;
  */
 public class MultipleVariableUT extends ExpressionTest {
 
-    private static final String VAR_X = "x";
-    private static final String VAR_Y = "y";
-    private static final String VAR_Z = "z";
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
+    private static final String  VAR_Z       = "z";
     private static final Integer VAR_X_VALUE = 3;
     private static final Integer VAR_Y_VALUE = 4;
     private static final Integer VAR_Z_VALUE = 5;
 
-    private static final String INPUT = "x + y * z";
-    private static final Double RESULT = 23d;
-    private static final String INPUT_ERR = "x + y / w";
+    private static final String                     INPUT     = "x + y * z";
+    private static final Double                     RESULT    = 23d;
+    private static final String                     INPUT_ERR = "x + y / w";
     private static final Class<? extends Exception> CLASS_ERR = NullPointerException.class;
 
 
@@ -41,7 +41,8 @@ public class MultipleVariableUT extends ExpressionTest {
 
 
     @Test
-    public void simpleAdditionTest() throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void simpleAdditionTest()
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT, RESULT);
     }
 

@@ -9,8 +9,8 @@ import parser.IncomparableTypeException;
 /**
  * x++.operator.common
  *
- * @author      Alexander Broadbent
- * @version     30/12/2015
+ * @author Alexander Broadbent
+ * @version 30/12/2015
  */
 public class Decrement extends UnaryOperator {
 
@@ -30,8 +30,8 @@ public class Decrement extends UnaryOperator {
             return Double.valueOf(arg1.getValue().toString()) - 1d;
         }
         catch (NumberFormatException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(),arg1.getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getClass().getSimpleName());
         }
     }
-    
+
 }

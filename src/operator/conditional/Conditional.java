@@ -9,8 +9,8 @@ import parser.IncomparableTypeException;
 /**
  * x++.operator.conditional
  *
- * @author      Alexander Broadbent
- * @version     08/01/2016
+ * @author Alexander Broadbent
+ * @version 08/01/2016
  */
 public class Conditional extends TernaryOperator {
 

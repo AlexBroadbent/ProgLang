@@ -9,8 +9,8 @@ import parser.IncomparableTypeException;
 /**
  * x++.operator.math
  *
- * @version     31/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 31/12/2015
  */
 public class SquareRoot extends UnaryOperator {
 

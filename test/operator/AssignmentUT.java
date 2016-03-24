@@ -16,18 +16,18 @@ import parser.ParserException;
  */
 public class AssignmentUT extends ExpressionTest {
 
-    private static final String VAR_X = "x";
-    private static final String VAR_Y = "y";
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
     private static final Integer VAR_X_VALUE = 4;
     private static final Integer VAR_Y_VALUE = 5;
 
-    private static final String INPUT_ASS = "z = x + y";
-    private static final String VAR_Z = "z";
-    private static final String INPUT_IMM = "x = 3";
-    private static final String INPUT_NON = "4 = 3";
-    private static final Double RESULT_ASS = 9d;
-    private static final Class<? extends Exception> CLASS_IMM = ExpressionException.class;
-    private static final Class<? extends Exception> CLASS_NON = ExpressionException.class;
+    private static final String                     INPUT_ASS  = "z = x + y";
+    private static final String                     VAR_Z      = "z";
+    private static final String                     INPUT_IMM  = "x = 3";
+    private static final String                     INPUT_NON  = "4 = 3";
+    private static final Double                     RESULT_ASS = 9d;
+    private static final Class<? extends Exception> CLASS_IMM  = ExpressionException.class;
+    private static final Class<? extends Exception> CLASS_NON  = ExpressionException.class;
 
 
     @Before
@@ -40,7 +40,8 @@ public class AssignmentUT extends ExpressionTest {
 
 
     @Test
-    public void standardAssignmentTest() throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void standardAssignmentTest()
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
         runExpressionVariableTest(INPUT_ASS, VAR_Z, RESULT_ASS);
     }
 

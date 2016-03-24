@@ -38,7 +38,8 @@ public class Declaration extends Function {
      * set in the assignment.
      */
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
+            throws IncomparableTypeException, ExpressionException {
         Stack<Literal> arguments = new Stack<>();
         while (!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER)
             arguments.push(stack.pop());

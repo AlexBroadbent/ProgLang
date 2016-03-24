@@ -14,8 +14,8 @@ import java.util.Stack;
 /**
  * x++.operator.base
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public abstract class TernaryOperator extends Operator {
 
@@ -34,8 +34,8 @@ public abstract class TernaryOperator extends Operator {
         return 99;
     }
 
-    public Object execute(Literal arg1, Literal arg2, Literal arg3) throws IncomparableTypeException {
-        return null;
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
 
     @Override
@@ -43,8 +43,13 @@ public abstract class TernaryOperator extends Operator {
         return true;
     }
 
+    public Object execute(Literal arg1, Literal arg2, Literal arg3) throws IncomparableTypeException {
+        return null;
+    }
+
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
+            throws IncomparableTypeException {
         if (returnExpression)
             return Domain.wrapLiteral(this);
 
@@ -65,10 +70,6 @@ public abstract class TernaryOperator extends Operator {
                 postfix.add(operatorStack.pop());
 
         operatorStack.add(this);
-    }
-
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
 
     public String getIncomparableType(String arg1Class, String arg2Class, List<String> allowedClasses) {

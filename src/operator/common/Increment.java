@@ -9,8 +9,8 @@ import parser.IncomparableTypeException;
 /**
  * x++.operator.common
  *
- * @author      Alexander Broadbent
- * @version     30/12/2015
+ * @author Alexander Broadbent
+ * @version 30/12/2015
  */
 public class Increment extends UnaryOperator {
 

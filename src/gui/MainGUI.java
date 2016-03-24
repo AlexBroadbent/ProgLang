@@ -1,13 +1,11 @@
 package gui;
 
 import eval.Expression;
-import lexer.Lexer;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import org.apache.commons.lang3.StringUtils;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
-import parser.Parser;
 import parser.ParserException;
 
 import java.util.Scanner;
@@ -25,7 +23,7 @@ public class MainGUI {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input;
-        domain = new Domain(new Lexer(), new Parser());
+        domain = Domain.getInstance();
         Expression expression;
 
         System.out.print(IConstants.LOGGER_NAME + " " + IConstants.LOGGER_VERSION + "\n> ");

@@ -9,8 +9,8 @@ import parser.IncomparableTypeException;
 /**
  * x++.operator.math
  *
- * @author      Alexander Broadbent
- * @version     04/01/2016
+ * @author Alexander Broadbent
+ * @version 04/01/2016
  */
 public class Log10 extends UnaryOperator {
 

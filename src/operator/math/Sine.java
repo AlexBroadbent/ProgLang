@@ -12,8 +12,8 @@ import static operator.IConstants.SIN;
 /**
  * x++.operator.common
  *
- * @author      Alexander Broadbent
- * @version     01/12/2015
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class Sine extends Function {
 

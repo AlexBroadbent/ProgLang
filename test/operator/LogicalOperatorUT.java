@@ -15,23 +15,23 @@ import parser.ParserException;
  */
 public class LogicalOperatorUT extends ExpressionTest {
 
-    private static final String VAR_W = "w";
-    private static final String VAR_X = "x";
-    private static final String VAR_Y = "y";
-    private static final String VAR_Z = "z";
+    private static final String  VAR_W       = "w";
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
+    private static final String  VAR_Z       = "z";
     private static final Integer VAR_W_VALUE = 3;
     private static final Integer VAR_X_VALUE = 12;
     private static final Integer VAR_Y_VALUE = 6;
     private static final Boolean VAR_Z_VALUE = Boolean.TRUE;
 
-    private static final String INPUT_NOT = "!z";
-    private static final String INPUT_AND = "w>x && y<x";
-    private static final String INPUT_OR = "w>x || y<x";
-    private static final String INPUT_ERR = "x && z";
-    private static final Boolean RESULT_NOT = Boolean.FALSE;
-    private static final Boolean RESULT_AND = Boolean.FALSE;
-    private static final Boolean RESULT_OR = Boolean.TRUE;
-    private static final Class<? extends Exception> CLASS_ERR = IncomparableTypeException.class;
+    private static final String                     INPUT_NOT  = "!z";
+    private static final String                     INPUT_AND  = "w>x && y<x";
+    private static final String                     INPUT_OR   = "w>x || y<x";
+    private static final String                     INPUT_ERR  = "x && z";
+    private static final Boolean                    RESULT_NOT = Boolean.FALSE;
+    private static final Boolean                    RESULT_AND = Boolean.FALSE;
+    private static final Boolean                    RESULT_OR  = Boolean.TRUE;
+    private static final Class<? extends Exception> CLASS_ERR  = IncomparableTypeException.class;
 
 
     @Override
@@ -45,17 +45,20 @@ public class LogicalOperatorUT extends ExpressionTest {
     }
 
     @Test
-    public void logicalNotOperatorTest() throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+    public void logicalNotOperatorTest()
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_NOT, RESULT_NOT);
     }
 
     @Test
-    public void logicalAndOperatorTest() throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+    public void logicalAndOperatorTest()
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_AND, RESULT_AND);
     }
 
     @Test
-    public void logicalOrOperatorTest() throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+    public void logicalOrOperatorTest()
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_OR, RESULT_OR);
     }
 

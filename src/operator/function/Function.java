@@ -22,8 +22,8 @@ import static eval.ICalculableType.FUNCTION_PLACEHOLDER;
 /**
  * x++.operator.function
  *
- * @author      Alexander Broadbent
- * @version     02/12/2015
+ * @author Alexander Broadbent
+ * @version 02/12/2015
  */
 public class Function implements IFunction {
 
@@ -49,11 +49,6 @@ public class Function implements IFunction {
     }
 
     @Override
-    public int getType() {
-        return ICalculableType.FUNCTION;
-    }
-
-    @Override
     public List<String> getAllowedExecutionTypes() {
         return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
@@ -64,7 +59,8 @@ public class Function implements IFunction {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
+            throws IncomparableTypeException, ExpressionException {
         List<Literal> args = Lists.newArrayList();
 
         while (!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER)
@@ -79,6 +75,11 @@ public class Function implements IFunction {
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
         postfix.add(new FunctionPlaceholder());
         operatorStack.push(this);
+    }
+
+    @Override
+    public int getType() {
+        return ICalculableType.FUNCTION;
     }
 
     public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {

@@ -3,12 +3,12 @@ package lexer;
 /**
  * JavaCCProgrammingLanguage.parser
  *
- * @author      Alexander Broadbent
- * @version     31/10/2015
+ * @author Alexander Broadbent
+ * @version 31/10/2015
  */
 public class Token implements IToken {
 
-    public final int token;
+    public final int    token;
     public final String sequence;
 
 

@@ -24,8 +24,9 @@ import static org.junit.Assert.*;
  */
 public class ExpressionTest {
 
-    private static final String MSG_ASSERT_TYPE = "Result is of type %s, expected %s";
-    private static final String MSG_ASSERT_RESULT = "Result is %s, expected %s";
+    private static final String MSG_ASSERT_TYPE       = "Result is of type %s, expected %s";
+    private static final String MSG_ASSERT_RESULT     = "Result is %s, expected %s";
+    private static final String MSG_ASSERT_RESULT_LOG = "Test::%s - Asserting result [%s] equals expected [%s]";
 
 
     @Before
@@ -39,7 +40,6 @@ public class ExpressionTest {
     }
 
 
-
     /*
             Testing methods
      */
@@ -50,8 +50,7 @@ public class ExpressionTest {
 
     protected void runExpressionTest(String msg, String input, Object expResult) throws UnknownSequenceException,
             ParserException, ExpressionException, IncomparableTypeException {
-        Expression expression = getExpressionFromInput(input);
-        Object result = getValueFromExpression(expression);
+        Object result = getResultFromInput(input);
 
         assertTypeOfResult(result, expResult.getClass());
         if (msg != null)
@@ -62,8 +61,7 @@ public class ExpressionTest {
 
     protected void runExpressionVariableTest(String input, String varName, Object expResult) throws ExpressionException,
             IncomparableTypeException, ParserException, UnknownSequenceException {
-        Expression expression = getExpressionFromInput(input);
-        expression.execute();
+        getResultFromInput(input);
         Object result = getValueFromDomainVariable(varName);
 
         assertTypeOfResult(result, expResult.getClass());
@@ -72,9 +70,10 @@ public class ExpressionTest {
 
     protected void runExpressionExceptionTest(String input, Class<? extends Exception> expException) {
         boolean result = assertExceptionIsThrown(input, expException);
-        assertResult(Boolean.TRUE, result);
+        assertResult(getClass().getSimpleName() + " - Asserting " + expException.getSimpleName() + " was thrown", true, result);
     }
 
+    @SuppressWarnings("unchecked")  // Catch is in place to check a casting exception
     protected void runExpressionListTest(String input, LinkedList<Literal> expResult) throws UnknownSequenceException,
             ParserException, ExpressionException, IncomparableTypeException {
         Expression expression = getExpressionFromInput(input);
@@ -144,7 +143,7 @@ public class ExpressionTest {
         }
     }
 
-    protected boolean assertExceptionIsThrown(String input, Class<? extends Exception> expectedException) {
+    private boolean assertExceptionIsThrown(String input, Class<? extends Exception> expectedException) {
         try {
             Object result = getValueFromExpression(getExpressionFromInput(input));
             return result == null;
@@ -154,17 +153,17 @@ public class ExpressionTest {
         }
     }
 
-    protected void assertTypeOfResult(Object result, Class expectedClass) {
+    private void assertTypeOfResult(Object result, Class expectedClass) {
         assertThat(String.format(MSG_ASSERT_TYPE, result.getClass().getSimpleName(),
                 expectedClass.getSimpleName()), result, instanceOf(expectedClass));
     }
 
-    protected <T> void assertResult(T expected, T actual) {
+    <T> void assertResult(T expected, T actual) {
         assertResult(getClass().getSimpleName(), expected, actual);
     }
 
-    protected <T> void assertResult(String testName, T expected, T actual) {
-        XLogger.log("Test::" + testName + " - Asserting result " + actual + " equals expected " + expected);
+    <T> void assertResult(String testName, T expected, T actual) {
+        XLogger.log(String.format(MSG_ASSERT_RESULT_LOG, testName, actual, expected));
         assertTrue(String.format(MSG_ASSERT_RESULT, actual, expected), expected.equals(actual));
     }
 

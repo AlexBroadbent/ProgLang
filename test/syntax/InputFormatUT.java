@@ -15,20 +15,20 @@ import parser.ParserException;
  */
 public class InputFormatUT extends ExpressionTest {
 
-    private static final String VAR_X = "x";
-    private static final String VAR_Y = "y";
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
     private static final Integer VAR_X_VALUE = 8;
     private static final Integer VAR_Y_VALUE = 4;
 
 
-    private static final String INPUT_FORMAT_1 = "x / y + 5";
-    private static final Double RESULT_FORMAT_1 = 7d;
-    private static final String INPUT_FORMAT_2 = "(x / y) + 5";
-    private static final Double RESULT_FORMAT_2 = 7d;
-    private static final String INPUT_ERROR = "x / y + 5 10";
-    private static final Class<? extends Exception> CLASS_ERROR = ExpressionException.class;
-    private static final String INPUT_PAREN = "(((x)) + (((3))))";
-    private static final Double RESULT_PAREN = 11d;
+    private static final String                     INPUT_FORMAT_1  = "x / y + 5";
+    private static final Double                     RESULT_FORMAT_1 = 7d;
+    private static final String                     INPUT_FORMAT_2  = "(x / y) + 5";
+    private static final Double                     RESULT_FORMAT_2 = 7d;
+    private static final String                     INPUT_ERROR     = "x / y + 5 10";
+    private static final Class<? extends Exception> CLASS_ERROR     = ExpressionException.class;
+    private static final String                     INPUT_PAREN     = "(((x)) + (((3))))";
+    private static final Double                     RESULT_PAREN    = 11d;
 
 
     @Override
@@ -40,22 +40,26 @@ public class InputFormatUT extends ExpressionTest {
     }
 
     @Test
-    public void testFormat1() throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void testFormat1()
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_FORMAT_1, RESULT_FORMAT_1);
     }
 
     @Test
-    public void testFormat2() throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void testFormat2()
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_FORMAT_2, RESULT_FORMAT_2);
     }
 
     @Test
-    public void testErrorInExecution() throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void testErrorInExecution()
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
         runExpressionExceptionTest(INPUT_ERROR, CLASS_ERROR);
     }
 
     @Test
-    public void testUnnecessaryParenthesis() throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void testUnnecessaryParenthesis()
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_PAREN, RESULT_PAREN);
     }
 

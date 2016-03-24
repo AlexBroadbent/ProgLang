@@ -7,14 +7,14 @@ package eval;
  * is assigned later on.
  * </p>
  *
- * @author      Alexander Broadbent
- * @version     01/12/2015
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class Variable extends Literal {
 
-    protected String name;
+    protected String  name;
     protected boolean valueSet;
-    protected int links;            // Memory management counter -> can be deleted when links is 0
+    protected int     links;            // Memory management counter -> can be deleted when links is 0
 
     public Variable(String name) {
         super(null);
@@ -48,22 +48,6 @@ public class Variable extends Literal {
         valueSet = true;
     }
 
-    public boolean isValueSet() {
-        return valueSet;
-    }
-
-
-    public int getLinks() {
-        return links;
-    }
-
-    public void setLinks(int links) {
-        this.links = links;
-    }
-
-
-
-
     @Override
     public int getType() {
         return ICalculableType.VARIABLE;
@@ -72,6 +56,18 @@ public class Variable extends Literal {
     @Override
     public String toString() {
         return getName() + ((isValueSet()) ? " [" + getValue().toString() + "]" : "");
+    }
+
+    public boolean isValueSet() {
+        return valueSet;
+    }
+
+    public int getLinks() {
+        return links;
+    }
+
+    public void setLinks(int links) {
+        this.links = links;
     }
 
     public String toDebugString() {

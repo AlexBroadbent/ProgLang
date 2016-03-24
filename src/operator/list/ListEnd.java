@@ -18,8 +18,8 @@ import static eval.ICalculableType.LIST_START;
 /**
  * x++.operator.list
  *
- * @author      Alexander Broadbent
- * @version     27/02/2016
+ * @author Alexander Broadbent
+ * @version 27/02/2016
  */
 public class ListEnd extends Function {
 

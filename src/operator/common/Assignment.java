@@ -10,7 +10,6 @@ import operator.function.UserFunction;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -36,43 +35,39 @@ public class Assignment extends BinaryOperator {
     }
 
     @Override
-    public int getType() {
-        return ICalculableType.OPERATOR;
-    }
-
-    @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
+            throws IncomparableTypeException, ExpressionException {
+        // If the stack has more than two items then it is a function declaration
         if (stack.size() > 2) {
-            List<Literal> expression = Lists.newArrayList();
-            while (!stack.isEmpty())
-                expression.add(stack.pop());
-            Collections.reverse(expression);
+            // Copy stack into a List to have cleaner operations
+            List<Literal> expression = Lists.newArrayList(stack);
+            stack.clear();
 
-            Literal userFunction = expression.get(0);
-            if (((UserFunction) userFunction.getValue()).getType() != ICalculableType.USER_FUNCTION)
-                throw new ExpressionException("Invalid Assignment, expecting user function and found: " + userFunction.getValue().getClass().getSimpleName());
+            // Validate that a UserFunction object exists in the top of the stack
+            Literal userFuncLiteral = expression.get(0);
+            if (((ICalculable) userFuncLiteral.getValue()).getType() != ICalculableType.USER_FUNCTION)
+                throw new ExpressionException("Invalid Assignment, expecting user function and found: " + userFuncLiteral.getValue().getClass().getSimpleName());
+            UserFunction userFunction = (UserFunction) userFuncLiteral.getValue();
 
+            // Check expression is valid for the function, such as matching arguments
             List<ICalculable> expr = Lists.newArrayList(expression.subList(1, expression.size()));
-            UserFunction func = (UserFunction) userFunction.getValue();
+            if (!userFunction.validate(expr, domain))
+                throw new ExpressionException("Function is not valid: Check the arguments match those used the expression");
 
-            try {
-                if (!func.validate(expr, domain))
-                    throw new ExpressionException("Function is not valid: Check the arguments match those used the expression");
-            }
-            catch (InvalidFunctionException ex) {
-                throw new ExpressionException("Invalid Function: " + ex.getMessage());
-            }
-            // Remove operators from Literals
+            // Extract the operator from the literal if there are any in the expression
             for (int i = 0; i < expr.size(); i++) {
                 ICalculable calculable = expr.get(i);
                 if (calculable.getType() == LITERAL)
                     expr.set(i, (ICalculable) ((Literal) calculable).getValue());
             }
-            func.setExpression(new Expression(expr, domain));
-            domain.registerFunction(func);
+
+            // Set the expression of the function and register the function in the domain
+            userFunction.setExpression(new Expression(expr, domain));
+            domain.registerFunction(userFunction);
 
             return Domain.wrapLiteral(null);
         }
+
         Literal arg2 = stack.pop();
         Literal arg1 = stack.pop();
         return Domain.wrapLiteral(execute(arg1, arg2));
@@ -80,15 +75,21 @@ public class Assignment extends BinaryOperator {
 
     @Override
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
+        // Check that the first argument is a variable
         if (arg1.getType() != VARIABLE)
             throw new ExpressionException("Assignment must be made to a variable");
 
+        // Ensure that the variable is immutable by rejecting a change
         if (((Variable) arg1).isValueSet())
             throw new ExpressionException("Cannot change the value of variable once it is set");
 
         arg1.setValue(arg2.getValue());
-
         return null;
+    }
+
+    @Override
+    public int getType() {
+        return ICalculableType.OPERATOR;
     }
 
 }

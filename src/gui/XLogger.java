@@ -6,12 +6,11 @@ import static gui.IConstants.DEBUG_MODE;
 
 /**
  * x++.gui
+ * <p>
+ * Handles logging to the user, can be used to debug log and handle formatted outputs
  *
- *  Handles logging to the user, can be used to debug log and handle formatted outputs
- *
- *
- * @author      Alexander Broadbent
- * @version     05/01/2016
+ * @author Alexander Broadbent
+ * @version 05/01/2016
  */
 public class XLogger {
 
@@ -27,13 +26,13 @@ public class XLogger {
     public static void severe(String msg) {
         if (debug)
             System.err.print("SEVERE: " + msg + "\n");
-            //logger.severe(format(new LogRecord(Level.SEVERE, msg)));
+        //logger.severe(format(new LogRecord(Level.SEVERE, msg)));
     }
 
     public static void warning(String msg) {
         if (debug)
             System.err.print("WARNING: " + msg + "\n");
-            //logger.warning(format(new LogRecord(Level.WARNING, msg)));
+        //logger.warning(format(new LogRecord(Level.WARNING, msg)));
     }
 
 

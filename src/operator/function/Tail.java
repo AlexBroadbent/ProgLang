@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * x++.operator.function
  *
- * @author      Alexander Broadbent
- * @version     26/02/2016
+ * @author Alexander Broadbent
+ * @version 26/02/2016
  */
 public class Tail extends Function {
 
@@ -28,7 +28,12 @@ public class Tail extends Function {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(List.class.getSimpleName());
+    }
+
+    @Override
+    @SuppressWarnings( "unchecked" )    // Catch is in place to check a casting exception
     public Object execute(List<Literal> args) throws ExpressionException {
         if (args.size() != getNumOperands())
             throw new ExpressionException("Tail function requires only one argument");
@@ -43,10 +48,5 @@ public class Tail extends Function {
         }
 
         return (list != null) ? Lists.newLinkedList(list.subList(1, list.size())) : null;
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(List.class.getSimpleName());
     }
 }

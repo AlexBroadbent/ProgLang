@@ -37,11 +37,11 @@ import java.util.Map;
 public class Domain {
 
     protected static Domain instance = null;
-    protected ILexer lexer;
-    protected IParser parser;
-    protected Map<String, IOperator> operators;
-    protected Map<String, IFunction> functions;
-    protected Map<String, Variable> variables;
+    protected ILexer                             lexer;
+    protected IParser                            parser;
+    protected Map<String, IOperator>             operators;
+    protected Map<String, IFunction>             functions;
+    protected Map<String, Variable>              variables;
     protected Map<String, Map<String, Variable>> functionalVariables;
 
 

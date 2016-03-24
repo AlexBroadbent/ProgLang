@@ -13,8 +13,8 @@ import static operator.IConstants.BITWISE_AND;
 /**
  * x++.operator.common
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class And extends BinaryOperator {
 
@@ -29,6 +29,11 @@ public class And extends BinaryOperator {
     }
 
     @Override
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
+    }
+
+    @Override
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException {
         try {
             return Byte.valueOf(arg1.getValue().toString()) & Byte.valueOf(arg2.getValue().toString());
@@ -37,11 +42,6 @@ public class And extends BinaryOperator {
             throw new IncomparableTypeException(Byte.class.getSimpleName(),
                     getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
         }
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
 
 }

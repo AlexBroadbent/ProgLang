@@ -40,19 +40,21 @@ public abstract class UnaryOperator extends Operator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException {
-        if (returnExpression)
-            return Domain.wrapLiteral(this);
-        return Domain.wrapLiteral(execute(stack.pop()));
-    }
-
-    public Object execute(Literal arg1) throws IncomparableTypeException {
-        return arg1;
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
 
     @Override
     public boolean isValidContext(Stack operatorStack, List infix, int position) {
         return true;
+    }
+
+    @Override
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
+            throws IncomparableTypeException {
+        if (returnExpression)
+            return Domain.wrapLiteral(this);
+        return Domain.wrapLiteral(execute(stack.pop()));
     }
 
     @Override
@@ -67,9 +69,8 @@ public abstract class UnaryOperator extends Operator {
         }
     }
 
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
+    public Object execute(Literal arg1) throws IncomparableTypeException {
+        return arg1;
     }
 
 }

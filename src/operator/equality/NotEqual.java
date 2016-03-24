@@ -8,8 +8,8 @@ import operator.base.BinaryOperator;
 /**
  * x++.operator.equality
  *
- * @author      Alexander Broadbent
- * @version     04/01/2016
+ * @author Alexander Broadbent
+ * @version 04/01/2016
  */
 public class NotEqual extends BinaryOperator {
 

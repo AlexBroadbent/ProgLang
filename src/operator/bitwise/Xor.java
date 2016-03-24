@@ -10,8 +10,8 @@ import static operator.IConstants.BITWISE_XOR;
 /**
  * x++.operator.common
  *
- * @version     01/12/2015
- * @author      Alexander Broadbent
+ * @author Alexander Broadbent
+ * @version 01/12/2015
  */
 public class Xor extends BinaryOperator {
 

@@ -22,7 +22,7 @@ import static lexer.IToken.*;
 public class Lexer implements ILexer {
 
     private Map<Integer, TokenInfo> tokenInfoMap;
-    private List<String> userFunctionNameList;
+    private List<String>            userFunctionNameList;
 
 
     public Lexer() {
@@ -68,17 +68,6 @@ public class Lexer implements ILexer {
         }
     }
 
-    /**
-     * Add a user function to the lexer
-     *
-     * @param name the name of the function to add to the lexer
-     */
-    @Override
-    public void addUserFunctionName(String name) {
-        userFunctionNameList.add(name);
-        tokenInfoMap.put(FUNCTION, new TokenInfo(Pattern.compile("^(" + getUserFunctionNameRegex() + ")"), FUNCTION));
-    }
-
     private String getUserFunctionNameRegex() {
         return FUNCTION_REGEX.concat("|" + StringUtils.join(userFunctionNameList, "|"));
     }
@@ -113,6 +102,17 @@ public class Lexer implements ILexer {
         }
 
         return tokens;
+    }
+
+    /**
+     * Add a user function to the lexer
+     *
+     * @param name the name of the function to add to the lexer
+     */
+    @Override
+    public void addUserFunctionName(String name) {
+        userFunctionNameList.add(name);
+        tokenInfoMap.put(FUNCTION, new TokenInfo(Pattern.compile("^(" + getUserFunctionNameRegex() + ")"), FUNCTION));
     }
 
 }
