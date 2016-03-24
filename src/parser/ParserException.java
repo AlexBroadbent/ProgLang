@@ -1,7 +1,7 @@
 package parser;
 
 /**
- * ProgLang.parser
+ * x++.parser
  *
  * @author Alexander Broadbent
  * @version 21/03/2016

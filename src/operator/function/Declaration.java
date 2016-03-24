@@ -17,7 +17,7 @@ import static eval.ICalculableType.FUNCTION_PLACEHOLDER;
 import static eval.ICalculableType.LITERAL;
 
 /**
- * ProgLang.operator.function
+ * x++.operator.function
  *
  * @author Alexander Broadbent
  * @version 08/03/2016
@@ -38,7 +38,7 @@ public class Declaration extends Function {
      * set in the assignment.
      */
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean funcDec) throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException, ExpressionException {
         Stack<Literal> arguments = new Stack<>();
         while (!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER)
             arguments.push(stack.pop());

@@ -21,8 +21,8 @@ import static lexer.IToken.*;
  */
 public class Lexer implements ILexer {
 
-    protected Map<Integer, TokenInfo> tokenInfoMap;
-    protected List<String> userFunctionNameList;
+    private Map<Integer, TokenInfo> tokenInfoMap;
+    private List<String> userFunctionNameList;
 
 
     public Lexer() {
@@ -30,6 +30,7 @@ public class Lexer implements ILexer {
         userFunctionNameList = Lists.newArrayList();
 
         addToken(WHITESPACE_REGEX, WHITESPACE);
+        addToken(BOOLEAN_COMPARATOR_REGEX, BOOLEAN_COMPARATOR);
         addToken(ASSIGNMENT_REGEX, ASSIGNMENT);
         addToken(INC_DEC_REGEX, INC_DEC);
         addToken(BINARY_8BIT_REGEX, BINARY_8BIT);
@@ -37,35 +38,27 @@ public class Lexer implements ILexer {
         addToken(NUMBER_REGEX, NUMBER);
         addToken(ARITHMETIC_REGEX, ARITHMETIC);
         addToken(GEOMETRIC_REGEX, GEOMETRIC);
-        addToken(FUNCTION_REGEX, FUNCTION);
+        addToken(BOOLEAN_REGEX, BOOLEAN);
         addToken(getUserFunctionNameRegex(), FUNCTION);
         addToken(FUNCTION_DECLARATION_REGEX, FUNCTION_DECLARATION);
-
-        addToken(BITWISE_OPERATOR_REGEX, BITWISE_OPERATOR);
-        addToken(BOOLEAN_COMPARATOR_REGEX, BOOLEAN_COMPARATOR);
+        addToken(LOGICAL_COMPARATOR_REGEX, LOGICAL_OPERATOR);
         addToken(BIT_SHIFT_OPERATOR_REGEX, BIT_SHIFT);
         addToken(MATH_COMPARATOR_EQUALITY_REGEX, MATH_COMPARATOR);
         addToken(MATH_COMPARATOR_REGEX, MATH_COMPARATOR);
-        addToken(LOGICAL_COMPARATOR_REGEX, LOGICAL_OPERATOR);
-
+        addToken(BITWISE_OPERATOR_REGEX, BITWISE_OPERATOR);
         addToken(LEFT_PAREN_REGEX, LEFT_PARENTHESIS);
         addToken(RIGHT_PAREN_REGEX, RIGHT_PARENTHESIS);
-
         addToken(TEXT_REGEX, TEXT);
-        addToken(BOOLEAN_REGEX, BOOLEAN);
         addToken(VARIABLE_REGEX, VARIABLE);
-
         addToken(IF_REGEX, IF);
         addToken(ELSE_REGEX, ELSE);
-        addToken(END_REGEX, END);
-
         addToken(LIST_START_REGEX, LIST_START);
         addToken(LIST_END_REGEX, LIST_END);
         addToken(ARG_SEPARATOR_REGEX, ARG_SEPARATOR);
     }
 
 
-    protected void addToken(String regex, Integer token) {
+    private void addToken(String regex, Integer token) {
         try {
             TokenInfo ti = new TokenInfo(Pattern.compile("^(" + regex + ")"), token);
             tokenInfoMap.put(token, ti);
@@ -86,9 +79,8 @@ public class Lexer implements ILexer {
         tokenInfoMap.put(FUNCTION, new TokenInfo(Pattern.compile("^(" + getUserFunctionNameRegex() + ")"), FUNCTION));
     }
 
-    protected String getUserFunctionNameRegex() {
-        String userF = StringUtils.join(userFunctionNameList, "|");
-        return FUNCTION_REGEX.concat("|" + userF);
+    private String getUserFunctionNameRegex() {
+        return FUNCTION_REGEX.concat("|" + StringUtils.join(userFunctionNameList, "|"));
     }
 
     @Override

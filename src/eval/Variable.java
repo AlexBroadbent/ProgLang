@@ -71,7 +71,7 @@ public class Variable extends Literal {
 
     @Override
     public String toString() {
-        return getName() + ((isValueSet()) ? " [" + getValue().toString() + "]" : " [No Value]");
+        return getName() + ((isValueSet()) ? " [" + getValue().toString() + "]" : "");
     }
 
     public String toDebugString() {

@@ -54,18 +54,16 @@ public class Expression {
     public Expression(List<ICalculable> postfix, Domain model) throws ExpressionException {
         infix = StringUtils.join(postfix, " "); // TODO: postfix-to-infix function?
         this.model = model;
-
-        init(postfix);
+        expression = postfix;
 
         if (!validate())
             throw new ExpressionException("Expression is not valid: " + this.toString());
     }
 
-
     /**
      * @param infix A parsed expression in infix form
      */
-    protected void init(List<ICalculable> infix) {
+    private void init(List<ICalculable> infix) {
         Stack<IOperator> operatorStack = new Stack<>();
         expression = Lists.newArrayList();
 
@@ -84,6 +82,7 @@ public class Expression {
 
     /**
      * Evaluate the post-fix infix
+     *
      * See http://en.wikipedia.org/wiki/Postfix_notation#The_postfix_algorithm
      * See https://en.wikipedia.org/wiki/Reverse_Polish_notation#Postfix_algorithm
      *
@@ -93,12 +92,12 @@ public class Expression {
      */
     public Object execute() throws ExpressionException, IncomparableTypeException {
         Stack<Literal> stack = new Stack<>();
-        boolean isFunctionDeclaration = false;
+        boolean returnExpression = false;
 
         for (ICalculable literal : expression) {
             if (literal instanceof Declaration)
-                isFunctionDeclaration = true;
-            Literal result = literal.evaluate(model, stack, isFunctionDeclaration);
+                returnExpression = true;
+            Literal result = literal.evaluate(model, stack, returnExpression);
             if (result != null)
                 stack.push(result);
         }
@@ -110,7 +109,7 @@ public class Expression {
         throw new ExpressionException("Arguments remaining after execution: " + StringUtils.join(stack, ", "));
     }
 
-    protected boolean validate() {
+    private boolean validate() {
         int stackSize = 0;
         int funcSize = 0;
         int inFunc = 0;
@@ -120,7 +119,7 @@ public class Expression {
             if (inFunc > 0)
                 funcSize++;
 
-            if (literal.getType() == OPERATOR)
+            if (literal.getType() == OPERATOR && inFunc == 0)
                 stackSize -= ((IOperator) literal).getNumOperands();
             if (literal.getType() == FUNCTION || literal.getType() == USER_FUNCTION) {
                 inFunc--;
@@ -134,6 +133,7 @@ public class Expression {
 
         return stackSize == 1;
     }
+
 
     @Override
     public String toString() {

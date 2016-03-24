@@ -30,9 +30,9 @@ public class LogicalAnd extends BinaryOperator {
     @Override
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException {
         try {
-            return Boolean.valueOf(arg1.getValue().toString()) && Boolean.valueOf(arg2.getValue().toString());
+            return ((Boolean) arg1.getValue()) && ((Boolean) arg2.getValue());
         }
-        catch (NumberFormatException ex) {
+        catch (ClassCastException ex) {
             throw new IncomparableTypeException(getAllowedExecutionTypes(),
                     getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
         }

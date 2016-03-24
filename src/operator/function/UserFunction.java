@@ -7,6 +7,7 @@ import model.Domain;
 import operator.Associativity;
 import operator.IOperator;
 import operator.IPrecedence;
+import org.apache.commons.lang3.StringUtils;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
@@ -15,7 +16,7 @@ import java.util.Set;
 import java.util.Stack;
 
 /**
- * ProgLang.operator.function
+ * x++.operator.function
  *
  * @author Alexander Broadbent
  * @version 08/03/2016
@@ -35,10 +36,6 @@ public class UserFunction extends Function {
         expression = null;
     }
 
-    public UserFunction(Domain model, String name) {
-        this(model, name, null);
-    }
-
 
     public String getName() {
         return name;
@@ -46,17 +43,6 @@ public class UserFunction extends Function {
 
     public List<Literal> getArguments() {
         return arguments;
-    }
-
-    public void setArguments(List<Literal> arguments) {
-        this.arguments = arguments;
-    }
-
-    public void addArgument(Literal arg) {
-        if (arguments == null)
-            arguments = Lists.newArrayList();
-
-        arguments.add(arg);
     }
 
     public Expression getExpression() {
@@ -78,7 +64,7 @@ public class UserFunction extends Function {
             var.setValue(args.get(i));
         }
 
-        return expression.execute();
+        return getExpression().execute();
     }
 
     @Override
@@ -151,4 +137,13 @@ public class UserFunction extends Function {
         return true;
     }
 
+
+    @Override
+    public String toString() {
+        List<Variable> vars = Lists.newArrayList();
+        for (Literal arg : getArguments())
+            vars.add((Variable) arg);
+
+        return getName() + ((!vars.isEmpty()) ? "(" + StringUtils.join(vars, ", ") + ")" : "");
+    }
 }

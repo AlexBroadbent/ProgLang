@@ -29,7 +29,12 @@ public class LogicalNot extends UnaryOperator {
 
     @Override
     public Object execute(Literal arg1) throws IncomparableTypeException {
-            return ! Boolean.valueOf(arg1.getValue().toString());
+        try {
+            return !((Boolean) arg1.getValue());
+        }
+        catch (ClassCastException ex) {
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getValue().getClass().getSimpleName());
+        }
     }
 
     @Override

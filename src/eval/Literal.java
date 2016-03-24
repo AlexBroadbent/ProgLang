@@ -28,6 +28,8 @@ public class Literal implements ICalculable {
             return Domain.wrapLiteral(Integer.valueOf(token.sequence));
         if (token.token == Token.DECIMAL)
             return Domain.wrapLiteral(Double.valueOf(token.sequence));
+        if (token.token == Token.TEXT)
+            return Domain.wrapLiteral(token.sequence.substring(1, token.sequence.length() - 1));
         if (token.token == Token.BINARY_8BIT)
             return Domain.wrapLiteral(Integer.parseUnsignedInt(token.sequence, 2));
 
@@ -43,7 +45,7 @@ public class Literal implements ICalculable {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack stack, boolean funcDec) {
+    public Literal evaluate(Domain domain, Stack stack, boolean returnExpression) {
         return this;
     }
 

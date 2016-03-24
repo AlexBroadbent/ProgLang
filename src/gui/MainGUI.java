@@ -45,7 +45,7 @@ public class MainGUI {
                             System.out.print("> " + result + "\n");
                     }
                     catch (UnknownSequenceException | ExpressionException | IncomparableTypeException | ParserException ex) {
-                        XLogger.severe(ex.getMessage());
+                        XLogger.warning(ex.getMessage());
                     }
                 }
             }
