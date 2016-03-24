@@ -42,7 +42,7 @@ public class Tail extends Function {
             XLogger.severe("Argument given to head must be a list. Instead found: " + args.get(0).getValue().getClass().getSimpleName());
         }
 
-        return (list != null) ? list.subList(1, list.size()) : null ;
+        return (list != null) ? Lists.newLinkedList(list.subList(1, list.size())) : null;
     }
 
     @Override

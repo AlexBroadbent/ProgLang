@@ -23,7 +23,7 @@ public class Sum extends Function {
 
     @Override
     public Object execute(List<Literal> args) throws IncomparableTypeException {
-        int sum = 0;
+        double sum = 0;
 
         for (Literal literal : args)
             sum += Double.parseDouble(literal.getValue().toString());
