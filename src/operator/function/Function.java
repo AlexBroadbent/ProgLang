@@ -64,7 +64,7 @@ public class Function implements IFunction {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean funcDec) throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException, ExpressionException {
         List<Literal> args = Lists.newArrayList();
 
         while (!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER)
@@ -88,6 +88,6 @@ public class Function implements IFunction {
 
     @Override
     public String toString() {
-        return getToken();
+        return getToken() + "(" + ((getNumOperands() == 0) ? "*" : getNumOperands()) + ")";
     }
 }

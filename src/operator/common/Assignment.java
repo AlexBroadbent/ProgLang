@@ -18,7 +18,7 @@ import static eval.ICalculableType.LITERAL;
 import static eval.ICalculableType.VARIABLE;
 
 /**
- * ProgLang.operator.common
+ * x++.operator.common
  *
  * @author Alexander Broadbent
  * @version 02/02/2016
@@ -41,7 +41,7 @@ public class Assignment extends BinaryOperator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean funcDec) throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException, ExpressionException {
         if (stack.size() > 2) {
             List<Literal> expression = Lists.newArrayList();
             while (!stack.isEmpty())

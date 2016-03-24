@@ -9,7 +9,7 @@ import parser.IncomparableTypeException;
 import static operator.IConstants.LIST;
 
 /**
- * ProgLang.operator.function
+ * x++.operator.function
  *
  * @author      Alexander Broadbent
  * @version     26/02/2016

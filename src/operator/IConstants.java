@@ -20,6 +20,7 @@ public interface IConstants {
     String MULTIPLY             = "*";
     String POWER                = "^";
     String MOD                  = "%";
+    String CONCAT = "#";
 
     String BITWISE_AND          = "&";
     String BITWISE_OR           = "|";
@@ -72,7 +73,6 @@ public interface IConstants {
     String HEAD                 = "head";
     String TAIL                 = "tail";
     String CONS                 = "cons";
-
     String FUNC = "func";
 
 }

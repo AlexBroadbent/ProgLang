@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ProgLang.operator.function
+ * x++.operator.function
  *
  * @author Alexander Broadbent
  * @version 26/02/2016

@@ -10,7 +10,7 @@ import java.util.List;
 import static operator.IConstants.MAX;
 
 /**
- * ProgLang.operator.function
+ * x++.operator.function
  *
  * @author Alexander Broadbent
  * @version 26/02/2016

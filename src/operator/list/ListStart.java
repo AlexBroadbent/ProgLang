@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * ProgLang.operator.list
+ * x++.operator.list
  *
  * @author      Alexander Broadbent
  * @version     27/02/2016

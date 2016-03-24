@@ -45,6 +45,10 @@ public class Domain {
     protected Map<String, Map<String, Variable>> functionalVariables;
 
 
+    public Domain() {
+        this(null, null);
+    }
+
     public Domain(ILexer lexer, IParser parser) {
         // Initialise the maps used for functions, operators and variables
         operators = Maps.newHashMap();
@@ -72,7 +76,9 @@ public class Domain {
         registerOperator(new Decrement());
         registerOperator(new LogicalAnd());
         registerOperator(new LogicalOr());
+        registerOperator(new LogicalNot());
         registerOperator(new ArgSeparator());
+        registerOperator(new Concat());
 
         // bitwise package operators
         registerOperator(new Not());
@@ -247,11 +253,11 @@ public class Domain {
     }
 
     public String getOperatorList() {
-        return StringUtils.join(operators.entrySet(), ", ");
+        return StringUtils.join(operators.values(), ", ");
     }
 
     public String getFunctionList() {
-        return StringUtils.join(functions.entrySet(), ", ");
+        return StringUtils.join(functions.values(), ", ");
     }
 
 }

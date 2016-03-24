@@ -26,7 +26,12 @@ public class Conditional extends TernaryOperator {
 
     @Override
     public Object execute(Literal arg1, Literal arg2, Literal arg3) throws IncomparableTypeException {
-        return ((Boolean) arg1.getValue()) ? arg2 : arg3;
+        try {
+            return ((Boolean) arg1.getValue()) ? arg2 : arg3;
+        }
+        catch (ClassCastException ex) {
+            throw new IncomparableTypeException("Boolean", arg1.getValue().getClass().getSimpleName());
+        }
     }
 
 }

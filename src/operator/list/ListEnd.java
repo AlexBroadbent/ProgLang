@@ -16,7 +16,7 @@ import java.util.Stack;
 import static eval.ICalculableType.LIST_START;
 
 /**
- * ProgLang.operator.list
+ * x++.operator.list
  *
  * @author      Alexander Broadbent
  * @version     27/02/2016
