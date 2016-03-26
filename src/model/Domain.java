@@ -36,13 +36,13 @@ import java.util.Map;
  */
 public class Domain {
 
-    protected static Domain instance = null;
+    private static Domain instance = null;
     protected ILexer                             lexer;
     protected IParser                            parser;
-    protected Map<String, IOperator>             operators;
-    protected Map<String, IFunction>             functions;
-    protected Map<String, Variable>              variables;
-    protected Map<String, Map<String, Variable>> functionalVariables;
+    private   Map<String, IOperator>             operators;
+    private   Map<String, IFunction>             functions;
+    private   Map<String, Variable>              variables;
+    private   Map<String, Map<String, Variable>> functionalVariables;
 
 
     public Domain() {
@@ -160,7 +160,7 @@ public class Domain {
         return parser;
     }
 
-    public void registerOperator(IOperator operator) {
+    private void registerOperator(IOperator operator) {
         operators.put(operator.getToken(), operator);
     }
 
@@ -177,7 +177,7 @@ public class Domain {
         return functions.containsKey(token);
     }
 
-    public boolean hasFunctionalVariable(String function, String variable) {
+    private boolean hasFunctionalVariable(String function, String variable) {
         return functionalVariables.get(function).containsKey(variable);
     }
 
@@ -226,7 +226,7 @@ public class Domain {
         }
     }
 
-    public Variable createVariable(String name) {
+    private Variable createVariable(String name) {
         return new Variable(name);
     }
 

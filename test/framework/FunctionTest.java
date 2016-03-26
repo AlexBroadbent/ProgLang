@@ -1,7 +1,6 @@
 package framework;
 
 import eval.Expression;
-import eval.Literal;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import parser.ExpressionException;
@@ -15,10 +14,6 @@ import parser.ParserException;
  * @version 22/03/2016
  */
 public class FunctionTest extends ExpressionTest {
-
-    protected static Literal wrap(Object object) {
-        return Domain.wrapLiteral(object);
-    }
 
     protected void runFunctionTest(String decInput, String funcName, String runInput, Object runResult)
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {

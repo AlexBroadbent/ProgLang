@@ -29,6 +29,11 @@ public class ExpressionTest {
     private static final String MSG_ASSERT_RESULT_LOG = "Test::%s - Asserting result [%s] equals expected [%s]";
 
 
+    protected static Literal wrap(Object object) {
+        return Domain.wrapLiteral(object);
+    }
+
+
     @Before
     public void setUp() {
         Domain.invalidateInstance();
@@ -59,22 +64,19 @@ public class ExpressionTest {
             assertResult(expResult, result);
     }
 
-    protected void runExpressionVariableTest(String input, String varName, Object expResult) throws ExpressionException,
+    protected void runVariableTest(String input, String varName, Object expResult) throws ExpressionException,
             IncomparableTypeException, ParserException, UnknownSequenceException {
         getResultFromInput(input);
-        Object result = getValueFromDomainVariable(varName);
-
-        assertTypeOfResult(result, expResult.getClass());
-        assertResult(expResult, result);
+        verifyVariable(varName, expResult);
     }
 
-    protected void runExpressionExceptionTest(String input, Class<? extends Exception> expException) {
+    protected void runExceptionTest(String input, Class<? extends Exception> expException) {
         boolean result = assertExceptionIsThrown(input, expException);
         assertResult(getClass().getSimpleName() + " - Asserting " + expException.getSimpleName() + " was thrown", true, result);
     }
 
-    @SuppressWarnings("unchecked")  // Catch is in place to check a casting exception
-    protected void runExpressionListTest(String input, LinkedList<Literal> expResult) throws UnknownSequenceException,
+    @SuppressWarnings( "unchecked" )  // Catch is in place to check a casting exception
+    protected void runListTest(String input, LinkedList<Literal> expResult) throws UnknownSequenceException,
             ParserException, ExpressionException, IncomparableTypeException {
         Expression expression = getExpressionFromInput(input);
         Object list = getValueFromExpression(expression);
@@ -90,6 +92,14 @@ public class ExpressionTest {
         assertResult(getClass().getSimpleName() + " - Assert size of result list matches expected size", expResult.size(), result.size());
         for (int i = 0; i < result.size(); i++)
             assertResult(getClass().getSimpleName() + " - list position: " + i, expResult.get(i).getValue(), result.get(i).getValue());
+    }
+
+    protected void verifyVariable(String varName, Object expResult) {
+        Object result = getValueFromDomainVariable(varName);
+
+        if (expResult != null)
+            assertTypeOfResult(result, expResult.getClass());
+        assertResult(expResult, result);
     }
 
 
@@ -118,11 +128,14 @@ public class ExpressionTest {
         return Domain.getInstance().getVariable(variableName).getValue();
     }
 
-
     protected Object getResultFromInput(String input) throws ExpressionException, IncomparableTypeException,
             ParserException, UnknownSequenceException {
         Expression expression = getExpressionFromInput(input);
         return expression.execute();
+    }
+
+    protected boolean hasVariableBeenCreated(String varName) {
+        return Domain.getInstance().hasVariable(varName);
     }
 
 

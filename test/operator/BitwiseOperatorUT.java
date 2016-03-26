@@ -9,6 +9,10 @@ import parser.ParserException;
 
 /**
  * x++.operator
+ * <p>
+ * Verified results using:
+ *  http://www.miniwebtool.com/bitwise-calculator/
+ *  http://www.miniwebtool.com/bitwise-calculator/bit-shift/
  *
  * @author Alexander Broadbent
  * @version 30/12/2015
@@ -24,21 +28,18 @@ public class BitwiseOperatorUT extends ExpressionTest {
     private static final Integer VAR_X_VAL_BINARY = Integer.parseUnsignedInt("00011010", 2); // Same method as Literal parser
     private static final Integer VAR_Y_VAL_BINARY = 2;
 
-    // Verified against: http://www.miniwebtool.com/bitwise-calculator/
-    private static final String  INPUT_NOT  = "~x";
-    private static final String  INPUT_AND  = "x & y";
-    private static final String  INPUT_OR   = "x | y";
-    private static final String  INPUT_XOR  = "x $ y";
-    private static final Integer RESULT_NOT = -6;
-    private static final Integer RESULT_AND = 1;
-    private static final Integer RESULT_OR  = 7;
-    private static final Integer RESULT_XOR = 6;
-
-    // Verified against: http://www.miniwebtool.com/bitwise-calculator/bit-shift/
-    private static final String  INPUT_LBS  = "binaryX << binaryY";
-    private static final String  INPUT_RBS  = "binaryX >> binaryY";
-    private static final Integer RESULT_LBS = 104;
-    private static final Integer RESULT_RBS = 6;
+    private static final String  INPUT_NOT        = "~x";
+    private static final String  INPUT_AND        = "x & y";
+    private static final String  INPUT_OR         = "x | y";
+    private static final String  INPUT_XOR        = "x $ y";
+    private static final Integer RESULT_NOT       = -6;
+    private static final Integer RESULT_AND       = 1;
+    private static final Integer RESULT_OR        = 7;
+    private static final Integer RESULT_XOR       = 6;
+    private static final String  INPUT_LBS        = "binaryX << binaryY";
+    private static final String  INPUT_RBS        = "binaryX >> binaryY";
+    private static final Integer RESULT_LBS       = 104;
+    private static final Integer RESULT_RBS       = 6;
 
 
     @Override

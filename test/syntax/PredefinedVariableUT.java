@@ -27,10 +27,10 @@ public class PredefinedVariableUT extends ExpressionTest {
     private static final String  VAR_X       = "x";
     private static final Integer VAR_X_VALUE = 1;
 
-    private static final String INPUT_PI  = "sin(x / pi)";
-    private static final Double RESULT_PI = Math.sin(1 / Math.PI);
-    private static final String INPUT_E   = "e^0.1";
-    private static final Double RESULT_E  = Math.exp(0.1);
+    private static final String  INPUT_PI    = "sin(x / pi)";
+    private static final Double  RESULT_PI   = Math.sin(1 / Math.PI);
+    private static final String  INPUT_E     = "e^0.1";
+    private static final Double  RESULT_E    = Math.exp(0.1);
 
 
     @Override

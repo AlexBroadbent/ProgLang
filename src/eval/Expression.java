@@ -26,6 +26,9 @@ import static eval.ICalculableType.*;
  */
 public class Expression {
 
+    private final static String MSG_EXP_INVALID = "Expression is not valid: %s";
+    private final static String MSG_ARG_REMAIN  = "Arguments remaining after execution: %s";
+
     protected Domain            model;
     protected List<ICalculable> expression;
     protected String            infix;
@@ -49,7 +52,7 @@ public class Expression {
         init(infixExpression);
 
         if (!validate())
-            throw new ExpressionException("Expression is not valid: " + this.toString());
+            throw new ExpressionException(String.format(MSG_EXP_INVALID, toString()));
     }
 
     public Expression(List<ICalculable> postfix, Domain model) throws ExpressionException {
@@ -58,7 +61,7 @@ public class Expression {
         this.expression = postfix;
 
         if (!validate())
-            throw new ExpressionException("Expression is not valid: " + this.toString());
+            throw new ExpressionException(String.format(MSG_EXP_INVALID, toString()));
     }
 
     /**
@@ -107,7 +110,7 @@ public class Expression {
         if (stack.size() == 1)
             return stack.pop().getValue();
 
-        throw new ExpressionException("Arguments remaining after execution: " + StringUtils.join(stack, ", "));
+        throw new ExpressionException(String.format(MSG_ARG_REMAIN, StringUtils.join(stack, ", ")));
     }
 
     private boolean validate() {

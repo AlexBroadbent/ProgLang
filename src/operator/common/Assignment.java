@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import eval.*;
 import model.Domain;
 import operator.IConstants;
+import operator.IOperator;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
 import operator.function.UserFunction;
@@ -23,6 +24,9 @@ import static eval.ICalculableType.VARIABLE;
  * @version 02/02/2016
  */
 public class Assignment extends BinaryOperator {
+
+    private final static String MSG_INVALID_ASSIGNMENT = "Invalid Assignment, expecting user function and found: %s";
+    private final static String MSG_INVALID_FUNCTION   = "Function is not valid: Check the arguments match those used the expression";
 
     @Override
     public String getToken() {
@@ -46,19 +50,21 @@ public class Assignment extends BinaryOperator {
             // Validate that a UserFunction object exists in the top of the stack
             Literal userFuncLiteral = expression.get(0);
             if (((ICalculable) userFuncLiteral.getValue()).getType() != ICalculableType.USER_FUNCTION)
-                throw new ExpressionException("Invalid Assignment, expecting user function and found: " + userFuncLiteral.getValue().getClass().getSimpleName());
+                throw new ExpressionException(String.format(MSG_INVALID_ASSIGNMENT, userFuncLiteral.getValue().getClass().getSimpleName()));
             UserFunction userFunction = (UserFunction) userFuncLiteral.getValue();
 
             // Check expression is valid for the function, such as matching arguments
             List<ICalculable> expr = Lists.newArrayList(expression.subList(1, expression.size()));
             if (!userFunction.validate(expr, domain))
-                throw new ExpressionException("Function is not valid: Check the arguments match those used the expression");
+                throw new ExpressionException(MSG_INVALID_FUNCTION);
 
             // Extract the operator from the literal if there are any in the expression
             for (int i = 0; i < expr.size(); i++) {
                 ICalculable calculable = expr.get(i);
-                if (calculable.getType() == LITERAL)
-                    expr.set(i, (ICalculable) ((Literal) calculable).getValue());
+                if (calculable.getType() == LITERAL) {
+                    if (((Literal) calculable).getValue() instanceof IOperator)
+                        expr.set(i, (ICalculable) ((Literal) calculable).getValue());
+                }
             }
 
             // Set the expression of the function and register the function in the domain
@@ -82,6 +88,7 @@ public class Assignment extends BinaryOperator {
         // Ensure that the variable is immutable by rejecting a change
         if (((Variable) arg1).isValueSet())
             throw new ExpressionException("Cannot change the value of variable once it is set");
+
 
         arg1.setValue(arg2.getValue());
         return null;

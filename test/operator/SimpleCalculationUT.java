@@ -15,21 +15,21 @@ import parser.ParserException;
  */
 public class SimpleCalculationUT extends ExpressionTest {
 
-    private static final String  VAR_X       = "x";
-    private static final String  VAR_Y       = "y";
-    private static final Integer VAR_X_VALUE = 3;
-    private static final String  VAR_Y_VALUE = "HelloWorld";
+    private static final String  VAR_X         = "x";
+    private static final String  VAR_Y         = "y";
+    private static final Integer VAR_X_VALUE   = 3;
+    private static final String  VAR_Y_VALUE   = "HelloWorld";
 
-    private static final String INPUT_ADD     = "x + x";
-    private static final String INPUT_SUB     = "x - x";
-    private static final String INPUT_MULTI   = "x * x";
-    private static final String INPUT_DIV     = "x / x";
-    private static final String INPUT_CONCAT  = "y # y";
-    private static final Double RESULT_ADD    = 6d;
-    private static final Double RESULT_SUB    = 0d;
-    private static final Double RESULT_MULTI  = 9d;
-    private static final Double RESULT_DIV    = 1d;
-    private static final String RESULT_CONCAT = "HelloWorldHelloWorld";
+    private static final String  INPUT_ADD     = "x + x";
+    private static final String  INPUT_SUB     = "x - x";
+    private static final String  INPUT_MULTI   = "x * x";
+    private static final String  INPUT_DIV     = "x / x";
+    private static final String  INPUT_CONCAT  = "y # y";
+    private static final Double  RESULT_ADD    = 6d;
+    private static final Double  RESULT_SUB    = 0d;
+    private static final Double  RESULT_MULTI  = 9d;
+    private static final Double  RESULT_DIV    = 1d;
+    private static final String  RESULT_CONCAT = "HelloWorldHelloWorld";
 
 
     @Override

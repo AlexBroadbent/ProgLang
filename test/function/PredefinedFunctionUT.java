@@ -55,7 +55,7 @@ public class PredefinedFunctionUT extends FunctionTest {
     @Test
     public void consFunctionTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runExpressionListTest(INPUT_CONS, RESULT_CONS);
+        runListTest(INPUT_CONS, RESULT_CONS);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class PredefinedFunctionUT extends FunctionTest {
     @Test
     public void listFunctionTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runExpressionListTest(INPUT_LIST, RESULT_LIST);
+        runListTest(INPUT_LIST, RESULT_LIST);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class PredefinedFunctionUT extends FunctionTest {
     @Test
     public void tailFunctionTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runExpressionListTest(INPUT_TAIL, RESULT_TAIL);
+        runListTest(INPUT_TAIL, RESULT_TAIL);
     }
 
 }

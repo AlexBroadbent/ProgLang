@@ -15,11 +15,10 @@ import parser.ParserException;
  */
 public class InputFormatUT extends ExpressionTest {
 
-    private static final String  VAR_X       = "x";
-    private static final String  VAR_Y       = "y";
-    private static final Integer VAR_X_VALUE = 8;
-    private static final Integer VAR_Y_VALUE = 4;
-
+    private static final String                     VAR_X           = "x";
+    private static final String                     VAR_Y           = "y";
+    private static final Integer                    VAR_X_VALUE     = 8;
+    private static final Integer                    VAR_Y_VALUE     = 4;
 
     private static final String                     INPUT_FORMAT_1  = "x / y + 5";
     private static final Double                     RESULT_FORMAT_1 = 7d;
@@ -54,7 +53,7 @@ public class InputFormatUT extends ExpressionTest {
     @Test
     public void testErrorInExecution()
             throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
-        runExpressionExceptionTest(INPUT_ERROR, CLASS_ERROR);
+        runExceptionTest(INPUT_ERROR, CLASS_ERROR);
     }
 
     @Test

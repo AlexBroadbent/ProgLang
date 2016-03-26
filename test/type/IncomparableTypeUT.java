@@ -28,7 +28,7 @@ public class IncomparableTypeUT extends ExpressionTest {
 
     @Test
     public void shiftOperatorIncomparableTest() {
-        runExpressionExceptionTest(INPUT_MATH, CLASS_MATH);
+        runExceptionTest(INPUT_MATH, CLASS_MATH);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class IncomparableTypeUT extends ExpressionTest {
     @Test
     public void equalityOperatorTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runExpressionExceptionTest(INPUT_NOT, CLASS_NOT);
+        runExceptionTest(INPUT_NOT, CLASS_NOT);
     }
 
 }
