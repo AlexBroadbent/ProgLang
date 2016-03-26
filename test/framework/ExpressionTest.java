@@ -22,12 +22,10 @@ import static org.junit.Assert.*;
  * @author Alexander Broadbent
  * @version 29/12/2015
  */
-public class ExpressionTest {
+public class ExpressionTest extends BaseTest {
 
-    private static final String MSG_ASSERT_TYPE       = "Result is of type %s, expected %s";
-    private static final String MSG_ASSERT_RESULT     = "Result is %s, expected %s";
-    private static final String MSG_ASSERT_RESULT_LOG = "Test::%s - Asserting result [%s] equals expected [%s]";
-
+    private static final String MSG_ASSERT_TYPE   = "Result is of type %s, expected %s";
+    private static final String MSG_ASSERT_RESULT = "Result is %s, expected %s";
 
     protected static Literal wrap(Object object) {
         return Domain.wrapLiteral(object);
@@ -94,7 +92,7 @@ public class ExpressionTest {
             assertResult(getClass().getSimpleName() + " - list position: " + i, expResult.get(i).getValue(), result.get(i).getValue());
     }
 
-    protected void verifyVariable(String varName, Object expResult) {
+    private void verifyVariable(String varName, Object expResult) {
         Object result = getValueFromDomainVariable(varName);
 
         if (expResult != null)
@@ -124,11 +122,11 @@ public class ExpressionTest {
         return expression.execute();
     }
 
-    protected Object getValueFromDomainVariable(String variableName) {
+    private Object getValueFromDomainVariable(String variableName) {
         return Domain.getInstance().getVariable(variableName).getValue();
     }
 
-    protected Object getResultFromInput(String input) throws ExpressionException, IncomparableTypeException,
+    private Object getResultFromInput(String input) throws ExpressionException, IncomparableTypeException,
             ParserException, UnknownSequenceException {
         Expression expression = getExpressionFromInput(input);
         return expression.execute();
@@ -175,7 +173,7 @@ public class ExpressionTest {
         assertResult(getClass().getSimpleName(), expected, actual);
     }
 
-    <T> void assertResult(String testName, T expected, T actual) {
+    private <T> void assertResult(String testName, T expected, T actual) {
         XLogger.log(String.format(MSG_ASSERT_RESULT_LOG, testName, actual, expected));
         assertTrue(String.format(MSG_ASSERT_RESULT, actual, expected), expected.equals(actual));
     }

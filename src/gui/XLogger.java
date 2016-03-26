@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.logging.LogRecord;
-
 import static gui.IConstants.DEBUG_MODE;
 
 /**
@@ -14,30 +12,41 @@ import static gui.IConstants.DEBUG_MODE;
  */
 public class XLogger {
 
-    protected static boolean debug = DEBUG_MODE;
-    //protected static Logger logger = Logger.getLogger(LOGGER_NAME);
-
+    private final static String FORMAT_LOG     = "%s \n";
+    private final static String FORMAT_WARNING = "WARNING: %s \n";
+    private final static String FORMAT_SEVERE  = "SEVERE: %s \n";
+    private static boolean debug = DEBUG_MODE;
 
     public static void log(String msg) {
         if (debug)
-            System.out.print(msg + "\n");
-    }
-
-    public static void severe(String msg) {
-        if (debug)
-            System.err.print("SEVERE: " + msg + "\n");
-        //logger.severe(format(new LogRecord(Level.SEVERE, msg)));
+            System.out.print(String.format(FORMAT_LOG, msg));
     }
 
     public static void warning(String msg) {
         if (debug)
-            System.err.print("WARNING: " + msg + "\n");
-        //logger.warning(format(new LogRecord(Level.WARNING, msg)));
+            System.err.print(String.format(FORMAT_WARNING, msg));
+    }
+
+    public static void severe(String msg) {
+        if (debug)
+            System.err.print(String.format(FORMAT_SEVERE, msg));
     }
 
 
-    public static String format(LogRecord record) {
-        return record.getMessage() + "\r\n";
+    public static void setDebug(boolean debug) {
+        XLogger.debug = debug;
     }
 
+
+    public static String getLogFormat() {
+        return FORMAT_LOG;
+    }
+
+    public static String getWarningFormat() {
+        return FORMAT_WARNING;
+    }
+
+    public static String getSevereFormat() {
+        return FORMAT_SEVERE;
+    }
 }

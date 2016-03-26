@@ -1,10 +1,13 @@
 package operator.conditional;
 
+import com.google.common.collect.Lists;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.TernaryOperator;
 import parser.IncomparableTypeException;
+
+import java.util.List;
 
 /**
  * x++.operator.conditional
@@ -25,13 +28,17 @@ public class Conditional extends TernaryOperator {
     }
 
     @Override
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Boolean.class.getSimpleName());
+    }
+
+    @Override
     public Object execute(Literal arg1, Literal arg2, Literal arg3) throws IncomparableTypeException {
         try {
             return ((Boolean) arg1.getValue()) ? arg2 : arg3;
         }
         catch (ClassCastException ex) {
-            throw new IncomparableTypeException("Boolean", arg1.getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getValue().getClass().getSimpleName());
         }
     }
-
 }

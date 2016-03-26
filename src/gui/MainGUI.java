@@ -85,6 +85,10 @@ public class MainGUI {
             input = input.replaceFirst("var ", "");
             XLogger.log(domain.getVariable(input).toDebugString());
         }
+        else if (input.startsWith("debug")) {
+            input = input.replaceFirst("debug ", "");
+            XLogger.setDebug(Boolean.parseBoolean(input));
+        }
     }
 
 }

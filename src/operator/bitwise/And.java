@@ -39,7 +39,7 @@ public class And extends BinaryOperator {
             return Byte.valueOf(arg1.getValue().toString()) & Byte.valueOf(arg2.getValue().toString());
         }
         catch (NumberFormatException ex) {
-            throw new IncomparableTypeException(Byte.class.getSimpleName(),
+            throw new IncomparableTypeException(Lists.newArrayList(Byte.class.getSimpleName()),
                     getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
         }
     }

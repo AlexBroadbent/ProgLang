@@ -35,6 +35,7 @@ public class UserFunctionUT extends FunctionTest {
     private final static Class<? extends Exception> CLASS_NO_ARG        = NullPointerException.class;
     private final static Class<? extends Exception> CLASS_BAD_NAME      = ExpressionException.class;
     private final static Class<? extends Exception> CLASS_INVALID_FUNC  = ExpressionException.class;
+    private final static Class<? extends Exception> CLASS_REDEC_FUNC    = ParserException.class;
 
 
     @Override
@@ -72,10 +73,17 @@ public class UserFunctionUT extends FunctionTest {
     public void nameClashFunctionTest() {
         runExceptionTest(INPUT_BAD_NAME_FUNC, CLASS_BAD_NAME);
     }
-    
+
     @Test
     public void invalidFunctionExceptionTest() {
         runExceptionTest(INPUT_INVALID_FUNC, CLASS_INVALID_FUNC);
+    }
+
+    @Test
+    public void redeclareExistingFunctionTest()
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+        runFunctionDeclaration(INPUT_COMBI_FUNC, NAME_COMBI_FUNC);
+        runExceptionTest(INPUT_COMBI_FUNC, CLASS_REDEC_FUNC);
     }
 
 }

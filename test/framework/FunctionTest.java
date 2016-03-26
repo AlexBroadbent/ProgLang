@@ -17,15 +17,8 @@ public class FunctionTest extends ExpressionTest {
 
     protected void runFunctionTest(String decInput, String funcName, String runInput, Object runResult)
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
-        // Create function
-        Expression declaration = getExpressionFromInput(decInput);
-        getValueFromExpression(declaration); // Returns null
-        assertFunctionCreated(funcName);
-
-        // Run function
-        Expression run = getExpressionFromInput(runInput);
-        Object result = getValueFromExpression(run);
-        assertResult(runResult, result);
+        runFunctionDeclaration(decInput, funcName);
+        runFunction(runInput, runResult);
     }
 
     private void assertFunctionCreated(String functionName) {
@@ -33,5 +26,25 @@ public class FunctionTest extends ExpressionTest {
         assertResult(true, model.getFunctionList().contains(functionName));
     }
 
+
+
+
+    /*
+     *      Helper Functions
+     */
+
+    protected void runFunctionDeclaration(String input, String functionName)
+            throws UnknownSequenceException, IncomparableTypeException, ExpressionException, ParserException {
+        Expression declaration = getExpressionFromInput(input);
+        getValueFromExpression(declaration);
+        assertFunctionCreated(functionName);
+    }
+
+    private void runFunction(String input, Object expResult)
+            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
+        Expression run = getExpressionFromInput(input);
+        Object result = getValueFromExpression(run);
+        assertResult(expResult, result);
+    }
 
 }
