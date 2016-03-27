@@ -18,6 +18,8 @@ import operator.conditional.ConditionalElse;
 import operator.equality.Equal;
 import operator.equality.NotEqual;
 import operator.function.*;
+import operator.list.ArrayAccessEnd;
+import operator.list.ArrayAccessStart;
 import operator.list.ListEnd;
 import operator.list.ListStart;
 import operator.math.*;
@@ -117,6 +119,8 @@ public class Domain {
         registerOperator(new ConditionalElse());
 
         // list package operators
+        registerOperator(new ArrayAccessStart());
+        registerOperator(new ArrayAccessEnd());
         registerOperator(new ListStart());
         registerOperator(new ListEnd());
 

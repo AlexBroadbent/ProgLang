@@ -34,6 +34,7 @@ public interface IToken {
     int    LIST_START                     = 23;
     int    LIST_END                       = 24;
     int    ARG_SEPARATOR                  = 25;
+    int    ARRAY_ACCESS                   = 26;
 
     String WHITESPACE_REGEX               = "\\s";
     String BOOLEAN_COMPARATOR_REGEX       = "\\!\\=|\\=\\=";
@@ -61,5 +62,6 @@ public interface IToken {
     String LIST_START_REGEX               = "\\{";
     String LIST_END_REGEX                 = "\\}";
     String ARG_SEPARATOR_REGEX            = "\\,";
+    String ARRAY_ACCESS_REGEX             = "\\[|\\]";
 
 }

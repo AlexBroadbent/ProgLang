@@ -10,34 +10,35 @@ package operator;
  */
 public interface IConstants {
 
-    String ARG_SEPARATOR     = ",";
-    String LEFT_PARENTHESIS  = "(";
-    String RIGHT_PARENTHESIS = ")";
+    String ARG_SEPARATOR      = ",";
+    String LEFT_PARENTHESIS   = "(";
+    String RIGHT_PARENTHESIS  = ")";
+    String ARRAY_ACCESS_START = "[";
+    String ARRAY_ACCESS_END   = "]";
 
-    String PLUS     = "+";
-    String MINUS    = "-";
-    String DIVIDE   = "/";
-    String MULTIPLY = "*";
-    String POWER    = "^";
-    String MOD      = "%";
-    String CONCAT   = "#";
+    String PLUS               = "+";
+    String MINUS              = "-";
+    String DIVIDE             = "/";
+    String MULTIPLY           = "*";
+    String POWER              = "^";
+    String MOD                = "%";
+    String CONCAT             = "#";
 
-    String BITWISE_AND = "&";
-    String BITWISE_OR  = "|";
-    String BITWISE_XOR = "$";
-    String LEFT_SHIFT  = "<<";
-    String RIGHT_SHIFT = ">>";
-    String BITWISE_NOT = "~";
+    String BITWISE_AND        = "&";
+    String BITWISE_OR         = "|";
+    String BITWISE_XOR        = "$";
+    String LEFT_SHIFT         = "<<";
+    String RIGHT_SHIFT        = ">>";
+    String BITWISE_NOT        = "~";
 
-    String LOGICAL_NOT = "!";
-    String LOGICAL_AND = "&&";
-    String LOGICAL_OR  = "||";
+    String LOGICAL_NOT        = "!";
+    String LOGICAL_AND        = "&&";
+    String LOGICAL_OR         = "||";
 
-    String INCREMENT = "++";
-    String DECREMENT = "--";
+    String INCREMENT          = "++";
+    String DECREMENT          = "--";
 
-    String ASSIGNMENT = "=";
-
+    String ASSIGNMENT         = "=";
     String GREATER_THAN       = ">";
     String GREATER_THAN_EQUAL = ">=";
     String LESS_THAN          = "<";
@@ -45,34 +46,32 @@ public interface IConstants {
     String EQUALITY           = "==";
     String INEQUALITY         = "!=";
 
-    String CONDITIONAL      = "?";
-    String CONDITIONAL_ELSE = ":";
-
-    String LIST_START = "{";
-    String LIST_END   = "}";
+    String CONDITIONAL        = "?";
+    String CONDITIONAL_ELSE   = ":";
+    String LIST_START         = "{";
+    String LIST_END           = "}";
 
     /*
         Functions
      */
 
-    String EXPONENTIAL = "exp";
+    String EXPONENTIAL        = "exp";
+    String SQUARE_ROOT        = "sqrt";
+    String LN                 = "ln";
+    String LOG_10             = "log10";
+    String SIN                = "sin";
+    String COS                = "cos";
+    String TAN                = "tan";
+    String ASIN               = "asin";
+    String ACOS               = "acos";
+    String ATAN               = "atan";
 
-    String SQUARE_ROOT = "sqrt";
-    String LN          = "ln";
-    String LOG_10      = "log10";
-    String SIN         = "sin";
-    String COS         = "cos";
-    String TAN         = "tan";
-    String ASIN        = "asin";
-    String ACOS        = "acos";
-    String ATAN        = "atan";
-
-    String SUM  = "sum";
-    String MAX  = "max";
-    String LIST = "list";
-    String HEAD = "head";
-    String TAIL = "tail";
-    String CONS = "cons";
-    String FUNC = "func";
+    String FUNC               = "func";
+    String SUM                = "sum";
+    String MAX                = "max";
+    String LIST               = "list";
+    String HEAD               = "head";
+    String TAIL               = "tail";
+    String CONS               = "cons";
 
 }

@@ -35,16 +35,7 @@ public class ArgSeparator extends NullaryOperator {
     }
 
     @Override
-    public boolean isValidContext(Stack<IOperator> operatorStack, List<ICalculable> infix, int position) {
-        for (int i = operatorStack.size(); i >= 0; --i)
-            if (operatorStack.get(i) instanceof Function)
-                return true;
-        return false;
-    }
-
-    @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException {
         return Domain.wrapLiteral(this);
     }
 
@@ -55,7 +46,7 @@ public class ArgSeparator extends NullaryOperator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        while (!(operatorStack.peek().getType() == LEFT_PARENTHESIS || operatorStack.peek().getType() == LIST_START))
+        while (!operatorStack.isEmpty() && !(operatorStack.peek().getType() == LEFT_PARENTHESIS || operatorStack.peek().getType() == LIST_START))
             postfix.add(operatorStack.pop());
     }
 

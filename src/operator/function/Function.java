@@ -54,11 +54,6 @@ public class Function implements IFunction {
     }
 
     @Override
-    public boolean isValidContext(Stack<IOperator> operatorStack, List<ICalculable> infix, int position) {
-        return true;
-    }
-
-    @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
             throws IncomparableTypeException, ExpressionException {
         List<Literal> args = Lists.newArrayList();

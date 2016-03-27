@@ -3,7 +3,6 @@ package operator;
 import eval.ICalculable;
 
 import java.util.List;
-import java.util.Stack;
 
 /**
  * x++.operator
@@ -22,7 +21,5 @@ public interface IOperator extends ICalculable {
     int getPrecedence();
 
     List<String> getAllowedExecutionTypes();
-
-    boolean isValidContext(Stack<IOperator> operatorStack, List<ICalculable> infix, int position);
 
 }

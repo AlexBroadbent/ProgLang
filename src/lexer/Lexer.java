@@ -55,6 +55,7 @@ public class Lexer implements ILexer {
         addToken(LIST_START_REGEX, LIST_START);
         addToken(LIST_END_REGEX, LIST_END);
         addToken(ARG_SEPARATOR_REGEX, ARG_SEPARATOR);
+        addToken(ARRAY_ACCESS_REGEX, ARRAY_ACCESS);
     }
 
 

@@ -12,6 +12,7 @@ package operator;
 public interface IPrecedence {
 
     int FUNCTION            = 1;    // ()
+    int ARRAY_ACCESS        = 1;    // []
     int LIST                = 1;    // {}
     int UNARY               = 2;    // ! ++ --
     int GEOMETRIC           = 3;    // * / MOD
@@ -28,5 +29,7 @@ public interface IPrecedence {
     int ASSIGNMENT_OPERATOR = 14;   // =
     int ARG_SEPARATOR       = 15;   // ,
     int BRACKET             = 16;   // ( )
+
+    int NONE                = 99;   // NullaryOperator
 
 }

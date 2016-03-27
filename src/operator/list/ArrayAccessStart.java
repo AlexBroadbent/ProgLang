@@ -1,6 +1,7 @@
-package operator.conditional;
+package operator.list;
 
 import eval.ICalculable;
+import eval.ICalculableType;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
@@ -10,27 +11,31 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * x++.operator.conditional
+ * x++.operator.list
  *
  * @author Alexander Broadbent
- * @version 08/01/2016
+ * @version 26/03/2016
  */
-public class ConditionalElse extends NullaryOperator {
+public class ArrayAccessStart extends NullaryOperator {
 
     @Override
     public String getToken() {
-        return IConstants.CONDITIONAL_ELSE;
+        return IConstants.ARRAY_ACCESS_START;
     }
 
     @Override
     public int getPrecedence() {
-        return IPrecedence.CONDITIONAL;
+        return IPrecedence.ARRAY_ACCESS;
+    }
+
+    @Override
+    public int getType() {
+        return ICalculableType.OPERATOR;
     }
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        while (!operatorStack.isEmpty() && !operatorStack.peek().getToken().equals(IConstants.CONDITIONAL))
-            postfix.add(operatorStack.pop());
+
     }
 
 }

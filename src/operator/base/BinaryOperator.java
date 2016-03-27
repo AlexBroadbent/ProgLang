@@ -6,6 +6,7 @@ import eval.Literal;
 import model.Domain;
 import operator.Associativity;
 import operator.IOperator;
+import operator.IPrecedence;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
@@ -37,16 +38,11 @@ public abstract class BinaryOperator extends Operator {
 
     @Override
     public int getPrecedence() {
-        return 99;
+        return IPrecedence.NONE;
     }
 
     public List<String> getAllowedExecutionTypes() {
         return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
-    }
-
-    @Override
-    public boolean isValidContext(Stack operatorStack, List infix, int position) {
-        return true;
     }
 
     @Override
@@ -63,22 +59,18 @@ public abstract class BinaryOperator extends Operator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        if (getAssociativity() == Associativity.LEFT_TO_RIGHT) {
-            // Left-associative operator
-            // pop any >= precedence operators from the stack and add to output
+        if (getAssociativity() == Associativity.LEFT_TO_RIGHT)
             while (!operatorStack.isEmpty() && operatorStack.peek().getPrecedence() <= getPrecedence())
                 postfix.add(operatorStack.pop());
-        }
-        if (getAssociativity() == Associativity.RIGHT_TO_LEFT) {
+        if (getAssociativity() == Associativity.RIGHT_TO_LEFT)
             while (!operatorStack.isEmpty() && operatorStack.peek().getPrecedence() < getPrecedence())
                 postfix.add(operatorStack.pop());
-        }
 
         operatorStack.add(this);
     }
 
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
-        return null;
+        throw new ExpressionException("Operator not implemented");
     }
 
     public String getIncomparableType(String arg1Class, String arg2Class, List<String> allowedClasses) {

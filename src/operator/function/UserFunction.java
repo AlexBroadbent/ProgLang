@@ -5,7 +5,6 @@ import com.google.common.collect.Sets;
 import eval.*;
 import model.Domain;
 import operator.Associativity;
-import operator.IOperator;
 import operator.IPrecedence;
 import org.apache.commons.lang3.StringUtils;
 import parser.ExpressionException;
@@ -13,7 +12,6 @@ import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * x++.operator.function
@@ -76,11 +74,6 @@ public class UserFunction extends Function {
     @Override
     public List<String> getAllowedExecutionTypes() {
         return Lists.newArrayList(Literal.class.getSimpleName());
-    }
-
-    @Override
-    public boolean isValidContext(Stack<IOperator> operatorStack, List<ICalculable> infix, int position) {
-        return true;
     }
 
     @Override

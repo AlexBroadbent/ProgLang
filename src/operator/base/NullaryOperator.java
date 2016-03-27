@@ -1,10 +1,10 @@
 package operator.base;
 
-import eval.ICalculable;
 import eval.Literal;
 import model.Domain;
 import operator.Associativity;
-import operator.IOperator;
+import operator.IPrecedence;
+import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public abstract class NullaryOperator extends Operator {
 
     @Override
     public int getPrecedence() {
-        return 99;
+        return IPrecedence.NONE;
     }
 
     @Override
@@ -42,14 +42,9 @@ public abstract class NullaryOperator extends Operator {
     }
 
     @Override
-    public boolean isValidContext(Stack<IOperator> operatorStack, List<ICalculable> infix, int position) {
-        return true;
-    }
-
-    @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException {
-        throw new Error("Operator not implemented");
+            throws IncomparableTypeException, ExpressionException {
+        throw new ExpressionException("Operator not implemented");
     }
 
 }

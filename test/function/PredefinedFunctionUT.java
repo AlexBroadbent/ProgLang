@@ -1,5 +1,6 @@
 package function;
 
+import com.google.common.collect.Lists;
 import eval.Literal;
 import framework.FunctionTest;
 import lexer.UnknownSequenceException;
@@ -26,7 +27,7 @@ public class PredefinedFunctionUT extends FunctionTest {
     private static final Integer             VAR_W_VALUE = 15;
     private static final Integer             VAR_X_VALUE = 10;
     private static final Integer             VAR_Y_VALUE = 4;
-    private static final LinkedList<Literal> VAR_Z_VALUE = new LinkedList<>(Arrays.asList(wrap(1), wrap(2), wrap(3)));
+    private static final LinkedList<Literal> VAR_Z_VALUE = Lists.newLinkedList(Arrays.asList(wrap(1), wrap(2), wrap(3)));
 
     private static final String              INPUT_CONS  = "cons(y, z)";
     private static final String              INPUT_HEAD  = "head(z)";
@@ -34,12 +35,12 @@ public class PredefinedFunctionUT extends FunctionTest {
     private static final String              INPUT_MAX   = "max(x, 2, 40, 24, 30)";
     private static final String              INPUT_SUM   = "sum(y, 16, w, 15, 5, 5)";
     private static final String              INPUT_TAIL  = "tail(z)";
-    private static final LinkedList<Literal> RESULT_CONS = new LinkedList<>(Arrays.asList(wrap(4), wrap(1), wrap(2), wrap(3)));
+    private static final LinkedList<Literal> RESULT_CONS = Lists.newLinkedList(Arrays.asList(wrap(4), wrap(1), wrap(2), wrap(3)));
     private static final Integer             RESULT_HEAD = 1;
-    private static final LinkedList<Literal> RESULT_LIST = new LinkedList<>(Arrays.asList(wrap(1), wrap(2), wrap(3)));
+    private static final LinkedList<Literal> RESULT_LIST = Lists.newLinkedList(Arrays.asList(wrap(1), wrap(2), wrap(3)));
     private static final Double              RESULT_MAX  = 40d;
     private static final Double              RESULT_SUM  = 60d;
-    private static final LinkedList<Literal> RESULT_TAIL = new LinkedList<>(Arrays.asList(wrap(2), wrap(3)));
+    private static final LinkedList<Literal> RESULT_TAIL = Lists.newLinkedList(Arrays.asList(wrap(2), wrap(3)));
 
 
     @Override

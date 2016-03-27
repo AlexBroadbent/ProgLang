@@ -1,11 +1,12 @@
 package operator.base;
 
-import com.google.common.collect.Lists;
 import eval.ICalculable;
 import eval.Literal;
 import model.Domain;
 import operator.Associativity;
 import operator.IOperator;
+import operator.IPrecedence;
+import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
 import java.util.List;
@@ -31,33 +32,20 @@ public abstract class TernaryOperator extends Operator {
 
     @Override
     public int getPrecedence() {
-        return 99;
-    }
-
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
-    }
-
-    @Override
-    public boolean isValidContext(Stack operatorStack, List infix, int position) {
-        return true;
-    }
-
-    public Object execute(Literal arg1, Literal arg2, Literal arg3) throws IncomparableTypeException {
-        return null;
+        return IPrecedence.NONE;
     }
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException {
+            throws IncomparableTypeException, ExpressionException {
         if (returnExpression)
             return Domain.wrapLiteral(this);
 
-        Literal ifFalse = stack.pop();
-        Literal ifTrue = stack.pop();
-        Literal cond = stack.pop();
+        Literal arg3 = stack.pop();
+        Literal arg2 = stack.pop();
+        Literal arg1 = stack.pop();
 
-        return Domain.wrapLiteral(execute(cond, ifTrue, ifFalse));
+        return Domain.wrapLiteral(execute(arg1, arg2, arg3));
     }
 
     @Override
@@ -72,8 +60,9 @@ public abstract class TernaryOperator extends Operator {
         operatorStack.add(this);
     }
 
-    public String getIncomparableType(String arg1Class, String arg2Class, List<String> allowedClasses) {
-        return (allowedClasses.contains(arg1Class)) ? arg2Class : arg1Class;
+    public Object execute(Literal arg1, Literal arg2, Literal arg3)
+            throws IncomparableTypeException, ExpressionException {
+        throw new ExpressionException("Operator not implemented");
     }
 
 }
