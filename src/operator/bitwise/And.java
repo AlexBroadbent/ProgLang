@@ -6,8 +6,6 @@ import operator.IPrecedence;
 import operator.base.BinaryOperator;
 import parser.IncomparableTypeException;
 
-import java.util.List;
-
 import static operator.IConstants.BITWISE_AND;
 
 /**
@@ -26,11 +24,6 @@ public class And extends BinaryOperator {
     @Override
     public int getPrecedence() {
         return IPrecedence.BITWISE_AND;
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
 
     @Override
