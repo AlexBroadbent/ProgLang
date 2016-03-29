@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import eval.*;
 import model.Domain;
 import operator.IConstants;
-import operator.IOperator;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
 import operator.function.UserFunction;
@@ -14,7 +13,6 @@ import parser.IncomparableTypeException;
 import java.util.List;
 import java.util.Stack;
 
-import static eval.ICalculableType.LITERAL;
 import static eval.ICalculableType.VARIABLE;
 
 /**
@@ -59,13 +57,7 @@ public class Assignment extends BinaryOperator {
                 throw new ExpressionException(MSG_INVALID_FUNCTION);
 
             // Extract the operator from the literal if there are any in the expression
-            for (int i = 0; i < expr.size(); i++) {
-                ICalculable calculable = expr.get(i);
-                if (calculable.getType() == LITERAL) {
-                    if (((Literal) calculable).getValue() instanceof IOperator)
-                        expr.set(i, (ICalculable) ((Literal) calculable).getValue());
-                }
-            }
+            expr = Expression.parseWrappedList(expr);
 
             // Set the expression of the function and register the function in the domain
             userFunction.setExpression(new Expression(expr, domain));

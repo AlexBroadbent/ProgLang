@@ -27,14 +27,15 @@ public interface IToken {
     int    MATH_COMPARATOR                = 16;
     int    LEFT_PARENTHESIS               = 17;
     int    RIGHT_PARENTHESIS              = 18;
-    int    TEXT                           = 19;
-    int    VARIABLE                       = 20;
-    int    IF                             = 21;
-    int    ELSE                           = 22;
-    int    LIST_START                     = 23;
-    int    LIST_END                       = 24;
-    int    ARG_SEPARATOR                  = 25;
-    int    ARRAY_ACCESS                   = 26;
+    int    FOR_LOOP_ELEMENT               = 19;
+    int    TEXT                           = 20;
+    int    VARIABLE                       = 21;
+    int    IF                             = 22;
+    int    ELSE                           = 23;
+    int    LIST_START                     = 24;
+    int    LIST_END                       = 25;
+    int    ARG_SEPARATOR                  = 26;
+    int    ARRAY_ACCESS                   = 27;
 
     String WHITESPACE_REGEX               = "\\s";
     String BOOLEAN_COMPARATOR_REGEX       = "\\!\\=|\\=\\=";
@@ -55,6 +56,7 @@ public interface IToken {
     String MATH_COMPARATOR_REGEX          = "\\<|\\>";
     String LEFT_PAREN_REGEX               = "\\(";
     String RIGHT_PAREN_REGEX              = "\\)";
+    String FOR_LOOP_ELEMENT_REGEX         = "for|in|do";
     String TEXT_REGEX                     = "\"([^\"| ]*)\"|\'([^\'| ]*)\'";
     String VARIABLE_REGEX                 = "[a-zA-Z][a-zA-Z0-9_]*";
     String IF_REGEX                       = "\\?";

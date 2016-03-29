@@ -17,15 +17,19 @@ import java.util.List;
  */
 public class Cons extends Function {
 
+    private final static String MSG_ARGS   = "Cons function requires two arguments: a literal and a list.";
+    private final static String MSG_FORMAT = "The function must be in the format: cons(literal, list). Instead of list, found: %s.";
+
     @Override
     public String getToken() {
         return IConstants.CONS;
     }
 
     @Override
+    @SuppressWarnings( "unchecked" )    // Class cast exception is caught
     public Object execute(List<Literal> args) throws ExpressionException {
         if (args.size() != 2)
-            throw new ExpressionException("Cons function requires two arguments: a literal and a list.");
+            throw new ExpressionException(MSG_ARGS);
 
         LinkedList<Literal> list;
         LinkedList<Literal> newList = Lists.newLinkedList();
@@ -37,7 +41,7 @@ public class Cons extends Function {
             newList.addAll(list);
         }
         catch (ClassCastException ex) {
-            XLogger.severe("The second argument given to cons function must be a list. Instead found: "
+            XLogger.severe(""
                     + args.get(0).getValue().getClass().getSimpleName());
         }
 

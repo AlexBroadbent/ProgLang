@@ -6,6 +6,7 @@ import lexer.UnknownSequenceException;
 import model.Domain;
 import operator.IOperator;
 import operator.function.Declaration;
+import operator.loop.Do;
 import org.apache.commons.lang3.StringUtils;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
@@ -28,12 +29,9 @@ public class Expression {
 
     private final static String MSG_EXP_INVALID = "Expression is not valid: %s";
     private final static String MSG_ARG_REMAIN  = "Arguments remaining after execution: %s";
-
     protected Domain            model;
     protected List<ICalculable> expression;
     protected String            infix;
-
-
     /**
      * Create an expression object...
      *
@@ -55,6 +53,7 @@ public class Expression {
             throw new ExpressionException(String.format(MSG_EXP_INVALID, toString()));
     }
 
+
     public Expression(List<ICalculable> postfix, Domain model) throws ExpressionException {
         this.infix = StringUtils.join(postfix, " "); // TODO: postfix-to-infix function?
         this.model = model;
@@ -64,24 +63,37 @@ public class Expression {
             throw new ExpressionException(String.format(MSG_EXP_INVALID, toString()));
     }
 
+    public static List<ICalculable> parseWrappedList(List<ICalculable> postfix) {
+        for (int i = 0; i < postfix.size(); i++) {
+            ICalculable calculable = postfix.get(i);
+            if (calculable.getType() == LITERAL) {
+                if (((Literal) calculable).getValue() instanceof IOperator)
+                    postfix.set(i, (ICalculable) ((Literal) calculable).getValue());
+            }
+            else
+                postfix.set(i, calculable);
+        }
+
+        return postfix;
+    }
+
     /**
+     * 'A practical infix-to-prefix algorithm for mathematical expressions'
+     * See http://www.chris-j.co.uk/parsing.php
+     *
      * @param infix A parsed expression in infix form
      */
     private void init(List<ICalculable> infix) {
         Stack<IOperator> operatorStack = new Stack<>();
         expression = Lists.newArrayList();
 
-        // 'A practical infix-to-prefix algorithm for mathematical expressions'
-        // See http://www.chris-j.co.uk/parsing.php
-
         // sort through input infix
         for (int i = 0; i < infix.size(); i++)
             infix.get(i).toPostFix(infix, i, expression, operatorStack);
 
         // Handle any remaining tokens in operator stack
-        while (operatorStack.size() > 0) {
+        while (operatorStack.size() > 0)
             expression.add(operatorStack.pop());
-        }
     }
 
     /**
@@ -99,7 +111,7 @@ public class Expression {
         boolean returnExpression = false;
 
         for (ICalculable literal : expression) {
-            if (literal instanceof Declaration)
+            if (literal instanceof Declaration || literal instanceof Do) //TODO: this
                 returnExpression = true;
             Literal result = literal.evaluate(model, stack, returnExpression);
             if (result != null)

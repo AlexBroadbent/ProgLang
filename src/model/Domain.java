@@ -22,6 +22,9 @@ import operator.list.ArrayAccessEnd;
 import operator.list.ArrayAccessStart;
 import operator.list.ListEnd;
 import operator.list.ListStart;
+import operator.loop.Do;
+import operator.loop.In;
+import operator.loop.ListLoop;
 import operator.math.*;
 import org.apache.commons.lang3.StringUtils;
 import parser.IParser;
@@ -123,6 +126,11 @@ public class Domain {
         registerOperator(new ArrayAccessEnd());
         registerOperator(new ListStart());
         registerOperator(new ListEnd());
+
+        // loop package operators
+        registerOperator(new ListLoop());
+        registerOperator(new Do());
+        registerOperator(new In());
 
         // function package functions
         registerFunction(new Sum());

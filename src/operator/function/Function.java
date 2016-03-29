@@ -25,7 +25,7 @@ import static eval.ICalculableType.FUNCTION_PLACEHOLDER;
  * @author Alexander Broadbent
  * @version 02/12/2015
  */
-public class Function implements IFunction {
+public abstract class Function implements IFunction {
 
     @Override
     public String getToken() {

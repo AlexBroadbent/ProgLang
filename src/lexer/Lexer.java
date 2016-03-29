@@ -48,6 +48,7 @@ public class Lexer implements ILexer {
         addToken(BITWISE_OPERATOR_REGEX, BITWISE_OPERATOR);
         addToken(LEFT_PAREN_REGEX, LEFT_PARENTHESIS);
         addToken(RIGHT_PAREN_REGEX, RIGHT_PARENTHESIS);
+        addToken(FOR_LOOP_ELEMENT_REGEX, FOR_LOOP_ELEMENT);
         addToken(TEXT_REGEX, TEXT);
         addToken(VARIABLE_REGEX, VARIABLE);
         addToken(IF_REGEX, IF);

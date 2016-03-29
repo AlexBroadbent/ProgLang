@@ -26,6 +26,7 @@ public interface IPrecedence {
     int LOGICAL_AND         = 11;   // &
     int LOGICAL_OR          = 12;   // |
     int CONDITIONAL         = 13;   // ? :
+    int LOOP                = 13;   // for in to
     int ASSIGNMENT_OPERATOR = 14;   // =
     int ARG_SEPARATOR       = 15;   // ,
     int BRACKET             = 16;   // ( )

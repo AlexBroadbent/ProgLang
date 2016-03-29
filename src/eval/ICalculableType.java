@@ -8,17 +8,18 @@ package eval;
  */
 public interface ICalculableType {
 
-    int OPERATOR      = 1;
-    int FUNCTION      = 2;
-    int USER_FUNCTION = 3;
+    int OPERATOR             = 1;
+    int FUNCTION             = 2;
+    int USER_FUNCTION        = 3;
+    int EXPRESSION           = 4;
 
-    int LEFT_PARENTHESIS     = 5;
-    int RIGHT_PARENTHESIS    = 6;
-    int ARG_SEPARATOR        = 7;
-    int LIST_START           = 8;
-    int FUNCTION_PLACEHOLDER = 9;
+    int VARIABLE             = 5;
+    int LITERAL              = 6;
 
-    int LITERAL  = 10;
-    int VARIABLE = 11;
+    int LEFT_PARENTHESIS     = 7;
+    int RIGHT_PARENTHESIS    = 8;
+    int ARG_SEPARATOR        = 9;
+    int LIST_START           = 10;
+    int FUNCTION_PLACEHOLDER = 11;
 
 }

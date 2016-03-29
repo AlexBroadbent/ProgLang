@@ -65,4 +65,8 @@ public abstract class TernaryOperator extends Operator {
         throw new ExpressionException("Operator not implemented");
     }
 
+    public String getIncomparableType(String arg1Class, String arg2Class, String arg3Class, List<String> allowedClasses) {
+        return (!allowedClasses.contains(arg1Class)) ? arg1Class : (!allowedClasses.contains(arg2Class) ? arg2Class : arg3Class);
+    }
+
 }

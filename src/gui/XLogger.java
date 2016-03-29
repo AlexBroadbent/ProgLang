@@ -17,6 +17,11 @@ public class XLogger {
     private final static String FORMAT_SEVERE  = "SEVERE: %s \n";
     private static boolean debug = DEBUG_MODE;
 
+
+    public static void consolePrint(String msg) {
+        System.out.print("> " + msg + "\n");
+    }
+
     public static void log(String msg) {
         if (debug)
             System.out.print(String.format(FORMAT_LOG, msg));

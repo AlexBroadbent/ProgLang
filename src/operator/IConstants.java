@@ -50,11 +50,13 @@ public interface IConstants {
     String CONDITIONAL_ELSE   = ":";
     String LIST_START         = "{";
     String LIST_END           = "}";
+    String FOR_LOOP           = "for";
+    String IN                 = "in";
+    String DO                 = "do";
 
     /*
         Functions
      */
-
     String EXPONENTIAL        = "exp";
     String SQUARE_ROOT        = "sqrt";
     String LN                 = "ln";
@@ -64,14 +66,15 @@ public interface IConstants {
     String TAN                = "tan";
     String ASIN               = "asin";
     String ACOS               = "acos";
-    String ATAN               = "atan";
 
+    String ATAN               = "atan";
     String FUNC               = "func";
     String SUM                = "sum";
     String MAX                = "max";
     String LIST               = "list";
     String HEAD               = "head";
     String TAIL               = "tail";
-    String CONS               = "cons";
+    String EXPR               = "expr";
 
+    String CONS               = "cons";
 }

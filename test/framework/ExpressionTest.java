@@ -1,5 +1,6 @@
 package framework;
 
+import com.google.common.collect.Lists;
 import eval.Expression;
 import eval.Literal;
 import gui.XLogger;
@@ -11,7 +12,7 @@ import parser.ExpressionException;
 import parser.IncomparableTypeException;
 import parser.ParserException;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
@@ -31,6 +32,19 @@ public class ExpressionTest extends BaseTest {
         return Domain.wrapLiteral(object);
     }
 
+    protected static List<Literal> createLiteralList(Object... elements) {
+        List<Literal> list = Lists.newArrayList();
+        for (Object element : elements)
+            list.add(wrap(element));
+        return list;
+    }
+
+    protected static List<Literal> createLiteralLinkedList(Object... elements) {
+        List<Literal> list = Lists.newLinkedList();
+        for (Object element : elements)
+            list.add(wrap(element));
+        return list;
+    }
 
     @Before
     public void setUp() {
@@ -41,7 +55,6 @@ public class ExpressionTest extends BaseTest {
     public void tearDown() {
         Domain.invalidateInstance();
     }
-
 
     /*
             Testing methods
@@ -68,20 +81,24 @@ public class ExpressionTest extends BaseTest {
         verifyVariable(varName, expResult);
     }
 
+    /*
+            Helper methods
+     */
+
     protected void runExceptionTest(String input, Class<? extends Exception> expException) {
         boolean result = assertExceptionIsThrown(input, expException);
         assertResult(getClass().getSimpleName() + " - Asserting " + expException.getSimpleName() + " was thrown", true, result);
     }
 
     @SuppressWarnings( "unchecked" )  // Catch is in place to check a casting exception
-    protected void runListTest(String input, LinkedList<Literal> expResult) throws UnknownSequenceException,
+    protected void runListTest(String input, List<Literal> expResult) throws UnknownSequenceException,
             ParserException, ExpressionException, IncomparableTypeException {
         Expression expression = getExpressionFromInput(input);
         Object list = getValueFromExpression(expression);
-        LinkedList<Literal> result = null;
+        List<Literal> result = null;
 
         try {
-            result = (LinkedList<Literal>) list;
+            result = (List<Literal>) list;
         }
         catch (ClassCastException ex) {
             fail("A LinkedList was not returned, instead result is of type " + getValueFromExpression(expression).getClass().getSimpleName());
@@ -100,16 +117,9 @@ public class ExpressionTest extends BaseTest {
         assertResult(expResult, result);
     }
 
-
-
-    /*
-            Helper methods
-     */
-
     protected void setDomainVariable(String name, Object value) {
         Domain.getInstance().getOrCreateVariable(name).setValue(value);
     }
-
 
     protected Expression getExpressionFromInput(String input) throws ExpressionException,
             UnknownSequenceException, ParserException {
