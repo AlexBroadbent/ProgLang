@@ -9,54 +9,52 @@ import parser.ParserException;
 
 /**
  * x++.operator
- * <p>
- * <p>
- * Test the mathematical functions:
- * <ul>
- * <li>Sine</li>
- * <li>Cosine</li>
- * <li>Tangent</li>
- * <li>ASine</li>
- * <li>ACosine</li>
- * <li>ATangent</li>
- * <li>Power</li>
- * <li>Square root</li>
- * <li>Natural log (ln)</li>
- * <li>Log Base 10 (log10)</li>
- * <li>Exponential</li>
- * <li>Modulo</li>
- * </ul>
- * </p>
  *
  * @author Alexander Broadbent
  * @version 04/01/2016
  */
 public class MathOperatorUT extends ExpressionTest {
 
-    private static final String INPUT_SIN   = "sin(1)";
-    private static final String INPUT_COS   = "cos(0.5)";
-    private static final String INPUT_TAN   = "tan(1.5)";
-    private static final String INPUT_ASIN  = "asin(1)";
-    private static final String INPUT_ACOS  = "acos(.5)";
-    private static final String INPUT_ATAN  = "atan(1.5)";
-    private static final String INPUT_POW   = "2^4";
-    private static final String INPUT_SQR   = "sqrt(9)";
-    private static final String INPUT_NLN   = "ln(4)";
-    private static final String INPUT_L10   = "log10(2)";
-    private static final String INPUT_EXP   = "exp(4)";
-    private static final String INPUT_MOD   = "4%2";
-    private static final Double RESULT_SIN  = Math.sin(1);
-    private static final Double RESULT_COS  = Math.cos(0.5);
-    private static final Double RESULT_TAN  = Math.tan(1.5);
-    private static final Double RESULT_ASIN = Math.asin(1);
-    private static final Double RESULT_ACOS = Math.acos(0.5);
-    private static final Double RESULT_ATAN = Math.atan(1.5);
-    private static final Double RESULT_POW  = Math.pow(2, 4);
-    private static final Double RESULT_SQR  = Math.sqrt(9);
-    private static final Double RESULT_NLN  = Math.log(4);
-    private static final Double RESULT_L10  = Math.log10(2);
-    private static final Double RESULT_EXP  = Math.exp(4);
-    private static final Double RESULT_MOD  = (double) (4 % 2);
+    private static final String                     INPUT_SIN      = "sin(1)";
+    private static final String                     INPUT_SIN_ERR  = "sin(true)";
+    private static final String                     INPUT_COS      = "cos(0.5)";
+    private static final String                     INPUT_COS_ERR  = "cos(false)";
+    private static final String                     INPUT_TAN      = "tan(1.5)";
+    private static final String                     INPUT_TAN_ERR  = "tan(\"s5\")";
+    private static final String                     INPUT_ASIN     = "asin(1)";
+    private static final String                     INPUT_ASIN_ERR = "asin(false)";
+    private static final String                     INPUT_ACOS     = "acos(.5)";
+    private static final String                     INPUT_ACOS_ERR = "acos(true)";
+    private static final String                     INPUT_ATAN     = "atan(1.5)";
+    private static final String                     INPUT_ATAN_ERR = "atan(true)";
+    private static final String                     INPUT_POW      = "2^4";
+    private static final String                     INPUT_POW_ERR  = "2^true";
+    private static final String                     INPUT_SQR      = "sqrt(9)";
+    private static final String                     INPUT_SQR_ERR  = "sqrt('false')";
+    private static final String                     INPUT_NLN      = "ln(4)";
+    private static final String                     INPUT_NLN_ERR  = "ln(false)";
+    private static final String                     INPUT_L10      = "log10(2)";
+    private static final String                     INPUT_L10_ERR  = "log10(true)";
+    private static final String                     INPUT_EXP      = "exp(4)";
+    private static final String                     INPUT_EXP_ERR  = "exp(false)";
+    private static final String                     INPUT_MOD      = "4%2";
+    private static final String                     INPUT_MOD_ERR  = "4%false";
+    private static final String                     INPUT_ALL      = "sin(1)+cos(.5)-tan(1.5)*asin(1)*(2^4)/sqrt(9)-ln(4)+log10(2)/exp(4)*(4%2)";
+    private static final Double                     RESULT_SIN     = Math.sin(1);
+    private static final Double                     RESULT_COS     = Math.cos(0.5);
+    private static final Double                     RESULT_TAN     = Math.tan(1.5);
+    private static final Double                     RESULT_ASIN    = Math.asin(1);
+    private static final Double                     RESULT_ACOS    = Math.acos(0.5);
+    private static final Double                     RESULT_ATAN    = Math.atan(1.5);
+    private static final Double                     RESULT_POW     = Math.pow(2, 4);
+    private static final Double                     RESULT_SQR     = Math.sqrt(9);
+    private static final Double                     RESULT_NLN     = Math.log(4);
+    private static final Double                     RESULT_L10     = Math.log10(2);
+    private static final Double                     RESULT_EXP     = Math.exp(4);
+    private static final Double                     RESULT_MOD     = (double) (4 % 2);
+    private static final Double                     RESULT_ALL     = RESULT_SIN + RESULT_COS - RESULT_TAN * RESULT_ASIN *
+            RESULT_POW / RESULT_SQR - RESULT_NLN + RESULT_L10 / RESULT_EXP * RESULT_MOD;
+    private static final Class<? extends Exception> CLASS_ITE      = IncomparableTypeException.class;
 
 
     @Test
@@ -129,6 +127,72 @@ public class MathOperatorUT extends ExpressionTest {
     public void operatorModuloTest()
             throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_MOD, RESULT_MOD);
+    }
+
+    @Test
+    public void operatorAllPrecedenceTest()
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+        runExpressionTest(INPUT_ALL, RESULT_ALL);
+    }
+
+    @Test
+    public void operatorSineExceptionTest() {
+        runExceptionTest(INPUT_SIN_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorCosineExceptionTest() {
+        runExceptionTest(INPUT_COS_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorTangentExceptionTest() {
+        runExceptionTest(INPUT_TAN_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorASineExceptionTest() {
+        runExceptionTest(INPUT_ASIN_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorACosineExceptionTest() {
+        runExceptionTest(INPUT_ACOS_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorATangentExceptionTest() {
+        runExceptionTest(INPUT_ATAN_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorPowerExceptionTest() {
+        runExceptionTest(INPUT_POW_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorSquareRootExceptionTest() {
+        runExceptionTest(INPUT_SQR_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorNaturalLogExceptionTest() {
+        runExceptionTest(INPUT_NLN_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorLog10ExceptionTest() {
+        runExceptionTest(INPUT_L10_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorExponentialExceptionTest() {
+        runExceptionTest(INPUT_EXP_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void operatorModuloExceptionTest() {
+        runExceptionTest(INPUT_MOD_ERR, CLASS_ITE);
     }
 
 }
