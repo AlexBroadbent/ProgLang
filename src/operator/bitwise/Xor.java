@@ -13,7 +13,7 @@ import static operator.IConstants.BITWISE_XOR;
  * @author Alexander Broadbent
  * @version 01/12/2015
  */
-public class Xor extends BinaryOperator {
+public class XOr extends BinaryOperator {
 
     @Override
     public String getToken() {
@@ -35,4 +35,5 @@ public class Xor extends BinaryOperator {
                     getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
         }
     }
+
 }

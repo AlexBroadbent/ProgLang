@@ -14,23 +14,18 @@ public class Variable extends Literal {
 
     protected String  name;
     protected boolean valueSet;
-    protected int     links;            // Memory management counter -> can be deleted when links is 0
 
     public Variable(String name) {
         super(null);
 
         this.name = name;
         valueSet = false;
-
-        links = 0;
     }
 
     public Variable(String name, Object value) {
         super(value);
         this.name = name;
         valueSet = true;
-
-        links = 1;
     }
 
 
@@ -62,16 +57,9 @@ public class Variable extends Literal {
         return valueSet;
     }
 
-    public int getLinks() {
-        return links;
-    }
-
-    public void setLinks(int links) {
-        this.links = links;
-    }
-
     public String toDebugString() {
-        return getName() + " -> Holds: " + getValue().getClass().getSimpleName() + " value: " + getValue().toString();
+        return getName() + ((!isValueSet()) ? "" : " -> | Type: " + getValue().getClass().getSimpleName() +
+                " | Value: " + getValue().toString() + " |");
     }
 
 }

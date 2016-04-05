@@ -66,15 +66,15 @@ public interface IConstants {
     String TAN                = "tan";
     String ASIN               = "asin";
     String ACOS               = "acos";
-
     String ATAN               = "atan";
+
     String FUNC               = "func";
     String SUM                = "sum";
     String MAX                = "max";
     String LIST               = "list";
     String HEAD               = "head";
     String TAIL               = "tail";
-    String EXPR               = "expr";
-
     String CONS               = "cons";
+    String EMPTY              = "empty";
+
 }

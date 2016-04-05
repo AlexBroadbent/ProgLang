@@ -27,10 +27,12 @@ import static eval.ICalculableType.FUNCTION_PLACEHOLDER;
  */
 public abstract class Function implements IFunction {
 
+    protected final static String MSG_ONE_ARG = "Only one argument is required, instead found %d";
+    protected final static String MSG_LIST    = "Argument given to head must be a list. Instead found: %s";
+
     @Override
     public String getToken() {
-        String className = this.getClass().getSimpleName();
-        return Character.toLowerCase(className.charAt(0)) + className.substring(1);
+        return getClass().getSimpleName();
     }
 
     @Override
@@ -56,6 +58,9 @@ public abstract class Function implements IFunction {
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
             throws IncomparableTypeException, ExpressionException {
+        if (returnExpression)
+            return Domain.wrapLiteral(this);
+
         List<Literal> args = Lists.newArrayList();
 
         while (!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER)
@@ -86,4 +91,5 @@ public abstract class Function implements IFunction {
     public String toString() {
         return getToken() + "(" + ((getNumOperands() == 0) ? "*" : getNumOperands()) + ")";
     }
+
 }

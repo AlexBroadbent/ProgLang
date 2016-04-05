@@ -1,6 +1,5 @@
 package operator.function;
 
-import com.google.common.collect.Lists;
 import eval.Literal;
 import parser.IncomparableTypeException;
 
@@ -29,11 +28,6 @@ public class Sum extends Function {
             sum += Double.parseDouble(literal.getValue().toString());
 
         return sum;
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
 
 }

@@ -14,4 +14,5 @@ hs_err_pid*
 
 # test output
 test-output
-
+Test Results - All_in_ProgLang.html
+coverage-report/

@@ -62,7 +62,12 @@ public class Lexer implements ILexer {
 
     private void addToken(String regex, Integer token) {
         try {
-            TokenInfo ti = new TokenInfo(Pattern.compile("^(" + regex + ")"), token);
+            TokenInfo ti;
+            if (token == BOOLEAN)
+                ti = new TokenInfo(Pattern.compile("^(" + regex + ")", Pattern.CASE_INSENSITIVE), token);
+            else
+                ti = new TokenInfo(Pattern.compile("^(" + regex + ")"), token);
+
             tokenInfoMap.put(token, ti);
         }
         catch (PatternSyntaxException ex) {

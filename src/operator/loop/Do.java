@@ -34,7 +34,7 @@ public class Do extends UnaryOperator {
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
             throws IncomparableTypeException, ExpressionException {
-        return null;
+        return Domain.wrapLiteral(this);    // TODO: Take this out, was crap fix for loop evaluation
     }
 
     @Override

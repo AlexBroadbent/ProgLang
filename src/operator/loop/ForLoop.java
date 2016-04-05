@@ -17,7 +17,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
-import static eval.ICalculableType.LITERAL;
 import static eval.ICalculableType.VARIABLE;
 
 /**
@@ -26,13 +25,12 @@ import static eval.ICalculableType.VARIABLE;
  * @author Alexander Broadbent
  * @version 27/03/2016
  */
-public class ListLoop extends Function {
+public class ForLoop extends Function {
 
-    private final static String MSG_INVALID_VAR  = "The first argument of the for loop should be a new variable, instead found %s.";
-    private final static String MSG_INVALID_LIST = "The second argument of the for loop should be a list to iterate, instead found %s.";
     private final static String MSG_CAST         = "Cannot run the for loop with arguments: %s %s %s.";
     private final static String MSG_NUM_ARGS     = "The function requires more arguments, should be in the format: for var in list do ...expression...";
     protected Domain domain;
+
 
     @Override
     public String getToken() {
@@ -42,12 +40,6 @@ public class ListLoop extends Function {
     @Override
     public int getPrecedence() {
         return IPrecedence.LOOP;
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Variable.class.getSimpleName(), LinkedList.class.getSimpleName(),
-                Expression.class.getSimpleName());
     }
 
     @Override
@@ -65,35 +57,43 @@ public class ListLoop extends Function {
         if (args.size() < 3)
             throw new ExpressionException(MSG_NUM_ARGS);
 
-        // Ensure first argument is a variable type
+        // Ensure first argument is a variable type, list cannot be checked as it could be a variable or a literal and
+        //  so is caught in the cast below
         if (args.get(0).getType() != VARIABLE)
-            throw new ExpressionException(String.format(MSG_INVALID_VAR, args.get(0).getValue().getClass().getSimpleName()));
-        // Ensure second argument is a variable or list
-        if (!(args.get(1).getType() == LITERAL || args.get(1).getType() == VARIABLE))
-            throw new ExpressionException(String.format(MSG_INVALID_LIST, args.get(1).getValue().getClass().getSimpleName()));
+            throw new IncomparableTypeException(Lists.newArrayList(Variable.class.getSimpleName()),
+                    args.get(0).getValue().getClass().getSimpleName());
 
         // Cast variables to match and throw expression exception if anything fails
         Variable var;
         LinkedList<Literal> list;
         List<ICalculable> expr = Lists.newArrayList(args.subList(2, args.size()));
+        List<Literal> results = Lists.newArrayList();
+
         try {
             var = (Variable) args.get(0);
             list = (LinkedList<Literal>) args.get(1).getValue();
             expr = Expression.parseWrappedList(expr);
+
+            // Remove do from expression, used to determine whether expression is executable previous to now
+            for (int i=0; i<expr.size(); i++) {
+                if (expr.get(i) instanceof Do) {
+                    expr.remove(i);
+                    i--;
+                }
+            }
+
+            // Create an array to store the results of each iteration
+            for (Literal element : list) {
+                var.setValue(element.getValue());
+                results.add(Domain.wrapLiteral(new Expression(expr, domain).execute()));
+            }
         }
         catch (ClassCastException | NullPointerException ex) {
-            String arg1 = args.get(0).getValue().getClass().getSimpleName();
-            String arg2 = args.get(1).getValue().getClass().getSimpleName();
+            String arg1 = Variable.class.getSimpleName();  // Value is not set, at this point it is known arg1 is a var
+            String arg2 = (args.get(1).getValue() == null) ? "Null" : args.get(1).getValue().getClass().getSimpleName();
             String arg3 = StringUtils.join(args.subList(2, args.size()));
 
             throw new ExpressionException(String.format(MSG_CAST, arg1, arg2, arg3));
-        }
-
-        // Create an array to store the results of each iteration
-        List<Literal> results = Lists.newArrayList();
-        for (Literal element : list) {
-            var.setValue(element.getValue());
-            results.add(Domain.wrapLiteral(new Expression(expr, domain).execute()));
         }
 
         return results;

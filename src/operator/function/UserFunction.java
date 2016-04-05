@@ -97,9 +97,9 @@ public class UserFunction extends Function {
 
     @Override
     public String toString() {
-        List<Variable> vars = Lists.newArrayList();
+        List<String> vars = Lists.newArrayList();
         for (Literal arg : getArguments())
-            vars.add((Variable) arg);
+            vars.add(((Variable) arg).getName());
 
         return getName() + ((!vars.isEmpty()) ? "(" + StringUtils.join(vars, ", ") + ")" : "");
     }

@@ -2,7 +2,6 @@ package operator.function;
 
 import com.google.common.collect.Lists;
 import eval.Literal;
-import gui.XLogger;
 import operator.IConstants;
 import parser.ExpressionException;
 
@@ -36,7 +35,7 @@ public class Tail extends Function {
     @SuppressWarnings( "unchecked" )    // Catch is in place to check a casting exception
     public Object execute(List<Literal> args) throws ExpressionException {
         if (args.size() != getNumOperands())
-            throw new ExpressionException("Tail function requires only one argument");
+            throw new ExpressionException(String.format(MSG_ONE_ARG, args.size()));
 
         LinkedList<Literal> list = null;
 
@@ -44,7 +43,7 @@ public class Tail extends Function {
             list = (LinkedList<Literal>) args.get(0).getValue();
         }
         catch (ClassCastException ex) {
-            XLogger.severe("Argument given to head must be a list. Instead found: " + args.get(0).getValue().getClass().getSimpleName());
+            throw new ExpressionException(String.format(MSG_LIST, args.get(0).getValue().getClass().getSimpleName()));
         }
 
         return (list != null) ? Lists.newLinkedList(list.subList(1, list.size())) : null;

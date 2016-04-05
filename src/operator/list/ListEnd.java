@@ -48,4 +48,9 @@ public class ListEnd extends Function {
         return Lists.newLinkedList(args);
     }
 
+    @Override
+    public String toString() {
+        return ListEnd.class.getSimpleName();
+    }
+
 }

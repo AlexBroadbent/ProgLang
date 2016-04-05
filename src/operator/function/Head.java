@@ -36,7 +36,7 @@ public class Head extends Function {
     @SuppressWarnings( "unchecked" )    // Catch is in place to check a casting exception
     public Object execute(List<Literal> args) throws ExpressionException {
         if (args.size() != getNumOperands())
-            throw new ExpressionException("Head function requires only one argument");
+            throw new ExpressionException(String.format(MSG_ONE_ARG, args.size()));
 
         LinkedList<Literal> list = null;
 

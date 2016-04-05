@@ -1,11 +1,14 @@
 package framework;
 
 import eval.Expression;
+import eval.Literal;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
 import parser.ParserException;
+
+import java.util.List;
 
 /**
  * x++.framework
@@ -19,6 +22,12 @@ public class FunctionTest extends ExpressionTest {
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
         runFunctionDeclaration(decInput, funcName);
         runFunction(runInput, runResult);
+    }
+
+    protected void runFunctionWithListResultTest(String decInput, String funcName, String runInput, List<Literal> runResult)
+            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
+        runFunctionDeclaration(decInput, funcName);
+        runListTest(runInput, runResult);
     }
 
     private void assertFunctionCreated(String functionName) {

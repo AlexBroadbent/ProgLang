@@ -23,8 +23,8 @@ import operator.list.ArrayAccessStart;
 import operator.list.ListEnd;
 import operator.list.ListStart;
 import operator.loop.Do;
+import operator.loop.ForLoop;
 import operator.loop.In;
-import operator.loop.ListLoop;
 import operator.math.*;
 import org.apache.commons.lang3.StringUtils;
 import parser.IParser;
@@ -89,7 +89,7 @@ public class Domain {
         registerOperator(new Not());
         registerOperator(new And());
         registerOperator(new Or());
-        registerOperator(new Xor());
+        registerOperator(new XOr());
         registerOperator(new LeftShift());
         registerOperator(new RightShift());
 
@@ -128,9 +128,9 @@ public class Domain {
         registerOperator(new ListEnd());
 
         // loop package operators
-        registerOperator(new ListLoop());
         registerOperator(new Do());
         registerOperator(new In());
+        registerOperator(new ForLoop());
 
         // function package functions
         registerFunction(new Sum());
@@ -139,6 +139,7 @@ public class Domain {
         registerFunction(new Head());
         registerFunction(new Tail());
         registerFunction(new Cons());
+        registerFunction(new Empty());
         registerFunction(new Declaration());
 
         // set singleton instance
@@ -160,7 +161,7 @@ public class Domain {
         return new Literal(value);
     }
 
-    public static void invalidateInstance() {
+    public static void resetInstance() {
         instance = null;
     }
 
@@ -225,7 +226,10 @@ public class Domain {
     }
 
     public Variable getVariable(String name) {
-        return variables.get(name);
+        if (hasVariable(name))
+            return variables.get(name);
+
+        return getOrCreateVariable(name);
     }
 
     public Variable getOrCreateVariable(String name) {

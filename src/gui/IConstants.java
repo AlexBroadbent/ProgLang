@@ -9,7 +9,8 @@ package gui;
 public interface IConstants {
 
     String  LOGGER_NAME    = "x++";
-    String  LOGGER_VERSION = "1.2";
+    String  LOGGER_VERSION = "1.3";
+    String  LINE_START     = "> ";
 
     Boolean DEBUG_MODE     = Boolean.TRUE;
 
@@ -19,7 +20,7 @@ public interface IConstants {
     String  OPERATORS      = "operators";
     String  FUNCTIONS      = "functions";
     String  FREE           = "free";
-    String  INVALIDATE     = "invalidate";
+    String  RESET          = "reset";
     String  VARIABLE       = "variable";
     String  DEBUG          = "debug";
     String  SPACE          = " ";

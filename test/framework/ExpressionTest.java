@@ -48,12 +48,12 @@ public class ExpressionTest extends BaseTest {
 
     @Before
     public void setUp() {
-        Domain.invalidateInstance();
+        Domain.resetInstance();
     }
 
     @After
     public void tearDown() {
-        Domain.invalidateInstance();
+        Domain.resetInstance();
     }
 
     /*

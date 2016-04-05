@@ -4,8 +4,13 @@ import static gui.IConstants.DEBUG_MODE;
 
 /**
  * x++.gui
+ *
  * <p>
  * Handles logging to the user, can be used to debug log and handle formatted outputs
+ * <p>
+ * By default, the debug mode is turned on to display all messages. This can be switched
+ * using the command 'domain debug false' to hide all log and warning messages, but severe
+ * warnings will still be shown.
  *
  * @author Alexander Broadbent
  * @version 05/01/2016
@@ -15,12 +20,9 @@ public class XLogger {
     private final static String FORMAT_LOG     = "%s \n";
     private final static String FORMAT_WARNING = "WARNING: %s \n";
     private final static String FORMAT_SEVERE  = "SEVERE: %s \n";
+
     private static boolean debug = DEBUG_MODE;
 
-
-    public static void consolePrint(String msg) {
-        System.out.print("> " + msg + "\n");
-    }
 
     public static void log(String msg) {
         if (debug)
@@ -33,15 +35,13 @@ public class XLogger {
     }
 
     public static void severe(String msg) {
-        if (debug)
-            System.err.print(String.format(FORMAT_SEVERE, msg));
+        System.err.print(String.format(FORMAT_SEVERE, msg));
     }
 
 
     public static void setDebug(boolean debug) {
         XLogger.debug = debug;
     }
-
 
     public static String getLogFormat() {
         return FORMAT_LOG;
@@ -54,4 +54,5 @@ public class XLogger {
     public static String getSevereFormat() {
         return FORMAT_SEVERE;
     }
+
 }

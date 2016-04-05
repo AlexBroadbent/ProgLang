@@ -7,6 +7,7 @@ import model.Domain;
 import operator.IOperator;
 import operator.function.Declaration;
 import operator.loop.Do;
+import operator.loop.ForLoop;
 import org.apache.commons.lang3.StringUtils;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
@@ -28,7 +29,8 @@ import static eval.ICalculableType.*;
 public class Expression {
 
     private final static String MSG_EXP_INVALID = "Expression is not valid: %s";
-    private final static String MSG_ARG_REMAIN  = "Arguments remaining after execution: %s";
+    private final static String MSG_ARG_REMAIN  = "Arguments remaining after executing: %s";
+
     protected Domain            model;
     protected List<ICalculable> expression;
     protected String            infix;
@@ -36,7 +38,7 @@ public class Expression {
      * Create an expression object...
      *
      * @param model  The domain object
-     * @param tokens A lexed(sp?) list of Token objects representing the expression
+     * @param tokens A lexically analysed list of Token objects representing the expression
      * @throws ExpressionException
      * @throws UnknownSequenceException
      */
@@ -58,9 +60,6 @@ public class Expression {
         this.infix = StringUtils.join(postfix, " "); // TODO: postfix-to-infix function?
         this.model = model;
         this.expression = postfix;
-
-        if (!validate())
-            throw new ExpressionException(String.format(MSG_EXP_INVALID, toString()));
     }
 
     public static List<ICalculable> parseWrappedList(List<ICalculable> postfix) {
@@ -87,11 +86,11 @@ public class Expression {
         Stack<IOperator> operatorStack = new Stack<>();
         expression = Lists.newArrayList();
 
-        // sort through input infix
+        // sort through input infix and convert to postfix through expression variable
         for (int i = 0; i < infix.size(); i++)
             infix.get(i).toPostFix(infix, i, expression, operatorStack);
 
-        // Handle any remaining tokens in operator stack
+        // push any remaining tokens in operator stack
         while (operatorStack.size() > 0)
             expression.add(operatorStack.pop());
     }
@@ -108,12 +107,17 @@ public class Expression {
      */
     public Object execute() throws ExpressionException, IncomparableTypeException {
         Stack<Literal> stack = new Stack<>();
-        boolean returnExpression = false;
+        boolean inFuncDec = false;
+        boolean inLoopDec = false;
 
         for (ICalculable literal : expression) {
-            if (literal instanceof Declaration || literal instanceof Do) //TODO: this
-                returnExpression = true;
-            Literal result = literal.evaluate(model, stack, returnExpression);
+            if (literal instanceof Declaration)
+                inFuncDec = true;
+            if (literal instanceof Do)
+                inLoopDec = true;
+            if (literal instanceof ForLoop && !inFuncDec)
+                inLoopDec = false;
+            Literal result = literal.evaluate(model, stack, (inFuncDec || inLoopDec));
             if (result != null)
                 stack.push(result);
         }

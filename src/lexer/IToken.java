@@ -46,7 +46,7 @@ public interface IToken {
     String NUMBER_REGEX                   = "[+-]?[0-9]+";
     String ARITHMETIC_REGEX               = "\\+|\\-|\\#";
     String GEOMETRIC_REGEX                = "\\*|/|\\^|\\%";
-    String BOOLEAN_REGEX                  = "true|false|TRUE|FALSE";
+    String BOOLEAN_REGEX                  = "true|false";
     String FUNCTION_REGEX                 = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan";
     String FUNCTION_DECLARATION_REGEX     = "func";
     String LOGICAL_COMPARATOR_REGEX       = "\\!|\\&\\&|\\|\\|";
@@ -56,7 +56,7 @@ public interface IToken {
     String MATH_COMPARATOR_REGEX          = "\\<|\\>";
     String LEFT_PAREN_REGEX               = "\\(";
     String RIGHT_PAREN_REGEX              = "\\)";
-    String FOR_LOOP_ELEMENT_REGEX         = "for|in|do";
+    String FOR_LOOP_ELEMENT_REGEX         = "(for|in|do)[\\W]";
     String TEXT_REGEX                     = "\"([^\"| ]*)\"|\'([^\'| ]*)\'";
     String VARIABLE_REGEX                 = "[a-zA-Z][a-zA-Z0-9_]*";
     String IF_REGEX                       = "\\?";

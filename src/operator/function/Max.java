@@ -33,8 +33,4 @@ public class Max extends Function {
         return Collections.max(list);
     }
 
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
-    }
 }

@@ -32,7 +32,7 @@ public class MainGUI {
         domain = Domain.getInstance();
         Expression expression;
 
-        System.out.print(IConstants.LOGGER_NAME + " " + IConstants.LOGGER_VERSION + "\n> ");
+        System.out.print(LOGGER_NAME + " " + LOGGER_VERSION + "\n" + LINE_START);
         input = scanner.nextLine();
 
         while (!input.equalsIgnoreCase(EXIT)) {
@@ -45,15 +45,18 @@ public class MainGUI {
                         Object result = expression.execute();
 
                         if (result != null && !StringUtils.isEmpty(result.toString()))
-                            System.out.print("> " + ((result instanceof List) ? parseList(result) : result) + "\n");
+                            System.out.println(LINE_START + ((result instanceof List) ? parseList(result) : result));
                     }
-                    catch (UnknownSequenceException | ExpressionException | IncomparableTypeException | ParserException | ClassCastException ex) {
+                    catch (UnknownSequenceException | ParserException | ClassCastException ex) {
                         XLogger.warning(ex.getMessage());
+                    }
+                    catch (ExpressionException | IncomparableTypeException ex) {
+                        XLogger.severe(ex.getMessage());
                     }
                 }
             }
 
-            System.out.print("> ");
+            System.out.print(LINE_START);
             input = scanner.nextLine();
         }
     }
@@ -65,9 +68,7 @@ public class MainGUI {
      */
     private static void handleDomainQueries(String input) {
         input = input.replaceFirst(DOMAIN + SPACE, "");
-        if (input.startsWith("size"))
-            XLogger.log("Domain size is " + domain.getVariableCount());
-        else if (input.startsWith(LIST)) {
+        if (input.startsWith(LIST)) {
             input = input.replaceFirst(LIST + SPACE, "");
             if (input.startsWith(VARIABLES))
                 XLogger.log("Variable list: " + domain.getAllVariables());
@@ -81,10 +82,10 @@ public class MainGUI {
             domain.freeVariable(input);
             XLogger.log(input + " has been removed.");
         }
-        else if (input.startsWith(INVALIDATE)) {
-            Domain.invalidateInstance();
+        else if (input.startsWith(RESET)) {
+            Domain.resetInstance();
             domain = Domain.getInstance();
-            XLogger.log("Domain has been invalidated.");
+            XLogger.log("Domain has been reset.");
         }
         else if (input.startsWith(VARIABLE)) {
             input = input.replaceFirst(VARIABLE + SPACE, "");
@@ -93,6 +94,14 @@ public class MainGUI {
         else if (input.startsWith(DEBUG)) {
             input = input.replaceFirst(DEBUG + SPACE, "");
             XLogger.setDebug(Boolean.parseBoolean(input));
+        }
+        else {
+            XLogger.log("The following commands are available:\n" +
+                    "\tlist       variables|operators|functions   list the corresponding data stored in the domain\n" +
+                    "\tfree       variable_name                   delete variable from storage, allowing a new value to be assigned\n" +
+                    "\tvariable   variable_name                   display the data type and value of a variable in the storage\n" +
+                    "\tdebug      true|false                      set if warning and log messages are displayed\n" +
+                    "\treset                                      resets all variables, operators and functions to the program defaults");
         }
     }
 
@@ -104,13 +113,15 @@ public class MainGUI {
         if (result instanceof LinkedList) {
             LinkedList<Literal> list = (LinkedList<Literal>) result;
             for (Literal literal : list) {
-                out += literal; if (list.indexOf(literal) != list.size()-1) out += " -> ";
+                out += literal;
+                if (list.indexOf(literal) != list.size() - 1) out += " -> ";
             }
         }
         if (result instanceof ArrayList) {
             ArrayList<Literal> list = (ArrayList<Literal>) result;
             for (Literal literal : list) {
-                out += "\t"+literal.getValue(); if (list.indexOf(literal) != list.size()-1) out += "\n";
+                out += "\t" + literal.getValue();
+                if (list.indexOf(literal) != list.size() - 1) out += "\n";
             }
         }
 
