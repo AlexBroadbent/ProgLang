@@ -39,8 +39,8 @@ public class Lexer implements ILexer {
         addToken(ARITHMETIC_REGEX, ARITHMETIC);
         addToken(GEOMETRIC_REGEX, GEOMETRIC);
         addToken(BOOLEAN_REGEX, BOOLEAN);
-        addToken(getUserFunctionNameRegex(), FUNCTION);
         addToken(FUNCTION_DECLARATION_REGEX, FUNCTION_DECLARATION);
+        addToken(getUserFunctionNameRegex(), FUNCTION);
         addToken(LOGICAL_COMPARATOR_REGEX, LOGICAL_OPERATOR);
         addToken(BIT_SHIFT_OPERATOR_REGEX, BIT_SHIFT);
         addToken(MATH_COMPARATOR_EQUALITY_REGEX, MATH_EQUALITY_COMPARATOR);
@@ -81,10 +81,6 @@ public class Lexer implements ILexer {
 
     @Override
     public List<Token> readAllTokens(String input) throws UnknownSequenceException {
-        return readAllTokens(input, false);
-    }
-
-    public List<Token> readAllTokens(String input, boolean ignoreList) throws UnknownSequenceException {
         List<Token> tokens = Lists.newArrayList();
 
         while (!input.isEmpty()) {

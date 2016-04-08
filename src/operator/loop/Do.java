@@ -2,7 +2,6 @@ package operator.loop;
 
 import eval.ICalculable;
 import eval.Literal;
-import model.Domain;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
@@ -32,14 +31,13 @@ public class Do extends UnaryOperator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException {
-        return Domain.wrapLiteral(this);    // TODO: Take this out, was crap fix for loop evaluation
+    public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
+        postfix.add(this);
     }
 
     @Override
-    public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        postfix.add(this);
+    public Object execute(Literal arg1) throws IncomparableTypeException, ExpressionException {
+        return null;
     }
 
 }

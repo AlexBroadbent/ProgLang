@@ -6,6 +6,7 @@ import eval.*;
 import model.Domain;
 import operator.Associativity;
 import operator.IPrecedence;
+import operator.IUserFunction;
 import org.apache.commons.lang3.StringUtils;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
@@ -19,7 +20,7 @@ import java.util.Set;
  * @author Alexander Broadbent
  * @version 08/03/2016
  */
-public class UserFunction extends Function {
+public class UserFunction extends Function implements IUserFunction {
 
     protected String        name;
     protected List<Literal> arguments;
@@ -34,26 +35,80 @@ public class UserFunction extends Function {
         expression = null;
     }
 
+    public UserFunction(Domain model, String name) {
+        this(model, name, Lists.newArrayList());
+    }
 
+
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
+    public void addArgument(Literal arg) {
+        arguments.add(arg);
+    }
+
+    @Override
     public List<Literal> getArguments() {
         return arguments;
     }
 
+    @Override
+    public void setArguments(List<Literal> arguments) {
+        this.arguments = arguments;
+    }
+
+    @Override
     public Expression getExpression() {
         return expression;
     }
 
+    @Override
     public void setExpression(Expression expression) {
         this.expression = expression;
     }
 
+    /**
+     * Match the variables used with those in the expression
+     * <p>
+     * Variable defined in the domain can be used in expressions, eg. pi, and so
+     * only the variables used in the arguments of the function have to be used
+     * in the expression; not vice-versa.
+     *
+     * @return function declaration is valid
+     */
+    @Override
+    public boolean validate() throws ExpressionException {
+        Set<String> argNames = Sets.newHashSet();
+        Set<String> expNames = Sets.newHashSet();
+        for (Literal args : getArguments())
+            argNames.add(((Variable) args).getName());
+        for (ICalculable literal : expression.getExpression())
+            if (literal.getType() == ICalculableType.VARIABLE)
+                expNames.add(((Variable) literal).getName());
+
+        // Check if all arguments are used in the expression
+        if (expNames.containsAll(argNames) && argNames.containsAll(expNames))
+            return true;
+
+        // Check the variables from the domain
+        expNames.removeAll(argNames);
+        for (String varName : expNames)
+            if (model.hasVariable(varName)) {
+                if (!model.getVariable(varName).isValueSet())
+                    throw new ExpressionException("Expression contains variable (" + varName + ") that does not have a value set.");
+            }
+            else
+                throw new ExpressionException("The variable, " + varName + ", has not been declared.");
+
+        return true;
+    }
+
     @Override
     public String getToken() {
-        return name;
+        return getName();
     }
 
     @Override
@@ -72,13 +127,13 @@ public class UserFunction extends Function {
     }
 
     @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Literal.class.getSimpleName());
+    public int getType() {
+        return ICalculableType.USER_FUNCTION;
     }
 
     @Override
-    public int getType() {
-        return ICalculableType.USER_FUNCTION;
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Literal.class.getSimpleName());
     }
 
     @Override
@@ -104,38 +159,4 @@ public class UserFunction extends Function {
         return getName() + ((!vars.isEmpty()) ? "(" + StringUtils.join(vars, ", ") + ")" : "");
     }
 
-    /**
-     * Match the variables used with those in the expression
-     * <p>
-     * Variable defined in the domain can be used in expressions, eg. pi, and so
-     * only the variables used in the arguments of the function have to be used
-     * in the expression; not vice-versa.
-     *
-     * @return function declaration is valid
-     */
-    public boolean validate(List<ICalculable> postfix, Domain domain) throws ExpressionException {
-        Set<String> argNames = Sets.newHashSet();
-        Set<String> expNames = Sets.newHashSet();
-        for (Literal args : getArguments())
-            argNames.add(((Variable) args).getName());
-        for (ICalculable literal : postfix)
-            if (literal.getType() == ICalculableType.VARIABLE)
-                expNames.add(((Variable) literal).getName());
-
-        // Check if all arguments are used in the expression
-        if (expNames.containsAll(argNames))
-            return true;
-
-        // Check the variables from the domain
-        argNames.removeAll(expNames);
-        for (String varName : argNames)
-            if (domain.hasVariable(varName)) {
-                if (!domain.getVariable(varName).isValueSet())
-                    throw new ExpressionException("Expression contains variable (" + varName + ") that does not have a value set.");
-            }
-            else
-                throw new ExpressionException("The variable, " + varName + ", has not been declared.");
-
-        return true;
-    }
 }

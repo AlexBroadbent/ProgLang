@@ -1,5 +1,6 @@
 package operator.conditional;
 
+import eval.ConditionalPlaceholder;
 import eval.ICalculable;
 import operator.IConstants;
 import operator.IOperator;
@@ -29,6 +30,7 @@ public class ConditionalElse extends NullaryOperator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
+        postfix.add(new ConditionalPlaceholder());
         while (!operatorStack.isEmpty() && !operatorStack.peek().getToken().equals(IConstants.CONDITIONAL))
             postfix.add(operatorStack.pop());
     }

@@ -71,10 +71,12 @@ public interface IConstants {
     String FUNC               = "func";
     String SUM                = "sum";
     String MAX                = "max";
+    String RANDOM             = "random";
     String LIST               = "list";
     String HEAD               = "head";
     String TAIL               = "tail";
     String CONS               = "cons";
     String EMPTY              = "empty";
+    String REFERENCE          = "reference";
 
 }

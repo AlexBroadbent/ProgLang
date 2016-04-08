@@ -62,4 +62,8 @@ public class Variable extends Literal {
                 " | Value: " + getValue().toString() + " |");
     }
 
+    public String toOutputString() {
+        return isValueSet() ? getValue().toString() : "null";
+    }
+
 }

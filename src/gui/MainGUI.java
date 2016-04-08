@@ -9,7 +9,6 @@ import parser.ExpressionException;
 import parser.IncomparableTypeException;
 import parser.ParserException;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -110,19 +109,10 @@ public class MainGUI {
     private static String parseList(Object result) throws ClassCastException {
         String out = "";
 
-        if (result instanceof LinkedList) {
-            LinkedList<Literal> list = (LinkedList<Literal>) result;
-            for (Literal literal : list) {
-                out += literal;
-                if (list.indexOf(literal) != list.size() - 1) out += " -> ";
-            }
-        }
-        if (result instanceof ArrayList) {
-            ArrayList<Literal> list = (ArrayList<Literal>) result;
-            for (Literal literal : list) {
-                out += "\t" + literal.getValue();
-                if (list.indexOf(literal) != list.size() - 1) out += "\n";
-            }
+        LinkedList<Literal> list = (LinkedList<Literal>) result;
+        for (Literal literal : list) {
+            out += literal;
+            if (list.indexOf(literal) != list.size() - 1) out += " -> ";
         }
 
         return out;

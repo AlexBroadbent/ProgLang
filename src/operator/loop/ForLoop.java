@@ -67,7 +67,7 @@ public class ForLoop extends Function {
         Variable var;
         LinkedList<Literal> list;
         List<ICalculable> expr = Lists.newArrayList(args.subList(2, args.size()));
-        List<Literal> results = Lists.newArrayList();
+        List<Literal> results = Lists.newLinkedList();
 
         try {
             var = (Variable) args.get(0);
@@ -98,4 +98,5 @@ public class ForLoop extends Function {
 
         return results;
     }
+
 }

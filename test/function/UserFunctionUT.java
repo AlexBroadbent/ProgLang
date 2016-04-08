@@ -18,38 +18,42 @@ import java.util.List;
  */
 public class UserFunctionUT extends FunctionTest {
 
-    private final static String                     VAR_D               = "d";
-    private final static String                     VAR_T               = "t";
-    private final static String                     VAR_V               = "v";
-    private final static Integer                    VAR_D_VALUE         = 5;
-    private final static List<Literal>              VAR_T_VALUE         = createLiteralLinkedList(1, 2, 3);
+    private final static String                     VAR_D                   = "d";
+    private final static String                     VAR_T                   = "t";
+    private final static String                     VAR_V                   = "v";
+    private final static Integer                    VAR_D_VALUE             = 5;
+    private final static List<Literal>              VAR_T_VALUE             = createLiteralLinkedList(1, 2, 3);
 
-    private final static String                     INPUT_SQUARE_FUNC   = "func square(x) = x * x";
-    private final static String                     INPUT_COMBI_FUNC    = "func times(c, d) = c * d";
-    private final static String                     INPUT_BIGGER_FUNC   = "func bigger(a, b) = a > b ? a : b";
-    private final static String                     INPUT_NO_ARG_FUNC   = "func noargs() = x";
-    private final static String                     INPUT_BAD_NAME_FUNC = "func TRUE() = 2";
-    private final static String                     INPUT_INVALID_FUNC  = "func circ(diameter) = diameter * pi /";
-    private final static String                     INPUT_DBL_LIST_FUNC = "func double(l) = for x in l do x*2";
-    private final static String                     INPUT_SQUARE_RUN    = "square(4)";
-    private final static String                     INPUT_COMBI_RUN     = "times(d, 7)";
-    private final static String                     INPUT_BIGGER_RUN    = "bigger(4, 7)";
-    private final static String                     INPUT_DBL_LIST_RUN  = "double(t)";
-    private final static String                     INPUT_PREC_RUN      = "2 + square(d) * 2";
-    private final static String                     NAME_SQUARE_FUNC    = "square";
-    private final static String                     NAME_BIGGER_FUNC    = "bigger";
-    private final static String                     NAME_COMBI_FUNC     = "times";
-    private final static String                     NAME_DBL_LIST_FUNC  = "double";
-
-    private final static Double                     RESULT_SQUARE_RUN   = 16d;
-    private final static Integer                    RESULT_BIGGER_RUN   = 7;
-    private final static Double                     RESULT_COMBI_RUN    = 35d;
-    private final static Double                     RESULT_PREC_RUN     = 52d;
-    private final static List<Literal>              RESULT_DBL_LIST     = createLiteralLinkedList(2d, 4d, 6d);
-    private final static Class<? extends Exception> CLASS_NO_ARG        = NullPointerException.class;
-    private final static Class<? extends Exception> CLASS_BAD_NAME      = ExpressionException.class;
-    private final static Class<? extends Exception> CLASS_INVALID_FUNC  = ExpressionException.class;
-    private final static Class<? extends Exception> CLASS_REDEC_FUNC    = ParserException.class;
+    private final static String                     INPUT_SQUARE_FUNC       = "func square(x) = x * x";
+    private final static String                     INPUT_COMBI_FUNC        = "func times(c, d) = c * d";
+    private final static String                     INPUT_BIGGER_FUNC       = "func bigger(a, b) = a > b ? a : b";
+    private final static String                     INPUT_NO_ARG_FUNC       = "func noargs() = x";
+    private final static String                     INPUT_BAD_NAME_FUNC     = "func TRUE() = 2";
+    private final static String                     INPUT_INVALID_FUNC      = "func circ(diameter) = diameter * pi /";
+    private final static String                     INPUT_INVALID_VARS_FUNC = "func circ(diameter) = diameter * pi * ip";
+    private final static String                     INPUT_MIXED_VAR_FUNC    = "func circ(diameter) = diameter * pi";
+    private final static String                     INPUT_DBL_LIST_FUNC     = "func double(l) = for x in l do x*2";
+    private final static String                     INPUT_RECURSIVE_FUNC    = "func fib(n) = (n < 2) ? n : fib(n - 1) + fib(n - 2)";
+    private final static String                     INPUT_SQUARE_RUN        = "square(4)";
+    private final static String                     INPUT_COMBI_RUN         = "times(d, 7)";
+    private final static String                     INPUT_BIGGER_RUN        = "bigger(4, 7)";
+    private final static String                     INPUT_DBL_LIST_RUN      = "double(t)";
+    private final static String                     INPUT_MIXED_VAR_RUN     = "circ(3)";
+    private final static String                     INPUT_PREC_RUN          = "2 + square(d) * 2";
+    private final static String                     NAME_SQUARE_FUNC        = "square";
+    private final static String                     NAME_BIGGER_FUNC        = "bigger";
+    private final static String                     NAME_COMBI_FUNC         = "times";
+    private final static String                     NAME_DBL_LIST_FUNC      = "double";
+    private final static String                     NAME_MIXED_VAR_FUNC     = "circ";
+    private final static Double                     RESULT_SQUARE           = 16d;
+    private final static Integer                    RESULT_BIGGER           = 7;
+    private final static Double                     RESULT_COMBI            = 35d;
+    private final static Double                     RESULT_PREC             = 52d;
+    private final static Double                     RESULT_MIXED_VAR        = Math.PI * 3d;
+    private final static List<Literal>              RESULT_DBL_LIST         = createLiteralLinkedList(2d, 4d, 6d);
+    private final static Class<? extends Exception> CLASS_NPE               = NullPointerException.class;
+    private final static Class<? extends Exception> CLASS_EE                = ExpressionException.class;
+    private final static Class<? extends Exception> CLASS_PE                = ParserException.class;
 
 
     @Override
@@ -64,41 +68,52 @@ public class UserFunctionUT extends FunctionTest {
     @Test
     public void singleVariableFunctionTest()
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
-        runFunctionTest(INPUT_SQUARE_FUNC, NAME_SQUARE_FUNC, INPUT_SQUARE_RUN, RESULT_SQUARE_RUN);
+        runFunctionTest(INPUT_SQUARE_FUNC, NAME_SQUARE_FUNC, INPUT_SQUARE_RUN, RESULT_SQUARE);
     }
 
     @Test
     public void multiVariableFunctionTest()
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
-        runFunctionTest(INPUT_BIGGER_FUNC, NAME_BIGGER_FUNC, INPUT_BIGGER_RUN, RESULT_BIGGER_RUN);
+        runFunctionTest(INPUT_BIGGER_FUNC, NAME_BIGGER_FUNC, INPUT_BIGGER_RUN, RESULT_BIGGER);
     }
 
     @Test
     public void combinationVariableFunctionTest()
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
-        runFunctionTest(INPUT_COMBI_FUNC, NAME_COMBI_FUNC, INPUT_COMBI_RUN, RESULT_COMBI_RUN);
+        runFunctionTest(INPUT_COMBI_FUNC, NAME_COMBI_FUNC, INPUT_COMBI_RUN, RESULT_COMBI);
     }
 
     @Test
     public void noArgumentFunctionTest() {
-        runExceptionTest(INPUT_NO_ARG_FUNC, CLASS_NO_ARG);
+        runExceptionTest(INPUT_NO_ARG_FUNC, CLASS_NPE);
     }
 
     @Test
     public void nameClashFunctionTest() {
-        runExceptionTest(INPUT_BAD_NAME_FUNC, CLASS_BAD_NAME);
+        runExceptionTest(INPUT_BAD_NAME_FUNC, CLASS_EE);
     }
 
     @Test
     public void invalidFunctionExceptionTest() {
-        runExceptionTest(INPUT_INVALID_FUNC, CLASS_INVALID_FUNC);
+        runExceptionTest(INPUT_INVALID_FUNC, CLASS_EE);
+    }
+
+    @Test
+    public void invalidVariablesExceptionTest() {
+        runExceptionTest(INPUT_INVALID_VARS_FUNC, CLASS_EE);
+    }
+
+    @Test
+    public void variableFromDomainFunctionTest()
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+        runFunctionTest(INPUT_MIXED_VAR_FUNC, NAME_MIXED_VAR_FUNC, INPUT_MIXED_VAR_RUN, RESULT_MIXED_VAR);
     }
 
     @Test
     public void redeclareExistingFunctionTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
         runFunctionDeclaration(INPUT_COMBI_FUNC, NAME_COMBI_FUNC);
-        runExceptionTest(INPUT_COMBI_FUNC, CLASS_REDEC_FUNC);
+        runExceptionTest(INPUT_COMBI_FUNC, CLASS_PE);
     }
 
     @Test
@@ -113,7 +128,7 @@ public class UserFunctionUT extends FunctionTest {
     public void precedenceUserFunctionTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
         runFunctionDeclaration(INPUT_SQUARE_FUNC, NAME_SQUARE_FUNC);
-        runExpressionTest(INPUT_PREC_RUN, RESULT_PREC_RUN);
+        runExpressionTest(INPUT_PREC_RUN, RESULT_PREC);
     }
 
 }

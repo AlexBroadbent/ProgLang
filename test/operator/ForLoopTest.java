@@ -29,7 +29,7 @@ public class ForLoopTest extends FunctionTest {
     private final static String                     INPUT_OPER     = "for x in s do s[x]";
     private final static String                     INPUT_SHORT    = "for x t x";
     private final static String                     INPUT_NO_DO    = "for x in x";
-    private final static String                     INPUT_NO_VAR   = "for in s x";
+    private final static String                     INPUT_NO_VAR   = "for in s do x";
     private final static String                     INPUT_NO_LIST  = "for x in x";
     private final static String                     INPUT_DBL_FUNC = "func double(l) = for x in l do x*2";
     private final static String                     NAME_DBL       = "double";
@@ -104,7 +104,7 @@ public class ForLoopTest extends FunctionTest {
 
     @Test
     public void incomparableVariableTypeExceptionTest() {
-        runExceptionTest(ERROR_VAR, CLASS_ICT);
+        runExceptionTest(ERROR_VAR, CLASS_EE);
     }
 
     @Test

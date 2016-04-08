@@ -1,10 +1,13 @@
 package eval;
 
 import com.google.common.collect.Lists;
+import gui.XLogger;
 import lexer.Token;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import operator.IOperator;
+import operator.conditional.Conditional;
+import operator.conditional.ConditionalElse;
 import operator.function.Declaration;
 import operator.loop.Do;
 import operator.loop.ForLoop;
@@ -26,11 +29,10 @@ import static eval.ICalculableType.*;
  * @author Alexander Broadbent
  * @version 01/12/2015
  */
-public class Expression {
+public class Expression extends Literal {
 
     private final static String MSG_EXP_INVALID = "Expression is not valid: %s";
     private final static String MSG_ARG_REMAIN  = "Arguments remaining after executing: %s";
-
     protected Domain            model;
     protected List<ICalculable> expression;
     protected String            infix;
@@ -44,8 +46,9 @@ public class Expression {
      */
     public Expression(Domain model, List<Token> tokens)
             throws ExpressionException, UnknownSequenceException, ParserException {
-        infix = StringUtils.join(tokens, " ");
+        super(null);
         this.model = model;
+        infix = StringUtils.join(tokens, " ");
 
         List<ICalculable> infixExpression = model.getParser().parse(model, tokens);
 
@@ -57,9 +60,13 @@ public class Expression {
 
 
     public Expression(List<ICalculable> postfix, Domain model) throws ExpressionException {
-        this.infix = StringUtils.join(postfix, " "); // TODO: postfix-to-infix function?
+        super(null);
         this.model = model;
-        this.expression = postfix;
+        infix = StringUtils.join(postfix, " ");
+        expression = parseWrappedList(postfix);
+
+        if (!validate())
+            throw new ExpressionException(String.format(MSG_EXP_INVALID, toString()));
     }
 
     public static List<ICalculable> parseWrappedList(List<ICalculable> postfix) {
@@ -75,6 +82,11 @@ public class Expression {
 
         return postfix;
     }
+
+    public List<ICalculable> getExpression() {
+        return expression;
+    }
+
 
     /**
      * 'A practical infix-to-prefix algorithm for mathematical expressions'
@@ -100,6 +112,9 @@ public class Expression {
      * <p>
      * See http://en.wikipedia.org/wiki/Postfix_notation#The_postfix_algorithm
      * See https://en.wikipedia.org/wiki/Reverse_Polish_notation#Postfix_algorithm
+     * <p>
+     * When in either a function, for loop expression, or a conditional expression declaration
+     * the result should be itself and not actually execute the operators/functions.
      *
      * @return An object representing the value of the expression
      * @throws ExpressionException
@@ -107,17 +122,23 @@ public class Expression {
      */
     public Object execute() throws ExpressionException, IncomparableTypeException {
         Stack<Literal> stack = new Stack<>();
-        boolean inFuncDec = false;
-        boolean inLoopDec = false;
+        boolean inFuncDec = false;  // defining a function
+        boolean inLoopDec = false;  // defining a for loop expression
+        boolean inCondDec = false;  // defining a conditional expression
 
         for (ICalculable literal : expression) {
             if (literal instanceof Declaration)
                 inFuncDec = true;
-            if (literal instanceof Do)
+            else if (literal instanceof Do)
                 inLoopDec = true;
-            if (literal instanceof ForLoop && !inFuncDec)
+            else if (literal instanceof ForLoop)
                 inLoopDec = false;
-            Literal result = literal.evaluate(model, stack, (inFuncDec || inLoopDec));
+            else if (literal.getType() == CONDITIONAL_PLACEHOLDER)
+                inCondDec = true;
+            else if (literal instanceof Conditional || literal instanceof ConditionalElse)
+                inCondDec = false;
+
+            Literal result = literal.evaluate(model, stack, (inFuncDec || inLoopDec || inCondDec));
             if (result != null)
                 stack.push(result);
         }
@@ -141,19 +162,30 @@ public class Expression {
 
             if (literal.getType() == OPERATOR && inFunc == 0)
                 stackSize -= ((IOperator) literal).getNumOperands();
-            if (literal.getType() == FUNCTION || literal.getType() == USER_FUNCTION) {
+            else if (literal.getType() == FUNCTION || literal.getType() == USER_FUNCTION) {
                 inFunc--;
                 stackSize -= funcSize;
                 funcSize = 0;
             }
-            if (literal.getType() == FUNCTION_PLACEHOLDER) {
+            else if (literal.getType() == FUNCTION_PLACEHOLDER)
                 inFunc++;
-            }
+            else if (literal.getType() == CONDITIONAL_PLACEHOLDER)
+                stackSize--;
         }
 
         return stackSize == 1;
     }
 
+    @Override
+    public Object getValue() {
+        try {
+            return execute();
+        }
+        catch (ExpressionException | IncomparableTypeException e) {
+            XLogger.severe(e.getMessage());
+            return null;
+        }
+    }
 
     @Override
     public String toString() {

@@ -18,8 +18,8 @@ public interface IToken {
     int    ARITHMETIC                     = 7;
     int    GEOMETRIC                      = 8;
     int    BOOLEAN                        = 9;
-    int    FUNCTION                       = 10;
-    int    FUNCTION_DECLARATION           = 11;
+    int    FUNCTION_DECLARATION           = 10;
+    int    FUNCTION                       = 11;
     int    LOGICAL_OPERATOR               = 12;
     int    BITWISE_OPERATOR               = 13;
     int    BIT_SHIFT                      = 14;
@@ -47,8 +47,8 @@ public interface IToken {
     String ARITHMETIC_REGEX               = "\\+|\\-|\\#";
     String GEOMETRIC_REGEX                = "\\*|/|\\^|\\%";
     String BOOLEAN_REGEX                  = "true|false";
-    String FUNCTION_REGEX                 = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan";
     String FUNCTION_DECLARATION_REGEX     = "func";
+    String FUNCTION_REGEX                 = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan";
     String LOGICAL_COMPARATOR_REGEX       = "\\!|\\&\\&|\\|\\|";
     String BITWISE_OPERATOR_REGEX         = "\\~|\\&|\\||\\$";
     String BIT_SHIFT_OPERATOR_REGEX       = "\\<\\<|\\>\\>";

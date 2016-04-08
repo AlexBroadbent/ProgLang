@@ -5,6 +5,7 @@ import eval.*;
 import model.Domain;
 import operator.IConstants;
 import operator.IPrecedence;
+import operator.IUserFunction;
 import operator.base.BinaryOperator;
 import operator.function.UserFunction;
 import parser.ExpressionException;
@@ -49,19 +50,16 @@ public class Assignment extends BinaryOperator {
             Literal userFuncLiteral = expression.get(0);
             if (((ICalculable) userFuncLiteral.getValue()).getType() != ICalculableType.USER_FUNCTION)
                 throw new ExpressionException(String.format(MSG_INVALID_ASSIGNMENT, userFuncLiteral.getValue().getClass().getSimpleName()));
-            UserFunction userFunction = (UserFunction) userFuncLiteral.getValue();
+            IUserFunction userFunction = (UserFunction) userFuncLiteral.getValue();
 
             // Check expression is valid for the function, such as matching arguments
             List<ICalculable> expr = Lists.newArrayList(expression.subList(1, expression.size()));
-            if (!userFunction.validate(expr, domain))
+            userFunction.setExpression(new Expression(expr, domain));
+            if (!userFunction.validate())
                 throw new ExpressionException(MSG_INVALID_FUNCTION);
-
-            // Extract the operator from the literal if there are any in the expression
-            expr = Expression.parseWrappedList(expr);
 
             // Set the expression of the function and register the function in the domain
             userFunction.setExpression(new Expression(expr, domain));
-            domain.registerFunction(userFunction);
 
             return Domain.wrapLiteral(null);
         }

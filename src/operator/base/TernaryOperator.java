@@ -50,8 +50,12 @@ public abstract class TernaryOperator extends Operator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        while (!operatorStack.isEmpty() && operatorStack.peek().getPrecedence() < getPrecedence())
-            postfix.add(operatorStack.pop());
+        if (getAssociativity() == Associativity.LEFT_TO_RIGHT)
+            while (!operatorStack.isEmpty() && operatorStack.peek().getPrecedence() <= getPrecedence())
+                postfix.add(operatorStack.pop());
+        if (getAssociativity() == Associativity.RIGHT_TO_LEFT)
+            while (!operatorStack.isEmpty() && operatorStack.peek().getPrecedence() < getPrecedence())
+                postfix.add(operatorStack.pop());
 
         operatorStack.add(this);
     }

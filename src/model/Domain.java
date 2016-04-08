@@ -33,8 +33,13 @@ import parser.Parser;
 import java.util.Collection;
 import java.util.Map;
 
+import static eval.ICalculableType.USER_FUNCTION;
+
 /**
  * x++.model
+ * <p>
+ * A single class that is the centre of the language; stores all operators, functions, variables and has
+ * an associated lexer and parser.
  *
  * @author Alexander Broadbent
  * @version 01/12/2015
@@ -135,6 +140,7 @@ public class Domain {
         // function package functions
         registerFunction(new Sum());
         registerFunction(new Max());
+        registerFunction(new Random());
         registerFunction(new List());
         registerFunction(new Head());
         registerFunction(new Tail());
@@ -147,9 +153,10 @@ public class Domain {
             instance = this;
     }
 
+
     public static Domain getInstance() {
         if (instance == null)
-            instance = new Domain(null, null);
+            instance = new Domain();
 
         return instance;
     }
@@ -164,6 +171,7 @@ public class Domain {
     public static void resetInstance() {
         instance = null;
     }
+
 
     public ILexer getLexer() {
         return lexer;
@@ -180,88 +188,79 @@ public class Domain {
     public void registerFunction(IFunction function) {
         lexer.addUserFunctionName(function.getToken());         // Register the function with the lexer
         functions.put(function.getToken(), function);
+
+        if (function.getType() == USER_FUNCTION)
+            functionalVariables.put(function.getToken(), Maps.newHashMap());
     }
 
-    public boolean isOperator(String token) {
-        return operators.containsKey(token);
+    public boolean isOperator(String operatorName) {
+        return operators.containsKey(operatorName);
     }
 
-    public boolean isFunction(String token) {
-        return functions.containsKey(token);
+    public boolean isFunction(String functionName) {
+        return functions.containsKey(functionName);
     }
 
-    private boolean hasFunctionalVariable(String function, String variable) {
-        return functionalVariables.get(function).containsKey(variable);
+    private boolean hasFunctionalVariable(String functionName, String variableName) {
+        return functionalVariables.get(functionName).containsKey(variableName);
     }
 
-    public Variable getFunctionalVariable(String function, String variable) {
-        if (hasFunctionalVariable(function, variable))
-            return functionalVariables.get(function).get(variable);
+    public Variable addFunctionalVariable(String functionName, String variableName) {
+        if (!hasFunctionalVariable(functionName, variableName))
+            functionalVariables.get(functionName).put(variableName, createVariable(variableName));
 
-        return getVariable(variable);
+        return functionalVariables.get(functionName).get(variableName);
     }
 
-    public Variable addFunctionalVariable(String function, String name) {
-        // empty map check
-        if (!isFunction(function) && functionalVariables.get(function) == null)
-            functionalVariables.put(function, Maps.newHashMap());
+    public Variable getFunctionalVariable(String functionName, String variableName) {
+        if (hasFunctionalVariable(functionName, variableName))
+            return functionalVariables.get(functionName).get(variableName);
 
-        // duplication check
-        if (!hasFunctionalVariable(function, name))
-            functionalVariables.get(function).put(name, createVariable(name));
-
-        return functionalVariables.get(function).get(name);
+        return getVariable(variableName);
     }
 
-    public IOperator getOperator(String token) {
-        return operators.get(token);
+    public IOperator getOperator(String operatorName) {
+        return operators.get(operatorName);
     }
 
-    public IFunction getFunction(String token) {
-        return functions.get(token);
+    public IFunction getFunction(String functionName) {
+        return functions.get(functionName);
     }
 
-    public boolean hasVariable(String name) {
-        return variables.containsKey(name);
+    public boolean hasVariable(String variableName) {
+        return variables.containsKey(variableName);
     }
 
-    public Variable getVariable(String name) {
-        if (hasVariable(name))
-            return variables.get(name);
+    public Variable getVariable(String variableName) {
+        if (hasVariable(variableName))
+            return variables.get(variableName);
 
-        return getOrCreateVariable(name);
+        return getOrCreateVariable(variableName);
     }
 
-    public Variable getOrCreateVariable(String name) {
-        if (hasVariable(name))
-            return getVariable(name);
+    public Variable getOrCreateVariable(String variableName) {
+        if (hasVariable(variableName))
+            return getVariable(variableName);
         else {
-            Variable var = createVariable(name);
-            variables.put(name, var);
+            Variable var = createVariable(variableName);
+            variables.put(variableName, var);
             return var;
         }
     }
 
-    private Variable createVariable(String name) {
-        return new Variable(name);
+    private Variable createVariable(String variableName) {
+        return new Variable(variableName);
     }
 
 
 
-
-
-
     /*
-     *      Functions for the GUI to interact with
+     *      Helper functions for the user to interact with through the MainGUI
      */
 
     public void freeVariable(String name) {
         if (hasVariable(name))
             variables.remove(name);
-    }
-
-    public int getVariableCount() {
-        return variables.size();
     }
 
     public Collection<Variable> getAllVariables() {

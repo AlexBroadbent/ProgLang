@@ -30,6 +30,7 @@ public abstract class Function implements IFunction {
     protected final static String MSG_ONE_ARG = "Only one argument is required, instead found %d";
     protected final static String MSG_LIST    = "Argument given to head must be a list. Instead found: %s";
 
+
     @Override
     public String getToken() {
         return getClass().getSimpleName();
@@ -85,7 +86,6 @@ public abstract class Function implements IFunction {
     public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
         throw new ExpressionException("Function not implemented");
     }
-
 
     @Override
     public String toString() {
