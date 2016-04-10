@@ -28,6 +28,11 @@ public class LogicalNot extends UnaryOperator {
     }
 
     @Override
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Boolean.class.getSimpleName());
+    }
+
+    @Override
     public Object execute(Literal arg1) throws IncomparableTypeException {
         try {
             return !((Boolean) arg1.getValue());
@@ -35,11 +40,6 @@ public class LogicalNot extends UnaryOperator {
         catch (ClassCastException ex) {
             throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getValue().getClass().getSimpleName());
         }
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Boolean.class.getSimpleName());
     }
 
 }

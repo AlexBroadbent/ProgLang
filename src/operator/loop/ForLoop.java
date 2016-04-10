@@ -27,8 +27,8 @@ import static eval.ICalculableType.VARIABLE;
  */
 public class ForLoop extends Function {
 
-    private final static String MSG_CAST         = "Cannot run the for loop with arguments: %s %s %s.";
-    private final static String MSG_NUM_ARGS     = "The function requires more arguments, should be in the format: for var in list do ...expression...";
+    private final static String MSG_CAST     = "Cannot run the for loop with arguments: %s %s %s.";
+    private final static String MSG_NUM_ARGS = "The function requires more arguments, should be in the format: for var in list do ...expression...";
     protected Domain domain;
 
 
@@ -75,7 +75,7 @@ public class ForLoop extends Function {
             expr = Expression.parseWrappedList(expr);
 
             // Remove do from expression, used to determine whether expression is executable previous to now
-            for (int i=0; i<expr.size(); i++) {
+            for (int i = 0; i < expr.size(); i++) {
                 if (expr.get(i) instanceof Do) {
                     expr.remove(i);
                     i--;

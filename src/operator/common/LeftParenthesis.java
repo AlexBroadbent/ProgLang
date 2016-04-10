@@ -29,13 +29,13 @@ public class LeftParenthesis extends NullaryOperator {
     }
 
     @Override
-    public int getType() {
-        return ICalculableType.LEFT_PARENTHESIS;
+    public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
+        operatorStack.push(this);
     }
 
     @Override
-    public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        operatorStack.push(this);
+    public int getType() {
+        return ICalculableType.LEFT_PARENTHESIS;
     }
 
 }

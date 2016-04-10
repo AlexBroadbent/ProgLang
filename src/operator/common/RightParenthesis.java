@@ -31,11 +31,6 @@ public class RightParenthesis extends NullaryOperator {
     }
 
     @Override
-    public int getType() {
-        return ICalculableType.RIGHT_PARENTHESIS;
-    }
-
-    @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
         while (!operatorStack.isEmpty() && !(operatorStack.peek().getType() == ICalculableType.LEFT_PARENTHESIS))
             postfix.add(operatorStack.pop());
@@ -48,5 +43,10 @@ public class RightParenthesis extends NullaryOperator {
         }
         else
             throw new Error("Invalid Expression: Mis-matching brackets");
+    }
+
+    @Override
+    public int getType() {
+        return ICalculableType.RIGHT_PARENTHESIS;
     }
 }

@@ -35,6 +35,7 @@ public class Expression extends Literal {
     protected Domain            model;
     protected List<ICalculable> expression;
     protected String            infix;
+
     /**
      * Create an expression object...
      *
@@ -127,7 +128,7 @@ public class Expression extends Literal {
 
         for (ICalculable literal : expression) {
             if (literal.getType() == FLAG)
-                inFuncDec = !inFuncDec;
+                inFuncDec = true;
             else if (literal instanceof Do)
                 inLoopDec = true;
             else if (literal instanceof ForLoop)

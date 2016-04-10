@@ -1,4 +1,4 @@
-package function;
+package feature;
 
 import eval.Literal;
 import framework.FunctionTest;
@@ -18,39 +18,40 @@ import java.util.List;
  */
 public class UserFunctionUT extends FunctionTest {
 
-    private final static String                     VAR_D                   = "d";
-    private final static String                     VAR_T                   = "t";
-    private final static String                     VAR_V                   = "v";
-    private final static Integer                    VAR_D_VALUE             = 5;
-    private final static List<Literal>              VAR_T_VALUE             = createLiteralLinkedList(1, 2, 3);
+    private final static String        VAR_D       = "d";
+    private final static String        VAR_T       = "t";
+    private final static Integer       VAR_D_VALUE = 5;
+    private final static List<Literal> VAR_T_VALUE = createLiteralLinkedList(1, 2, 3);
 
-    private final static String                     INPUT_SQUARE_FUNC       = "func square(x) = x * x";
-    private final static String                     INPUT_COMBI_FUNC        = "func times(c, d) = c * d";
-    private final static String                     INPUT_BIGGER_FUNC       = "func bigger(a, b) = a > b ? a : b";
-    private final static String                     INPUT_NO_ARG_FUNC       = "func noargs() = x";
-    private final static String                     INPUT_BAD_NAME_FUNC     = "func TRUE() = 2";
-    private final static String                     INPUT_INVALID_FUNC      = "func circ(diameter) = diameter * pi /";
-    private final static String                     INPUT_INVALID_VARS_FUNC = "func circ(diameter) = diameter * pi * ip";
-    private final static String                     INPUT_MIXED_VAR_FUNC    = "func circ(diameter) = diameter * pi";
-    private final static String                     INPUT_DBL_LIST_FUNC     = "func double(l) = for x in l do x*2";
-    private final static String                     INPUT_RECURSIVE_FUNC    = "func fib(n) = (n < 2) ? n : fib(n - 1) + fib(n - 2)";
-    private final static String                     INPUT_SQUARE_RUN        = "square(4)";
-    private final static String                     INPUT_COMBI_RUN         = "times(d, 7)";
-    private final static String                     INPUT_BIGGER_RUN        = "bigger(4, 7)";
-    private final static String                     INPUT_DBL_LIST_RUN      = "double(t)";
-    private final static String                     INPUT_MIXED_VAR_RUN     = "circ(3)";
-    private final static String                     INPUT_PREC_RUN          = "2 + square(d) * 2";
-    private final static String                     NAME_SQUARE_FUNC        = "square";
-    private final static String                     NAME_BIGGER_FUNC        = "bigger";
-    private final static String                     NAME_COMBI_FUNC         = "times";
-    private final static String                     NAME_DBL_LIST_FUNC      = "double";
-    private final static String                     NAME_MIXED_VAR_FUNC     = "circ";
-    private final static Double                     RESULT_SQUARE           = 16d;
-    private final static Integer                    RESULT_BIGGER           = 7;
-    private final static Double                     RESULT_COMBI            = 35d;
-    private final static Double                     RESULT_PREC             = 52d;
-    private final static Double                     RESULT_MIXED_VAR        = Math.PI * 3d;
-    private final static List<Literal>              RESULT_DBL_LIST         = createLiteralLinkedList(2d, 4d, 6d);
+    private final static String        INPUT_SQUARE_FUNC       = "func square(x) = x * x";
+    private final static String        INPUT_COMBI_FUNC        = "func times(c, d) = c * d";
+    private final static String        INPUT_BIGGER_FUNC       = "func bigger(a, b) = a > b ? a : b";
+    private final static String        INPUT_NO_ARG_FUNC       = "func noargs() = x";
+    private final static String        INPUT_BAD_NAME_FUNC     = "func TRUE() = 2";
+    private final static String        INPUT_INVALID_FUNC      = "func circ(diameter) = diameter * pi /";
+    private final static String        INPUT_INVALID_VARS_FUNC = "func circ(diameter) = diameter * pi * ip";
+    private final static String        INPUT_MIXED_VAR_FUNC    = "func circ(diameter) = diameter * pi";
+    private final static String        INPUT_MORE_ARGS_FUNC    = "func test(a) = a";
+    private final static String        INPUT_DBL_LIST_FUNC     = "func double(l) = for x in l do x*2";
+    private final static String        INPUT_SQUARE_RUN        = "square(4)";
+    private final static String        INPUT_COMBI_RUN         = "times(d, 7)";
+    private final static String        INPUT_BIGGER_RUN        = "bigger(4, 7)";
+    private final static String        INPUT_DBL_LIST_RUN      = "double(t)";
+    private final static String        INPUT_MIXED_VAR_RUN     = "circ(3)";
+    private final static String        INPUT_MORE_ARGS_RUN     = "test(3, 4)";
+    private final static String        INPUT_PREC_RUN          = "2 + square(d) * 2";
+    private final static String        NAME_SQUARE_FUNC        = "square";
+    private final static String        NAME_BIGGER_FUNC        = "bigger";
+    private final static String        NAME_COMBI_FUNC         = "times";
+    private final static String        NAME_DBL_LIST_FUNC      = "double";
+    private final static String        NAME_MIXED_VAR_FUNC     = "circ";
+    private final static String        NAME_MORE_ARGS_FUNC     = "test";
+    private final static Double        RESULT_SQUARE           = 16d;
+    private final static Integer       RESULT_BIGGER           = 7;
+    private final static Double        RESULT_COMBI            = 35d;
+    private final static Double        RESULT_PREC             = 52d;
+    private final static Double        RESULT_MIXED_VAR        = Math.PI * 3d;
+    private final static List<Literal> RESULT_DBL_LIST         = createLiteralLinkedList(2d, 4d, 6d);
     private final static Class<? extends Exception> CLASS_NPE               = NullPointerException.class;
     private final static Class<? extends Exception> CLASS_EE                = ExpressionException.class;
     private final static Class<? extends Exception> CLASS_PE                = ParserException.class;
@@ -110,6 +111,13 @@ public class UserFunctionUT extends FunctionTest {
     }
 
     @Test
+    public void tooManyArgumentsInCallTest()
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+        runFunctionDeclaration(INPUT_MORE_ARGS_FUNC, NAME_MORE_ARGS_FUNC);
+        runExceptionTest(INPUT_MORE_ARGS_RUN, CLASS_EE);
+    }
+
+    @Test
     public void redeclareExistingFunctionTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
         runFunctionDeclaration(INPUT_COMBI_FUNC, NAME_COMBI_FUNC);
@@ -122,7 +130,6 @@ public class UserFunctionUT extends FunctionTest {
         runFunctionDeclaration(INPUT_DBL_LIST_FUNC, NAME_DBL_LIST_FUNC);
         runListTest(INPUT_DBL_LIST_RUN, RESULT_DBL_LIST);
     }
-
 
     @Test
     public void precedenceUserFunctionTest()

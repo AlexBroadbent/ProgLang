@@ -4,7 +4,7 @@ import static gui.IConstants.DEBUG_MODE;
 
 /**
  * x++.gui
- *
+ * <p>
  * <p>
  * Handles logging to the user, can be used to debug log and handle formatted outputs
  * <p>
@@ -15,7 +15,7 @@ import static gui.IConstants.DEBUG_MODE;
  * @author Alexander Broadbent
  * @version 05/01/2016
  */
-public class XLogger {
+public abstract class XLogger {
 
     private final static String FORMAT_LOG     = "%s \n";
     private final static String FORMAT_WARNING = "WARNING: %s \n";

@@ -1,8 +1,9 @@
-package operator.function;
+package operator.list;
 
 import com.google.common.collect.Lists;
 import eval.Literal;
 import operator.IConstants;
+import operator.function.Function;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
@@ -10,16 +11,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ProgLang.operator.function
+ * x++.operator.function
  *
  * @author Alexander Broadbent
- * @version 29/03/2016
+ * @version 26/02/2016
  */
-public class Empty extends Function {
+public class Size extends Function {
 
     @Override
     public String getToken() {
-        return IConstants.EMPTY;
+        return IConstants.SIZE;
     }
 
     @Override
@@ -29,24 +30,24 @@ public class Empty extends Function {
 
     @Override
     public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(LinkedList.class.getSimpleName());
+        return Lists.newArrayList(List.class.getSimpleName());
     }
 
     @Override
-    @SuppressWarnings( "unchecked" )    // Class Case Exception caught in method
-    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
+    @SuppressWarnings( "unchecked" )    // Catch is in place to check a casting exception
+    public Object execute(List<Literal> args) throws ExpressionException, IncomparableTypeException {
         if (args.size() != getNumOperands())
             throw new ExpressionException(String.format(MSG_ONE_ARG, args.size()));
 
-        List<Literal> list;
+        LinkedList<Literal> list;
+
         try {
-            list = (List<Literal>) args.get(0).getValue();
+            list = (LinkedList<Literal>) args.get(0).getValue();
         }
-        catch (ClassCastException | NullPointerException ex) {
+        catch (ClassCastException ex) {
             throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0).getValue().getClass().getSimpleName());
         }
 
-        return list.isEmpty();
+        return list.size();
     }
-
 }

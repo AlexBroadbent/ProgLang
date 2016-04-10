@@ -1,10 +1,11 @@
-package operator.function;
+package operator.list;
 
 import com.google.common.collect.Lists;
 import eval.Literal;
-import gui.XLogger;
 import operator.IConstants;
+import operator.function.Function;
 import parser.ExpressionException;
+import parser.IncomparableTypeException;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,11 +16,11 @@ import java.util.List;
  * @author Alexander Broadbent
  * @version 26/02/2016
  */
-public class Head extends Function {
+public class Tail extends Function {
 
     @Override
     public String getToken() {
-        return IConstants.HEAD;
+        return IConstants.TAIL;
     }
 
     @Override
@@ -34,19 +35,20 @@ public class Head extends Function {
 
     @Override
     @SuppressWarnings( "unchecked" )    // Catch is in place to check a casting exception
-    public Object execute(List<Literal> args) throws ExpressionException {
+    public Object execute(List<Literal> args) throws ExpressionException, IncomparableTypeException {
         if (args.size() != getNumOperands())
             throw new ExpressionException(String.format(MSG_ONE_ARG, args.size()));
 
-        LinkedList<Literal> list = null;
+        LinkedList<Literal> list;
 
         try {
             list = (LinkedList<Literal>) args.get(0).getValue();
         }
         catch (ClassCastException ex) {
-            XLogger.severe("Argument given to head must be a list. Instead found: " + args.get(0).getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0).getValue().getClass().getSimpleName());
         }
 
-        return (list != null) ? list.peek().getValue() : null;
+        return (list != null) ? Lists.newLinkedList(list.subList(1, list.size())) : null;
     }
+
 }

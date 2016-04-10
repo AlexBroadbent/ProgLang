@@ -1,6 +1,7 @@
 package operator.function;
 
 import eval.Literal;
+import eval.Variable;
 import parser.IncomparableTypeException;
 
 import java.util.List;
@@ -21,11 +22,26 @@ public class Sum extends Function {
     }
 
     @Override
+    public List<String> getAllowedExecutionTypes() {
+        List<String> sup = super.getAllowedExecutionTypes();
+        sup.add(Variable.class.getSimpleName());
+        return sup;
+    }
+
+    @Override
     public Object execute(List<Literal> args) throws IncomparableTypeException {
         double sum = 0;
 
-        for (Literal literal : args)
-            sum += Double.parseDouble(literal.getValue().toString());
+        Literal lit = null;
+        try {
+            for (Literal literal : args) {
+                lit = literal;
+                sum += Double.parseDouble(literal.getValue().toString());
+            }
+        }
+        catch (NumberFormatException ex) {
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), lit.getValue().getClass().getSimpleName());
+        }
 
         return sum;
     }

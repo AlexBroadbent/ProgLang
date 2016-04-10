@@ -135,7 +135,7 @@ public class UserFunction extends Function implements IUserFunction {
             return this;
 
         if (args.size() != arguments.size())
-            throw new ExpressionException("Not enough arguments for function, expected " + arguments.size() + " and received " + args.size());
+            throw new ExpressionException(String.format(MSG_SIZE_ARG, arguments.size(), args.size()));
 
         // set values for the functional variables
         for (int i = 0; i < arguments.size(); i++) {

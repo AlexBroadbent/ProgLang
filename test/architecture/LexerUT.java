@@ -24,7 +24,6 @@ public class LexerUT {
     }
 
 
-
     @Test
     public void invalidRegexToken() {
 

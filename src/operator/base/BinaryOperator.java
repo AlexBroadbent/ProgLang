@@ -3,6 +3,7 @@ package operator.base;
 import com.google.common.collect.Lists;
 import eval.ICalculable;
 import eval.Literal;
+import eval.Variable;
 import model.Domain;
 import operator.Associativity;
 import operator.IOperator;
@@ -12,6 +13,8 @@ import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;
+
+import static eval.ICalculableType.VARIABLE;
 
 /**
  * x++.operator.base
@@ -53,6 +56,14 @@ public abstract class BinaryOperator extends Operator {
 
         Literal arg2 = stack.pop();
         Literal arg1 = stack.pop();
+
+        // Assert that the operation is not attempting to be executed on a variable that does not have a value
+        if (arg1.getType() == VARIABLE)
+            if (!((Variable) arg1).isValueSet())
+                throw new ExpressionException(String.format(MSG_VALUE_NOT_SET, ((Variable) arg1).getName()));
+        if (arg2.getType() == VARIABLE)
+            if (!((Variable) arg2).isValueSet())
+                throw new ExpressionException(String.format(MSG_VALUE_NOT_SET, ((Variable) arg2).getName()));
 
         return Domain.wrapLiteral(execute(arg1, arg2));
     }

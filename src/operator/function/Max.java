@@ -22,13 +22,20 @@ public class Max extends Function {
         return MAX;
     }
 
-
     @Override
     public Object execute(List<Literal> args) throws IncomparableTypeException {
         List<Double> list = Lists.newArrayList();
 
-        for (Literal literal : args)
-            list.add(Double.parseDouble(literal.getValue().toString()));
+        Literal lit = null;
+        try {
+            for (Literal literal : args) {
+                lit = literal;
+                list.add(Double.parseDouble(literal.getValue().toString()));
+            }
+        }
+        catch (NumberFormatException ex) {
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), lit.getValue().getClass().getSimpleName());
+        }
 
         return Collections.max(list);
     }

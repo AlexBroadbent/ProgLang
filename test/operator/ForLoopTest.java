@@ -18,25 +18,25 @@ import java.util.List;
  */
 public class ForLoopTest extends FunctionTest {
 
-    private final static String                     VAR_T          = "t";
-    private final static String                     VAR_S          = "s";
-    private final static List<Literal>              VAR_T_VALUE    = createLiteralLinkedList(1, 2, 3);
-    private final static List<Literal>              VAR_S_VALUE    = createLiteralLinkedList(0, 1, 2);
+    private final static String        VAR_T       = "t";
+    private final static String        VAR_S       = "s";
+    private final static List<Literal> VAR_T_VALUE = createLiteralLinkedList(1, 2, 3);
+    private final static List<Literal> VAR_S_VALUE = createLiteralLinkedList(0, 1, 2);
 
-    private final static String                     INPUT_VAR      = "for x in t do x";
-    private final static String                     INPUT_LIST     = "for x in list(4, 5, 6) do x";
-    private final static String                     INPUT_CALC     = "for x in list(2, 5, 70) do x*2";
-    private final static String                     INPUT_OPER     = "for x in s do s[x]";
-    private final static String                     INPUT_SHORT    = "for x t x";
-    private final static String                     INPUT_NO_DO    = "for x in x";
-    private final static String                     INPUT_NO_VAR   = "for in s do x";
-    private final static String                     INPUT_NO_LIST  = "for x in x";
-    private final static String                     INPUT_DBL_FUNC = "func double(l) = for x in l do x*2";
-    private final static String                     NAME_DBL       = "double";
-    private final static String                     INPUT_DBL_RUN  = "double(t)";
-    private final static String                     ERROR_VAR      = "for true in t do x";
-    private final static String                     ERROR_LIST     = "for x in true do x";
-    private final static String                     ERROR_LIST_2   = "for x in head do x";
+    private final static String INPUT_VAR      = "for x in t do x";
+    private final static String INPUT_LIST     = "for x in list(4, 5, 6) do x";
+    private final static String INPUT_CALC     = "for x in list(2, 5, 70) do x*2";
+    private final static String INPUT_OPER     = "for x in s do s[x]";
+    private final static String INPUT_SHORT    = "for x t x";
+    private final static String INPUT_NO_DO    = "for x in x";
+    private final static String INPUT_NO_VAR   = "for in s do x";
+    private final static String INPUT_NO_LIST  = "for x in x";
+    private final static String INPUT_DBL_FUNC = "func double(l) = for x in l do x*2";
+    private final static String NAME_DBL       = "double";
+    private final static String INPUT_DBL_RUN  = "double(t)";
+    private final static String ERROR_VAR      = "for true in t do x";
+    private final static String ERROR_LIST     = "for x in true do x";
+    private final static String ERROR_LIST_2   = "for x in head do x";
 
     private final static List<Literal>              RESULT_VAR     = createLiteralList(1, 2, 3);
     private final static List<Literal>              RESULT_LIST    = createLiteralList(4, 5, 6);

@@ -174,7 +174,7 @@ public class ExpressionTest extends BaseTest {
         }
     }
 
-    private void assertTypeOfResult(Object result, Class expectedClass) {
+    protected void assertTypeOfResult(Object result, Class expectedClass) {
         assertThat(String.format(MSG_ASSERT_TYPE, result.getClass().getSimpleName(),
                 expectedClass.getSimpleName()), result, instanceOf(expectedClass));
     }

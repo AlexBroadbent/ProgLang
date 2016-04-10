@@ -1,11 +1,14 @@
 package operator;
 
+import eval.Literal;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
 import parser.ParserException;
+
+import java.util.List;
 
 /**
  * x++.operator
@@ -15,19 +18,22 @@ import parser.ParserException;
  */
 public class ConditionalOperatorUT extends ExpressionTest {
 
-    private static final String                     VAR_W            = "w";
-    private static final String                     VAR_X            = "x";
-    private static final String                     VAR_Y            = "y";
-    private static final String                     VAR_Z            = "z";
-    private static final Integer                    VAR_W_VALUE      = 3;
-    private static final Integer                    VAR_X_VALUE      = 12;
-    private static final Integer                    VAR_Y_VALUE      = 6;
-    private static final Boolean                    VAR_Z_VALUE      = Boolean.TRUE;
+    private static final String  VAR_V       = "v";
+    private static final String  VAR_W       = "w";
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
+    private static final String  VAR_Z       = "z";
+    private static final Integer VAR_W_VALUE = 3;
+    private static final Integer VAR_X_VALUE = 12;
+    private static final Integer VAR_Y_VALUE = 6;
+    private static final Boolean VAR_Z_VALUE = Boolean.TRUE;
 
     private static final String                     INPUT_SIM        = "(x > y) ? x : y";
     private static final String                     INPUT_SIM_2      = "z ? y : x";
     private static final String                     INPUT_COM        = "(x < y + 3) ? x + 1 / 2 : ( 2 / 3 ) * y";
     private static final String                     INPUT_COM_2      = "(x > y) ? (x/3)^(y/3) : y^w";
+    private static final String                     INPUT_ASSIGN     = "v = (x > y) ? x : y";
+    private static final String                     INPUT_FUNC       = "(x < y) ? list(x, 1) : list(y, 2)";
     private static final String                     INPUT_MISS_ELSE  = "(x < y+3) ? x y";
     private static final String                     INPUT_INCOMPAT   = "(x) ? x : y";
     private static final String                     INPUT_INCOMPAT_2 = "(3) ? x : y";
@@ -35,6 +41,8 @@ public class ConditionalOperatorUT extends ExpressionTest {
     private static final Integer                    RESULT_SIM_2     = 6;
     private static final Double                     RESULT_COM       = 4d;
     private static final Double                     RESULT_COM_2     = 16d;
+    private static final Integer                    RESULT_ASSIGN    = 12;
+    private static final List<Literal>              RESULT_FUNC      = createLiteralLinkedList(6, 2);
     private static final Class<? extends Exception> CLASS_EE         = ExpressionException.class;
     private static final Class<? extends Exception> CLASS_ITE        = IncomparableTypeException.class;
 
@@ -49,27 +57,39 @@ public class ConditionalOperatorUT extends ExpressionTest {
     }
 
     @Test
-    public void simpleConditionalOperatorTest()
+    public void simpleTest()
             throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_SIM, RESULT_SIM);
     }
 
     @Test
-    public void simple2ConditionalOperatorTest()
+    public void simple2Test()
             throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_SIM_2, RESULT_SIM_2);
     }
 
     @Test
-    public void complexConditionalOperatorTest()
+    public void complexTest()
             throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
         runExpressionTest("Complex Conditional[" + INPUT_COM + "]", INPUT_COM, RESULT_COM);
     }
 
     @Test
-    public void complex2ConditionalOperatorTest()
+    public void complex2Test()
             throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
         runExpressionTest("Complex Conditional[" + INPUT_COM_2 + "]", INPUT_COM_2, RESULT_COM_2);
+    }
+
+    @Test
+    public void assignmentTest()
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+        runVariableTest(INPUT_ASSIGN, VAR_V, RESULT_ASSIGN);
+    }
+
+    @Test
+    public void functionTest()
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+        runListTest(INPUT_FUNC, RESULT_FUNC);
     }
 
     @Test

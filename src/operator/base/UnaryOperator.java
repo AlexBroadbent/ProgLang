@@ -3,15 +3,19 @@ package operator.base;
 import com.google.common.collect.Lists;
 import eval.ICalculable;
 import eval.Literal;
+import eval.Variable;
 import model.Domain;
 import operator.Associativity;
 import operator.IOperator;
 import operator.IPrecedence;
+import operator.loop.In;
 import parser.ExpressionException;
 import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;
+
+import static eval.ICalculableType.VARIABLE;
 
 /**
  * x++.operator.base
@@ -51,7 +55,15 @@ public abstract class UnaryOperator extends Operator {
             throws IncomparableTypeException, ExpressionException {
         if (returnExpression)
             return Domain.wrapLiteral(this);
-        return Domain.wrapLiteral(execute(stack.pop()));
+
+        Literal arg1 = stack.pop();
+
+        // Assert that the operation is not attempting to be executed on a variable that does not have a value
+        if (arg1.getType() == VARIABLE)
+            if (!((Variable) arg1).isValueSet() && getClass() != In.class)
+                throw new ExpressionException(String.format(MSG_VALUE_NOT_SET, ((Variable) arg1).getName()));
+
+        return Domain.wrapLiteral(execute(arg1));
     }
 
     @Override

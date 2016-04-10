@@ -18,10 +18,7 @@ import operator.conditional.ConditionalElse;
 import operator.equality.Equal;
 import operator.equality.NotEqual;
 import operator.function.*;
-import operator.list.ArrayAccessEnd;
-import operator.list.ArrayAccessStart;
-import operator.list.ListEnd;
-import operator.list.ListStart;
+import operator.list.*;
 import operator.loop.Do;
 import operator.loop.ForLoop;
 import operator.loop.In;
@@ -143,10 +140,13 @@ public class Domain {
         registerFunction(new Max());
         registerFunction(new Random());
         registerFunction(new List());
+
+        // list package functions
         registerFunction(new Head());
         registerFunction(new Tail());
         registerFunction(new Cons());
         registerFunction(new Empty());
+        registerFunction(new Size());
 
         // set singleton instance
         if (instance == null)

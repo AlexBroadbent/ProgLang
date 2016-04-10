@@ -15,10 +15,10 @@ import parser.ParserException;
  */
 public class SimpleCalculationUT extends ExpressionTest {
 
-    private static final String                     VAR_X              = "x";
-    private static final String                     VAR_Y              = "y";
-    private static final Integer                    VAR_X_VALUE        = 3;
-    private static final String                     VAR_Y_VALUE        = "HelloWorld";
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
+    private static final Integer VAR_X_VALUE = 3;
+    private static final String  VAR_Y_VALUE = "HelloWorld";
 
     private static final String                     INPUT_ADD          = "x + x";
     private static final String                     INPUT_ADD_ERR      = "x + 'j'";

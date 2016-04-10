@@ -12,6 +12,9 @@ import java.util.List;
  */
 public interface IOperator extends ICalculable {
 
+    String MSG_VALUE_NOT_SET = "The variable %s does not have a value";
+
+
     String getToken();
 
     int getNumOperands();

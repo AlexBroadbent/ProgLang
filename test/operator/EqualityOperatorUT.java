@@ -15,14 +15,14 @@ import parser.ParserException;
  */
 public class EqualityOperatorUT extends ExpressionTest {
 
-    private static final String  VAR_W         = "w";
-    private static final String  VAR_X         = "x";
-    private static final String  VAR_Y         = "y";
-    private static final String  VAR_Z         = "z";
-    private static final Integer VAR_W_VALUE   = 3;
-    private static final Integer VAR_X_VALUE   = 12;
-    private static final Integer VAR_Y_VALUE   = 6;
-    private static final Boolean VAR_Z_VALUE   = Boolean.TRUE;
+    private static final String  VAR_W       = "w";
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
+    private static final String  VAR_Z       = "z";
+    private static final Integer VAR_W_VALUE = 3;
+    private static final Integer VAR_X_VALUE = 12;
+    private static final Integer VAR_Y_VALUE = 6;
+    private static final Boolean VAR_Z_VALUE = Boolean.TRUE;
 
     private static final String  INPUT_EQ      = "x == y";
     private static final String  INPUT_EQ_2    = "x > w == z";

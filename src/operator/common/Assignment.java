@@ -40,8 +40,6 @@ public class Assignment extends BinaryOperator {
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
             throws IncomparableTypeException, ExpressionException {
-//        if (returnExpression)
-  //          return Domain.wrapLiteral(this);
 
         // If the stack has more than two items then it is a function declaration
         if (stack.size() > 2) {

@@ -53,6 +53,7 @@ public class FunctionTest extends ExpressionTest {
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
         Expression run = getExpressionFromInput(input);
         Object result = getValueFromExpression(run);
+        assertTypeOfResult(result, expResult.getClass());
         assertResult(expResult, result);
     }
 

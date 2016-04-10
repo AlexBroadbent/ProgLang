@@ -1,8 +1,10 @@
-package operator.function;
+package operator.list;
 
 import com.google.common.collect.Lists;
 import eval.Literal;
+import gui.XLogger;
 import operator.IConstants;
+import operator.function.Function;
 import parser.ExpressionException;
 
 import java.util.LinkedList;
@@ -14,11 +16,11 @@ import java.util.List;
  * @author Alexander Broadbent
  * @version 26/02/2016
  */
-public class Tail extends Function {
+public class Head extends Function {
 
     @Override
     public String getToken() {
-        return IConstants.TAIL;
+        return IConstants.HEAD;
     }
 
     @Override
@@ -43,9 +45,9 @@ public class Tail extends Function {
             list = (LinkedList<Literal>) args.get(0).getValue();
         }
         catch (ClassCastException ex) {
-            throw new ExpressionException(String.format(MSG_LIST, args.get(0).getValue().getClass().getSimpleName()));
+            XLogger.severe(String.format(MSG_LIST, getToken(), args.get(0).getValue().getClass().getSimpleName()));
         }
 
-        return (list != null) ? Lists.newLinkedList(list.subList(1, list.size())) : null;
+        return (list != null) ? list.peek().getValue() : null;
     }
 }

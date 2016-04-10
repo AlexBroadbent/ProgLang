@@ -11,5 +11,4 @@ import framework.ExpressionTest;
 public class ComplexCalculationUT extends ExpressionTest {
 
 
-
 }

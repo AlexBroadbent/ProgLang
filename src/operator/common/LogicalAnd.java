@@ -28,6 +28,11 @@ public class LogicalAnd extends BinaryOperator {
     }
 
     @Override
+    public List<String> getAllowedExecutionTypes() {
+        return Lists.newArrayList(Boolean.class.getSimpleName());
+    }
+
+    @Override
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException {
         try {
             return ((Boolean) arg1.getValue()) && ((Boolean) arg2.getValue());
@@ -36,11 +41,6 @@ public class LogicalAnd extends BinaryOperator {
             throw new IncomparableTypeException(getAllowedExecutionTypes(),
                     getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
         }
-    }
-
-    @Override
-    public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Boolean.class.getSimpleName());
     }
 
 }

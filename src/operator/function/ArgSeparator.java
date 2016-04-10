@@ -35,19 +35,20 @@ public class ArgSeparator extends NullaryOperator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws IncomparableTypeException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
+            throws IncomparableTypeException {
         return Domain.wrapLiteral(this);
-    }
-
-    @Override
-    public int getType() {
-        return ICalculableType.ARG_SEPARATOR;
     }
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
         while (!operatorStack.isEmpty() && !(operatorStack.peek().getType() == LEFT_PARENTHESIS || operatorStack.peek().getType() == LIST_START))
             postfix.add(operatorStack.pop());
+    }
+
+    @Override
+    public int getType() {
+        return ICalculableType.ARG_SEPARATOR;
     }
 
 }

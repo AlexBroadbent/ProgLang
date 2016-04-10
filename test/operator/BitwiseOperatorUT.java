@@ -28,24 +28,24 @@ public class BitwiseOperatorUT extends ExpressionTest {
     private static final Integer VAR_X_VAL_BINARY = Integer.parseUnsignedInt("00011010", 2); // Same method as Literal parser
     private static final Integer VAR_Y_VAL_BINARY = 2;
 
-    private static final String  INPUT_NOT        = "~x";
-    private static final String  INPUT_NOT_ERR    = "~'hello'";
-    private static final String  INPUT_AND        = "x & y";
-    private static final String  INPUT_AND_ERR    = "x & true";
-    private static final String  INPUT_OR         = "x | y";
-    private static final String  INPUT_OR_ERR     = "x | false";
-    private static final String  INPUT_XOR        = "x $ y";
-    private static final String  INPUT_XOR_ERR    = "x $ 'hello'";
-    private static final String  INPUT_LBS        = "binaryX << binaryY";
-    private static final String  INPUT_LBS_ERR    = "binaryX << 'hello'";
-    private static final String  INPUT_RBS        = "binaryX >> binaryY";
-    private static final String  INPUT_RBS_ERR    = "binaryX >> false";
-    private static final Integer RESULT_NOT       = -6;
-    private static final Integer RESULT_AND       = 1;
-    private static final Integer RESULT_OR        = 7;
-    private static final Integer RESULT_XOR       = 6;
-    private static final Integer RESULT_LBS       = 104;
-    private static final Integer RESULT_RBS       = 6;
+    private static final String                     INPUT_NOT          = "~x";
+    private static final String                     INPUT_NOT_ERR      = "~'hello'";
+    private static final String                     INPUT_AND          = "x & y";
+    private static final String                     INPUT_AND_ERR      = "x & true";
+    private static final String                     INPUT_OR           = "x | y";
+    private static final String                     INPUT_OR_ERR       = "x | false";
+    private static final String                     INPUT_XOR          = "x $ y";
+    private static final String                     INPUT_XOR_ERR      = "x $ 'hello'";
+    private static final String                     INPUT_LBS          = "binaryX << binaryY";
+    private static final String                     INPUT_LBS_ERR      = "binaryX << 'hello'";
+    private static final String                     INPUT_RBS          = "binaryX >> binaryY";
+    private static final String                     INPUT_RBS_ERR      = "binaryX >> false";
+    private static final Integer                    RESULT_NOT         = -6;
+    private static final Integer                    RESULT_AND         = 1;
+    private static final Integer                    RESULT_OR          = 7;
+    private static final Integer                    RESULT_XOR         = 6;
+    private static final Integer                    RESULT_LBS         = 104;
+    private static final Integer                    RESULT_RBS         = 6;
     private static final Class<? extends Exception> CLASS_INCOMPARABLE = IncomparableTypeException.class;
 
 

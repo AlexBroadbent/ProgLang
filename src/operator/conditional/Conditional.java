@@ -6,7 +6,6 @@ import eval.Expression;
 import eval.ICalculable;
 import eval.Literal;
 import model.Domain;
-import operator.Associativity;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
@@ -68,13 +67,8 @@ public class Conditional extends TernaryOperator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        if (getAssociativity() == Associativity.LEFT_TO_RIGHT)
-            while (!operatorStack.isEmpty() && operatorStack.peek().getPrecedence() <= getPrecedence())
-                postfix.add(operatorStack.pop());
-        if (getAssociativity() == Associativity.RIGHT_TO_LEFT)
-            while (!operatorStack.isEmpty() && operatorStack.peek().getPrecedence() < getPrecedence())
-                postfix.add(operatorStack.pop());
-
+        while (!operatorStack.isEmpty() && operatorStack.peek().getPrecedence() < getPrecedence())
+            postfix.add(operatorStack.pop());
         postfix.add(new ConditionalPlaceholder());
         operatorStack.add(this);
     }

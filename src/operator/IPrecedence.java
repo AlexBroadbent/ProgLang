@@ -31,6 +31,6 @@ public interface IPrecedence {
     int ARG_SEPARATOR       = 15;   // ,
     int BRACKET             = 16;   // ( )
 
-    int NONE                = 99;   // NullaryOperator
+    int NONE = 99;   // NullaryOperator
 
 }

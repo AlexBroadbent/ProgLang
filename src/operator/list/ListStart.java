@@ -30,14 +30,14 @@ public class ListStart extends NullaryOperator {
     }
 
     @Override
-    public int getType() {
-        return ICalculableType.LIST_START;
-    }
-
-    @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
         postfix.add(new FunctionPlaceholder());
         operatorStack.push(this);
+    }
+
+    @Override
+    public int getType() {
+        return ICalculableType.LIST_START;
     }
 
 }

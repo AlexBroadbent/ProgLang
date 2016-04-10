@@ -15,10 +15,10 @@ import parser.ParserException;
  */
 public class ComparatorOperatorUT extends ExpressionTest {
 
-    private static final String                     VAR_X              = "x";
-    private static final String                     VAR_Y              = "y";
-    private static final Integer                    VAR_X_VALUE        = 3;
-    private static final Integer                    VAR_Y_VALUE        = 5;
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
+    private static final Integer VAR_X_VALUE = 3;
+    private static final Integer VAR_Y_VALUE = 5;
 
     private static final String                     INPUT_GT           = "x > y";
     private static final String                     INPUT_GT_ERR       = "x > true";

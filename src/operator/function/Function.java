@@ -1,10 +1,7 @@
 package operator.function;
 
 import com.google.common.collect.Lists;
-import eval.FunctionPlaceholder;
-import eval.ICalculable;
-import eval.ICalculableType;
-import eval.Literal;
+import eval.*;
 import model.Domain;
 import operator.Associativity;
 import operator.IFunction;
@@ -27,8 +24,9 @@ import static eval.ICalculableType.FUNCTION_PLACEHOLDER;
  */
 public abstract class Function implements IFunction {
 
-    protected final static String MSG_ONE_ARG = "Only one argument is required, instead found %d";
-    protected final static String MSG_LIST    = "Argument given to head must be a list. Instead found: %s";
+    protected final static String MSG_ONE_ARG  = "Only one argument is required, instead found %d";
+    protected final static String MSG_SIZE_ARG = "The function expects %d arguments, instead received %d";
+    protected final static String MSG_LIST     = "Argument given to %s must be a list. Instead found: %s";
 
 
     @Override
@@ -53,7 +51,7 @@ public abstract class Function implements IFunction {
 
     @Override
     public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
+        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName(), Variable.class.getSimpleName());
     }
 
     @Override

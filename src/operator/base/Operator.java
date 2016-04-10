@@ -11,7 +11,6 @@ import operator.IOperator;
  */
 public abstract class Operator implements IOperator {
 
-
     @Override
     public int getType() {
         return ICalculableType.OPERATOR;

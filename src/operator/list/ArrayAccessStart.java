@@ -29,13 +29,13 @@ public class ArrayAccessStart extends NullaryOperator {
     }
 
     @Override
-    public int getType() {
-        return ICalculableType.OPERATOR;
+    public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
+
     }
 
     @Override
-    public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-
+    public int getType() {
+        return ICalculableType.OPERATOR;
     }
 
 }
