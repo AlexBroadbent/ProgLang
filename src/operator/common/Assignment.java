@@ -40,26 +40,28 @@ public class Assignment extends BinaryOperator {
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
             throws IncomparableTypeException, ExpressionException {
+//        if (returnExpression)
+  //          return Domain.wrapLiteral(this);
+
         // If the stack has more than two items then it is a function declaration
         if (stack.size() > 2) {
-            // Copy stack into a List to have cleaner operations
-            List<Literal> expression = Lists.newArrayList(stack);
-            stack.clear();
+            // Remove the placeholder for the UserFunction
+            stack.remove(0);
 
             // Validate that a UserFunction object exists in the top of the stack
-            Literal userFuncLiteral = expression.get(0);
+            Literal userFuncLiteral = stack.get(0);
             if (((ICalculable) userFuncLiteral.getValue()).getType() != ICalculableType.USER_FUNCTION)
                 throw new ExpressionException(String.format(MSG_INVALID_ASSIGNMENT, userFuncLiteral.getValue().getClass().getSimpleName()));
             IUserFunction userFunction = (UserFunction) userFuncLiteral.getValue();
 
             // Check expression is valid for the function, such as matching arguments
-            List<ICalculable> expr = Lists.newArrayList(expression.subList(1, expression.size()));
+            List<ICalculable> expr = Lists.newArrayList(stack.subList(1, stack.size()));
             userFunction.setExpression(new Expression(expr, domain));
             if (!userFunction.validate())
                 throw new ExpressionException(MSG_INVALID_FUNCTION);
 
-            // Set the expression of the function and register the function in the domain
-            userFunction.setExpression(new Expression(expr, domain));
+            // Empty the stack
+            stack.clear();
 
             return Domain.wrapLiteral(null);
         }

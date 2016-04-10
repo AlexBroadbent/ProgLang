@@ -22,13 +22,13 @@ import java.util.Set;
  */
 public class UserFunction extends Function implements IUserFunction {
 
-    protected String        name;
-    protected List<Literal> arguments;
-    protected Expression    expression;
-    protected Domain        model;
+    protected String         name;
+    protected List<Variable> arguments;
+    protected Expression     expression;
+    protected Domain         model;
 
 
-    public UserFunction(Domain model, String name, List<Literal> arguments) {
+    public UserFunction(Domain model, String name, List<Variable> arguments) {
         this.model = model;
         this.name = name;
         this.arguments = arguments;
@@ -46,17 +46,17 @@ public class UserFunction extends Function implements IUserFunction {
     }
 
     @Override
-    public void addArgument(Literal arg) {
+    public void addArgument(Variable arg) {
         arguments.add(arg);
     }
 
     @Override
-    public List<Literal> getArguments() {
+    public List<Variable> getArguments() {
         return arguments;
     }
 
     @Override
-    public void setArguments(List<Literal> arguments) {
+    public void setArguments(List<Variable> arguments) {
         this.arguments = arguments;
     }
 
@@ -83,8 +83,8 @@ public class UserFunction extends Function implements IUserFunction {
     public boolean validate() throws ExpressionException {
         Set<String> argNames = Sets.newHashSet();
         Set<String> expNames = Sets.newHashSet();
-        for (Literal args : getArguments())
-            argNames.add(((Variable) args).getName());
+        for (Variable arg : getArguments())
+            argNames.add(arg.getName());
         for (ICalculable literal : expression.getExpression())
             if (literal.getType() == ICalculableType.VARIABLE)
                 expNames.add(((Variable) literal).getName());
@@ -93,17 +93,10 @@ public class UserFunction extends Function implements IUserFunction {
         if (expNames.containsAll(argNames) && argNames.containsAll(expNames))
             return true;
 
-        // Check the variables from the domain
+        // Check if arguments exist in the domain, the value can be null as for loops have a variable which
+        //  is not set yet.
         expNames.removeAll(argNames);
-        for (String varName : expNames)
-            if (model.hasVariable(varName)) {
-                if (!model.getVariable(varName).isValueSet())
-                    throw new ExpressionException("Expression contains variable (" + varName + ") that does not have a value set.");
-            }
-            else
-                throw new ExpressionException("The variable, " + varName + ", has not been declared.");
-
-        return true;
+        return (model.getVariableNames().containsAll(expNames));
     }
 
     @Override
@@ -127,23 +120,26 @@ public class UserFunction extends Function implements IUserFunction {
     }
 
     @Override
-    public int getType() {
-        return ICalculableType.USER_FUNCTION;
-    }
-
-    @Override
     public List<String> getAllowedExecutionTypes() {
         return Lists.newArrayList(Literal.class.getSimpleName());
     }
 
     @Override
+    public int getType() {
+        return ICalculableType.USER_FUNCTION;
+    }
+
+    @Override
     public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
+        if (args.size() == 0)
+            return this;
+
         if (args.size() != arguments.size())
             throw new ExpressionException("Not enough arguments for function, expected " + arguments.size() + " and received " + args.size());
 
         // set values for the functional variables
         for (int i = 0; i < arguments.size(); i++) {
-            Variable var = model.getFunctionalVariable(name, ((Variable) arguments.get(i)).getName());
+            Variable var = model.getFunctionalVariable(name, (arguments.get(i)).getName());
             var.setValue(args.get(i));
         }
 
@@ -153,8 +149,8 @@ public class UserFunction extends Function implements IUserFunction {
     @Override
     public String toString() {
         List<String> vars = Lists.newArrayList();
-        for (Literal arg : getArguments())
-            vars.add(((Variable) arg).getName());
+        for (Variable arg : getArguments())
+            vars.add(arg.getName());
 
         return getName() + ((!vars.isEmpty()) ? "(" + StringUtils.join(vars, ", ") + ")" : "");
     }

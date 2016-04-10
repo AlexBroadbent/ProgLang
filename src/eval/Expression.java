@@ -8,7 +8,6 @@ import model.Domain;
 import operator.IOperator;
 import operator.conditional.Conditional;
 import operator.conditional.ConditionalElse;
-import operator.function.Declaration;
 import operator.loop.Do;
 import operator.loop.ForLoop;
 import org.apache.commons.lang3.StringUtils;
@@ -127,8 +126,8 @@ public class Expression extends Literal {
         boolean inCondDec = false;  // defining a conditional expression
 
         for (ICalculable literal : expression) {
-            if (literal instanceof Declaration)
-                inFuncDec = true;
+            if (literal.getType() == FLAG)
+                inFuncDec = !inFuncDec;
             else if (literal instanceof Do)
                 inLoopDec = true;
             else if (literal instanceof ForLoop)
@@ -169,7 +168,7 @@ public class Expression extends Literal {
             }
             else if (literal.getType() == FUNCTION_PLACEHOLDER)
                 inFunc++;
-            else if (literal.getType() == CONDITIONAL_PLACEHOLDER)
+            else if (literal.getType() == CONDITIONAL_PLACEHOLDER || literal.getType() == FLAG)
                 stackSize--;
         }
 

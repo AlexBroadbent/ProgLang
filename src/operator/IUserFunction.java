@@ -1,7 +1,7 @@
 package operator;
 
 import eval.Expression;
-import eval.Literal;
+import eval.Variable;
 import parser.ExpressionException;
 
 import java.util.List;
@@ -16,11 +16,11 @@ public interface IUserFunction extends IFunction {
 
     String getName();
 
-    void addArgument(Literal arg);
+    void addArgument(Variable arg);
 
-    List<Literal> getArguments();
+    List<Variable> getArguments();
 
-    void setArguments(List<Literal> arguments);
+    void setArguments(List<Variable> arguments);
 
     Expression getExpression();
 

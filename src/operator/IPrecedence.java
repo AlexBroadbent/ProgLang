@@ -11,7 +11,6 @@ package operator;
  */
 public interface IPrecedence {
 
-    int REFERENCE           = 0;
     int FUNCTION            = 1;    // ()
     int ARRAY_ACCESS        = 1;    // []
     int LIST                = 1;    // {}

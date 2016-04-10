@@ -21,6 +21,6 @@ public interface ICalculableType {
     int LIST_START              = 9;
     int FUNCTION_PLACEHOLDER    = 10;
     int CONDITIONAL_PLACEHOLDER = 11;
-    int REFERENCE               = 12;
+    int FLAG                    = 12;
 
 }

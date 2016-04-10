@@ -32,6 +32,7 @@ import parser.Parser;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import static eval.ICalculableType.USER_FUNCTION;
 
@@ -146,7 +147,6 @@ public class Domain {
         registerFunction(new Tail());
         registerFunction(new Cons());
         registerFunction(new Empty());
-        registerFunction(new Declaration());
 
         // set singleton instance
         if (instance == null)
@@ -252,6 +252,9 @@ public class Domain {
         return new Variable(variableName);
     }
 
+    public Set<String> getVariableNames() {
+        return variables.keySet();
+    }
 
 
     /*

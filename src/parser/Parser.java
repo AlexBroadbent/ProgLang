@@ -1,9 +1,9 @@
 package parser;
 
 import com.google.common.collect.Lists;
+import eval.Flag;
 import eval.ICalculable;
 import eval.Literal;
-import eval.Variable;
 import lexer.Token;
 import model.Domain;
 import operator.IUserFunction;
@@ -39,7 +39,7 @@ public class Parser implements IParser {
 
         for (Token token : tokens) {
             if (token.token == FUNCTION_DECLARATION)
-                return parseDeclaration(domain, tokens);                                        // Function declaration
+                return parseDeclaration(domain, tokens.subList(1, tokens.size()));              // Function declaration
             if (token.token == VARIABLE)
                 infixExpression.add(domain.getOrCreateVariable(token.sequence));                            // Variable
             else if (domain.isOperator(token.sequence))
@@ -62,7 +62,7 @@ public class Parser implements IParser {
      * @return list of ICalculable objects
      */
     private List<ICalculable> parseDeclaration(Domain domain, List<Token> tokens) throws ParserException {
-        List<ICalculable> infixExpression = Lists.newArrayList();
+        List<ICalculable> infixExpression = Lists.newArrayList(new Flag());
         boolean inFunctionAssignment = false;
         IUserFunction function = null;
 
@@ -72,12 +72,10 @@ public class Parser implements IParser {
                     if (function == null) {
                         function = new UserFunction(domain, token.sequence);
                         domain.registerFunction(function);
-                        infixExpression.add(Domain.wrapLiteral(function));
+                        infixExpression.add(function);
                     }
-                    else {
-                        Variable variable = domain.addFunctionalVariable(function.getName(), token.sequence);
-                        function.addArgument(Domain.wrapLiteral(variable.getName()));
-                    }
+                    else
+                        function.addArgument(domain.addFunctionalVariable(function.getName(), token.sequence));
                 }
                 else {
                     if (function != null && Objects.equals(token.sequence, function.getName()))
@@ -87,9 +85,10 @@ public class Parser implements IParser {
                 }
             }
             else if (domain.isOperator(token.sequence)) {
-                infixExpression.add(domain.getOperator(token.sequence));                                    // Operator
-                if (Objects.equals(token.sequence, ASSIGNMENT))
+                if (Objects.equals(token.sequence, ASSIGNMENT))                                             // Operator
                     inFunctionAssignment = true;
+                if (inFunctionAssignment)
+                    infixExpression.add(domain.getOperator(token.sequence));
             }
             else if (domain.isFunction(token.sequence)) {
                 if (function == null && !Objects.equals(token.sequence, FUNC))                              // Function

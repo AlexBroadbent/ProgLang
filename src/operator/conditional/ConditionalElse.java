@@ -8,7 +8,10 @@ import operator.IPrecedence;
 import operator.base.NullaryOperator;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
+
+import static operator.IConstants.CONDITIONAL;
 
 /**
  * x++.operator.conditional
@@ -30,9 +33,10 @@ public class ConditionalElse extends NullaryOperator {
 
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
-        postfix.add(new ConditionalPlaceholder());
-        while (!operatorStack.isEmpty() && !operatorStack.peek().getToken().equals(IConstants.CONDITIONAL))
+        while (!operatorStack.isEmpty() && !Objects.equals(operatorStack.peek().getToken(), CONDITIONAL))
             postfix.add(operatorStack.pop());
+
+        postfix.add(new ConditionalPlaceholder());
     }
 
 }
