@@ -2,8 +2,6 @@ package eval;
 
 import model.Domain;
 import operator.IOperator;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;

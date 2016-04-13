@@ -1,19 +1,13 @@
 package operator.loop;
 
 import com.google.common.collect.Lists;
-import eval.Expression;
-import eval.ICalculable;
-import eval.Literal;
-import eval.Variable;
+import eval.*;
 import model.Domain;
 import operator.IConstants;
 import operator.IPrecedence;
 import operator.function.Function;
 import org.apache.commons.lang3.StringUtils;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -65,13 +59,13 @@ public class ForLoop extends Function {
 
         // Cast variables to match and throw expression exception if anything fails
         Variable var;
-        LinkedList<Literal> list;
+        XList list;
         List<ICalculable> expr = Lists.newArrayList(args.subList(2, args.size()));
-        List<Literal> results = Lists.newLinkedList();
+        XList results = new XList();
 
         try {
             var = (Variable) args.get(0);
-            list = (LinkedList<Literal>) args.get(1).getValue();
+            list = (XList) args.get(1).getValue();
             expr = Expression.parseWrappedList(expr);
 
             // Remove do from expression, used to determine whether expression is executable previous to now
@@ -85,7 +79,7 @@ public class ForLoop extends Function {
             // Create an array to store the results of each iteration
             for (Literal element : list) {
                 var.setValue(element.getValue());
-                results.add(Domain.wrapLiteral(new Expression(expr, domain).execute()));
+                results.push(Domain.wrapLiteral(new Expression(expr, domain).execute()));
             }
         }
         catch (ClassCastException | NullPointerException ex) {

@@ -1,13 +1,13 @@
 package operator.loop;
 
+import eval.ExpressionException;
 import eval.ICalculable;
+import eval.IncomparableTypeException;
 import eval.Literal;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
 import operator.base.UnaryOperator;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;

@@ -1,13 +1,13 @@
 package operator.base;
 
+import eval.ExpressionException;
 import eval.ICalculable;
+import eval.IncomparableTypeException;
 import eval.Literal;
 import model.Domain;
 import operator.Associativity;
 import operator.IOperator;
 import operator.IPrecedence;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;

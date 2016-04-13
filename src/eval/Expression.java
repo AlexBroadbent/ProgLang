@@ -11,8 +11,6 @@ import operator.conditional.ConditionalElse;
 import operator.loop.Do;
 import operator.loop.ForLoop;
 import org.apache.commons.lang3.StringUtils;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
 
 import java.util.List;

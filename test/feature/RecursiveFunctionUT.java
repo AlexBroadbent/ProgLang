@@ -1,14 +1,12 @@
 package feature;
 
-import eval.Literal;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
+import eval.XList;
 import framework.FunctionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
-
-import java.util.List;
 
 /**
  * ProgLang.feature
@@ -18,8 +16,8 @@ import java.util.List;
  */
 public class RecursiveFunctionUT extends FunctionTest {
 
-    private final static String        VAR_T       = "t";
-    private final static List<Literal> VAR_T_VALUE = createLiteralLinkedList(10, 20, 30);
+    private final static String VAR_T       = "t";
+    private final static XList  VAR_T_VALUE = XList.parse(10, 20, 30);
 
     private final static String DEF_FIB        = "func fib(n) = (n < 2) ? n : fib(n - 1) + fib(n - 2)";
     private final static String DEF_PROCESS    = "func process(l) = empty(l) ? 'finished' : process(tail(l))";

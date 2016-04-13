@@ -1,13 +1,13 @@
 package operator.list;
 
 import com.google.common.collect.Lists;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
 import eval.Literal;
-import gui.XLogger;
+import eval.XList;
 import operator.IConstants;
 import operator.function.Function;
-import parser.ExpressionException;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,19 +35,18 @@ public class Head extends Function {
 
     @Override
     @SuppressWarnings( "unchecked" )    // Catch is in place to check a casting exception
-    public Object execute(List<Literal> args) throws ExpressionException {
+    public Object execute(List<Literal> args) throws ExpressionException, IncomparableTypeException {
         if (args.size() != getNumOperands())
             throw new ExpressionException(String.format(MSG_ONE_ARG, args.size()));
 
-        LinkedList<Literal> list = null;
+        XList list;
 
         try {
-            list = (LinkedList<Literal>) args.get(0).getValue();
+            list = (XList) args.get(0).getValue();
+            return list.peek().getValue();
         }
         catch (ClassCastException ex) {
-            XLogger.severe(String.format(MSG_LIST, getToken(), args.get(0).getValue().getClass().getSimpleName()));
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0).getValue().getClass().getSimpleName());
         }
-
-        return (list != null) ? list.peek().getValue() : null;
     }
 }

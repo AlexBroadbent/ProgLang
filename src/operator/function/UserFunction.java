@@ -8,8 +8,6 @@ import operator.Associativity;
 import operator.IPrecedence;
 import operator.IUserFunction;
 import org.apache.commons.lang3.StringUtils;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Set;

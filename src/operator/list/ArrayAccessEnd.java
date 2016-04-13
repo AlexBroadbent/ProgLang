@@ -1,13 +1,10 @@
 package operator.list;
 
 import com.google.common.collect.Lists;
-import eval.ICalculableType;
-import eval.Literal;
+import eval.*;
 import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,14 +33,19 @@ public class ArrayAccessEnd extends BinaryOperator {
     }
 
     @Override
-    @SuppressWarnings( "unchecked" ) // Caught and warning issued
+    @SuppressWarnings( "unchecked" ) // Class cast exception caught
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
-        LinkedList<Literal> list = null;
-        Integer position = null;
+        XList list;
+        Integer position;
 
         try {
-            list = (LinkedList<Literal>) arg1.getValue();
+            list = (XList) arg1.getValue();
             position = Integer.parseInt(arg2.getValue().toString());
+
+            if (list.size() < position)
+                throw new ExpressionException("The list has a size of " + list.size() + ", position is not accessible");
+
+            return list.get(position);
         }
         catch (ClassCastException ex) {
             throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getValue().getClass().getSimpleName());
@@ -51,11 +53,6 @@ public class ArrayAccessEnd extends BinaryOperator {
         catch (NumberFormatException ex) {
             throw new ExpressionException("The position given is not a valid integer");
         }
-
-        if (list.size() < position)
-            throw new ExpressionException("The list has a size of " + list.size() + ", position is not accessible");
-
-        return list.get(position);
     }
 
     @Override

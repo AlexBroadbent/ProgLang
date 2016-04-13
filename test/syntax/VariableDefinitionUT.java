@@ -1,8 +1,8 @@
 package syntax;
 
+import eval.ExpressionException;
 import framework.ExpressionTest;
 import org.junit.Test;
-import parser.ExpressionException;
 
 /**
  * ProgLang.syntax

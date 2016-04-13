@@ -7,8 +7,6 @@ import operator.Associativity;
 import operator.IFunction;
 import operator.IOperator;
 import operator.IPrecedence;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +24,6 @@ public abstract class Function implements IFunction {
 
     protected final static String MSG_ONE_ARG  = "Only one argument is required, instead found %d";
     protected final static String MSG_SIZE_ARG = "The function expects %d arguments, instead received %d";
-    protected final static String MSG_LIST     = "Argument given to %s must be a list. Instead found: %s";
 
 
     @Override

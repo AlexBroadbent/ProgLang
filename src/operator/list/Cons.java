@@ -1,13 +1,12 @@
 package operator.list;
 
-import com.google.common.collect.Lists;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.XList;
 import operator.IConstants;
 import operator.function.Function;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -36,20 +35,20 @@ public class Cons extends Function {
         if (args.size() != getNumOperands())
             throw new ExpressionException(String.format(MSG_SIZE_ARG, getNumOperands(), args.size()));
 
-        LinkedList<Literal> list;
-        LinkedList<Literal> newList = Lists.newLinkedList();
+        XList list;
+        XList newList = new XList();
 
         try {
-            list = (LinkedList<Literal>) args.get(1).getValue();
-            newList.add(args.get(0));
-            newList.addAll(list);
+            list = (XList) args.get(1).getValue();
+            newList.push(args.get(0));
+            newList.pushAll(list);
+
+            return newList;
         }
         catch (ClassCastException | NullPointerException ex) {
             throw new IncomparableTypeException(String.format(MSG_FORMAT, args.get(0).getValue().getClass().getSimpleName() +
                     ", " + args.get(1).getValue().getClass().getSimpleName()));
         }
-
-        return newList;
     }
 
 }

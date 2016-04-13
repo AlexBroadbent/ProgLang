@@ -1,9 +1,9 @@
 package operator.math;
 
+import eval.IncomparableTypeException;
 import eval.Literal;
 import operator.IPrecedence;
 import operator.function.Function;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 

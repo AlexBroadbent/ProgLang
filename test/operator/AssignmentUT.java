@@ -1,11 +1,11 @@
 package operator;
 
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Before;
 import org.junit.Test;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
 
 /**

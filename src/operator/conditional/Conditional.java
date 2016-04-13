@@ -1,17 +1,12 @@
 package operator.conditional;
 
 import com.google.common.collect.Lists;
-import eval.ConditionalPlaceholder;
-import eval.Expression;
-import eval.ICalculable;
-import eval.Literal;
+import eval.*;
 import model.Domain;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
 import operator.base.TernaryOperator;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.Collections;
 import java.util.List;

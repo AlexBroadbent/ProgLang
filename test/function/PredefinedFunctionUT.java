@@ -1,14 +1,12 @@
 package function;
 
-import eval.Literal;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
+import eval.XList;
 import framework.FunctionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
-
-import java.util.List;
 
 /**
  * x++.function
@@ -18,14 +16,14 @@ import java.util.List;
  */
 public class PredefinedFunctionUT extends FunctionTest {
 
-    private static final String        VAR_W       = "w";
-    private static final String        VAR_X       = "x";
-    private static final String        VAR_Y       = "y";
-    private static final String        VAR_Z       = "z";
-    private static final Integer       VAR_W_VALUE = 15;
-    private static final Integer       VAR_X_VALUE = 10;
-    private static final Integer       VAR_Y_VALUE = 4;
-    private static final List<Literal> VAR_Z_VALUE = createLiteralLinkedList(1, 2, 3);
+    private static final String  VAR_W       = "w";
+    private static final String  VAR_X       = "x";
+    private static final String  VAR_Y       = "y";
+    private static final String  VAR_Z       = "z";
+    private static final Integer VAR_W_VALUE = 15;
+    private static final Integer VAR_X_VALUE = 10;
+    private static final Integer VAR_Y_VALUE = 4;
+    private static final XList   VAR_Z_VALUE = XList.parse(1, 2, 3);
 
     private static final String                     INPUT_CONS       = "cons(y, z)";
     private static final String                     INPUT_CONS_ARG   = "cons(y, z, 3)";
@@ -47,12 +45,12 @@ public class PredefinedFunctionUT extends FunctionTest {
     private static final String                     INPUT_SIZE       = "size(z)";
     private static final String                     INPUT_SIZE_ARG   = "size(z, 2)";
     private static final String                     INPUT_SIZE_TYPE  = "size(2)";
-    private static final List<Literal>              RESULT_CONS      = createLiteralLinkedList(4, 1, 2, 3);
+    private static final XList                      RESULT_CONS      = XList.parse(4, 1, 2, 3);
     private static final Integer                    RESULT_HEAD      = 1;
-    private static final List<Literal>              RESULT_LIST      = createLiteralLinkedList(1, 2, 3);
+    private static final XList                      RESULT_LIST      = XList.parse(1, 2, 3);
     private static final Double                     RESULT_MAX       = 40d;
     private static final Double                     RESULT_SUM       = 60d;
-    private static final List<Literal>              RESULT_TAIL      = createLiteralLinkedList(2, 3);
+    private static final XList                      RESULT_TAIL      = XList.parse(2, 3);
     private static final Boolean                    RESULT_EMPTY     = Boolean.FALSE;
     private static final Integer                    RESULT_SIZE      = 3;
     private static final Class<? extends Exception> CLASS_ITE        = IncomparableTypeException.class;

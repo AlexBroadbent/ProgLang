@@ -73,42 +73,42 @@ public class Domain {
         variables.put("e", new Variable("e", Math.E));
 
         // common package operators
-        registerOperator(new Assignment());
-        registerOperator(new LeftParenthesis());
-        registerOperator(new RightParenthesis());
         registerOperator(new Add());
-        registerOperator(new Subtract());
-        registerOperator(new Multiply());
+        registerOperator(new ArgSeparator());
+        registerOperator(new Assignment());
+        registerOperator(new Concat());
+        registerOperator(new Decrement());
         registerOperator(new Divide());
         registerOperator(new Increment());
-        registerOperator(new Decrement());
+        registerOperator(new LeftParenthesis());
         registerOperator(new LogicalAnd());
-        registerOperator(new LogicalOr());
         registerOperator(new LogicalNot());
-        registerOperator(new ArgSeparator());
-        registerOperator(new Concat());
+        registerOperator(new LogicalOr());
+        registerOperator(new Multiply());
+        registerOperator(new RightParenthesis());
+        registerOperator(new Subtract());
 
         // bitwise package operators
-        registerOperator(new Not());
         registerOperator(new And());
-        registerOperator(new Or());
-        registerOperator(new XOr());
         registerOperator(new LeftShift());
+        registerOperator(new Not());
+        registerOperator(new Or());
         registerOperator(new RightShift());
+        registerOperator(new XOr());
 
         // math package operators
-        registerOperator(new Power());
-        registerOperator(new SquareRoot());
-        registerOperator(new Exponential());
-        registerOperator(new NaturalLog());
-        registerOperator(new Mod());
-        registerOperator(new Log10());
-        registerOperator(new Sine());
-        registerOperator(new Cosine());
-        registerOperator(new Tangent());
-        registerOperator(new ASine());
         registerOperator(new ACosine());
+        registerOperator(new ASine());
         registerOperator(new ATangent());
+        registerOperator(new Cosine());
+        registerOperator(new Exponential());
+        registerOperator(new Log10());
+        registerOperator(new Mod());
+        registerOperator(new NaturalLog());
+        registerOperator(new Power());
+        registerOperator(new Sine());
+        registerOperator(new SquareRoot());
+        registerOperator(new Tangent());
 
         // comparator package
         registerOperator(new GreaterThan());
@@ -125,28 +125,29 @@ public class Domain {
         registerOperator(new ConditionalElse());
 
         // list package operators
-        registerOperator(new ArrayAccessStart());
         registerOperator(new ArrayAccessEnd());
-        registerOperator(new ListStart());
+        registerOperator(new ArrayAccessStart());
         registerOperator(new ListEnd());
+        registerOperator(new ListStart());
 
         // loop package operators
         registerOperator(new Do());
-        registerOperator(new In());
         registerOperator(new ForLoop());
+        registerOperator(new In());
 
         // function package functions
-        registerFunction(new Sum());
-        registerFunction(new Max());
-        registerFunction(new Random());
         registerFunction(new List());
+        registerFunction(new Max());
+        registerFunction(new Print());
+        registerFunction(new Random());
+        registerFunction(new Sum());
 
         // list package functions
-        registerFunction(new Head());
-        registerFunction(new Tail());
         registerFunction(new Cons());
         registerFunction(new Empty());
+        registerFunction(new Head());
         registerFunction(new Size());
+        registerFunction(new Tail());
 
         // set singleton instance
         if (instance == null)

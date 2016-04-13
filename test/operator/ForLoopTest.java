@@ -1,14 +1,12 @@
 package operator;
 
-import eval.Literal;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
+import eval.XList;
 import framework.FunctionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
-
-import java.util.List;
 
 /**
  * ProgLang.operator.loop
@@ -18,10 +16,10 @@ import java.util.List;
  */
 public class ForLoopTest extends FunctionTest {
 
-    private final static String        VAR_T       = "t";
-    private final static String        VAR_S       = "s";
-    private final static List<Literal> VAR_T_VALUE = createLiteralLinkedList(1, 2, 3);
-    private final static List<Literal> VAR_S_VALUE = createLiteralLinkedList(0, 1, 2);
+    private final static String VAR_T       = "t";
+    private final static String VAR_S       = "s";
+    private final static XList  VAR_T_VALUE = XList.parse(1, 2, 3);
+    private final static XList  VAR_S_VALUE = XList.parse(0, 1, 2);
 
     private final static String INPUT_VAR      = "for x in t do x";
     private final static String INPUT_LIST     = "for x in list(4, 5, 6) do x";
@@ -38,12 +36,12 @@ public class ForLoopTest extends FunctionTest {
     private final static String ERROR_LIST     = "for x in true do x";
     private final static String ERROR_LIST_2   = "for x in head do x";
 
-    private final static List<Literal>              RESULT_VAR     = createLiteralList(1, 2, 3);
-    private final static List<Literal>              RESULT_LIST    = createLiteralList(4, 5, 6);
-    private final static List<Literal>              RESULT_CALC    = createLiteralList(4d, 10d, 140d);
-    private final static List<Literal>              RESULT_OPER    = createLiteralList(0, 1, 2);
-    private final static List<Literal>              RESULT_SHORT   = createLiteralList(1, 2, 3);
-    private final static List<Literal>              RESULT_DBL_RUN = createLiteralList(2d, 4d, 6d);
+    private final static XList                      RESULT_VAR     = XList.parse(1, 2, 3);
+    private final static XList                      RESULT_LIST    = XList.parse(4, 5, 6);
+    private final static XList                      RESULT_CALC    = XList.parse(4d, 10d, 140d);
+    private final static XList                      RESULT_OPER    = XList.parse(0, 1, 2);
+    private final static XList                      RESULT_SHORT   = XList.parse(1, 2, 3);
+    private final static XList                      RESULT_DBL_RUN = XList.parse(2d, 4d, 6d);
     private final static Class<? extends Exception> CLASS_EE       = ExpressionException.class;
     private final static Class<? extends Exception> CLASS_ICT      = IncomparableTypeException.class;
 

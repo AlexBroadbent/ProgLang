@@ -1,16 +1,12 @@
 package operator.base;
 
 import com.google.common.collect.Lists;
-import eval.ICalculable;
-import eval.Literal;
-import eval.Variable;
+import eval.*;
 import model.Domain;
 import operator.Associativity;
 import operator.IOperator;
 import operator.IPrecedence;
 import operator.loop.In;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;
@@ -69,9 +65,9 @@ public abstract class UnaryOperator extends Operator {
     @Override
     public void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack) {
         if (getAssociativity() == Associativity.LEFT_TO_RIGHT)
-            operatorStack.push(this);   // pre-fix unary operator, add to operator stack
+            operatorStack.push(this);   // pre-fix unary operator, push to operator stack
         if (getAssociativity() == Associativity.RIGHT_TO_LEFT)
-            postfix.add(this);          // post-fix unary operator, add to postfix output
+            postfix.add(this);          // post-fix unary operator, push to postfix output
     }
 
     public Object execute(Literal arg1) throws IncomparableTypeException, ExpressionException {

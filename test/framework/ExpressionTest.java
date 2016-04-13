@@ -1,18 +1,12 @@
 package framework;
 
-import com.google.common.collect.Lists;
-import eval.Expression;
-import eval.Literal;
+import eval.*;
 import gui.XLogger;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import org.junit.After;
 import org.junit.Before;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
@@ -28,22 +22,8 @@ public class ExpressionTest extends BaseTest {
     private static final String MSG_ASSERT_TYPE   = "Result is of type %s, expected %s";
     private static final String MSG_ASSERT_RESULT = "Result is %s, expected %s";
 
-    protected static Literal wrap(Object object) {
+    private static Literal wrap(Object object) {
         return Domain.wrapLiteral(object);
-    }
-
-    protected static List<Literal> createLiteralList(Object... elements) {
-        List<Literal> list = Lists.newArrayList();
-        for (Object element : elements)
-            list.add(wrap(element));
-        return list;
-    }
-
-    protected static List<Literal> createLiteralLinkedList(Object... elements) {
-        List<Literal> list = Lists.newLinkedList();
-        for (Object element : elements)
-            list.add(wrap(element));
-        return list;
     }
 
     @Before
@@ -91,17 +71,17 @@ public class ExpressionTest extends BaseTest {
     }
 
     @SuppressWarnings( "unchecked" )  // Catch is in place to check a casting exception
-    protected void runListTest(String input, List<Literal> expResult) throws UnknownSequenceException,
+    protected void runListTest(String input, XList expResult) throws UnknownSequenceException,
             ParserException, ExpressionException, IncomparableTypeException {
         Expression expression = getExpressionFromInput(input);
         Object list = getValueFromExpression(expression);
-        List<Literal> result = null;
+        XList result = null;
 
         try {
-            result = (List<Literal>) list;
+            result = (XList) list;
         }
         catch (ClassCastException ex) {
-            fail("A LinkedList was not returned, instead result is of type " + getValueFromExpression(expression).getClass().getSimpleName());
+            fail("A List was not returned, instead result is of type " + getValueFromExpression(expression).getClass().getSimpleName());
         }
 
         assertResult(getClass().getSimpleName() + " - Assert size of result list matches expected size", expResult.size(), result.size());
@@ -153,16 +133,6 @@ public class ExpressionTest extends BaseTest {
     /*
             Assert Methods
      */
-
-    protected boolean assertErrorInExpression(String input) {
-        try {
-            getExpressionFromInput(input);
-            return false;
-        }
-        catch (UnknownSequenceException | ExpressionException | ParserException e) {
-            return true;
-        }
-    }
 
     private boolean assertExceptionIsThrown(String input, Class<? extends Exception> expectedException) {
         try {

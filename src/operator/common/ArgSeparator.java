@@ -1,14 +1,14 @@
-package operator.function;
+package operator.common;
 
 import eval.ICalculable;
 import eval.ICalculableType;
+import eval.IncomparableTypeException;
 import eval.Literal;
 import model.Domain;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
 import operator.base.NullaryOperator;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;

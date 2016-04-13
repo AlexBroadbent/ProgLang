@@ -1,9 +1,9 @@
 package operator.bitwise;
 
+import eval.IncomparableTypeException;
 import eval.Literal;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
-import parser.IncomparableTypeException;
 
 import static operator.IConstants.BITWISE_XOR;
 

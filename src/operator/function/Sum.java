@@ -1,8 +1,8 @@
 package operator.function;
 
+import eval.IncomparableTypeException;
 import eval.Literal;
 import eval.Variable;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 

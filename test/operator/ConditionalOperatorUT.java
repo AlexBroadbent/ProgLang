@@ -1,14 +1,12 @@
 package operator;
 
-import eval.Literal;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
+import eval.XList;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
-
-import java.util.List;
 
 /**
  * x++.operator
@@ -42,7 +40,7 @@ public class ConditionalOperatorUT extends ExpressionTest {
     private static final Double                     RESULT_COM       = 4d;
     private static final Double                     RESULT_COM_2     = 16d;
     private static final Integer                    RESULT_ASSIGN    = 12;
-    private static final List<Literal>              RESULT_FUNC      = createLiteralLinkedList(6, 2);
+    private static final XList                      RESULT_FUNC      = XList.parse(6, 2);
     private static final Class<? extends Exception> CLASS_EE         = ExpressionException.class;
     private static final Class<? extends Exception> CLASS_ITE        = IncomparableTypeException.class;
 

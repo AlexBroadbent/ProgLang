@@ -110,7 +110,7 @@ public class Lexer implements ILexer {
     /**
      * Add a user function to the lexer
      *
-     * @param name the name of the function to add to the lexer
+     * @param name the name of the function to push to the lexer
      */
     @Override
     public void addUserFunctionName(String name) {

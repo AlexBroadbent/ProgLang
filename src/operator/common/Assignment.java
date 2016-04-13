@@ -8,8 +8,6 @@ import operator.IPrecedence;
 import operator.IUserFunction;
 import operator.base.BinaryOperator;
 import operator.function.UserFunction;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;

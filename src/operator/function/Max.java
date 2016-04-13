@@ -1,8 +1,8 @@
 package operator.function;
 
 import com.google.common.collect.Lists;
+import eval.IncomparableTypeException;
 import eval.Literal;
-import parser.IncomparableTypeException;
 
 import java.util.Collections;
 import java.util.List;

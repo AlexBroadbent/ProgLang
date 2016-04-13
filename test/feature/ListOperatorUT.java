@@ -1,14 +1,12 @@
 package feature;
 
-import eval.Literal;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
+import eval.XList;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
-
-import java.util.List;
 
 /**
  * ProgLang.operator
@@ -18,8 +16,8 @@ import java.util.List;
  */
 public class ListOperatorUT extends ExpressionTest {
 
-    private final static String        VAR_T       = "t";
-    private final static List<Literal> VAR_T_VALUE = createLiteralLinkedList(1, 2, 3);
+    private final static String VAR_T       = "t";
+    private final static XList  VAR_T_VALUE = XList.parse(1, 2, 3);
 
     private final static String                     INPUT_ACCESS       = "t[2]";
     private final static String                     INPUT_ACCESS_ERR_2 = "2[2]";
@@ -28,7 +26,7 @@ public class ListOperatorUT extends ExpressionTest {
     private static final String                     INPUT_CREATE_ERR   = "1, 3, 5}";
     private final static String                     INPUT_ACCESS_ERR   = "t[4]";
     private final static Integer                    RESULT_ACCESS      = 3;
-    private static final List<Literal>              RESULT_CREATE      = createLiteralLinkedList(1, 3, 5);
+    private static final XList                      RESULT_CREATE      = XList.parse(1, 3, 5);
     private final static Class<? extends Exception> CLASS_CREATE_ERR   = ExpressionException.class;
     private final static Class<? extends Exception> CLASS_ACCESS_ERR   = ExpressionException.class;
     private final static Class<? extends Exception> CLASS_INCOMPARABLE = IncomparableTypeException.class;

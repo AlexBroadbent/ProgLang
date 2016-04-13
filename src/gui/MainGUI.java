@@ -1,16 +1,13 @@
 package gui;
 
 import eval.Expression;
-import eval.Literal;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import org.apache.commons.lang3.StringUtils;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 import parser.ParserException;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 import static gui.IConstants.*;
@@ -44,7 +41,7 @@ public class MainGUI {
                         Object result = expression.execute();
 
                         if (result != null && !StringUtils.isEmpty(result.toString()))
-                            System.out.println(LINE_START + ((result instanceof List) ? parseList(result) : result));
+                            System.out.println(LINE_START + result);
                     }
                     catch (UnknownSequenceException | ParserException | ClassCastException ex) {
                         XLogger.warning(ex.getMessage());
@@ -102,20 +99,6 @@ public class MainGUI {
                     "\tdebug      true|false                      set if warning and log messages are displayed\n" +
                     "\treset                                      resets all variables, operators and functions to the program defaults");
         }
-    }
-
-
-    @SuppressWarnings( "unchecked" ) // ClassCastException is thrown
-    private static String parseList(Object result) throws ClassCastException {
-        String out = "";
-
-        LinkedList<Literal> list = (LinkedList<Literal>) result;
-        for (Literal literal : list) {
-            out += literal;
-            if (list.indexOf(literal) != list.size() - 1) out += " -> ";
-        }
-
-        return out;
     }
 
 }

@@ -1,8 +1,8 @@
 package operator;
 
 import eval.Expression;
+import eval.ExpressionException;
 import eval.Variable;
-import parser.ExpressionException;
 
 import java.util.List;
 

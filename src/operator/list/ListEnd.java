@@ -1,14 +1,10 @@
 package operator.list;
 
-import com.google.common.collect.Lists;
-import eval.ICalculable;
-import eval.Literal;
+import eval.*;
 import operator.IConstants;
 import operator.IOperator;
 import operator.IPrecedence;
 import operator.function.Function;
-import parser.ExpressionException;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 import java.util.Stack;
@@ -45,7 +41,7 @@ public class ListEnd extends Function {
 
     @Override
     public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
-        return Lists.newLinkedList(args);
+        return new XList(args);
     }
 
     @Override

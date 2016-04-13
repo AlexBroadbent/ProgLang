@@ -1,11 +1,11 @@
 package operator.common;
 
 import com.google.common.collect.Lists;
+import eval.IncomparableTypeException;
 import eval.Literal;
 import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
-import parser.IncomparableTypeException;
 
 import java.util.List;
 
