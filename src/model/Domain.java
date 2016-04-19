@@ -17,7 +17,10 @@ import operator.conditional.Conditional;
 import operator.conditional.ConditionalElse;
 import operator.equality.Equal;
 import operator.equality.NotEqual;
-import operator.function.*;
+import operator.function.List;
+import operator.function.Max;
+import operator.function.Random;
+import operator.function.Sum;
 import operator.list.*;
 import operator.loop.Do;
 import operator.loop.ForLoop;
@@ -138,7 +141,6 @@ public class Domain {
         // function package functions
         registerFunction(new List());
         registerFunction(new Max());
-        registerFunction(new Print());
         registerFunction(new Random());
         registerFunction(new Sum());
 

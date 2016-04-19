@@ -43,7 +43,7 @@ public class Head extends Function {
 
         try {
             list = (XList) args.get(0).getValue();
-            return list.peek().getValue();
+            return list.get(0).getValue();
         }
         catch (ClassCastException ex) {
             throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0).getValue().getClass().getSimpleName());

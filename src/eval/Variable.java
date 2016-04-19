@@ -13,7 +13,7 @@ package eval;
 public class Variable extends Literal {
 
     protected String  name;
-    protected boolean valueSet;
+    private   boolean valueSet;
 
     public Variable(String name) {
         super(null);
@@ -35,11 +35,7 @@ public class Variable extends Literal {
 
     @Override
     public void setValue(Object value) {
-        if (value instanceof Literal)
-            this.value = ((Literal) value).getValue();
-        else
-            this.value = value;
-
+        super.setValue(value instanceof Literal ? ((Literal) value).getValue() : value);
         valueSet = true;
     }
 

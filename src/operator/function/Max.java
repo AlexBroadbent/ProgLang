@@ -3,9 +3,11 @@ package operator.function;
 import com.google.common.collect.Lists;
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.XList;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static operator.IConstants.MAX;
 
@@ -26,15 +28,17 @@ public class Max extends Function {
     public Object execute(List<Literal> args) throws IncomparableTypeException {
         List<Double> list = Lists.newArrayList();
 
-        Literal lit = null;
-        try {
-            for (Literal literal : args) {
-                lit = literal;
-                list.add(Double.parseDouble(literal.getValue().toString()));
+        for (Literal literal : args) {
+            try {
+                if (Objects.equals(literal.getValue().getClass().getSimpleName(), XList.class.getSimpleName()))
+                    for (Literal lit : ((XList) literal.getValue()))
+                        list.add(Double.parseDouble(lit.getValue().toString()));
+                else
+                    list.add(Double.parseDouble(literal.getValue().toString()));
             }
-        }
-        catch (NumberFormatException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), lit.getValue().getClass().getSimpleName());
+            catch (NumberFormatException ex) {
+                throw new IncomparableTypeException(getAllowedExecutionTypes(), literal.getValue().getClass().getSimpleName());
+            }
         }
 
         return Collections.max(list);

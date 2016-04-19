@@ -5,7 +5,7 @@ import framework.ExpressionTest;
 import org.junit.Test;
 
 /**
- * ProgLang.syntax
+ * x++.syntax
  *
  * @author Alexander Broadbent
  * @version 11/04/2016

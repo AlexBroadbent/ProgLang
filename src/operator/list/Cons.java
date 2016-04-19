@@ -40,8 +40,8 @@ public class Cons extends Function {
 
         try {
             list = (XList) args.get(1).getValue();
-            newList.push(args.get(0));
-            newList.pushAll(list);
+            newList.add(args.get(0));
+            newList.addAll(list);
 
             return newList;
         }

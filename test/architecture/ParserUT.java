@@ -1,7 +1,7 @@
 package architecture;
 
 /**
- * ProgLang.architecture
+ * x++.architecture
  *
  * @author Alexander Broadbent
  * @version 26/03/2016

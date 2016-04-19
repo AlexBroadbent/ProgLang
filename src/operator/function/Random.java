@@ -8,7 +8,7 @@ import java.util.List;
 import static operator.IConstants.RANDOM;
 
 /**
- * ProgLang.operator.function
+ * x++.operator.function
  *
  * @author Alexander Broadbent
  * @version 07/04/2016

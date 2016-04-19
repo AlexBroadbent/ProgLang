@@ -3,7 +3,7 @@ package operator;
 import framework.ExpressionTest;
 
 /**
- * ProgLang.operator
+ * x++.operator
  *
  * @author Alexander Broadbent
  * @version 27/03/2016

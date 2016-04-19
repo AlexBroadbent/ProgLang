@@ -9,10 +9,6 @@ import parser.ParserException;
 
 /**
  * x++.operator
- * <p>
- * Verified results using:
- * http://www.miniwebtool.com/bitwise-calculator/
- * http://www.miniwebtool.com/bitwise-calculator/bit-shift/
  *
  * @author Alexander Broadbent
  * @version 30/12/2015
@@ -38,14 +34,14 @@ public class BitwiseOperatorUT extends ExpressionTest {
     private static final String                     INPUT_XOR_ERR      = "x $ 'hello'";
     private static final String                     INPUT_LBS          = "binaryX << binaryY";
     private static final String                     INPUT_LBS_ERR      = "binaryX << 'hello'";
-    private static final String                     INPUT_RBS          = "binaryX >> binaryY";
+    private static final String                     INPUT_RBS          = "00110011 >> binaryY";
     private static final String                     INPUT_RBS_ERR      = "binaryX >> false";
-    private static final Integer                    RESULT_NOT         = -6;
-    private static final Integer                    RESULT_AND         = 1;
-    private static final Integer                    RESULT_OR          = 7;
-    private static final Integer                    RESULT_XOR         = 6;
-    private static final Integer                    RESULT_LBS         = 104;
-    private static final Integer                    RESULT_RBS         = 6;
+    private static final Integer                    RESULT_NOT         = ~5;
+    private static final Integer                    RESULT_AND         = 5 & 3;
+    private static final Integer                    RESULT_OR          = 5 | 3;
+    private static final Integer                    RESULT_XOR         = 5 ^ 3;
+    private static final Integer                    RESULT_LBS         = 0b00011010 << 2;
+    private static final Integer                    RESULT_RBS         = 0b00110011 >> 2;
     private static final Class<? extends Exception> CLASS_INCOMPARABLE = IncomparableTypeException.class;
 
 

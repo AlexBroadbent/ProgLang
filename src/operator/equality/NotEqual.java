@@ -5,6 +5,8 @@ import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
 
+import java.util.Objects;
+
 /**
  * x++.operator.equality
  *
@@ -25,7 +27,7 @@ public class NotEqual extends BinaryOperator {
 
     @Override
     public Object execute(Literal arg1, Literal arg2) {
-        return !(arg1.getValue().equals(arg2.getValue()));
+        return !Objects.equals(arg1.getValue(), arg2.getValue());
     }
 
 }

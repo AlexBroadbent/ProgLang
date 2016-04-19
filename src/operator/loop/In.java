@@ -15,7 +15,7 @@ import java.util.Stack;
 import static eval.ICalculableType.VARIABLE;
 
 /**
- * ProgLang.operator.loop
+ * x++.operator.loop
  *
  * @author Alexander Broadbent
  * @version 27/03/2016

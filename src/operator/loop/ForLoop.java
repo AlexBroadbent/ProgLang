@@ -14,7 +14,7 @@ import java.util.Stack;
 import static eval.ICalculableType.VARIABLE;
 
 /**
- * ProgLang.operator.loop
+ * x++.operator.loop
  *
  * @author Alexander Broadbent
  * @version 27/03/2016
@@ -79,7 +79,7 @@ public class ForLoop extends Function {
             // Create an array to store the results of each iteration
             for (Literal element : list) {
                 var.setValue(element.getValue());
-                results.push(Domain.wrapLiteral(new Expression(expr, domain).execute()));
+                results.add(Domain.wrapLiteral(new Expression(expr, domain).execute()));
             }
         }
         catch (ClassCastException | NullPointerException ex) {

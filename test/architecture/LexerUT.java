@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.regex.PatternSyntaxException;
 
 /**
- * ProgLang.architecture
+ * x++.architecture
  *
  * @author Alexander Broadbent
  * @version 26/03/2016

@@ -32,29 +32,31 @@ public class MathOperatorUT extends ExpressionTest {
     private static final String                     INPUT_SQR      = "sqrt(9)";
     private static final String                     INPUT_SQR_ERR  = "sqrt('false')";
     private static final String                     INPUT_NLN      = "ln(4)";
-    private static final String                     INPUT_NLN_ERR  = "ln(false)";
-    private static final String                     INPUT_L10      = "log10(2)";
-    private static final String                     INPUT_L10_ERR  = "log10(true)";
-    private static final String                     INPUT_EXP      = "exp(4)";
-    private static final String                     INPUT_EXP_ERR  = "exp(false)";
-    private static final String                     INPUT_MOD      = "4%2";
-    private static final String                     INPUT_MOD_ERR  = "4%false";
-    private static final String                     INPUT_ALL      = "sin(1)+cos(.5)-tan(1.5)*asin(1)*(2^4)/sqrt(9)-ln(4)+log10(2)/exp(4)*(4%2)";
-    private static final Double                     RESULT_SIN     = Math.sin(1);
-    private static final Double                     RESULT_COS     = Math.cos(0.5);
-    private static final Double                     RESULT_TAN     = Math.tan(1.5);
-    private static final Double                     RESULT_ASIN    = Math.asin(1);
-    private static final Double                     RESULT_ACOS    = Math.acos(0.5);
+    private static final String                     INPUT_NLN_ERR = "ln(false)";
+    private static final String                     INPUT_L10     = "log10(2)";
+    private static final String                     INPUT_L10_ERR = "log10(true)";
+    private static final String                     INPUT_EXP     = "exp(4)";
+    private static final String                     INPUT_EXP_ERR = "exp(false)";
+    private static final String                     INPUT_MOD     = "4%2";
+    private static final String                     INPUT_MOD_ERR = "4%false";
+    private static final String                     INPUT_LN_E    = "ln(e^ln(e))";
+    private static final String                     INPUT_ALL     = "sin(1)+cos(.5)-tan(1.5)*asin(1)*(2^4)/sqrt(9)-ln(4)+log10(2)/exp(4)*(4%2)";
+    private static final Double                     RESULT_SIN    = Math.sin(1);
+    private static final Double                     RESULT_COS    = Math.cos(0.5);
+    private static final Double                     RESULT_TAN    = Math.tan(1.5);
+    private static final Double                     RESULT_ASIN   = Math.asin(1);
+    private static final Double                     RESULT_ACOS   = Math.acos(0.5);
     private static final Double                     RESULT_ATAN    = Math.atan(1.5);
-    private static final Double                     RESULT_POW     = Math.pow(2, 4);
-    private static final Double                     RESULT_SQR     = Math.sqrt(9);
-    private static final Double                     RESULT_NLN     = Math.log(4);
-    private static final Double                     RESULT_L10     = Math.log10(2);
-    private static final Double                     RESULT_EXP     = Math.exp(4);
-    private static final Double                     RESULT_MOD     = (double) (4 % 2);
-    private static final Double                     RESULT_ALL     = RESULT_SIN + RESULT_COS - RESULT_TAN * RESULT_ASIN *
+    private static final Double                     RESULT_POW    = Math.pow(2, 4);
+    private static final Double                     RESULT_SQR    = Math.sqrt(9);
+    private static final Double                     RESULT_NLN    = Math.log(4);
+    private static final Double                     RESULT_L10    = Math.log10(2);
+    private static final Double                     RESULT_EXP    = Math.exp(4);
+    private static final Double                     RESULT_MOD    = (double) (4 % 2);
+    private static final Double                     RESULT_LN_E   = Math.log(Math.pow(Math.E, Math.log(Math.E)));
+    private static final Double                     RESULT_ALL    = RESULT_SIN + RESULT_COS - RESULT_TAN * RESULT_ASIN *
             RESULT_POW / RESULT_SQR - RESULT_NLN + RESULT_L10 / RESULT_EXP * RESULT_MOD;
-    private static final Class<? extends Exception> CLASS_ITE      = IncomparableTypeException.class;
+    private static final Class<? extends Exception> CLASS_ITE     = IncomparableTypeException.class;
 
 
     @Test
@@ -133,6 +135,12 @@ public class MathOperatorUT extends ExpressionTest {
     public void operatorAllPrecedenceTest()
             throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
         runExpressionTest(INPUT_ALL, RESULT_ALL);
+    }
+
+    @Test
+    public void logETest()
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+        runExpressionTest(INPUT_LN_E, RESULT_LN_E);
     }
 
     @Test

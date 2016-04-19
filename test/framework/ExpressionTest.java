@@ -84,9 +84,7 @@ public class ExpressionTest extends BaseTest {
             fail("A List was not returned, instead result is of type " + getValueFromExpression(expression).getClass().getSimpleName());
         }
 
-        assertResult(getClass().getSimpleName() + " - Assert size of result list matches expected size", expResult.size(), result.size());
-        for (int i = 0; i < result.size(); i++)
-            assertResult(getClass().getSimpleName() + " - list position: " + i, expResult.get(i).getValue(), result.get(i).getValue());
+        assertResult(expResult, result);
     }
 
     private void verifyVariable(String varName, Object expResult) {
@@ -116,7 +114,7 @@ public class ExpressionTest extends BaseTest {
         return Domain.getInstance().getVariable(variableName).getValue();
     }
 
-    private Object getResultFromInput(String input) throws ExpressionException, IncomparableTypeException,
+    protected Object getResultFromInput(String input) throws ExpressionException, IncomparableTypeException,
             ParserException, UnknownSequenceException {
         Expression expression = getExpressionFromInput(input);
         return expression.execute();
@@ -126,13 +124,10 @@ public class ExpressionTest extends BaseTest {
         return Domain.getInstance().hasVariable(varName);
     }
 
-
-
-
-
     /*
             Assert Methods
      */
+
 
     private boolean assertExceptionIsThrown(String input, Class<? extends Exception> expectedException) {
         try {
@@ -151,6 +146,13 @@ public class ExpressionTest extends BaseTest {
 
     <T> void assertResult(T expected, T actual) {
         assertResult(getClass().getSimpleName(), expected, actual);
+    }
+
+    protected void assertResultRange(Double result, Double min, Double max) {
+        String log = String.format(MSG_ASSERT_RESULT_LOG, getClass().getSimpleName(), result,
+                min + "<=" + result + "<=" + max);
+        XLogger.log(log);
+        assertTrue(log, result >= min && result <= max);
     }
 
     private <T> void assertResult(String testName, T expected, T actual) {

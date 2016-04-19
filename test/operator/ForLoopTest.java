@@ -9,7 +9,7 @@ import org.junit.Test;
 import parser.ParserException;
 
 /**
- * ProgLang.operator.loop
+ * x++.operator.loop
  *
  * @author Alexander Broadbent
  * @version 28/03/2016

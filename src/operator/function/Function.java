@@ -48,7 +48,7 @@ public abstract class Function implements IFunction {
 
     @Override
     public List<String> getAllowedExecutionTypes() {
-        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName(), Variable.class.getSimpleName());
+        return Lists.newArrayList(Double.class.getSimpleName(), Integer.class.getSimpleName());
     }
 
     @Override

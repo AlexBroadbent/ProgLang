@@ -5,11 +5,12 @@ import eval.IncomparableTypeException;
 import eval.XList;
 import framework.FunctionTest;
 import lexer.UnknownSequenceException;
+import org.junit.Ignore;
 import org.junit.Test;
 import parser.ParserException;
 
 /**
- * ProgLang.feature
+ * x++.feature
  *
  * @author Alexander Broadbent
  * @version 10/04/2016
@@ -37,7 +38,8 @@ public class RecursiveFunctionUT extends FunctionTest {
     }
 
 
-    @Test
+    //@Test
+    @Ignore( "The domain does not currently support variable storage for recursive functions" )
     public void fibonacciSequenceFunctionTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
         runFunctionTest(DEF_FIB, NAME_FIB, RUN_FIB, RESULT_FIB);

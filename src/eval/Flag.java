@@ -5,13 +5,12 @@ import model.Domain;
 import java.util.Stack;
 
 /**
- * ProgLang.eval
+ * x++.eval
  *
  * @author Alexander Broadbent
  * @version 09/04/2016
  */
 public class Flag extends Literal {
-
 
     public Flag() {
         super(null);

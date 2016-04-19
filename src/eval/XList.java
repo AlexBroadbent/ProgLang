@@ -5,6 +5,7 @@ import model.Domain;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * x++.eval
@@ -35,30 +36,16 @@ public class XList implements Iterable<Literal> {
     public static XList parse(Object... elements) {
         XList list = new XList();
         for (Object element : elements)
-            list.push(wrap(element));
+            list.add(wrap(element));
         return list;
     }
 
-    public boolean push(Literal literal) {
-        return list.add(literal);
-    }
-
-    public boolean pushAll(XList list) {
+    public boolean addAll(XList list) {
         return this.list.addAll(list.list);
-    }
-
-    public Literal pop() {
-        Literal literal = list.get(0);
-        list.remove(0);
-        return literal;
     }
 
     public Literal get(int index) {
         return list.get(index);
-    }
-
-    public Literal peek() {
-        return list.get(0);
     }
 
     public int size() {
@@ -67,6 +54,10 @@ public class XList implements Iterable<Literal> {
 
     public boolean isEmpty() {
         return list.isEmpty();
+    }
+
+    public boolean add(Literal literal) {
+        return list.add(literal);
     }
 
     public XList subList(int fromIndex, int toIndex) {
@@ -79,12 +70,26 @@ public class XList implements Iterable<Literal> {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof XList))
+            return false;
+
+        XList other = (XList) obj;
+        if (size() != other.size())
+            return false;
+
+        for (int i = 0; i < size(); i++)
+            if (!Objects.equals(get(i).getValue(), other.get(i).getValue()))
+                return false;
+        return true;
+    }
+
+    @Override
     public String toString() {
         String out = "";
 
-        for (Literal literal : list) {
-            out += literal;
-            if (list.indexOf(literal) != list.size() - 1) out += " -> ";
+        for (int i = 0; i < list.size(); i++) {
+            out += list.get(i) + (i < list.size() - 1 ? " -> " : "");
         }
 
         return out;

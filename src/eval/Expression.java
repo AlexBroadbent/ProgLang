@@ -100,7 +100,7 @@ public class Expression extends Literal {
         for (int i = 0; i < infix.size(); i++)
             infix.get(i).toPostFix(infix, i, expression, operatorStack);
 
-        // push any remaining tokens in operator stack
+        // add any remaining tokens in operator stack
         while (operatorStack.size() > 0)
             expression.add(operatorStack.pop());
     }

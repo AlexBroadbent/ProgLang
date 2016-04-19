@@ -39,18 +39,19 @@ public class PredefinedFunctionUT extends FunctionTest {
     private static final String                     INPUT_TAIL       = "tail(z)";
     private static final String                     INPUT_TAIL_ARG   = "tail(z, true)";
     private static final String                     INPUT_TAIL_TYPE  = "tail(true)";
-    private static final String                     INPUT_EMPTY      = "empty(z)";
-    private static final String                     INPUT_EMPTY_ARG  = "empty(z, 2)";
-    private static final String                     INPUT_EMPTY_TYPE = "empty(x)";
-    private static final String                     INPUT_SIZE       = "size(z)";
-    private static final String                     INPUT_SIZE_ARG   = "size(z, 2)";
-    private static final String                     INPUT_SIZE_TYPE  = "size(2)";
-    private static final XList                      RESULT_CONS      = XList.parse(4, 1, 2, 3);
-    private static final Integer                    RESULT_HEAD      = 1;
-    private static final XList                      RESULT_LIST      = XList.parse(1, 2, 3);
-    private static final Double                     RESULT_MAX       = 40d;
-    private static final Double                     RESULT_SUM       = 60d;
-    private static final XList                      RESULT_TAIL      = XList.parse(2, 3);
+    private static final String  INPUT_EMPTY      = "empty(z)";
+    private static final String  INPUT_EMPTY_ARG  = "empty(z, 2)";
+    private static final String  INPUT_EMPTY_TYPE = "empty(x)";
+    private static final String  INPUT_SIZE       = "size(z)";
+    private static final String  INPUT_SIZE_ARG   = "size(z, 2)";
+    private static final String  INPUT_SIZE_TYPE  = "size(2)";
+    private static final String  INPUT_RANDOM     = "random()";
+    private static final XList   RESULT_CONS      = XList.parse(4, 1, 2, 3);
+    private static final Integer RESULT_HEAD      = 1;
+    private static final XList   RESULT_LIST      = XList.parse(1, 2, 3);
+    private static final Double  RESULT_MAX       = 40d;
+    private static final Double  RESULT_SUM       = 60d;
+    private static final XList   RESULT_TAIL      = XList.parse(2, 3);
     private static final Boolean                    RESULT_EMPTY     = Boolean.FALSE;
     private static final Integer                    RESULT_SIZE      = 3;
     private static final Class<? extends Exception> CLASS_ITE        = IncomparableTypeException.class;
@@ -173,6 +174,14 @@ public class PredefinedFunctionUT extends FunctionTest {
     @Test
     public void sizeIncomparableTypeTest() {
         runExceptionTest(INPUT_SIZE_TYPE, CLASS_ITE);
+    }
+
+    @Test
+    public void randomFunctionTest()
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+        Object result = getResultFromInput(INPUT_RANDOM);
+        assertTypeOfResult(result, Double.class);
+        assertResultRange(((Double) result), 0d, 1d);
     }
 
 }

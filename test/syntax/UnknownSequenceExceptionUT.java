@@ -8,7 +8,7 @@ import org.junit.Test;
 import parser.ParserException;
 
 /**
- * ProgLang.syntax
+ * x++.syntax
  *
  * @author Alexander Broadbent
  * @version 24/03/2016
