@@ -70,10 +70,8 @@ public class ForLoop extends Function {
 
             // Remove do from expression, used to determine whether expression is executable previous to now
             for (int i = 0; i < expr.size(); i++) {
-                if (expr.get(i) instanceof Do) {
-                    expr.remove(i);
-                    i--;
-                }
+                if (expr.get(i) instanceof Do)
+                    expr.remove(i--);
             }
 
             // Create an array to store the results of each iteration

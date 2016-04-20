@@ -24,25 +24,28 @@ public class BitwiseOperatorUT extends ExpressionTest {
     private static final Integer VAR_X_VAL_BINARY = Integer.parseUnsignedInt("00011010", 2); // Same method as Literal parser
     private static final Integer VAR_Y_VAL_BINARY = 2;
 
-    private static final String                     INPUT_NOT          = "~x";
-    private static final String                     INPUT_NOT_ERR      = "~'hello'";
-    private static final String                     INPUT_AND          = "x & y";
-    private static final String                     INPUT_AND_ERR      = "x & true";
-    private static final String                     INPUT_OR           = "x | y";
-    private static final String                     INPUT_OR_ERR       = "x | false";
-    private static final String                     INPUT_XOR          = "x $ y";
-    private static final String                     INPUT_XOR_ERR      = "x $ 'hello'";
-    private static final String                     INPUT_LBS          = "binaryX << binaryY";
-    private static final String                     INPUT_LBS_ERR      = "binaryX << 'hello'";
-    private static final String                     INPUT_RBS          = "00110011 >> binaryY";
-    private static final String                     INPUT_RBS_ERR      = "binaryX >> false";
-    private static final Integer                    RESULT_NOT         = ~5;
-    private static final Integer                    RESULT_AND         = 5 & 3;
-    private static final Integer                    RESULT_OR          = 5 | 3;
-    private static final Integer                    RESULT_XOR         = 5 ^ 3;
-    private static final Integer                    RESULT_LBS         = 0b00011010 << 2;
-    private static final Integer                    RESULT_RBS         = 0b00110011 >> 2;
-    private static final Class<? extends Exception> CLASS_INCOMPARABLE = IncomparableTypeException.class;
+    private static final String                     INPUT_NOT       = "~x";
+    private static final String                     INPUT_NOT_ERR   = "~'hello'";
+    private static final String                     INPUT_AND       = "x & y";
+    private static final String                     INPUT_AND_ERR   = "x & true";
+    private static final String                     INPUT_OR        = "x | y";
+    private static final String                     INPUT_OR_ERR    = "x | false";
+    private static final String                     INPUT_XOR       = "x $ y";
+    private static final String                     INPUT_XOR_ERR   = "x $ 'hello'";
+    private static final String                     INPUT_LBS       = "binaryX << binaryY";
+    private static final String                     INPUT_LBS_ERR   = "binaryX << 'hello'";
+    private static final String                     INPUT_RBS       = "00110011 >> binaryY";
+    private static final String                     INPUT_RBS_ERR   = "binaryX >> false";
+    private static final String                     INPUT_TOO_SMALL = "-134 & 23";
+    private static final String                     INPUT_TOO_LARGE = "1205 | 23";
+    private static final Integer                    RESULT_NOT      = ~5;
+    private static final Integer                    RESULT_AND      = 5 & 3;
+    private static final Integer                    RESULT_OR       = 5 | 3;
+    private static final Integer                    RESULT_XOR      = 5 ^ 3;
+    private static final Integer                    RESULT_LBS      = 0b00011010 << 2;
+    private static final Integer                    RESULT_RBS      = 0b00110011 >> 2;
+    private static final Class<? extends Exception> CLASS_ITE       = IncomparableTypeException.class;
+    private static final Class<? extends Exception> CLASS_EE        = ExpressionException.class;
 
 
     @Override
@@ -93,32 +96,42 @@ public class BitwiseOperatorUT extends ExpressionTest {
 
     @Test
     public void bitwiseNotExceptionTest() {
-        runExceptionTest(INPUT_NOT_ERR, CLASS_INCOMPARABLE);
+        runExceptionTest(INPUT_NOT_ERR, CLASS_ITE);
     }
 
     @Test
     public void bitwiseAndExceptionTest() {
-        runExceptionTest(INPUT_AND_ERR, CLASS_INCOMPARABLE);
+        runExceptionTest(INPUT_AND_ERR, CLASS_ITE);
     }
 
     @Test
     public void bitwiseOrExceptionTest() {
-        runExceptionTest(INPUT_OR_ERR, CLASS_INCOMPARABLE);
+        runExceptionTest(INPUT_OR_ERR, CLASS_ITE);
     }
 
     @Test
     public void bitwiseXorExceptionTest() {
-        runExceptionTest(INPUT_XOR_ERR, CLASS_INCOMPARABLE);
+        runExceptionTest(INPUT_XOR_ERR, CLASS_ITE);
     }
 
     @Test
     public void bitwiseLeftShiftExceptionTest() {
-        runExceptionTest(INPUT_LBS_ERR, CLASS_INCOMPARABLE);
+        runExceptionTest(INPUT_LBS_ERR, CLASS_ITE);
     }
 
     @Test
     public void bitwiseRightShiftExceptionTest() {
-        runExceptionTest(INPUT_RBS_ERR, CLASS_INCOMPARABLE);
+        runExceptionTest(INPUT_RBS_ERR, CLASS_ITE);
+    }
+
+    @Test
+    public void maxByteParseExceptionTest() {
+        runExceptionTest(INPUT_TOO_LARGE, CLASS_EE);
+    }
+
+    @Test
+    public void minBtyeParseExceptionTest() {
+        runExceptionTest(INPUT_TOO_SMALL, CLASS_EE);
     }
 
 }
