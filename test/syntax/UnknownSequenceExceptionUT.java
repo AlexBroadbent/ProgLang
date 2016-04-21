@@ -27,9 +27,6 @@ public class UnknownSequenceExceptionUT extends ExpressionTest {
     }
 
     @Test
-    /*
-     *  TODO: Is this expected behaviour?? A var created with bad data still exists...
-     */
     public void variableCreatedWithUnknownSymbol()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
         runExceptionTest(INPUT_VAR, CLASS_UN);
