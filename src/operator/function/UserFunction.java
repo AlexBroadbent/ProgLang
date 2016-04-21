@@ -7,6 +7,8 @@ import model.Domain;
 import operator.Associativity;
 import operator.IPrecedence;
 import operator.IUserFunction;
+import operator.loop.Do;
+import operator.loop.ForLoop;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -83,18 +85,31 @@ public class UserFunction extends Function implements IUserFunction {
         Set<String> expNames = Sets.newHashSet();
         for (Variable arg : getArguments())
             argNames.add(arg.getName());
+
+        boolean inForLoop = false;
+        boolean forLoop = false;
         for (ICalculable literal : expression.getExpression())
-            if (literal.getType() == ICalculableType.VARIABLE)
+            if (literal instanceof ForLoop)
+                inForLoop = forLoop = true;
+            else if (literal instanceof Do)
+                inForLoop = false;
+            else if (literal.getType() == ICalculableType.VARIABLE && !inForLoop)
                 expNames.add(((Variable) literal).getName());
 
         // Check if all arguments are used in the expression
         if (expNames.containsAll(argNames) && argNames.containsAll(expNames))
             return true;
 
-        // Check if arguments exist in the domain, the value can be null as for loops have a variable which
-        //  is not set yet.
+        // Check if arguments exist in the domain, the value can be null because
+        // for loops have a variable which is not set yet.
         expNames.removeAll(argNames);
-        return (model.getVariableNames().containsAll(expNames));
+        if (forLoop)
+            return model.getVariableNames().containsAll(expNames);
+
+        for (Variable variable : model.getAllVariables())
+            if (!variable.isValueSet())
+                return false;
+        return true;
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static lexer.IToken.FUNCTION_DECLARATION;
-import static lexer.IToken.VARIABLE;
+import static lexer.IToken.VARIABLE_FUNCTION;
 import static operator.IConstants.ASSIGNMENT;
 import static operator.IConstants.FUNC;
 
@@ -37,15 +37,17 @@ public class Parser implements IParser {
     public List<ICalculable> parse(Domain domain, List<Token> tokens) throws ParserException {
         List<ICalculable> infixExpression = Lists.newArrayList();
 
+
+        if (tokens.get(0).token == FUNCTION_DECLARATION)
+            return parseDeclaration(domain, tokens.subList(1, tokens.size()));                  // Function declaration
+
         for (Token token : tokens) {
-            if (token.token == FUNCTION_DECLARATION)
-                return parseDeclaration(domain, tokens.subList(1, tokens.size()));              // Function declaration
-            if (token.token == VARIABLE)
-                infixExpression.add(domain.getOrCreateVariable(token.sequence));                            // Variable
-            else if (domain.isOperator(token.sequence))
+            if (domain.isOperator(token.sequence))
                 infixExpression.add(domain.getOperator(token.sequence));                                    // Operator
             else if (domain.isFunction(token.sequence))
                 infixExpression.add(domain.getFunction(token.sequence));                                    // Function
+            else if (token.token == VARIABLE_FUNCTION)
+                infixExpression.add(domain.getOrCreateVariable(token.sequence));                            // Variable
             else
                 infixExpression.add(Literal.parseLiteral(token));                                           // Constant
         }
@@ -67,7 +69,19 @@ public class Parser implements IParser {
         IUserFunction function = null;
 
         for (Token token : tokens) {
-            if (token.token == VARIABLE) {
+            if (domain.isOperator(token.sequence)) {
+                if (Objects.equals(token.sequence, ASSIGNMENT))                                             // Operator
+                    inFunctionAssignment = true;
+                if (inFunctionAssignment)
+                    infixExpression.add(domain.getOperator(token.sequence));
+            }
+            else if (domain.isFunction(token.sequence)) {
+                if (function == null && !Objects.equals(token.sequence, FUNC))                              // Function
+                    throw new ParserException("The function already exists, use another name.");
+
+                infixExpression.add(domain.getFunction(token.sequence));
+            }
+            else if (token.token == VARIABLE_FUNCTION) {
                 if (!inFunctionAssignment) {                                                                // Variable
                     if (function == null) {
                         function = new UserFunction(domain, token.sequence);
@@ -83,18 +97,6 @@ public class Parser implements IParser {
                     else
                         infixExpression.add(domain.getFunctionalVariable(function.getName(), token.sequence));
                 }
-            }
-            else if (domain.isOperator(token.sequence)) {
-                if (Objects.equals(token.sequence, ASSIGNMENT))                                             // Operator
-                    inFunctionAssignment = true;
-                if (inFunctionAssignment)
-                    infixExpression.add(domain.getOperator(token.sequence));
-            }
-            else if (domain.isFunction(token.sequence)) {
-                if (function == null && !Objects.equals(token.sequence, FUNC))                              // Function
-                    throw new ParserException("The function already exists, use another name.");
-
-                infixExpression.add(domain.getFunction(token.sequence));
             }
             else
                 infixExpression.add(Literal.parseLiteral(token));                                           // Constant

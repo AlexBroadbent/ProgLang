@@ -23,7 +23,8 @@ import static eval.ICalculableType.VARIABLE;
 public class Assignment extends BinaryOperator {
 
     private final static String MSG_INVALID_ASSIGNMENT = "Invalid Assignment, expecting user function and found: %s";
-    private final static String MSG_INVALID_FUNCTION   = "Function is not valid: Check the arguments match those used the expression";
+    private final static String MSG_INVALID_FUNCTION   = "Invalid Function: Check the passed variables match those used" +
+            " in the expression";
 
     @Override
     public String getToken() {

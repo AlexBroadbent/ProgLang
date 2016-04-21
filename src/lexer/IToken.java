@@ -1,7 +1,7 @@
 package lexer;
 
 /**
- * JavaCCProgrammingLanguage.parser
+ * x++.parser
  *
  * @author Alexander Broadbent
  * @version 31/10/2015
@@ -19,23 +19,19 @@ public interface IToken {
     int GEOMETRIC                = 8;
     int BOOLEAN                  = 9;
     int FUNCTION_DECLARATION     = 10;
-    int FUNCTION                 = 11;
-    int LOGICAL_OPERATOR         = 12;
-    int BITWISE_OPERATOR         = 13;
-    int BIT_SHIFT                = 14;
-    int MATH_EQUALITY_COMPARATOR = 15;
-    int MATH_COMPARATOR          = 16;
-    int LEFT_PARENTHESIS         = 17;
-    int RIGHT_PARENTHESIS        = 18;
-    int FOR_LOOP_ELEMENT         = 19;
-    int TEXT                     = 20;
-    int VARIABLE                 = 21;
-    int IF                       = 22;
-    int ELSE                     = 23;
-    int LIST_START               = 24;
-    int LIST_END                 = 25;
-    int ARG_SEPARATOR            = 26;
-    int ARRAY_ACCESS             = 27;
+    int LOGICAL_OPERATOR         = 11;
+    int BITWISE_OPERATOR         = 12;
+    int BIT_SHIFT                = 13;
+    int MATH_EQUALITY_COMPARATOR = 14;
+    int MATH_COMPARATOR          = 15;
+    int PARENTHESIS              = 16;
+    int FOR_LOOP_ELEMENT         = 17;
+    int TEXT                     = 18;
+    int VARIABLE_FUNCTION        = 19;
+    int CONDITIONAL              = 20;
+    int LIST                     = 21;
+    int ARG_SEPARATOR            = 22;
+    int ARRAY_ACCESS             = 23;
 
     String WHITESPACE_REGEX               = "\\s";
     String BOOLEAN_COMPARATOR_REGEX       = "\\!\\=|\\=\\=";
@@ -48,21 +44,17 @@ public interface IToken {
     String GEOMETRIC_REGEX                = "\\*|/|\\^|\\%";
     String BOOLEAN_REGEX                  = "true|false";
     String FUNCTION_DECLARATION_REGEX     = "func";
-    String FUNCTION_REGEX                 = "sin|cos|tan|exp|ln|log10|sqrt|asin|acos|atan";
     String LOGICAL_COMPARATOR_REGEX       = "\\!|\\&\\&|\\|\\|";
     String BITWISE_OPERATOR_REGEX         = "\\~|\\&|\\||\\$";
     String BIT_SHIFT_OPERATOR_REGEX       = "\\<\\<|\\>\\>";
     String MATH_COMPARATOR_EQUALITY_REGEX = "\\<\\=|\\>\\=";
     String MATH_COMPARATOR_REGEX          = "\\<|\\>";
-    String LEFT_PAREN_REGEX               = "\\(";
-    String RIGHT_PAREN_REGEX              = "\\)";
+    String PARENTHESIS_REGEX              = "\\(|\\)";
     String FOR_LOOP_ELEMENT_REGEX         = "(for|in|do)[\\W]";
     String TEXT_REGEX                     = "\"([^\"| ]*)\"|\'([^\'| ]*)\'";
-    String VARIABLE_REGEX                 = "[a-zA-Z][a-zA-Z0-9_]*";
-    String IF_REGEX                       = "\\?";
-    String ELSE_REGEX                     = "\\:";
-    String LIST_START_REGEX               = "\\{";
-    String LIST_END_REGEX                 = "\\}";
+    String VARIABLE_OR_FUNCTION_REGEX     = "\\w(\\w|\\d)*";
+    String CONDITIONAL_REGEX              = "\\?|\\:";
+    String LIST_REGEX                     = "\\{|\\}";
     String ARG_SEPARATOR_REGEX            = "\\,";
     String ARRAY_ACCESS_REGEX             = "\\[|\\]";
 

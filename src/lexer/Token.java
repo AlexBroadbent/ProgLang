@@ -1,7 +1,7 @@
 package lexer;
 
 /**
- * JavaCCProgrammingLanguage.parser
+ * x++.parser
  *
  * @author Alexander Broadbent
  * @version 31/10/2015

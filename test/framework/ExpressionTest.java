@@ -1,6 +1,8 @@
 package framework;
 
-import eval.*;
+import eval.Expression;
+import eval.ExpressionException;
+import eval.IncomparableTypeException;
 import gui.XLogger;
 import lexer.UnknownSequenceException;
 import model.Domain;
@@ -19,12 +21,9 @@ import static org.junit.Assert.*;
  */
 public class ExpressionTest extends BaseTest {
 
-    private static final String MSG_ASSERT_TYPE   = "Result is of type %s, expected %s";
+    private static final String MSG_ASSERT_TYPE   = "Test::%s - Asserting result type [%s] equals expected type [%s]";
     private static final String MSG_ASSERT_RESULT = "Result is %s, expected %s";
 
-    private static Literal wrap(Object object) {
-        return Domain.wrapLiteral(object);
-    }
 
     @Before
     public void setUp() {
@@ -35,6 +34,7 @@ public class ExpressionTest extends BaseTest {
     public void tearDown() {
         Domain.resetInstance();
     }
+
 
     /*
             Testing methods
@@ -61,30 +61,23 @@ public class ExpressionTest extends BaseTest {
         verifyVariable(varName, expResult);
     }
 
+    protected void runExceptionTest(String input, Class<? extends Exception> expException) {
+        try {
+            getResultFromInput(input);
+            fail("No exception was thrown from the input " + input);
+        }
+        catch (Exception ex) {
+            assertTypeOfResult(ex, expException);
+        }
+    }
+
+
     /*
             Helper methods
      */
 
-    protected void runExceptionTest(String input, Class<? extends Exception> expException) {
-        boolean result = assertExceptionIsThrown(input, expException);
-        assertResult(getClass().getSimpleName() + " - Asserting " + expException.getSimpleName() + " was thrown", true, result);
-    }
-
-    @SuppressWarnings( "unchecked" )  // Catch is in place to check a casting exception
-    protected void runListTest(String input, XList expResult) throws UnknownSequenceException,
-            ParserException, ExpressionException, IncomparableTypeException {
-        Expression expression = getExpressionFromInput(input);
-        Object list = getValueFromExpression(expression);
-        XList result = null;
-
-        try {
-            result = (XList) list;
-        }
-        catch (ClassCastException ex) {
-            fail("A List was not returned, instead result is of type " + getValueFromExpression(expression).getClass().getSimpleName());
-        }
-
-        assertResult(expResult, result);
+    protected void setDomainVariable(String name, Object value) {
+        Domain.getInstance().getOrCreateVariable(name).setValue(value);
     }
 
     private void verifyVariable(String varName, Object expResult) {
@@ -95,8 +88,10 @@ public class ExpressionTest extends BaseTest {
         assertResult(expResult, result);
     }
 
-    protected void setDomainVariable(String name, Object value) {
-        Domain.getInstance().getOrCreateVariable(name).setValue(value);
+    protected Object getResultFromInput(String input) throws ExpressionException, IncomparableTypeException,
+            ParserException, UnknownSequenceException {
+        Expression expression = getExpressionFromInput(input);
+        return getValueFromExpression(expression);
     }
 
     protected Expression getExpressionFromInput(String input) throws ExpressionException,
@@ -114,34 +109,20 @@ public class ExpressionTest extends BaseTest {
         return Domain.getInstance().getVariable(variableName).getValue();
     }
 
-    protected Object getResultFromInput(String input) throws ExpressionException, IncomparableTypeException,
-            ParserException, UnknownSequenceException {
-        Expression expression = getExpressionFromInput(input);
-        return expression.execute();
-    }
-
     protected boolean hasVariableBeenCreated(String varName) {
         return Domain.getInstance().hasVariable(varName);
     }
+
 
     /*
             Assert Methods
      */
 
-
-    private boolean assertExceptionIsThrown(String input, Class<? extends Exception> expectedException) {
-        try {
-            Object result = getValueFromExpression(getExpressionFromInput(input));
-            return result == null;
-        }
-        catch (Exception ex) {
-            return (ex.getClass().equals(expectedException));
-        }
-    }
-
     protected void assertTypeOfResult(Object result, Class expectedClass) {
-        assertThat(String.format(MSG_ASSERT_TYPE, result.getClass().getSimpleName(),
-                expectedClass.getSimpleName()), result, instanceOf(expectedClass));
+        XLogger.log(String.format(MSG_ASSERT_TYPE, getClass().getSimpleName(), result.getClass().getSimpleName(),
+                expectedClass.getSimpleName()));
+        assertThat(String.format(MSG_ASSERT_RESULT, result.getClass().getSimpleName(), expectedClass.getSimpleName()),
+                result, instanceOf(expectedClass));
     }
 
     <T> void assertResult(T expected, T actual) {

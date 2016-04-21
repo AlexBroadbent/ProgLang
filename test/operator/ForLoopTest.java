@@ -58,31 +58,31 @@ public class ForLoopTest extends FunctionTest {
     @Test
     public void loopWithVariableTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runListTest(INPUT_VAR, RESULT_VAR);
+        runExpressionTest(INPUT_VAR, RESULT_VAR);
     }
 
     @Test
     public void loopWithInlineListTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runListTest(INPUT_LIST, RESULT_LIST);
+        runExpressionTest(INPUT_LIST, RESULT_LIST);
     }
 
     @Test
     public void loopCalculationTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runListTest(INPUT_CALC, RESULT_CALC);
+        runExpressionTest(INPUT_CALC, RESULT_CALC);
     }
 
     @Test
     public void loopAccessTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runListTest(INPUT_OPER, RESULT_OPER);
+        runExpressionTest(INPUT_OPER, RESULT_OPER);
     }
 
     @Test
     public void loopShortInputTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runListTest(INPUT_SHORT, RESULT_SHORT);
+        runExpressionTest(INPUT_SHORT, RESULT_SHORT);
     }
 
     @Test

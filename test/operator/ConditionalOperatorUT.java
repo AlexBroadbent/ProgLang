@@ -87,7 +87,7 @@ public class ConditionalOperatorUT extends ExpressionTest {
     @Test
     public void functionTest()
             throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
-        runListTest(INPUT_FUNC, RESULT_FUNC);
+        runExpressionTest(INPUT_FUNC, RESULT_FUNC);
     }
 
     @Test

@@ -50,7 +50,6 @@ public class UserFunctionUT extends FunctionTest {
     private final static Double                     RESULT_PREC             = 52d;
     private final static Double                     RESULT_MIXED_VAR        = Math.PI * 3d;
     private final static XList                      RESULT_DBL_LIST         = XList.parse(2d, 4d, 6d);
-    private final static Class<? extends Exception> CLASS_NPE               = NullPointerException.class;
     private final static Class<? extends Exception> CLASS_EE                = ExpressionException.class;
     private final static Class<? extends Exception> CLASS_PE                = ParserException.class;
 
@@ -84,7 +83,7 @@ public class UserFunctionUT extends FunctionTest {
 
     @Test
     public void noArgumentFunctionTest() {
-        runExceptionTest(INPUT_NO_ARG_FUNC, CLASS_NPE);
+        runExceptionTest(INPUT_NO_ARG_FUNC, CLASS_EE);
     }
 
     @Test
@@ -126,7 +125,7 @@ public class UserFunctionUT extends FunctionTest {
     public void loopInFunctionListTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
         runFunctionDeclaration(INPUT_DBL_LIST_FUNC, NAME_DBL_LIST_FUNC);
-        runListTest(INPUT_DBL_LIST_RUN, RESULT_DBL_LIST);
+        runExpressionTest(INPUT_DBL_LIST_RUN, RESULT_DBL_LIST);
     }
 
     @Test

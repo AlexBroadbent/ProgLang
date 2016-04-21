@@ -47,7 +47,7 @@ public class ListOperatorUT extends ExpressionTest {
     @Test
     public void listOperatorTest()
             throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runListTest(INPUT_CREATE, RESULT_CREATE);
+        runExpressionTest(INPUT_CREATE, RESULT_CREATE);
     }
 
     @Test

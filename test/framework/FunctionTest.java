@@ -25,7 +25,7 @@ public class FunctionTest extends ExpressionTest {
     protected void runFunctionWithListResultTest(String decInput, String funcName, String runInput, XList runResult)
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
         runFunctionDeclaration(decInput, funcName);
-        runListTest(runInput, runResult);
+        runExpressionTest(runInput, runResult);
     }
 
     private void assertFunctionCreated(String functionName) {
@@ -34,12 +34,9 @@ public class FunctionTest extends ExpressionTest {
     }
 
 
-
-
     /*
      *      Helper Functions
      */
-
     protected void runFunctionDeclaration(String input, String functionName)
             throws UnknownSequenceException, IncomparableTypeException, ExpressionException, ParserException {
         Expression declaration = getExpressionFromInput(input);

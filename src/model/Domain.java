@@ -189,9 +189,7 @@ public class Domain {
     }
 
     public void registerFunction(IFunction function) {
-        lexer.addUserFunctionName(function.getToken());         // Register the function with the lexer
         functions.put(function.getToken(), function);
-
         if (function.getType() == USER_FUNCTION)
             functionalVariables.put(function.getToken(), Maps.newHashMap());
     }
