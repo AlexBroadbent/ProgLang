@@ -80,8 +80,9 @@ public abstract class BinaryOperator extends Operator {
         throw new ExpressionException("Operator not implemented");
     }
 
-    public String getIncomparableType(String arg1Class, String arg2Class, List<String> allowedClasses) {
-        return (allowedClasses.contains(arg1Class)) ? arg2Class : arg1Class;
+    public ICalculable getIncomparableObject(ICalculable arg1, ICalculable arg2, List<String> allowedClasses) {
+        String a1Class = (arg1.getType() == VARIABLE) ? ((Variable) arg1).getValue().getClass().getSimpleName() : arg1.getClass().getSimpleName();
+        return (allowedClasses.contains(a1Class)) ? arg2 : arg1;
     }
 
 }

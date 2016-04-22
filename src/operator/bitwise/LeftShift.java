@@ -53,7 +53,7 @@ public class LeftShift extends BinaryOperator {
         }
         catch (NumberFormatException ex) {
             throw new IncomparableTypeException(getAllowedExecutionTypes(),
-                    getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
+                    getIncomparableObject(arg1, arg2, getAllowedExecutionTypes()));
         }
     }
 

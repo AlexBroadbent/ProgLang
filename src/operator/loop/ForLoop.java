@@ -54,8 +54,7 @@ public class ForLoop extends Function {
         // Ensure first argument is a variable type, list cannot be checked as it could be a variable or a literal and
         //  so is caught in the cast below
         if (args.get(0).getType() != VARIABLE)
-            throw new IncomparableTypeException(Lists.newArrayList(Variable.class.getSimpleName()),
-                    args.get(0).getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(Lists.newArrayList(Variable.class.getSimpleName()), args.get(0));
 
         // Cast variables to match and throw expression exception if anything fails
         Variable var;

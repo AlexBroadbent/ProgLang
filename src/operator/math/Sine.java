@@ -37,7 +37,7 @@ public class Sine extends Function {
             return Math.sin(Double.parseDouble(arg1.getValue().toString()));
         }
         catch (NumberFormatException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1);
         }
     }
 

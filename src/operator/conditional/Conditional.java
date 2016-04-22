@@ -74,7 +74,7 @@ public class Conditional extends TernaryOperator {
             return ((Boolean) arg1.getValue()) ? arg2.getValue() : arg3.getValue();
         }
         catch (ClassCastException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1);
         }
     }
 }

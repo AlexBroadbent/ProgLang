@@ -1,4 +1,4 @@
-package operator;
+package feature;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
@@ -35,13 +35,12 @@ public class ForLoopTest extends FunctionTest {
     private final static String ERROR_VAR      = "for true in t do x";
     private final static String ERROR_LIST     = "for x in true do x";
     private final static String ERROR_LIST_2   = "for x in head do x";
-
-    private final static XList                      RESULT_VAR     = XList.parse(1, 2, 3);
-    private final static XList                      RESULT_LIST    = XList.parse(4, 5, 6);
-    private final static XList                      RESULT_CALC    = XList.parse(4d, 10d, 140d);
-    private final static XList                      RESULT_OPER    = XList.parse(0, 1, 2);
-    private final static XList                      RESULT_SHORT   = XList.parse(1, 2, 3);
-    private final static XList                      RESULT_DBL_RUN = XList.parse(2d, 4d, 6d);
+    private final static XList  RESULT_VAR     = XList.parse(1, 2, 3);
+    private final static XList  RESULT_LIST    = XList.parse(4, 5, 6);
+    private final static XList  RESULT_CALC    = XList.parse(4d, 10d, 140d);
+    private final static XList  RESULT_OPER    = XList.parse(0, 1, 2);
+    private final static XList  RESULT_SHORT   = XList.parse(1, 2, 3);
+    private final static XList  RESULT_DBL_RUN = XList.parse(2d, 4d, 6d);
     private final static Class<? extends Exception> CLASS_EE       = ExpressionException.class;
     private final static Class<? extends Exception> CLASS_ICT      = IncomparableTypeException.class;
 
@@ -86,6 +85,12 @@ public class ForLoopTest extends FunctionTest {
     }
 
     @Test
+    public void funcWithLoopTest()
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+        runFunctionTest(INPUT_DBL_FUNC, NAME_DBL, INPUT_DBL_RUN, RESULT_DBL_RUN);
+    }
+
+    @Test
     public void inputNoDoExceptionTest() {
         runExceptionTest(INPUT_NO_DO, CLASS_EE);
     }
@@ -113,12 +118,6 @@ public class ForLoopTest extends FunctionTest {
     @Test
     public void wrongListTypeExceptionTest() {
         runExceptionTest(ERROR_LIST, CLASS_EE);
-    }
-
-    @Test
-    public void funcWithLoopTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
-        runFunctionWithListResultTest(INPUT_DBL_FUNC, NAME_DBL, INPUT_DBL_RUN, RESULT_DBL_RUN);
     }
 
 }

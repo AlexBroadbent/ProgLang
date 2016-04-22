@@ -15,7 +15,7 @@ import java.io.PrintStream;
  * @author Alexander Broadbent
  * @version 26/03/2016
  */
-public class LogTest extends BaseTest {
+public abstract class LogTest extends BaseTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();

@@ -3,7 +3,6 @@ package framework;
 import eval.Expression;
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
-import eval.XList;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import parser.ParserException;
@@ -14,7 +13,7 @@ import parser.ParserException;
  * @author Alexander Broadbent
  * @version 22/03/2016
  */
-public class FunctionTest extends ExpressionTest {
+public abstract class FunctionTest extends ExpressionTest {
 
     protected void runFunctionTest(String decInput, String funcName, String runInput, Object runResult)
             throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
@@ -22,26 +21,20 @@ public class FunctionTest extends ExpressionTest {
         runFunction(runInput, runResult);
     }
 
-    protected void runFunctionWithListResultTest(String decInput, String funcName, String runInput, XList runResult)
-            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
-        runFunctionDeclaration(decInput, funcName);
-        runExpressionTest(runInput, runResult);
-    }
-
-    private void assertFunctionCreated(String functionName) {
-        Domain model = Domain.getInstance();
-        assertResult(true, model.getFunctionList().contains(functionName));
+    protected void runFunctionDeclaration(String input, String functionName)
+            throws UnknownSequenceException, IncomparableTypeException, ExpressionException, ParserException {
+        Expression declaration = getExpressionFromInput(input);
+        getValueFromExpression(declaration);
+        assertFunctionCreated(functionName);
     }
 
 
     /*
      *      Helper Functions
      */
-    protected void runFunctionDeclaration(String input, String functionName)
-            throws UnknownSequenceException, IncomparableTypeException, ExpressionException, ParserException {
-        Expression declaration = getExpressionFromInput(input);
-        getValueFromExpression(declaration);
-        assertFunctionCreated(functionName);
+    private void assertFunctionCreated(String functionName) {
+        Domain model = Domain.getInstance();
+        assertResult(true, model.getFunctionList().contains(functionName));
     }
 
     private void runFunction(String input, Object expResult)

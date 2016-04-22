@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  * @author Alexander Broadbent
  * @version 29/12/2015
  */
-public class ExpressionTest extends BaseTest {
+public abstract class ExpressionTest extends BaseTest {
 
     private static final String MSG_ASSERT_TYPE   = "Test::%s - Asserting result type [%s] equals expected type [%s]";
     private static final String MSG_ASSERT_RESULT = "Result is %s, expected %s";

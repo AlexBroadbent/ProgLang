@@ -144,9 +144,6 @@ public class UserFunction extends Function implements IUserFunction {
 
     @Override
     public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
-        if (args.size() == 0)
-            return this;
-
         if (args.size() != arguments.size())
             throw new ExpressionException(String.format(MSG_SIZE_ARG, arguments.size(), args.size()));
 

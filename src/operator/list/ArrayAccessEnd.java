@@ -48,7 +48,7 @@ public class ArrayAccessEnd extends BinaryOperator {
             return list.get(position);
         }
         catch (ClassCastException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1);
         }
         catch (NumberFormatException ex) {
             throw new ExpressionException("The position given is not a valid integer");

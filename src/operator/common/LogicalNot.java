@@ -38,7 +38,7 @@ public class LogicalNot extends UnaryOperator {
             return !((Boolean) arg1.getValue());
         }
         catch (ClassCastException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1);
         }
     }
 

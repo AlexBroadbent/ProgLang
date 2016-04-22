@@ -46,7 +46,7 @@ public class Head extends Function {
             return list.get(0).getValue();
         }
         catch (ClassCastException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0).getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0));
         }
     }
 }

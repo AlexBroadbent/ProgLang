@@ -31,8 +31,7 @@ public class Multiply extends BinaryOperator {
             return Double.valueOf(arg1.getValue().toString()) * Double.valueOf(arg2.getValue().toString());
         }
         catch (NumberFormatException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(),
-                    getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), getIncomparableObject(arg1, arg2, getAllowedExecutionTypes()));
         }
     }
 }

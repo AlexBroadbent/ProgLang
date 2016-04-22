@@ -14,9 +14,9 @@ import org.junit.Test;
  */
 public class LoggerUT extends LogTest {
 
-    private final static String TEST_LOG     = "test log";
-    private final static String TEST_WARNING = "test log";
-    private final static String TEST_SEVERE  = "test log";
+    private final static String TEST_LOG     = "test log message";
+    private final static String TEST_WARNING = "test warning message";
+    private final static String TEST_SEVERE  = "test severe message";
 
 
     @Override

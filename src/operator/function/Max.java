@@ -37,7 +37,7 @@ public class Max extends Function {
                     list.add(Double.parseDouble(literal.getValue().toString()));
             }
             catch (NumberFormatException ex) {
-                throw new IncomparableTypeException(getAllowedExecutionTypes(), literal.getValue().getClass().getSimpleName());
+                throw new IncomparableTypeException(getAllowedExecutionTypes(), literal);
             }
         }
 

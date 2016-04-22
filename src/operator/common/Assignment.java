@@ -72,7 +72,7 @@ public class Assignment extends BinaryOperator {
     public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
         // Check that the first argument is a variable
         if (arg1.getType() != VARIABLE)
-            throw new ExpressionException("Assignment must be made to a variable");
+            throw new ExpressionException(""); // TODO: proper output for reserved names
 
         // Ensure that the variable is immutable by rejecting a change
         if (((Variable) arg1).isValueSet())

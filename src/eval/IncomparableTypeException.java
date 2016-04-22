@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+import static eval.ICalculableType.VARIABLE;
+
 /**
  * x++.parser
  *
@@ -19,8 +21,9 @@ public class IncomparableTypeException extends Exception {
         super(msg);
     }
 
-    public IncomparableTypeException(List<String> expectedTypes, String foundType) {
-        super(String.format(OUTPUT_MSG, StringUtils.join(expectedTypes, ", "), foundType));
+    public IncomparableTypeException(List<String> expectedTypes, ICalculable actual) {
+        super(String.format(OUTPUT_MSG, StringUtils.join(expectedTypes, ", "),
+                (actual.getType() == VARIABLE) ? ((Variable) actual).getValue().getClass().getSimpleName() : actual.getClass().getSimpleName()));
     }
 
 }

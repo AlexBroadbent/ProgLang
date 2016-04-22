@@ -35,7 +35,7 @@ public class Sum extends Function {
                     sum += Double.parseDouble(literal.getValue().toString());
             }
             catch (NumberFormatException ex) {
-                throw new IncomparableTypeException(getAllowedExecutionTypes(), literal.getValue().getClass().getSimpleName());
+                throw new IncomparableTypeException(getAllowedExecutionTypes(), literal);
             }
         }
 

@@ -38,7 +38,7 @@ public class Not extends UnaryOperator {
             return ~Byte.valueOf(arg1.getValue().toString());
         }
         catch (NumberFormatException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1.getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1);
         }
     }
 

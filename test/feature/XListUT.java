@@ -1,4 +1,4 @@
-package type;
+package feature;
 
 import eval.XList;
 import framework.BaseTest;

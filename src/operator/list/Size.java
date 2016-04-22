@@ -43,7 +43,7 @@ public class Size extends Function {
             return ((XList) args.get(0).getValue()).size();
         }
         catch (ClassCastException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0).getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0));
         }
     }
 }

@@ -34,6 +34,11 @@ public class Variable extends Literal {
     }
 
     @Override
+    public Object getValue() {
+        return super.getValue();
+    }
+
+    @Override
     public void setValue(Object value) {
         super.setValue(value instanceof Literal ? ((Literal) value).getValue() : value);
         valueSet = true;

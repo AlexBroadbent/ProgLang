@@ -46,7 +46,7 @@ public class And extends BinaryOperator {
         }
         catch (NumberFormatException ex) {
             throw new IncomparableTypeException(Lists.newArrayList(Byte.class.getSimpleName()),
-                    getIncomparableType(arg1.getClass().getSimpleName(), arg2.getClass().getSimpleName(), getAllowedExecutionTypes()));
+                    getIncomparableObject(arg1, arg2, getAllowedExecutionTypes()));
         }
     }
 

@@ -72,7 +72,7 @@ public interface IConstants {
     String SUM    = "sum";
     String MAX    = "max";
     String RANDOM = "random";
-    String PRINT  = "print";
+    String ROUND  = "round";
     String LIST   = "list";
     String HEAD   = "head";
     String TAIL   = "tail";

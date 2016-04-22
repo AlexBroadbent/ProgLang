@@ -46,7 +46,7 @@ public class Tail extends Function {
             return list.subList(1, list.size());
         }
         catch (ClassCastException ex) {
-            throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0).getValue().getClass().getSimpleName());
+            throw new IncomparableTypeException(getAllowedExecutionTypes(), args.get(0));
         }
     }
 
