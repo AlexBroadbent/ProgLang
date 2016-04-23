@@ -18,7 +18,7 @@ public abstract class Operator implements IOperator {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName();
+        return getToken();
     }
 
 }

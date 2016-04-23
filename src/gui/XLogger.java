@@ -5,12 +5,13 @@ import static gui.IConstants.DEBUG_MODE;
 /**
  * x++.gui
  * <p>
- * <p>
  * Handles logging to the user, can be used to debug log and handle formatted outputs
+ * </p>
  * <p>
  * By default, the debug mode is turned on to display all messages. This can be switched
  * using the command 'domain debug false' to hide all log and warning messages, but severe
  * warnings will still be shown.
+ * </p>
  *
  * @author Alexander Broadbent
  * @version 05/01/2016

@@ -131,8 +131,8 @@ public class Domain {
         registerOperator(new ListStart());
 
         // loop package operators
+        registerFunction(new ForLoop());
         registerOperator(new Do());
-        registerOperator(new ForLoop());
         registerOperator(new In());
 
         // function package functions

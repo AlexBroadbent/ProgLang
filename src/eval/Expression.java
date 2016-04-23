@@ -35,12 +35,13 @@ public class Expression extends Literal {
     protected String            infix;
 
     /**
-     * Create an expression object...
+     * Create an expression object
      *
      * @param model  The domain object
      * @param tokens A lexically analysed list of Token objects representing the expression
-     * @throws ExpressionException
-     * @throws UnknownSequenceException
+     * @throws ExpressionException  when an error occurs during the parsing analysis, converting to postfix, or in validation
+     * @throws UnknownSequenceException when an unrecognised token is found
+     * @throws ParserException when an
      */
     public Expression(Domain model, List<Token> tokens)
             throws ExpressionException, UnknownSequenceException, ParserException {
@@ -115,8 +116,8 @@ public class Expression extends Literal {
      * the result should be itself and not actually execute the operators/functions.
      *
      * @return An object representing the value of the expression
-     * @throws ExpressionException
-     * @throws IncomparableTypeException
+     * @throws ExpressionException when an error arises from executing the expression
+     * @throws IncomparableTypeException when an operator is executed with the wrong type of operand
      */
     public Object execute() throws ExpressionException, IncomparableTypeException {
         Stack<Literal> stack = new Stack<>();

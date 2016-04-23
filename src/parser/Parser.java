@@ -31,12 +31,11 @@ public class Parser implements IParser {
      * @param domain domain model
      * @param tokens list of tokens
      * @return list of ICalculable objects
-     * @throws ParserException
+     * @throws ParserException when an unexpected token is analysed
      */
     @Override
     public List<ICalculable> parse(Domain domain, List<Token> tokens) throws ParserException {
         List<ICalculable> infixExpression = Lists.newArrayList();
-
 
         if (tokens.get(0).token == FUNCTION_DECLARATION)
             return parseDeclaration(domain, tokens.subList(1, tokens.size()));                  // Function declaration
@@ -63,6 +62,7 @@ public class Parser implements IParser {
      * @param tokens list of tokens
      * @return list of ICalculable objects
      */
+    @SuppressWarnings( "null" )
     private List<ICalculable> parseDeclaration(Domain domain, List<Token> tokens) throws ParserException {
         List<ICalculable> infixExpression = Lists.newArrayList(new Flag());
         boolean inFunctionAssignment = false;
@@ -94,8 +94,12 @@ public class Parser implements IParser {
                 else {
                     if (function != null && Objects.equals(token.sequence, function.getName()))
                         infixExpression.add(domain.getFunction(function.getName()));
-                    else
-                        infixExpression.add(domain.getFunctionalVariable(function.getName(), token.sequence));
+                    else {
+                        if (function != null)
+                            infixExpression.add(domain.getFunctionalVariable(function.getName(), token.sequence));
+                        else
+                            throw new ParserException("Invalid sequence, check the syntax of function declarations");
+                    }
                 }
             }
             else
