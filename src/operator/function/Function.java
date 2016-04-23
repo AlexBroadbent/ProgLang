@@ -59,8 +59,17 @@ public abstract class Function implements IFunction {
 
         List<Literal> args = Lists.newArrayList();
 
-        while (!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER)
+        // functionLevel defines how many functions deep the code is in, every function increments this number
+        //  and a placeholder will decrement it.
+        int functionLevel = 0;
+        while ((!stack.isEmpty() && stack.peek().getType() != FUNCTION_PLACEHOLDER) || functionLevel > 0) {
+            if (stack.peek().getValue() instanceof Function)
+                functionLevel++;
+            else if (stack.peek().getType() == FUNCTION_PLACEHOLDER)
+                functionLevel--;
+
             args.add(stack.pop());
+        }
         stack.pop(); // Pop off the arg separator
 
         Collections.reverse(args);
