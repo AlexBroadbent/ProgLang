@@ -2,6 +2,7 @@ package operator;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
@@ -46,25 +47,25 @@ public class ComparatorOperatorUT extends ExpressionTest {
 
     @Test
     public void greaterThanOperatorTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_GT, RESULT_GT);
     }
 
     @Test
     public void greaterThanEqualOperatorTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_GT_EQ, RESULT_GT_EQ);
     }
 
     @Test
     public void lessThanOperatorTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_LT, RESULT_LT);
     }
 
     @Test
     public void lessThanEqualOperatorTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_LT_EQ, RESULT_LT_EQ);
     }
 

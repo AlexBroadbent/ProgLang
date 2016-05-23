@@ -58,7 +58,7 @@ public class Expression extends Literal {
     }
 
 
-    public Expression(List<ICalculable> postfix, Domain model) throws ExpressionException {
+    public Expression(List<ICalculable> postfix, Domain model) throws ExpressionException, NoValueException {
         super(null);
         this.model = model;
         infix = StringUtils.join(postfix, " ");
@@ -68,7 +68,7 @@ public class Expression extends Literal {
             throw new ExpressionException(String.format(MSG_EXP_INVALID, toString()));
     }
 
-    public static List<ICalculable> parseWrappedList(List<ICalculable> postfix) {
+    public static List<ICalculable> parseWrappedList(List<ICalculable> postfix) throws NoValueException {
         for (int i = 0; i < postfix.size(); i++) {
             ICalculable calculable = postfix.get(i);
             if (calculable.getType() == LITERAL) {
@@ -119,7 +119,7 @@ public class Expression extends Literal {
      * @throws ExpressionException when an error arises from executing the expression
      * @throws IncomparableTypeException when an operator is executed with the wrong type of operand
      */
-    public Object execute() throws ExpressionException, IncomparableTypeException {
+    public Object execute() throws ExpressionException, IncomparableTypeException, NoValueException {
         Stack<Literal> stack = new Stack<>();
         boolean inFuncDec = false;  // defining a function
         boolean inLoopDec = false;  // defining a for loop expression
@@ -176,7 +176,7 @@ public class Expression extends Literal {
     }
 
     @Override
-    public Object getValue() {
+    public Object getValue() throws NoValueException {
         try {
             return execute();
         }

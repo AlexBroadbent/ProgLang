@@ -21,9 +21,9 @@ public class IncomparableTypeException extends Exception {
         super(msg);
     }
 
-    public IncomparableTypeException(List<String> expectedTypes, ICalculable actual) {
+    public IncomparableTypeException(List<String> expectedTypes, ICalculable actual) throws NoValueException {
         super(String.format(OUTPUT_MSG, StringUtils.join(expectedTypes, ", "),
-                (actual.getType() == VARIABLE) ? ((Variable) actual).getValue().getClass().getSimpleName() : actual.getClass().getSimpleName()));
+                actual.getType() == VARIABLE ? ((Variable) actual).getValue().getClass().getSimpleName() : actual.getClass().getSimpleName()));
     }
 
 }

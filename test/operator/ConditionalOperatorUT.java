@@ -2,6 +2,7 @@ package operator;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import eval.XList;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
@@ -56,37 +57,37 @@ public class ConditionalOperatorUT extends ExpressionTest {
 
     @Test
     public void simpleTest()
-            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_SIM, RESULT_SIM);
     }
 
     @Test
     public void simple2Test()
-            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_SIM_2, RESULT_SIM_2);
     }
 
     @Test
     public void complexTest()
-            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest("Complex Conditional[" + INPUT_COM + "]", INPUT_COM, RESULT_COM);
     }
 
     @Test
     public void complex2Test()
-            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest("Complex Conditional[" + INPUT_COM_2 + "]", INPUT_COM_2, RESULT_COM_2);
     }
 
     @Test
     public void assignmentTest()
-            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException, NoValueException {
         runVariableTest(INPUT_ASSIGN, VAR_V, RESULT_ASSIGN);
     }
 
     @Test
     public void functionTest()
-            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException {
+            throws UnknownSequenceException, ExpressionException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_FUNC, RESULT_FUNC);
     }
 

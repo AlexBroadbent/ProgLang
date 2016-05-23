@@ -1,6 +1,7 @@
 package operator.equality;
 
 import eval.Literal;
+import eval.NoValueException;
 import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
@@ -26,7 +27,7 @@ public class Equal extends BinaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1, Literal arg2) {
+    public Object execute(Literal arg1, Literal arg2) throws NoValueException {
         return Objects.equals(arg1.getValue(), arg2.getValue());
     }
 

@@ -62,7 +62,6 @@ public class Parser implements IParser {
      * @param tokens list of tokens
      * @return list of ICalculable objects
      */
-    @SuppressWarnings( "null" )
     private List<ICalculable> parseDeclaration(Domain domain, List<Token> tokens) throws ParserException {
         List<ICalculable> infixExpression = Lists.newArrayList(new Flag());
         boolean inFunctionAssignment = false;

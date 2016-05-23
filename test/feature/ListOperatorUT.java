@@ -2,6 +2,7 @@ package feature;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import eval.XList;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
@@ -46,7 +47,7 @@ public class ListOperatorUT extends ExpressionTest {
 
     @Test
     public void listOperatorTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_CREATE, RESULT_CREATE);
     }
 
@@ -57,7 +58,7 @@ public class ListOperatorUT extends ExpressionTest {
 
     @Test
     public void listAccessTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_ACCESS, RESULT_ACCESS);
     }
 
@@ -78,13 +79,13 @@ public class ListOperatorUT extends ExpressionTest {
 
     @Test
     public void listMaxFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_MAX_FUNC, RESULT_MAX_FUNC);
     }
 
     @Test
     public void listSumFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_SUM_FUNC, RESULT_SUM_FUNC);
     }
 

@@ -2,6 +2,7 @@ package operator.math;
 
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import operator.IPrecedence;
 import operator.base.UnaryOperator;
 
@@ -26,7 +27,7 @@ public class Exponential extends UnaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1) throws IncomparableTypeException {
+    public Object execute(Literal arg1) throws IncomparableTypeException, NoValueException {
         try {
             return Math.exp(Double.valueOf(arg1.getValue().toString()));
         }

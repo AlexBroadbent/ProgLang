@@ -2,6 +2,7 @@ package operator.function;
 
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import eval.XList;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class Sum extends Function {
     }
 
     @Override
-    public Object execute(List<Literal> args) throws IncomparableTypeException {
+    public Object execute(List<Literal> args) throws IncomparableTypeException, NoValueException {
         double sum = 0;
 
         for (Literal literal : args) {

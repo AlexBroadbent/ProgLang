@@ -3,6 +3,7 @@ package operator.common;
 import com.google.common.collect.Lists;
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
@@ -33,7 +34,7 @@ public class LogicalOr extends BinaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException {
+    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, NoValueException {
         try {
             return ((Boolean) arg1.getValue()) || ((Boolean) arg2.getValue());
         }

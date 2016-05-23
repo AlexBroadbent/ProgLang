@@ -2,6 +2,7 @@ package operator;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
@@ -61,85 +62,85 @@ public class MathOperatorUT extends ExpressionTest {
 
     @Test
     public void operatorSineTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_SIN, RESULT_SIN);
     }
 
     @Test
     public void operatorCosineTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_COS, RESULT_COS);
     }
 
     @Test
     public void operatorTangentTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_TAN, RESULT_TAN);
     }
 
     @Test
     public void operatorASineTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_ASIN, RESULT_ASIN);
     }
 
     @Test
     public void operatorACosineTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_ACOS, RESULT_ACOS);
     }
 
     @Test
     public void operatorATangentTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_ATAN, RESULT_ATAN);
     }
 
     @Test
     public void operatorPowerTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_POW, RESULT_POW);
     }
 
     @Test
     public void operatorSquareRootTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_SQR, RESULT_SQR);
     }
 
     @Test
     public void operatorNaturalLogTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_NLN, RESULT_NLN);
     }
 
     @Test
     public void operatorLog10Test()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_L10, RESULT_L10);
     }
 
     @Test
     public void operatorExponentialTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_EXP, RESULT_EXP);
     }
 
     @Test
     public void operatorModuloTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_MOD, RESULT_MOD);
     }
 
     @Test
     public void operatorAllPrecedenceTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_ALL, RESULT_ALL);
     }
 
     @Test
     public void logETest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_LN_E, RESULT_LN_E);
     }
 

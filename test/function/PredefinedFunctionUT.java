@@ -2,6 +2,7 @@ package function;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import eval.XList;
 import framework.FunctionTest;
 import lexer.UnknownSequenceException;
@@ -39,19 +40,19 @@ public class PredefinedFunctionUT extends FunctionTest {
     private static final String                     INPUT_TAIL       = "tail(z)";
     private static final String                     INPUT_TAIL_ARG   = "tail(z, true)";
     private static final String                     INPUT_TAIL_TYPE  = "tail(true)";
-    private static final String  INPUT_EMPTY      = "empty(z)";
-    private static final String  INPUT_EMPTY_ARG  = "empty(z, 2)";
-    private static final String  INPUT_EMPTY_TYPE = "empty(x)";
-    private static final String  INPUT_SIZE       = "size(z)";
-    private static final String  INPUT_SIZE_ARG   = "size(z, 2)";
-    private static final String  INPUT_SIZE_TYPE  = "size(2)";
-    private static final String  INPUT_RANDOM     = "random()";
-    private static final XList   RESULT_CONS      = XList.parse(4, 1, 2, 3);
-    private static final Integer RESULT_HEAD      = 1;
-    private static final XList   RESULT_LIST      = XList.parse(1, 2, 3);
-    private static final Double  RESULT_MAX       = 40d;
-    private static final Double  RESULT_SUM       = 60d;
-    private static final XList   RESULT_TAIL      = XList.parse(2, 3);
+    private static final String                     INPUT_EMPTY      = "empty(z)";
+    private static final String                     INPUT_EMPTY_ARG  = "empty(z, 2)";
+    private static final String                     INPUT_EMPTY_TYPE = "empty(x)";
+    private static final String                     INPUT_SIZE       = "size(z)";
+    private static final String                     INPUT_SIZE_ARG   = "size(z, 2)";
+    private static final String                     INPUT_SIZE_TYPE  = "size(2)";
+    private static final String                     INPUT_RANDOM     = "random()";
+    private static final XList                      RESULT_CONS      = XList.parse(4, 1, 2, 3);
+    private static final Integer                    RESULT_HEAD      = 1;
+    private static final XList                      RESULT_LIST      = XList.parse(1, 2, 3);
+    private static final Double                     RESULT_MAX       = 40d;
+    private static final Double                     RESULT_SUM       = 60d;
+    private static final XList                      RESULT_TAIL      = XList.parse(2, 3);
     private static final Boolean                    RESULT_EMPTY     = Boolean.FALSE;
     private static final Integer                    RESULT_SIZE      = 3;
     private static final Class<? extends Exception> CLASS_ITE        = IncomparableTypeException.class;
@@ -70,7 +71,7 @@ public class PredefinedFunctionUT extends FunctionTest {
 
     @Test
     public void consFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_CONS, RESULT_CONS);
     }
 
@@ -86,7 +87,7 @@ public class PredefinedFunctionUT extends FunctionTest {
 
     @Test
     public void headFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_HEAD, RESULT_HEAD);
     }
 
@@ -102,13 +103,13 @@ public class PredefinedFunctionUT extends FunctionTest {
 
     @Test
     public void listFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_LIST, RESULT_LIST);
     }
 
     @Test
     public void maxFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_MAX, RESULT_MAX);
     }
 
@@ -119,7 +120,7 @@ public class PredefinedFunctionUT extends FunctionTest {
 
     @Test
     public void sumFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_SUM, RESULT_SUM);
     }
 
@@ -130,7 +131,7 @@ public class PredefinedFunctionUT extends FunctionTest {
 
     @Test
     public void tailFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_TAIL, RESULT_TAIL);
     }
 
@@ -146,7 +147,7 @@ public class PredefinedFunctionUT extends FunctionTest {
 
     @Test
     public void emptyFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_EMPTY, RESULT_EMPTY);
     }
 
@@ -162,7 +163,7 @@ public class PredefinedFunctionUT extends FunctionTest {
 
     @Test
     public void sizeFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_SIZE, RESULT_SIZE);
     }
 
@@ -178,7 +179,7 @@ public class PredefinedFunctionUT extends FunctionTest {
 
     @Test
     public void randomFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         Object result = getResultFromInput(INPUT_RANDOM);
         assertTypeOfResult(result, Double.class);
         assertResultRange(((Double) result), 0d, 1d);

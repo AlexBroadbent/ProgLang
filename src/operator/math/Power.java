@@ -2,6 +2,7 @@ package operator.math;
 
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
 
@@ -26,7 +27,7 @@ public class Power extends BinaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException {
+    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, NoValueException {
         try {
             return Math.pow(Double.valueOf(arg1.getValue().toString()), Double.valueOf(arg2.getValue().toString()));
         }

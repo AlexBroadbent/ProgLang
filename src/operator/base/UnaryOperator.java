@@ -48,7 +48,7 @@ public abstract class UnaryOperator extends Operator {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException {
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         if (returnExpression)
             return Domain.wrapLiteral(this);
 
@@ -70,7 +70,7 @@ public abstract class UnaryOperator extends Operator {
             postfix.add(this);          // post-fix unary operator, add to postfix output
     }
 
-    public Object execute(Literal arg1) throws IncomparableTypeException, ExpressionException {
+    public Object execute(Literal arg1) throws IncomparableTypeException, ExpressionException, NoValueException {
         throw new ExpressionException("Operator not implemented");
     }
 

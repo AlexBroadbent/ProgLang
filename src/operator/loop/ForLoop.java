@@ -38,7 +38,7 @@ public class ForLoop extends Function {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException {
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         this.domain = domain;
         return super.evaluate(domain, stack, returnExpression);
     }
@@ -46,7 +46,7 @@ public class ForLoop extends Function {
     @Override
     @SuppressWarnings( "unchecked" )
     public Object execute(List<Literal> args)
-            throws IncomparableTypeException, ExpressionException {
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         // Ensure function has all required arguments
         if (args.size() < 3)
             throw new ExpressionException(MSG_NUM_ARGS);

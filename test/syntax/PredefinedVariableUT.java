@@ -1,11 +1,7 @@
 package syntax;
 
-import eval.ExpressionException;
-import eval.IncomparableTypeException;
 import framework.ExpressionTest;
-import lexer.UnknownSequenceException;
 import org.junit.Test;
-import parser.ParserException;
 
 /**
  * x++.operator
@@ -41,14 +37,12 @@ public class PredefinedVariableUT extends ExpressionTest {
     }
 
     @Test
-    public void variablePiTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void variablePiTest() throws Exception {
         runExpressionTest(INPUT_PI, RESULT_PI);
     }
 
     @Test
-    public void variableETest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void variableETest() throws Exception {
         runExpressionTest(INPUT_E, RESULT_E);
     }
 

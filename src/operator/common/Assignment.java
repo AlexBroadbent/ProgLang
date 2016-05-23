@@ -38,7 +38,7 @@ public class Assignment extends BinaryOperator {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException {
+            throws IncomparableTypeException, ExpressionException, NoValueException {
 
         // If the stack has more than two items then it is a function declaration
         if (stack.size() > 2) {
@@ -69,7 +69,8 @@ public class Assignment extends BinaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
+    public Object execute(Literal arg1, Literal arg2)
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         // Check that the first argument is a variable
         if (arg1.getType() != VARIABLE)
             throw new ExpressionException(""); // TODO: proper output for reserved names

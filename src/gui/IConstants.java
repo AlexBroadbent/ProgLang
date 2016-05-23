@@ -12,7 +12,8 @@ public interface IConstants {
     String LOGGER_VERSION = "1.3";
     String LINE_START     = "> ";
 
-    Boolean DEBUG_MODE = Boolean.TRUE;
+    Boolean DEBUG_MODE   = Boolean.TRUE;
+    Boolean RADIANS_MODE = Boolean.TRUE;
 
     String DOMAIN    = "domain";
     String LIST      = "list";

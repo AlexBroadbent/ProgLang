@@ -39,7 +39,7 @@ public class Conditional extends TernaryOperator {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException {
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         if (returnExpression)
             return Domain.wrapLiteral(this);
 
@@ -69,7 +69,7 @@ public class Conditional extends TernaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1, Literal arg2, Literal arg3) throws IncomparableTypeException {
+    public Object execute(Literal arg1, Literal arg2, Literal arg3) throws IncomparableTypeException, NoValueException {
         try {
             return ((Boolean) arg1.getValue()) ? arg2.getValue() : arg3.getValue();
         }

@@ -1,11 +1,8 @@
 package type;
 
-import eval.ExpressionException;
 import eval.IncomparableTypeException;
 import framework.ExpressionTest;
-import lexer.UnknownSequenceException;
 import org.junit.Test;
-import parser.ParserException;
 
 /**
  * x++.type
@@ -32,14 +29,12 @@ public class IncomparableTypeUT extends ExpressionTest {
     }
 
     @Test
-    public void equalityOperatorExceptionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+    public void equalityOperatorExceptionTest() throws Exception {
         runExpressionTest(INPUT_EQU, RESULT_EQU);
     }
 
     @Test
-    public void equalityOperatorTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+    public void equalityOperatorTest() throws Exception {
         runExceptionTest(INPUT_NOT, CLASS_NOT);
     }
 

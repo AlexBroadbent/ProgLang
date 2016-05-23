@@ -34,7 +34,8 @@ public class ArrayAccessEnd extends BinaryOperator {
 
     @Override
     @SuppressWarnings( "unchecked" ) // Class cast exception caught
-    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
+    public Object execute(Literal arg1, Literal arg2)
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         XList list;
         Integer position;
 

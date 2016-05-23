@@ -3,6 +3,7 @@ package operator.function;
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import operator.IConstants;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class Round extends Function {
     }
 
     @Override
-    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
+    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException, NoValueException {
         if (args.size() != getNumOperands())
             throw new ExpressionException(String.format(MSG_SIZE_ARG, getNumOperands(), args.size()));
 

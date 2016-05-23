@@ -2,6 +2,7 @@ package operator;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
@@ -52,43 +53,43 @@ public class SimpleCalculationUT extends ExpressionTest {
 
     @Test
     public void simpleAdditionTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_ADD, RESULT_ADD);
     }
 
     @Test
     public void simpleSubtractionTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_SUB, RESULT_SUB);
     }
 
     @Test
     public void simpleMultiplicationTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_MULTI, RESULT_MULTI);
     }
 
     @Test
     public void simpleDivisionTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_DIV, RESULT_DIV);
     }
 
     @Test
     public void simpleConcatenationTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_CONCAT, RESULT_CONCAT);
     }
 
     @Test
     public void simpleIncrementTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_INCREMENT, RESULT_INCREMENT);
     }
 
     @Test
     public void simpleDecrementTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_DECREMENT, RESULT_DECREMENT);
     }
 

@@ -3,6 +3,7 @@ package gui;
 import eval.Expression;
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import org.apache.commons.lang3.StringUtils;
@@ -43,10 +44,10 @@ public class MainGUI {
                         if (result != null && !StringUtils.isEmpty(result.toString()))
                             System.out.println(LINE_START + result);
                     }
-                    catch (UnknownSequenceException | ParserException | ClassCastException ex) {
+                    catch (ExpressionException | IncomparableTypeException | NoValueException ex) {
                         XLogger.warning(ex.getMessage());
                     }
-                    catch (ExpressionException | IncomparableTypeException ex) {
+                    catch (UnknownSequenceException | ParserException | ClassCastException ex) {
                         XLogger.severe(ex.getMessage());
                     }
                 }

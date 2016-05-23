@@ -3,6 +3,7 @@ package framework;
 import eval.Expression;
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import parser.ParserException;
@@ -16,13 +17,13 @@ import parser.ParserException;
 public abstract class FunctionTest extends ExpressionTest {
 
     protected void runFunctionTest(String decInput, String funcName, String runInput, Object runResult)
-            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
+            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException, NoValueException {
         runFunctionDeclaration(decInput, funcName);
         runFunction(runInput, runResult);
     }
 
     protected void runFunctionDeclaration(String input, String functionName)
-            throws UnknownSequenceException, IncomparableTypeException, ExpressionException, ParserException {
+            throws UnknownSequenceException, IncomparableTypeException, ExpressionException, ParserException, NoValueException {
         Expression declaration = getExpressionFromInput(input);
         getValueFromExpression(declaration);
         assertFunctionCreated(functionName);
@@ -38,7 +39,7 @@ public abstract class FunctionTest extends ExpressionTest {
     }
 
     private void runFunction(String input, Object expResult)
-            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
+            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException, NoValueException {
         Expression run = getExpressionFromInput(input);
         Object result = getValueFromExpression(run);
         assertTypeOfResult(result, expResult.getClass());

@@ -3,6 +3,7 @@ package operator.bitwise;
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.UnaryOperator;
@@ -26,7 +27,7 @@ public class Not extends UnaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1) throws IncomparableTypeException, ExpressionException {
+    public Object execute(Literal arg1) throws IncomparableTypeException, ExpressionException, NoValueException {
         try {
             // Validate that input can be parsed into a Byte
             Double d1 = Double.parseDouble(arg1.getValue().toString());

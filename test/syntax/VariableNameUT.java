@@ -2,6 +2,7 @@ package syntax;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import eval.XList;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
@@ -25,7 +26,7 @@ public class VariableNameUT extends ExpressionTest {
 
     @Test
     public void variableNameStartsWithFunctionNameTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runVariableTest(INPUT_VAR_STARTS_WITH_FUNC, NAME_VAR_STARTS_WITH_FUNC, RESULT_VAR_STARTS_WITH_FUNC);
     }
 

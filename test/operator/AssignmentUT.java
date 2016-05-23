@@ -1,12 +1,9 @@
 package operator;
 
 import eval.ExpressionException;
-import eval.IncomparableTypeException;
 import framework.ExpressionTest;
-import lexer.UnknownSequenceException;
 import org.junit.Before;
 import org.junit.Test;
-import parser.ParserException;
 
 /**
  * x++.operator
@@ -40,13 +37,12 @@ public class AssignmentUT extends ExpressionTest {
 
 
     @Test
-    public void standardAssignmentTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+    public void standardAssignmentTest() throws Exception {
         runVariableTest(INPUT_ASS, VAR_Z, RESULT_ASS);
     }
 
     @Test
-    public void immutableAssignmentTest() throws ExpressionException, UnknownSequenceException {
+    public void immutableAssignmentTest() throws Exception {
         runExceptionTest(INPUT_IMM, CLASS_IMM);
     }
 

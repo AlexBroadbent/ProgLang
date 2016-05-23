@@ -34,13 +34,15 @@ public class Variable extends Literal {
     }
 
     @Override
-    public Object getValue() {
+    public Object getValue() throws NoValueException {
+        if (!valueSet)
+            throw new NoValueException(getName());
         return super.getValue();
     }
 
     @Override
     public void setValue(Object value) {
-        super.setValue(value instanceof Literal ? ((Literal) value).getValue() : value);
+        super.setValue(value);
         valueSet = true;
     }
 
@@ -51,7 +53,12 @@ public class Variable extends Literal {
 
     @Override
     public String toString() {
-        return getName() + ((isValueSet()) ? " [" + getValue().toString() + "]" : "");
+        try {
+            return getName() + ((isValueSet()) ? " [" + getValue().toString() + "]" : "");
+        }
+        catch (NoValueException ex) {
+            return getName();
+        }
     }
 
     public boolean isValueSet() {
@@ -59,8 +66,13 @@ public class Variable extends Literal {
     }
 
     public String toDebugString() {
-        return getName() + ((!isValueSet()) ? "" : " -> | Type: " + getValue().getClass().getSimpleName() +
-                " | Value: " + getValue().toString() + " |");
+        try {
+            return getName() + ((!isValueSet()) ? "" : " -> | Type: " + getValue().getClass().getSimpleName() +
+                    " | Value: " + getValue().toString() + " |");
+        }
+        catch (NoValueException ex) {
+            return getName() + " -> Value: null";
+        }
     }
 
 }

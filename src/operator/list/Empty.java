@@ -1,10 +1,7 @@
 package operator.list;
 
 import com.google.common.collect.Lists;
-import eval.ExpressionException;
-import eval.IncomparableTypeException;
-import eval.Literal;
-import eval.XList;
+import eval.*;
 import operator.IConstants;
 import operator.function.Function;
 
@@ -36,7 +33,7 @@ public class Empty extends Function {
 
     @Override
     @SuppressWarnings( "unchecked" )    // Class Case Exception caught in method
-    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
+    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException, NoValueException {
         if (args.size() != getNumOperands())
             throw new ExpressionException(String.format(MSG_ONE_ARG, args.size()));
 

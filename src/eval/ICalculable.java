@@ -15,7 +15,7 @@ import java.util.Stack;
 public interface ICalculable {
 
     Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException;
+            throws IncomparableTypeException, ExpressionException, NoValueException;
 
     void toPostFix(List<ICalculable> infix, int infixIndex, List<ICalculable> postfix, Stack<IOperator> operatorStack);
 

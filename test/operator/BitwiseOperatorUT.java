@@ -2,6 +2,7 @@ package operator;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
@@ -60,37 +61,37 @@ public class BitwiseOperatorUT extends ExpressionTest {
 
     @Test
     public void bitwiseNotTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_NOT, RESULT_NOT);
     }
 
     @Test
     public void bitwiseAndTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_AND, RESULT_AND);
     }
 
     @Test
     public void bitwiseOrTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_OR, RESULT_OR);
     }
 
     @Test
     public void bitwiseXorTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_XOR, RESULT_XOR);
     }
 
     @Test
     public void bitwiseLeftShiftTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_LBS, RESULT_LBS);
     }
 
     @Test
     public void bitwiseRightShiftTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_RBS, RESULT_RBS);
     }
 

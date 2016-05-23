@@ -2,6 +2,7 @@ package operator;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class MultipleVariableUT extends ExpressionTest {
 
     @Test
     public void simpleAdditionTest()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT, RESULT);
     }
 

@@ -143,7 +143,7 @@ public class UserFunction extends Function implements IUserFunction {
     }
 
     @Override
-    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
+    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException, NoValueException {
         if (args.size() != arguments.size())
             throw new ExpressionException(String.format(MSG_SIZE_ARG, arguments.size(), args.size()));
 

@@ -1,5 +1,6 @@
 package eval;
 
+import gui.XLogger;
 import lexer.Token;
 import model.Domain;
 import operator.IOperator;
@@ -14,6 +15,9 @@ import java.util.Stack;
  * @version 01/12/2015
  */
 public class Literal implements ICalculable {
+
+    private static final String MSG_SET_NO_VALUE = "The assigned literal has no value";
+
 
     protected Object value;
 
@@ -36,12 +40,21 @@ public class Literal implements ICalculable {
         return Domain.wrapLiteral(token.sequence);
     }
 
-    public Object getValue() {
+    public Object getValue() throws NoValueException {
         return value;
     }
 
     public void setValue(Object value) {
-        this.value = value;
+        if (value instanceof Literal) {
+            try {
+                this.value = ((Literal) value).getValue();
+            }
+            catch (NoValueException e) {
+                XLogger.warning(MSG_SET_NO_VALUE);
+            }
+        }
+        else
+            this.value = value;
     }
 
     @Override
@@ -61,7 +74,12 @@ public class Literal implements ICalculable {
 
     @Override
     public String toString() {
-        return getValue() != null ? getValue().toString() : "null";
+        try {
+            return getValue().toString();
+        }
+        catch (NoValueException e) {
+            return "null";
+        }
     }
 
 }

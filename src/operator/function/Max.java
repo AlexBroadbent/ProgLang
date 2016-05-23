@@ -3,6 +3,7 @@ package operator.function;
 import com.google.common.collect.Lists;
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import eval.XList;
 
 import java.util.Collections;
@@ -25,7 +26,7 @@ public class Max extends Function {
     }
 
     @Override
-    public Object execute(List<Literal> args) throws IncomparableTypeException {
+    public Object execute(List<Literal> args) throws IncomparableTypeException, NoValueException {
         List<Double> list = Lists.newArrayList();
 
         for (Literal literal : args) {

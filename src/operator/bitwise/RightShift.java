@@ -3,6 +3,7 @@ package operator.bitwise;
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import operator.IPrecedence;
 import operator.base.BinaryOperator;
 
@@ -27,7 +28,8 @@ public class RightShift extends BinaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
+    public Object execute(Literal arg1, Literal arg2)
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         try {
             // Validate that inputs can be parsed into a Byte
             Double d1 = Double.parseDouble(arg1.getValue().toString());
@@ -47,6 +49,7 @@ public class RightShift extends BinaryOperator {
             throw new IncomparableTypeException(getAllowedExecutionTypes(),
                     getIncomparableObject(arg1, arg2, getAllowedExecutionTypes()));
         }
+
     }
 
 }

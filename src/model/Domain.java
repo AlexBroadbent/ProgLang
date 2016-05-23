@@ -270,11 +270,11 @@ public class Domain {
     }
 
     public String getOperatorList() {
-        return StringUtils.join(operators.values(), ", ");
+        return StringUtils.join(operators.values(), " ");
     }
 
     public String getFunctionList() {
-        return StringUtils.join(functions.values(), ", ");
+        return StringUtils.join(functions.values(), " ");
     }
 
 }

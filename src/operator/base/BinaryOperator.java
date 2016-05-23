@@ -46,7 +46,7 @@ public abstract class BinaryOperator extends Operator {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException {
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         if (returnExpression)
             return Domain.wrapLiteral(this);
 
@@ -76,11 +76,13 @@ public abstract class BinaryOperator extends Operator {
         operatorStack.add(this);
     }
 
-    public Object execute(Literal arg1, Literal arg2) throws IncomparableTypeException, ExpressionException {
+    public Object execute(Literal arg1, Literal arg2)
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         throw new ExpressionException("Operator not implemented");
     }
 
-    public ICalculable getIncomparableObject(ICalculable arg1, ICalculable arg2, List<String> allowedClasses) {
+    public ICalculable getIncomparableObject(ICalculable arg1, ICalculable arg2, List<String> allowedClasses)
+            throws NoValueException {
         String a1Class = (arg1.getType() == VARIABLE) ? ((Variable) arg1).getValue().getClass().getSimpleName() : arg1.getClass().getSimpleName();
         return (allowedClasses.contains(a1Class)) ? arg2 : arg1;
     }

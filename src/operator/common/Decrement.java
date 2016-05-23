@@ -2,6 +2,7 @@ package operator.common;
 
 import eval.IncomparableTypeException;
 import eval.Literal;
+import eval.NoValueException;
 import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.UnaryOperator;
@@ -25,7 +26,7 @@ public class Decrement extends UnaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1) throws IncomparableTypeException {
+    public Object execute(Literal arg1) throws IncomparableTypeException, NoValueException {
         try {
             return Double.valueOf(arg1.getValue().toString()) - 1d;
         }

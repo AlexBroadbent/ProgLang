@@ -1,9 +1,6 @@
 package operator.list;
 
-import eval.ExpressionException;
-import eval.IncomparableTypeException;
-import eval.Literal;
-import eval.XList;
+import eval.*;
 import operator.IConstants;
 import operator.function.Function;
 
@@ -31,7 +28,7 @@ public class Cons extends Function {
 
     @Override
     @SuppressWarnings( "unchecked" )    // Class cast exception is caught
-    public Object execute(List<Literal> args) throws ExpressionException, IncomparableTypeException {
+    public Object execute(List<Literal> args) throws ExpressionException, IncomparableTypeException, NoValueException {
         if (args.size() != getNumOperands())
             throw new ExpressionException(String.format(MSG_SIZE_ARG, getNumOperands(), args.size()));
 

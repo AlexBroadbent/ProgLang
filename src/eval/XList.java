@@ -78,10 +78,15 @@ public class XList implements Iterable<Literal> {
         if (size() != other.size())
             return false;
 
-        for (int i = 0; i < size(); i++)
-            if (!Objects.equals(get(i).getValue(), other.get(i).getValue()))
-                return false;
-        return true;
+        try {
+            for (int i = 0; i < size(); i++)
+                if (!Objects.equals(get(i).getValue(), other.get(i).getValue()))
+                    return false;
+            return true;
+        }
+        catch (NoValueException ex) {
+            return false;
+        }
     }
 
     @Override

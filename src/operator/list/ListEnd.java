@@ -46,7 +46,7 @@ public class ListEnd extends Function {
 
     @Override
     public String toString() {
-        return ListEnd.class.getSimpleName();
+        return getToken();
     }
 
 }

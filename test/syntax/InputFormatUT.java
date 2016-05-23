@@ -2,6 +2,7 @@ package syntax;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import framework.ExpressionTest;
 import lexer.UnknownSequenceException;
 import org.junit.Test;
@@ -40,25 +41,25 @@ public class InputFormatUT extends ExpressionTest {
 
     @Test
     public void testFormat1()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_FORMAT_1, RESULT_FORMAT_1);
     }
 
     @Test
     public void testFormat2()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_FORMAT_2, RESULT_FORMAT_2);
     }
 
     @Test
     public void testErrorInExecution()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExceptionTest(INPUT_ERROR, CLASS_ERROR);
     }
 
     @Test
     public void testUnnecessaryParenthesis()
-            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException {
+            throws ExpressionException, UnknownSequenceException, IncomparableTypeException, ParserException, NoValueException {
         runExpressionTest(INPUT_PAREN, RESULT_PAREN);
     }
 

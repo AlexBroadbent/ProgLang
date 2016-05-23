@@ -3,6 +3,7 @@ package framework;
 import eval.Expression;
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import gui.XLogger;
 import lexer.UnknownSequenceException;
 import model.Domain;
@@ -40,12 +41,12 @@ public abstract class ExpressionTest extends BaseTest {
             Testing methods
      */
     protected void runExpressionTest(String input, Object expResult) throws UnknownSequenceException,
-            ParserException, ExpressionException, IncomparableTypeException {
+            ParserException, ExpressionException, IncomparableTypeException, NoValueException {
         runExpressionTest(null, input, expResult);
     }
 
     protected void runExpressionTest(String msg, String input, Object expResult) throws UnknownSequenceException,
-            ParserException, ExpressionException, IncomparableTypeException {
+            ParserException, ExpressionException, IncomparableTypeException, NoValueException {
         Object result = getResultFromInput(input);
 
         assertTypeOfResult(result, expResult.getClass());
@@ -56,7 +57,7 @@ public abstract class ExpressionTest extends BaseTest {
     }
 
     protected void runVariableTest(String input, String varName, Object expResult) throws ExpressionException,
-            IncomparableTypeException, ParserException, UnknownSequenceException {
+            IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         getResultFromInput(input);
         verifyVariable(varName, expResult);
     }
@@ -81,7 +82,14 @@ public abstract class ExpressionTest extends BaseTest {
     }
 
     private void verifyVariable(String varName, Object expResult) {
-        Object result = getValueFromDomainVariable(varName);
+        Object result;
+
+        try {
+            result = getValueFromDomainVariable(varName);
+        }
+        catch (NoValueException ex) {
+            result = null;
+        }
 
         if (expResult != null)
             assertTypeOfResult(result, expResult.getClass());
@@ -89,7 +97,7 @@ public abstract class ExpressionTest extends BaseTest {
     }
 
     protected Object getResultFromInput(String input) throws ExpressionException, IncomparableTypeException,
-            ParserException, UnknownSequenceException {
+            ParserException, UnknownSequenceException, NoValueException {
         Expression expression = getExpressionFromInput(input);
         return getValueFromExpression(expression);
     }
@@ -101,11 +109,11 @@ public abstract class ExpressionTest extends BaseTest {
     }
 
     protected Object getValueFromExpression(Expression expression) throws ExpressionException,
-            UnknownSequenceException, IncomparableTypeException {
+            UnknownSequenceException, IncomparableTypeException, NoValueException {
         return expression.execute();
     }
 
-    private Object getValueFromDomainVariable(String variableName) {
+    private Object getValueFromDomainVariable(String variableName) throws NoValueException {
         return Domain.getInstance().getVariable(variableName).getValue();
     }
 

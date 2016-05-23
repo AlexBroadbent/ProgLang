@@ -53,7 +53,7 @@ public abstract class Function implements IFunction {
 
     @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException {
+            throws IncomparableTypeException, ExpressionException, NoValueException {
         if (returnExpression)
             return Domain.wrapLiteral(this);
 
@@ -87,7 +87,7 @@ public abstract class Function implements IFunction {
         return ICalculableType.FUNCTION;
     }
 
-    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException {
+    public Object execute(List<Literal> args) throws IncomparableTypeException, ExpressionException, NoValueException {
         throw new ExpressionException("Function not implemented");
     }
 

@@ -2,6 +2,7 @@ package feature;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import eval.XList;
 import framework.FunctionTest;
 import lexer.UnknownSequenceException;
@@ -69,19 +70,19 @@ public class UserFunctionUT extends FunctionTest {
 
     @Test
     public void singleVariableFunctionTest()
-            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
+            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException, NoValueException {
         runFunctionTest(INPUT_SQUARE_FUNC, NAME_SQUARE_FUNC, INPUT_SQUARE_RUN, RESULT_SQUARE);
     }
 
     @Test
     public void multiVariableFunctionTest()
-            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
+            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException, NoValueException {
         runFunctionTest(INPUT_BIGGER_FUNC, NAME_BIGGER_FUNC, INPUT_BIGGER_RUN, RESULT_BIGGER);
     }
 
     @Test
     public void combinationVariableFunctionTest()
-            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException {
+            throws UnknownSequenceException, ParserException, ExpressionException, IncomparableTypeException, NoValueException {
         runFunctionTest(INPUT_COMBI_FUNC, NAME_COMBI_FUNC, INPUT_COMBI_RUN, RESULT_COMBI);
     }
 
@@ -107,41 +108,41 @@ public class UserFunctionUT extends FunctionTest {
 
     @Test
     public void variableFromDomainFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runFunctionTest(INPUT_MIXED_VAR_FUNC, NAME_MIXED_VAR_FUNC, INPUT_MIXED_VAR_RUN, RESULT_MIXED_VAR);
     }
 
     @Test
     public void tooManyArgumentsInCallTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runFunctionDeclaration(INPUT_MORE_ARGS_FUNC, NAME_MORE_ARGS_FUNC);
         runExceptionTest(INPUT_MORE_ARGS_RUN, CLASS_EE);
     }
 
     @Test
     public void redeclareExistingFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runFunctionDeclaration(INPUT_COMBI_FUNC, NAME_COMBI_FUNC);
         runExceptionTest(INPUT_COMBI_FUNC, CLASS_PE);
     }
 
     @Test
     public void loopInFunctionListTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runFunctionDeclaration(INPUT_DBL_LIST_FUNC, NAME_DBL_LIST_FUNC);
         runExpressionTest(INPUT_DBL_LIST_RUN, RESULT_DBL_LIST);
     }
 
     @Test
     public void precedenceUserFunctionTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runFunctionDeclaration(INPUT_SQUARE_FUNC, NAME_SQUARE_FUNC);
         runExpressionTest(INPUT_PREC_RUN, RESULT_PREC);
     }
 
     @Test
     public void multipleFunctionsTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runFunctionDeclaration(INPUT_TRIPLE_FUNC, NAME_TRIPLE_FUNC);
         runExpressionTest(INPUT_TRIPLE_RUN, RESULT_TRIPLE);
     }

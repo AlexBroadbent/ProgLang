@@ -2,6 +2,7 @@ package feature;
 
 import eval.ExpressionException;
 import eval.IncomparableTypeException;
+import eval.NoValueException;
 import eval.XList;
 import framework.FunctionTest;
 import lexer.UnknownSequenceException;
@@ -55,37 +56,37 @@ public class ForLoopTest extends FunctionTest {
 
     @Test
     public void loopWithVariableTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_VAR, RESULT_VAR);
     }
 
     @Test
     public void loopWithInlineListTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_LIST, RESULT_LIST);
     }
 
     @Test
     public void loopCalculationTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_CALC, RESULT_CALC);
     }
 
     @Test
     public void loopAccessTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_OPER, RESULT_OPER);
     }
 
     @Test
     public void loopShortInputTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runExpressionTest(INPUT_SHORT, RESULT_SHORT);
     }
 
     @Test
     public void funcWithLoopTest()
-            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException {
+            throws ExpressionException, IncomparableTypeException, ParserException, UnknownSequenceException, NoValueException {
         runFunctionTest(INPUT_DBL_FUNC, NAME_DBL, INPUT_DBL_RUN, RESULT_DBL_RUN);
     }
 
