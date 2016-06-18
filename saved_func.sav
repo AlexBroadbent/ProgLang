@@ -1,0 +1,1 @@
+avg;func avg(l) = sum(l) / size(l)

@@ -1,10 +1,11 @@
 package model;
 
 import com.google.common.collect.Maps;
-import eval.Literal;
-import eval.Variable;
+import eval.*;
+import gui.XLogger;
 import lexer.ILexer;
 import lexer.Lexer;
+import lexer.UnknownSequenceException;
 import operator.IFunction;
 import operator.IOperator;
 import operator.bitwise.*;
@@ -26,7 +27,14 @@ import operator.math.*;
 import org.apache.commons.lang3.StringUtils;
 import parser.IParser;
 import parser.Parser;
+import parser.ParserException;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -42,15 +50,19 @@ import static eval.ICalculableType.USER_FUNCTION;
  * @author Alexander Broadbent
  * @version 01/12/2015
  */
-public class Domain {
+public class Domain implements Cloneable {
 
-    private static Domain instance = null;
+    private final static String FILE_SAVED_FUNCTION = "saved_func.sav";
+    private final static String MSG_NOT_FOUND       = "There is no function called %s in the saved function file.";
+
+    private static Path savedFunctionsPath = null;
     protected ILexer                             lexer;
     protected IParser                            parser;
     private   Map<String, IOperator>             operators;
     private   Map<String, IFunction>             functions;
     private   Map<String, Variable>              variables;
     private   Map<String, Map<String, Variable>> functionalVariables;
+    private   Map<String, String>                savedFunctions;
 
 
     public Domain() {
@@ -63,6 +75,7 @@ public class Domain {
         functions = Maps.newHashMap();
         variables = Maps.newHashMap();
         functionalVariables = Maps.newHashMap();
+        savedFunctions = Maps.newHashMap();
 
         // Create lexer and parser if necessary
         this.lexer = (lexer != null) ? lexer : new Lexer();
@@ -149,17 +162,16 @@ public class Domain {
         registerFunction(new Size());
         registerFunction(new Tail());
 
-        // set singleton instance
-        if (instance == null)
-            instance = this;
-    }
-
-
-    public static Domain getInstance() {
-        if (instance == null)
-            instance = new Domain();
-
-        return instance;
+        // set stored function file
+        if (savedFunctionsPath == null) {
+            try {
+                savedFunctionsPath = Paths.get(new File(FILE_SAVED_FUNCTION).toURI());
+                loadSavedFunctions();
+            }
+            catch (IllegalArgumentException | FileSystemNotFoundException | SecurityException e) {
+                XLogger.severe("Cannot load savedFunctionsPath function file: " + e.getMessage());
+            }
+        }
     }
 
     public static Literal wrapLiteral(Object value) {
@@ -169,10 +181,15 @@ public class Domain {
         return new Literal(value);
     }
 
-    public static void resetInstance() {
-        instance = null;
+    @Override
+    public Domain clone() {
+        try {
+            return (Domain) super.clone();
+        }
+        catch (CloneNotSupportedException ex) {
+            return null;
+        }
     }
-
 
     public ILexer getLexer() {
         return lexer;
@@ -260,9 +277,8 @@ public class Domain {
      *      Helper functions for the user to interact with through the MainGUI
      */
 
-    public void freeVariable(String name) {
-        if (hasVariable(name))
-            variables.remove(name);
+    public boolean freeVariable(String name) {
+        return hasVariable(name) && variables.remove(name) != null;
     }
 
     public Collection<Variable> getAllVariables() {
@@ -277,4 +293,74 @@ public class Domain {
         return StringUtils.join(functions.values(), " ");
     }
 
+    public String getSavedFunctionList() {
+        return StringUtils.join(savedFunctions.keySet(), " ");
+    }
+
+    public String getSavedUserFunction(String name) {
+        if (functions.get(name).getType() != USER_FUNCTION)
+            return null;
+
+        return ((UserFunction) functions.get(name)).getDeclaration();
+    }
+
+    public boolean saveUserFunction(String name) {
+        if (functions.get(name) != null) {
+            IFunction function = functions.get(name);
+
+            return function.getType() == ICalculableType.USER_FUNCTION;
+
+
+        }
+
+        return false;
+    }
+
+    public boolean saveAllUserFunction() {
+        return true;
+    }
+
+    public boolean loadUserFunction(String name) {
+        if (savedFunctions.containsKey(name)) {
+            String declaration = savedFunctions.get(name);
+
+            try {
+                Expression expression = new Expression(this, getLexer().readAllTokens(declaration));
+                expression.execute();
+                return true;
+            }
+            catch (ExpressionException | UnknownSequenceException | ParserException | IncomparableTypeException | NoValueException e) {
+                XLogger.severe(e.getMessage());
+                return false;
+            }
+        }
+
+        XLogger.severe(String.format(MSG_NOT_FOUND, name));
+        return false;
+    }
+
+    public boolean loadAllUserFunctions() {
+        for (String name : savedFunctions.keySet())
+            if (!loadUserFunction(name))
+                return false;
+        return true;
+    }
+
+    private void loadSavedFunctions() {
+        try {
+            java.util.List<String> declarations = Files.readAllLines(savedFunctionsPath);
+
+            for (int i = 0; i < declarations.size(); i++) {
+                String[] d = declarations.get(i).split(";");
+
+                if (d.length != 2)
+                    XLogger.warning("Error in saved function, on line " + i + ". Format should be name;declaration");
+                else
+                    savedFunctions.put(d[0], d[1]);
+            }
+        }
+        catch (IOException e) {
+            XLogger.severe("Error loading function from file: " + e.getMessage());
+        }
+    }
 }

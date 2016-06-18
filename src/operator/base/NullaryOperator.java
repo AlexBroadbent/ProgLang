@@ -2,7 +2,6 @@ package operator.base;
 
 import eval.ExpressionException;
 import eval.ICalculable;
-import eval.IncomparableTypeException;
 import eval.Literal;
 import model.Domain;
 import operator.Associativity;
@@ -44,8 +43,12 @@ public abstract class NullaryOperator extends Operator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException, ExpressionException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack) throws ExpressionException {
+        return evaluate(domain, stack, false);
+    }
+
+    @Override
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) throws ExpressionException {
         throw new ExpressionException("Operator not implemented");
     }
 

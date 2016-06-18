@@ -6,9 +6,6 @@ import eval.IncomparableTypeException;
 import eval.NoValueException;
 import gui.XLogger;
 import lexer.UnknownSequenceException;
-import model.Domain;
-import org.junit.After;
-import org.junit.Before;
 import parser.ParserException;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -24,17 +21,6 @@ public abstract class ExpressionTest extends BaseTest {
 
     private static final String MSG_ASSERT_TYPE   = "Test::%s - Asserting result type [%s] equals expected type [%s]";
     private static final String MSG_ASSERT_RESULT = "Result is %s, expected %s";
-
-
-    @Before
-    public void setUp() {
-        Domain.resetInstance();
-    }
-
-    @After
-    public void tearDown() {
-        Domain.resetInstance();
-    }
 
 
     /*
@@ -78,7 +64,7 @@ public abstract class ExpressionTest extends BaseTest {
      */
 
     protected void setDomainVariable(String name, Object value) {
-        Domain.getInstance().getOrCreateVariable(name).setValue(value);
+        domain.getOrCreateVariable(name).setValue(value);
     }
 
     private void verifyVariable(String varName, Object expResult) {
@@ -104,8 +90,7 @@ public abstract class ExpressionTest extends BaseTest {
 
     protected Expression getExpressionFromInput(String input) throws ExpressionException,
             UnknownSequenceException, ParserException {
-        Domain model = Domain.getInstance();
-        return new Expression(model, model.getLexer().readAllTokens(input));
+        return new Expression(domain, domain.getLexer().readAllTokens(input));
     }
 
     protected Object getValueFromExpression(Expression expression) throws ExpressionException,
@@ -114,11 +99,11 @@ public abstract class ExpressionTest extends BaseTest {
     }
 
     private Object getValueFromDomainVariable(String variableName) throws NoValueException {
-        return Domain.getInstance().getVariable(variableName).getValue();
+        return domain.getVariable(variableName).getValue();
     }
 
     protected boolean hasVariableBeenCreated(String varName) {
-        return Domain.getInstance().hasVariable(varName);
+        return domain.hasVariable(varName);
     }
 
 

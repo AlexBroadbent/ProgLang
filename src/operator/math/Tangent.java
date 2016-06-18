@@ -3,9 +3,14 @@ package operator.math;
 import eval.IncomparableTypeException;
 import eval.Literal;
 import eval.NoValueException;
+import gui.XProperties;
+import operator.IConstants;
 import operator.IPrecedence;
 import operator.base.UnaryOperator;
 
+import static gui.IConstants.ANGLE_MODE;
+import static gui.IConstants.ANGLE_MODE_DEFAULT;
+import static operator.IConstants.Angle.RADIANS;
 import static operator.IConstants.TAN;
 
 /**
@@ -29,7 +34,9 @@ public class Tangent extends UnaryOperator {
     @Override
     public Object execute(Literal arg1) throws IncomparableTypeException, NoValueException {
         try {
-            return Math.tan(Double.parseDouble(arg1.getValue().toString()));
+            IConstants.Angle angle = XProperties.getAngle(ANGLE_MODE, ANGLE_MODE_DEFAULT);
+            double result = Math.tan(Double.parseDouble(arg1.getValue().toString()));
+            return (angle == RADIANS) ? result : Math.toDegrees(result);
         }
         catch (NumberFormatException ex) {
             throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1);

@@ -2,7 +2,6 @@ package operator.common;
 
 import eval.ICalculable;
 import eval.ICalculableType;
-import eval.IncomparableTypeException;
 import eval.Literal;
 import model.Domain;
 import operator.IConstants;
@@ -35,8 +34,12 @@ public class ArgSeparator extends NullaryOperator {
     }
 
     @Override
-    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
-            throws IncomparableTypeException {
+    public Literal evaluate(Domain domain, Stack<Literal> stack) {
+        return evaluate(domain, stack, false);
+    }
+
+    @Override
+    public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression) {
         return Domain.wrapLiteral(this);
     }
 

@@ -6,10 +6,6 @@ import lexer.Token;
 import lexer.UnknownSequenceException;
 import model.Domain;
 import operator.IOperator;
-import operator.conditional.Conditional;
-import operator.conditional.ConditionalElse;
-import operator.loop.Do;
-import operator.loop.ForLoop;
 import org.apache.commons.lang3.StringUtils;
 import parser.ParserException;
 
@@ -39,9 +35,9 @@ public class Expression extends Literal {
      *
      * @param model  The domain object
      * @param tokens A lexically analysed list of Token objects representing the expression
-     * @throws ExpressionException  when an error occurs during the parsing analysis, converting to postfix, or in validation
+     * @throws ExpressionException      when an error occurs during the parsing analysis, converting to postfix, or in validation
      * @throws UnknownSequenceException when an unrecognised token is found
-     * @throws ParserException when an
+     * @throws ParserException          when an
      */
     public Expression(Domain model, List<Token> tokens)
             throws ExpressionException, UnknownSequenceException, ParserException {
@@ -109,40 +105,25 @@ public class Expression extends Literal {
     /**
      * Evaluate the post-fix infix
      * <p>
-     * See http://en.wikipedia.org/wiki/Postfix_notation#The_postfix_algorithm
+     * See http://en.wikipedia.org/wiki/Postfix_notation#The_postfix_algorithm<br/>
      * See https://en.wikipedia.org/wiki/Reverse_Polish_notation#Postfix_algorithm
      * <p>
      * When in either a function, for loop expression, or a conditional expression declaration
      * the result should be itself and not actually execute the operators/functions.
      *
      * @return An object representing the value of the expression
-     * @throws ExpressionException when an error arises from executing the expression
+     * @throws ExpressionException       when an error arises from executing the expression
      * @throws IncomparableTypeException when an operator is executed with the wrong type of operand
      */
     public Object execute() throws ExpressionException, IncomparableTypeException, NoValueException {
         Stack<Literal> stack = new Stack<>();
-        boolean inFuncDec = false;  // defining a function
-        boolean inLoopDec = false;  // defining a for loop expression
-        boolean inCondDec = false;  // defining a conditional expression
 
         for (ICalculable literal : expression) {
-            if (literal.getType() == FLAG)
-                inFuncDec = true;
-            else if (literal instanceof Do)
-                inLoopDec = true;
-            else if (literal instanceof ForLoop)
-                inLoopDec = false;
-            else if (literal.getType() == CONDITIONAL_PLACEHOLDER)
-                inCondDec = true;
-            else if (literal instanceof Conditional || literal instanceof ConditionalElse)
-                inCondDec = false;
-
-            Literal result = literal.evaluate(model, stack, (inFuncDec || inLoopDec || inCondDec));
+            Literal result = literal.evaluate(model, stack);
             if (result != null)
                 stack.push(result);
         }
 
-        // get result from stack
         if (stack.size() == 1)
             return stack.pop().getValue();
 

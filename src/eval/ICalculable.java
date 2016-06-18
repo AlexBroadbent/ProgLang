@@ -14,6 +14,9 @@ import java.util.Stack;
  */
 public interface ICalculable {
 
+    Literal evaluate(Domain domain, Stack<Literal> stack)
+            throws IncomparableTypeException, ExpressionException, NoValueException;
+
     Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
             throws IncomparableTypeException, ExpressionException, NoValueException;
 

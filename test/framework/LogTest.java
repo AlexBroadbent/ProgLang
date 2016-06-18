@@ -73,7 +73,7 @@ public abstract class LogTest extends BaseTest {
 
         XLogger.log(input);
 
-        XLogger.setDebug(IConstants.DEBUG_MODE);
+        XLogger.setDebug(IConstants.DEBUG_MODE_DEFAULT);
         Assert.assertEquals(String.format(MSG_ASSERT_RESULT_LOG, getClass().getSimpleName(), expected,
                 outContent.toString()), expected, outContent.toString());
     }

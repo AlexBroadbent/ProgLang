@@ -80,4 +80,35 @@ public interface IConstants {
     String SIZE   = "size";
     String EMPTY  = "empty";
 
+    /*
+        Angle mode for functions such as sin, cos, tan, ...
+    */
+    enum Angle {
+        RADIANS(0),
+        DEGREES(1);
+
+        int id;
+
+        Angle(int id) {
+            this.id = id;
+        }
+
+        public static Angle get(String s) {
+            if (s.equalsIgnoreCase("radians") || s.equals("0"))
+                return Angle.RADIANS;
+            if (s.equalsIgnoreCase("degrees") || s.equals("1"))
+                return Angle.DEGREES;
+            return gui.IConstants.ANGLE_MODE_DEFAULT;
+        }
+
+        @Override
+        public String toString() {
+            return name().substring(0, 1) + name().substring(1).toLowerCase();
+        }
+
+        public String getValue() {
+            return Integer.toString(id);
+        }
+    }
+
 }

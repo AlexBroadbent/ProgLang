@@ -5,8 +5,9 @@ import eval.ExpressionException;
 import eval.IncomparableTypeException;
 import eval.NoValueException;
 import lexer.UnknownSequenceException;
-import model.Domain;
 import parser.ParserException;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * x++.framework
@@ -34,8 +35,7 @@ public abstract class FunctionTest extends ExpressionTest {
      *      Helper Functions
      */
     private void assertFunctionCreated(String functionName) {
-        Domain model = Domain.getInstance();
-        assertResult(true, model.getFunctionList().contains(functionName));
+        assertTrue(domain.getFunctionList().contains(functionName));
     }
 
     private void runFunction(String input, Object expResult)

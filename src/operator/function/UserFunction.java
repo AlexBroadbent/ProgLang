@@ -112,6 +112,17 @@ public class UserFunction extends Function implements IUserFunction {
         return true;
     }
 
+    /**
+     * Provide a declaration string as if the function was to be declared again. Used for
+     *
+     * @return declaration
+     */
+    @Override
+    public String getDeclaration() {
+        return "func " + getName() + "(" + StringUtils.join(getArguments(), ", ") +
+                " = " + getExpression();
+    }
+
     @Override
     public String getToken() {
         return getName();
@@ -164,5 +175,4 @@ public class UserFunction extends Function implements IUserFunction {
 
         return getName() + ((!vars.isEmpty()) ? "(" + StringUtils.join(vars, ", ") + ")" : "");
     }
-
 }

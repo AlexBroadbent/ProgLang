@@ -1,5 +1,9 @@
 package framework;
 
+import model.Domain;
+import org.junit.After;
+import org.junit.Before;
+
 /**
  * x++.framework
  *
@@ -8,6 +12,18 @@ package framework;
  */
 public abstract class BaseTest {
 
-    protected static final String MSG_ASSERT_RESULT_LOG = "Test::%s - Asserting result [%s] equals expected [%s]";
+    static final String MSG_ASSERT_RESULT_LOG = "Test::%s - Asserting result [%s] equals expected [%s]";
 
+    protected Domain domain;
+
+
+    @Before
+    public void setUp() {
+        domain = new Domain();
+    }
+
+    @After
+    public void tearDown() {
+        domain = new Domain();
+    }
 }

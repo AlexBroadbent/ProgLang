@@ -25,7 +25,7 @@ public class LoggerUT extends LogTest {
         super.tearDown();
 
         // Reset the XLogger default debug mode value
-        XLogger.setDebug(IConstants.DEBUG_MODE);
+        XLogger.setDebug(IConstants.DEBUG_MODE_DEFAULT);
     }
 
     @Test

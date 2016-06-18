@@ -45,6 +45,12 @@ public abstract class BinaryOperator extends Operator {
     }
 
     @Override
+    public Literal evaluate(Domain domain, Stack<Literal> stack)
+            throws IncomparableTypeException, ExpressionException, NoValueException {
+        return evaluate(domain, stack, false);
+    }
+
+    @Override
     public Literal evaluate(Domain domain, Stack<Literal> stack, boolean returnExpression)
             throws IncomparableTypeException, ExpressionException, NoValueException {
         if (returnExpression)

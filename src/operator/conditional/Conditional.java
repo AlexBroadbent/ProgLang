@@ -22,6 +22,9 @@ import static eval.ICalculableType.CONDITIONAL_PLACEHOLDER;
  */
 public class Conditional extends TernaryOperator {
 
+    protected Domain domain;
+
+
     @Override
     public String getToken() {
         return IConstants.CONDITIONAL;
@@ -57,7 +60,9 @@ public class Conditional extends TernaryOperator {
         Collections.reverse(expressionTrue);
         Collections.reverse(expressionFalse);
 
-        return Domain.wrapLiteral(execute(conditional, new Expression(expressionTrue, domain), new Expression(expressionFalse, domain)));
+        this.domain = domain;
+
+        return Domain.wrapLiteral(execute(conditional, Domain.wrapLiteral(expressionTrue), Domain.wrapLiteral(expressionFalse)));
     }
 
     @Override
@@ -69,9 +74,16 @@ public class Conditional extends TernaryOperator {
     }
 
     @Override
-    public Object execute(Literal arg1, Literal arg2, Literal arg3) throws IncomparableTypeException, NoValueException {
+    @SuppressWarnings( "unchecked" )    // ClassCaseException is caught
+    public Object execute(Literal arg1, Literal arg2, Literal arg3)
+            throws IncomparableTypeException, NoValueException, ExpressionException {
         try {
-            return ((Boolean) arg1.getValue()) ? arg2.getValue() : arg3.getValue();
+            List<ICalculable> conTrue = (List<ICalculable>) arg2.getValue();
+            List<ICalculable> conFalse = (List<ICalculable>) arg3.getValue();
+
+            return ((Boolean) arg1.getValue()) ?
+                   (new Expression(conTrue, domain.clone())).getValue() :
+                   (new Expression(conFalse, domain.clone())).getValue();
         }
         catch (ClassCastException ex) {
             throw new IncomparableTypeException(getAllowedExecutionTypes(), arg1);

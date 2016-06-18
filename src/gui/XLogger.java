@@ -1,6 +1,7 @@
 package gui;
 
 import static gui.IConstants.DEBUG_MODE;
+import static gui.IConstants.DEBUG_MODE_DEFAULT;
 
 /**
  * x++.gui
@@ -22,7 +23,7 @@ public abstract class XLogger {
     private final static String FORMAT_WARNING = "WARNING: %s \n";
     private final static String FORMAT_SEVERE  = "SEVERE: %s \n";
 
-    private static boolean debug = DEBUG_MODE;
+    private static boolean debug = XProperties.getBoolean(DEBUG_MODE, DEBUG_MODE_DEFAULT);
 
 
     public static void log(String msg) {

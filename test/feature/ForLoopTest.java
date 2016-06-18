@@ -43,6 +43,7 @@ public class ForLoopTest extends FunctionTest {
     private final static XList                      RESULT_SHORT   = XList.parse(1, 2, 3);
     private final static XList                      RESULT_DBL_RUN = XList.parse(2d, 4d, 6d);
     private final static Class<? extends Exception> CLASS_EE       = ExpressionException.class;
+    private final static Class<? extends Exception> CLASS_NVE      = NoValueException.class;
 
 
     @Override
@@ -112,7 +113,7 @@ public class ForLoopTest extends FunctionTest {
 
     @Test
     public void incomparableListTypeExceptionTest() {
-        runExceptionTest(ERROR_LIST_2, CLASS_EE);
+        runExceptionTest(ERROR_LIST_2, CLASS_NVE);
     }
 
     @Test

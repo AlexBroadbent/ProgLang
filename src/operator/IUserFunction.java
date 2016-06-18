@@ -28,4 +28,8 @@ public interface IUserFunction extends IFunction {
 
     boolean validate() throws ExpressionException;
 
+    String getDeclaration();
+
+
+
 }

@@ -58,6 +58,11 @@ public class Literal implements ICalculable {
     }
 
     @Override
+    public Literal evaluate(Domain domain, Stack<Literal> stack) {
+        return evaluate(domain, stack, false);
+    }
+
+    @Override
     public Literal evaluate(Domain domain, Stack stack, boolean returnExpression) {
         return this;
     }
