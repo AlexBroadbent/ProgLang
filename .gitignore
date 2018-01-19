@@ -17,3 +17,7 @@ coverage-report/
 
 # JavaDoc output
 docs/
+
+.idea/
+
+target/
