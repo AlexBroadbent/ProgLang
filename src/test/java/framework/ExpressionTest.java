@@ -1,14 +1,14 @@
 package framework;
 
-import eval.Expression;
-import eval.ExpressionException;
-import eval.IncomparableTypeException;
-import gui.XLogger;
-import lexer.UnknownSequenceException;
-import model.Domain;
+import uk.co.alexbroadbent.eval.Expression;
+import uk.co.alexbroadbent.eval.ExpressionException;
+import uk.co.alexbroadbent.eval.IncomparableTypeException;
+import uk.co.alexbroadbent.ui.XLogger;
+import uk.co.alexbroadbent.lexer.UnknownSequenceException;
+import uk.co.alexbroadbent.model.Domain;
 import org.junit.After;
 import org.junit.Before;
-import parser.ParserException;
+import uk.co.alexbroadbent.parser.ParserException;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;

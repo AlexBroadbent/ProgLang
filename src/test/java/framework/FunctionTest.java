@@ -1,11 +1,11 @@
 package framework;
 
-import eval.Expression;
-import eval.ExpressionException;
-import eval.IncomparableTypeException;
-import lexer.UnknownSequenceException;
-import model.Domain;
-import parser.ParserException;
+import uk.co.alexbroadbent.eval.Expression;
+import uk.co.alexbroadbent.eval.ExpressionException;
+import uk.co.alexbroadbent.eval.IncomparableTypeException;
+import uk.co.alexbroadbent.lexer.UnknownSequenceException;
+import uk.co.alexbroadbent.model.Domain;
+import uk.co.alexbroadbent.parser.ParserException;
 
 /**
  * x++.framework

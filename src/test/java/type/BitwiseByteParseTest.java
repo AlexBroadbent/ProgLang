@@ -1,6 +1,6 @@
 package type;
 
-import eval.ExpressionException;
+import uk.co.alexbroadbent.eval.ExpressionException;
 import framework.ExpressionTest;
 import org.junit.Test;
 

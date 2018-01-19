@@ -1,8 +1,8 @@
 package architecture;
 
 import framework.LogTest;
-import gui.IConstants;
-import gui.XLogger;
+import uk.co.alexbroadbent.ui.IConstants;
+import uk.co.alexbroadbent.ui.XLogger;
 import org.junit.After;
 import org.junit.Test;
 

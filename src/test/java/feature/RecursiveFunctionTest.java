@@ -1,13 +1,13 @@
 package feature;
 
-import eval.ExpressionException;
-import eval.IncomparableTypeException;
-import eval.XList;
+import uk.co.alexbroadbent.eval.ExpressionException;
+import uk.co.alexbroadbent.eval.IncomparableTypeException;
+import uk.co.alexbroadbent.eval.XList;
 import framework.FunctionTest;
-import lexer.UnknownSequenceException;
+import uk.co.alexbroadbent.lexer.UnknownSequenceException;
 import org.junit.Ignore;
 import org.junit.Test;
-import parser.ParserException;
+import uk.co.alexbroadbent.parser.ParserException;
 
 /**
  * x++.feature

@@ -1,11 +1,11 @@
 package syntax;
 
-import eval.ExpressionException;
-import eval.IncomparableTypeException;
+import uk.co.alexbroadbent.eval.ExpressionException;
+import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import framework.ExpressionTest;
-import lexer.UnknownSequenceException;
+import uk.co.alexbroadbent.lexer.UnknownSequenceException;
 import org.junit.Test;
-import parser.ParserException;
+import uk.co.alexbroadbent.parser.ParserException;
 
 /**
  * x++.syntax

@@ -1,8 +1,8 @@
 package feature;
 
-import eval.XList;
+import uk.co.alexbroadbent.eval.XList;
 import framework.BaseTest;
-import gui.XLogger;
+import uk.co.alexbroadbent.ui.XLogger;
 import org.junit.Assert;
 import org.junit.Test;
 

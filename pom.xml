@@ -18,7 +18,7 @@
   <name>ProgLang</name>
 
   <properties>
-    <mainClass>gui.MainGUI</mainClass>
+    <mainClass>uk.co.alexbroadbent.ui.MainUI</mainClass>
 
     <java.compile.version>1.8</java.compile.version>
     

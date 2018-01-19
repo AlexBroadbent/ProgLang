@@ -1,7 +1,7 @@
 package framework;
 
-import gui.IConstants;
-import gui.XLogger;
+import uk.co.alexbroadbent.ui.IConstants;
+import uk.co.alexbroadbent.ui.XLogger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
