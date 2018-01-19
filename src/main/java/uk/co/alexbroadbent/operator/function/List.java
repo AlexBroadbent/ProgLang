@@ -1,11 +1,11 @@
 package uk.co.alexbroadbent.operator.function;
 
+import static uk.co.alexbroadbent.operator.IConstants.LIST;
+
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.XList;
 import uk.co.alexbroadbent.model.Domain;
-
-import static uk.co.alexbroadbent.operator.IConstants.LIST;
 
 /**
  * x++.operator.function

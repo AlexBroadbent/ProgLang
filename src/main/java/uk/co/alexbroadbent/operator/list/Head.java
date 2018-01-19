@@ -1,12 +1,13 @@
 package uk.co.alexbroadbent.operator.list;
 
-import com.google.common.collect.Lists;
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.XList;
 import uk.co.alexbroadbent.operator.IConstants;
 import uk.co.alexbroadbent.operator.function.Function;
+
+import com.google.common.collect.Lists;
 
 import java.util.List;
 

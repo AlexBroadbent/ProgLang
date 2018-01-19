@@ -1,13 +1,7 @@
 package uk.co.alexbroadbent.operator.common;
 
-import com.google.common.collect.Lists;
-import eval.*;
-import uk.co.alexbroadbent.model.Domain;
-import uk.co.alexbroadbent.operator.IConstants;
-import uk.co.alexbroadbent.operator.IPrecedence;
-import uk.co.alexbroadbent.operator.IUserFunction;
-import uk.co.alexbroadbent.operator.base.BinaryOperator;
-import uk.co.alexbroadbent.operator.function.UserFunction;
+import static uk.co.alexbroadbent.eval.ICalculableType.VARIABLE;
+
 import uk.co.alexbroadbent.eval.Expression;
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.ICalculable;
@@ -15,11 +9,17 @@ import uk.co.alexbroadbent.eval.ICalculableType;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.Variable;
+import uk.co.alexbroadbent.model.Domain;
+import uk.co.alexbroadbent.operator.IConstants;
+import uk.co.alexbroadbent.operator.IPrecedence;
+import uk.co.alexbroadbent.operator.IUserFunction;
+import uk.co.alexbroadbent.operator.base.BinaryOperator;
+import uk.co.alexbroadbent.operator.function.UserFunction;
+
+import com.google.common.collect.Lists;
 
 import java.util.List;
 import java.util.Stack;
-
-import static uk.co.alexbroadbent.eval.ICalculableType.VARIABLE;
 
 /**
  * x++.operator.common

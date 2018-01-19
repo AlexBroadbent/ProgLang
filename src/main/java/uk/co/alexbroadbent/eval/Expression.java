@@ -1,7 +1,5 @@
 package uk.co.alexbroadbent.eval;
 
-import com.google.common.collect.Lists;
-import uk.co.alexbroadbent.ui.XLogger;
 import uk.co.alexbroadbent.lexer.Token;
 import uk.co.alexbroadbent.lexer.UnknownSequenceException;
 import uk.co.alexbroadbent.model.Domain;
@@ -10,8 +8,11 @@ import uk.co.alexbroadbent.operator.conditional.Conditional;
 import uk.co.alexbroadbent.operator.conditional.ConditionalElse;
 import uk.co.alexbroadbent.operator.loop.Do;
 import uk.co.alexbroadbent.operator.loop.ForLoop;
-import org.apache.commons.lang3.StringUtils;
 import uk.co.alexbroadbent.parser.ParserException;
+import uk.co.alexbroadbent.ui.XLogger;
+
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Stack;

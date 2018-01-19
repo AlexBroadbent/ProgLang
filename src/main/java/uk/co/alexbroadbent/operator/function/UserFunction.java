@@ -1,15 +1,5 @@
 package uk.co.alexbroadbent.operator.function;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import eval.*;
-import uk.co.alexbroadbent.model.Domain;
-import uk.co.alexbroadbent.operator.Associativity;
-import uk.co.alexbroadbent.operator.IPrecedence;
-import uk.co.alexbroadbent.operator.IUserFunction;
-import uk.co.alexbroadbent.operator.loop.Do;
-import uk.co.alexbroadbent.operator.loop.ForLoop;
-import org.apache.commons.lang3.StringUtils;
 import uk.co.alexbroadbent.eval.Expression;
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.ICalculable;
@@ -17,6 +7,16 @@ import uk.co.alexbroadbent.eval.ICalculableType;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.Variable;
+import uk.co.alexbroadbent.model.Domain;
+import uk.co.alexbroadbent.operator.Associativity;
+import uk.co.alexbroadbent.operator.IPrecedence;
+import uk.co.alexbroadbent.operator.IUserFunction;
+import uk.co.alexbroadbent.operator.loop.Do;
+import uk.co.alexbroadbent.operator.loop.ForLoop;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Set;

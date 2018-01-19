@@ -1,5 +1,7 @@
 package uk.co.alexbroadbent.operator.common;
 
+import static uk.co.alexbroadbent.eval.ICalculableType.FUNCTION;
+
 import uk.co.alexbroadbent.eval.ICalculable;
 import uk.co.alexbroadbent.eval.ICalculableType;
 import uk.co.alexbroadbent.operator.IConstants;
@@ -9,8 +11,6 @@ import uk.co.alexbroadbent.operator.base.NullaryOperator;
 
 import java.util.List;
 import java.util.Stack;
-
-import static uk.co.alexbroadbent.eval.ICalculableType.FUNCTION;
 
 /**
  * x++.operator.common

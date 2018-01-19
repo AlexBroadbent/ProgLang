@@ -1,20 +1,19 @@
 package uk.co.alexbroadbent.operator.list;
 
-import eval.*;
-import uk.co.alexbroadbent.operator.IConstants;
-import uk.co.alexbroadbent.operator.IOperator;
-import uk.co.alexbroadbent.operator.IPrecedence;
-import uk.co.alexbroadbent.operator.function.Function;
+import static uk.co.alexbroadbent.eval.ICalculableType.LIST_START;
+
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.ICalculable;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.XList;
+import uk.co.alexbroadbent.operator.IConstants;
+import uk.co.alexbroadbent.operator.IOperator;
+import uk.co.alexbroadbent.operator.IPrecedence;
+import uk.co.alexbroadbent.operator.function.Function;
 
 import java.util.List;
 import java.util.Stack;
-
-import static uk.co.alexbroadbent.eval.ICalculableType.LIST_START;
 
 /**
  * x++.operator.list

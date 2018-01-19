@@ -1,15 +1,16 @@
 package uk.co.alexbroadbent.operator.function;
 
-import com.google.common.collect.Lists;
+import static uk.co.alexbroadbent.operator.IConstants.MAX;
+
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.XList;
 
+import com.google.common.collect.Lists;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import static uk.co.alexbroadbent.operator.IConstants.MAX;
 
 /**
  * x++.operator.function

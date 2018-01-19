@@ -1,11 +1,11 @@
 package uk.co.alexbroadbent.operator.math;
 
+import static uk.co.alexbroadbent.operator.IConstants.POWER;
+
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.operator.IPrecedence;
 import uk.co.alexbroadbent.operator.base.BinaryOperator;
-
-import static uk.co.alexbroadbent.operator.IConstants.POWER;
 
 /**
  * x++.operator.common

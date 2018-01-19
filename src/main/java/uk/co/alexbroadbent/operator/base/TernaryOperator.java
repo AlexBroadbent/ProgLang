@@ -1,20 +1,19 @@
 package uk.co.alexbroadbent.operator.base;
 
-import eval.*;
-import uk.co.alexbroadbent.model.Domain;
-import uk.co.alexbroadbent.operator.Associativity;
-import uk.co.alexbroadbent.operator.IOperator;
-import uk.co.alexbroadbent.operator.IPrecedence;
+import static uk.co.alexbroadbent.eval.ICalculableType.VARIABLE;
+
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.ICalculable;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.Variable;
+import uk.co.alexbroadbent.model.Domain;
+import uk.co.alexbroadbent.operator.Associativity;
+import uk.co.alexbroadbent.operator.IOperator;
+import uk.co.alexbroadbent.operator.IPrecedence;
 
 import java.util.List;
 import java.util.Stack;
-
-import static uk.co.alexbroadbent.eval.ICalculableType.VARIABLE;
 
 /**
  * x++.operator.base

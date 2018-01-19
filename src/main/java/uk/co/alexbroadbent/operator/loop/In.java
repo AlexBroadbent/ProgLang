@@ -1,5 +1,7 @@
 package uk.co.alexbroadbent.operator.loop;
 
+import static uk.co.alexbroadbent.eval.ICalculableType.VARIABLE;
+
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.ICalculable;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
@@ -11,8 +13,6 @@ import uk.co.alexbroadbent.operator.base.UnaryOperator;
 
 import java.util.List;
 import java.util.Stack;
-
-import static uk.co.alexbroadbent.eval.ICalculableType.VARIABLE;
 
 /**
  * x++.operator.loop

@@ -1,7 +1,8 @@
 package uk.co.alexbroadbent.eval;
 
-import com.google.common.collect.Lists;
 import uk.co.alexbroadbent.model.Domain;
+
+import com.google.common.collect.Lists;
 
 import java.util.Iterator;
 import java.util.List;

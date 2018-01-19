@@ -1,13 +1,14 @@
 package uk.co.alexbroadbent.operator.bitwise;
 
-import com.google.common.collect.Lists;
+import static uk.co.alexbroadbent.operator.IConstants.BITWISE_AND;
+
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.operator.IPrecedence;
 import uk.co.alexbroadbent.operator.base.BinaryOperator;
 
-import static uk.co.alexbroadbent.operator.IConstants.BITWISE_AND;
+import com.google.common.collect.Lists;
 
 /**
  * x++.operator.common

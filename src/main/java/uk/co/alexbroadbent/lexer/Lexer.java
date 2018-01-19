@@ -1,16 +1,64 @@
 package uk.co.alexbroadbent.lexer;
 
+import static uk.co.alexbroadbent.lexer.IToken.ARG_SEPARATOR;
+import static uk.co.alexbroadbent.lexer.IToken.ARG_SEPARATOR_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.ARITHMETIC;
+import static uk.co.alexbroadbent.lexer.IToken.ARITHMETIC_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.ARRAY_ACCESS;
+import static uk.co.alexbroadbent.lexer.IToken.ARRAY_ACCESS_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.ASSIGNMENT;
+import static uk.co.alexbroadbent.lexer.IToken.ASSIGNMENT_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.BINARY_8BIT;
+import static uk.co.alexbroadbent.lexer.IToken.BINARY_8BIT_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.BITWISE_OPERATOR;
+import static uk.co.alexbroadbent.lexer.IToken.BITWISE_OPERATOR_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.BIT_SHIFT;
+import static uk.co.alexbroadbent.lexer.IToken.BIT_SHIFT_OPERATOR_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.BOOLEAN;
+import static uk.co.alexbroadbent.lexer.IToken.BOOLEAN_COMPARATOR;
+import static uk.co.alexbroadbent.lexer.IToken.BOOLEAN_COMPARATOR_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.BOOLEAN_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.CONDITIONAL;
+import static uk.co.alexbroadbent.lexer.IToken.CONDITIONAL_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.DECIMAL;
+import static uk.co.alexbroadbent.lexer.IToken.DECIMAL_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.FOR_LOOP_ELEMENT;
+import static uk.co.alexbroadbent.lexer.IToken.FOR_LOOP_ELEMENT_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.FUNCTION_DECLARATION;
+import static uk.co.alexbroadbent.lexer.IToken.FUNCTION_DECLARATION_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.GEOMETRIC;
+import static uk.co.alexbroadbent.lexer.IToken.GEOMETRIC_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.INC_DEC;
+import static uk.co.alexbroadbent.lexer.IToken.INC_DEC_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.LIST;
+import static uk.co.alexbroadbent.lexer.IToken.LIST_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.LOGICAL_COMPARATOR_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.LOGICAL_OPERATOR;
+import static uk.co.alexbroadbent.lexer.IToken.MATH_COMPARATOR;
+import static uk.co.alexbroadbent.lexer.IToken.MATH_COMPARATOR_EQUALITY_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.MATH_COMPARATOR_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.MATH_EQUALITY_COMPARATOR;
+import static uk.co.alexbroadbent.lexer.IToken.NUMBER;
+import static uk.co.alexbroadbent.lexer.IToken.NUMBER_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.PARENTHESIS;
+import static uk.co.alexbroadbent.lexer.IToken.PARENTHESIS_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.TEXT;
+import static uk.co.alexbroadbent.lexer.IToken.TEXT_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.VARIABLE_FUNCTION;
+import static uk.co.alexbroadbent.lexer.IToken.VARIABLE_OR_FUNCTION_REGEX;
+import static uk.co.alexbroadbent.lexer.IToken.WHITESPACE;
+import static uk.co.alexbroadbent.lexer.IToken.WHITESPACE_REGEX;
+
+import uk.co.alexbroadbent.ui.XLogger;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import uk.co.alexbroadbent.ui.XLogger;
 
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
-import static uk.co.alexbroadbent.lexer.IToken.*;
 
 /**
  * x++.parser

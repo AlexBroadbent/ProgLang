@@ -1,15 +1,15 @@
 package uk.co.alexbroadbent.operator.list;
 
-import com.google.common.collect.Lists;
-import eval.*;
-import uk.co.alexbroadbent.operator.IConstants;
-import uk.co.alexbroadbent.operator.IPrecedence;
-import uk.co.alexbroadbent.operator.base.BinaryOperator;
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.ICalculableType;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.XList;
+import uk.co.alexbroadbent.operator.IConstants;
+import uk.co.alexbroadbent.operator.IPrecedence;
+import uk.co.alexbroadbent.operator.base.BinaryOperator;
+
+import com.google.common.collect.Lists;
 
 import java.util.LinkedList;
 import java.util.List;

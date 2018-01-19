@@ -1,12 +1,12 @@
 package uk.co.alexbroadbent.operator.bitwise;
 
+import static uk.co.alexbroadbent.operator.IConstants.BITWISE_OR;
+
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.operator.IPrecedence;
 import uk.co.alexbroadbent.operator.base.BinaryOperator;
-
-import static uk.co.alexbroadbent.operator.IConstants.BITWISE_OR;
 
 /**
  * x++.operator.common

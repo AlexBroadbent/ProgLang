@@ -1,11 +1,12 @@
 package uk.co.alexbroadbent.operator.common;
 
-import com.google.common.collect.Lists;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.operator.IConstants;
 import uk.co.alexbroadbent.operator.IPrecedence;
 import uk.co.alexbroadbent.operator.base.UnaryOperator;
+
+import com.google.common.collect.Lists;
 
 import java.util.List;
 

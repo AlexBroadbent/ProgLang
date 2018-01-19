@@ -1,11 +1,11 @@
 package uk.co.alexbroadbent.operator.function;
 
+import static uk.co.alexbroadbent.operator.IConstants.RANDOM;
+
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 
 import java.util.List;
-
-import static uk.co.alexbroadbent.operator.IConstants.RANDOM;
 
 /**
  * x++.operator.function

@@ -1,16 +1,30 @@
 package uk.co.alexbroadbent.ui;
 
+import static uk.co.alexbroadbent.ui.IConstants.DEBUG;
+import static uk.co.alexbroadbent.ui.IConstants.DOMAIN;
+import static uk.co.alexbroadbent.ui.IConstants.EXIT;
+import static uk.co.alexbroadbent.ui.IConstants.FREE;
+import static uk.co.alexbroadbent.ui.IConstants.FUNCTIONS;
+import static uk.co.alexbroadbent.ui.IConstants.LINE_START;
+import static uk.co.alexbroadbent.ui.IConstants.LIST;
+import static uk.co.alexbroadbent.ui.IConstants.LOGGER_NAME;
+import static uk.co.alexbroadbent.ui.IConstants.LOGGER_VERSION;
+import static uk.co.alexbroadbent.ui.IConstants.OPERATORS;
+import static uk.co.alexbroadbent.ui.IConstants.RESET;
+import static uk.co.alexbroadbent.ui.IConstants.SPACE;
+import static uk.co.alexbroadbent.ui.IConstants.VARIABLE;
+import static uk.co.alexbroadbent.ui.IConstants.VARIABLES;
+
 import uk.co.alexbroadbent.eval.Expression;
 import uk.co.alexbroadbent.eval.ExpressionException;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.lexer.UnknownSequenceException;
 import uk.co.alexbroadbent.model.Domain;
-import org.apache.commons.lang3.StringUtils;
 import uk.co.alexbroadbent.parser.ParserException;
 
-import java.util.Scanner;
+import org.apache.commons.lang3.StringUtils;
 
-import static uk.co.alexbroadbent.ui.IConstants.*;
+import java.util.Scanner;
 
 /**
  * x++.gui

@@ -1,5 +1,7 @@
 package uk.co.alexbroadbent.operator.conditional;
 
+import static uk.co.alexbroadbent.operator.IConstants.CONDITIONAL;
+
 import uk.co.alexbroadbent.eval.ConditionalPlaceholder;
 import uk.co.alexbroadbent.eval.ICalculable;
 import uk.co.alexbroadbent.operator.IConstants;
@@ -10,8 +12,6 @@ import uk.co.alexbroadbent.operator.base.NullaryOperator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
-
-import static uk.co.alexbroadbent.operator.IConstants.CONDITIONAL;
 
 /**
  * x++.operator.conditional

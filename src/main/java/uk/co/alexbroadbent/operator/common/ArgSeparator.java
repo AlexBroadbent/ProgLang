@@ -1,5 +1,8 @@
 package uk.co.alexbroadbent.operator.common;
 
+import static uk.co.alexbroadbent.eval.ICalculableType.LEFT_PARENTHESIS;
+import static uk.co.alexbroadbent.eval.ICalculableType.LIST_START;
+
 import uk.co.alexbroadbent.eval.ICalculable;
 import uk.co.alexbroadbent.eval.ICalculableType;
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
@@ -12,9 +15,6 @@ import uk.co.alexbroadbent.operator.base.NullaryOperator;
 
 import java.util.List;
 import java.util.Stack;
-
-import static uk.co.alexbroadbent.eval.ICalculableType.LEFT_PARENTHESIS;
-import static uk.co.alexbroadbent.eval.ICalculableType.LIST_START;
 
 /**
  * x++.operator.function

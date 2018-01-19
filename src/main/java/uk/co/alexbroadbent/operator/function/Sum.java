@@ -1,13 +1,13 @@
 package uk.co.alexbroadbent.operator.function;
 
+import static uk.co.alexbroadbent.operator.IConstants.SUM;
+
 import uk.co.alexbroadbent.eval.IncomparableTypeException;
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.XList;
 
 import java.util.List;
 import java.util.Objects;
-
-import static uk.co.alexbroadbent.operator.IConstants.SUM;
 
 /**
  * x++.operator.function

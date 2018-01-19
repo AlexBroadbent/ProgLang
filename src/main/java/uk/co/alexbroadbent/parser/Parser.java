@@ -1,6 +1,10 @@
 package uk.co.alexbroadbent.parser;
 
-import com.google.common.collect.Lists;
+import static uk.co.alexbroadbent.lexer.IToken.FUNCTION_DECLARATION;
+import static uk.co.alexbroadbent.lexer.IToken.VARIABLE_FUNCTION;
+import static uk.co.alexbroadbent.operator.IConstants.ASSIGNMENT;
+import static uk.co.alexbroadbent.operator.IConstants.FUNC;
+
 import uk.co.alexbroadbent.eval.Flag;
 import uk.co.alexbroadbent.eval.ICalculable;
 import uk.co.alexbroadbent.eval.Literal;
@@ -9,13 +13,10 @@ import uk.co.alexbroadbent.model.Domain;
 import uk.co.alexbroadbent.operator.IUserFunction;
 import uk.co.alexbroadbent.operator.function.UserFunction;
 
+import com.google.common.collect.Lists;
+
 import java.util.List;
 import java.util.Objects;
-
-import static uk.co.alexbroadbent.lexer.IToken.FUNCTION_DECLARATION;
-import static uk.co.alexbroadbent.lexer.IToken.VARIABLE_FUNCTION;
-import static uk.co.alexbroadbent.operator.IConstants.ASSIGNMENT;
-import static uk.co.alexbroadbent.operator.IConstants.FUNC;
 
 /**
  * x++.parser

@@ -1,6 +1,7 @@
 package uk.co.alexbroadbent.model;
 
-import com.google.common.collect.Maps;
+import static uk.co.alexbroadbent.eval.ICalculableType.USER_FUNCTION;
+
 import uk.co.alexbroadbent.eval.Literal;
 import uk.co.alexbroadbent.eval.Variable;
 import uk.co.alexbroadbent.lexer.ILexer;
@@ -52,7 +53,6 @@ import uk.co.alexbroadbent.operator.list.Tail;
 import uk.co.alexbroadbent.operator.loop.Do;
 import uk.co.alexbroadbent.operator.loop.ForLoop;
 import uk.co.alexbroadbent.operator.loop.In;
-import org.apache.commons.lang3.StringUtils;
 import uk.co.alexbroadbent.operator.math.ACosine;
 import uk.co.alexbroadbent.operator.math.ASine;
 import uk.co.alexbroadbent.operator.math.ATangent;
@@ -68,11 +68,12 @@ import uk.co.alexbroadbent.operator.math.Tangent;
 import uk.co.alexbroadbent.parser.IParser;
 import uk.co.alexbroadbent.parser.Parser;
 
+import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-
-import static uk.co.alexbroadbent.eval.ICalculableType.USER_FUNCTION;
 
 /**
  * x++.model
