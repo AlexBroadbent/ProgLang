@@ -1,18 +1,14 @@
 language: java
 
 jdk:
-- oraclejdk8
+- oraclejdk7
 
-cache:
-  directories:
-    - $HOME/.m2/repository/
+addons:
+  sonarcloud:
+    organization: "alexbroadbent-github"
+    token:
+      secure: "nadYh14V0ugFVsra2vnygG8ZFGpg/4fnUbwVJQYAT4xGc+MTabuGAwsbrrjCwJloTAgEl/slYa6P7E+2q7hvKKMEE6PCLWQTFBVTVj347IEdQlHoDsTdlmZ2Po/xAKobtvm0cKTHLrX5D8M52yFeTmGOqqbe0oXGHPskhvbbYzlXBvxw6W1TQed1fVgNNq0Er7JWeBgakOHTU39bJnHjItiKhAn1AIbwnAQyrG23VcrQGqsMP/giTnRXzZSQ+xQEdb/Jb85XSCQQ7esBT79bPjJswNLrvTrSkWOLlKO3zm/Jm8KjDpwd9hUD/qhbKnEP12LKFy4kiMb+nHYOSalLUDWW6rh3HBBt2EISmK+r/scZSRP2ZqYX7OPKXCNsDvy5O6WXK/YXoPIrjGo1RlrdFybZ28S8VfGkP2wLu0s55BGxZpkrW8EALXc4XGzcz0OI+7+Rx0+F5E3TAeAnpL5GVg/y/OVIr1/RF9Z9ZtOlc+caXdViZzxCxT0LWbCbUym4Sz/DJ1FvP28KQG2+R2lUSTHOkZweS2zFJG7UhqHVlj4nBniIKXoBUEAvugjbzbG1WTLEaeDXqG25O5Gf8OaYSsDzKQaUCKQgTf7YJihCZV3l3ubFECX5epaxKX7oSTHOsjhMJECGMKgsU32rDyQImo7W/dGibs90CWW4uJnoKuo="
 
 script:
- - "mvn cobertura:cobertura"
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 
-before_install:
-  - export PATH=$PATH:$HOME/.local/bin
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-  - bash <(curl -s https://copilot.blackducksoftware.com/ci/travis/scripts/upload)
